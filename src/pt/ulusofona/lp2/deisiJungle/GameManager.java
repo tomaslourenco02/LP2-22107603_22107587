@@ -2,6 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GameManager {
 
@@ -39,27 +40,40 @@ public class GameManager {
             return false;
         }
 
-        //verificar ID´s dos jogadores
+        HashMap<String, String> IDjogadores = new HashMap<>();
 
+        //verifica ID´s Jogadores
         for (int i = 0; i < playersInfo.length; i++) {
-            if(playersInfo[i][1] == null || playersInfo[i][1].equals("")){
+            if (!IDjogadores.containsKey(playersInfo[i][0])) {
+                IDjogadores.put(playersInfo[i][0], playersInfo[i][1]);
+            } else {
                 return false;
             }
         }
 
-        //verificar ID´s duplicados e iguais COM HASH MAP ou HASH SET
+        //verifica especies jogadores
+        for (int i = 0; i < playersInfo.length; i++) {
+            if(!(playersInfo[i][2].equals("L") || playersInfo[i][2].equals("E") || playersInfo[i][2].equals("P") || playersInfo[i][2].equals("T")
+            || playersInfo[i][2].equals("Z"))){
+                return false;
+            }
+        }
 
-
-
-        //verificar nomes jogadores
-        if ((playersInfo[0][1] == null || playersInfo[0][1].equals("")) ||
-                (playersInfo[1][1] == null || playersInfo[1][1].equals("")) ||
-                (playersInfo[2][1] == null || playersInfo[2][1].equals("")) ||
-                (playersInfo[3][1] == null || playersInfo[3][1].equals(""))) {
-
+        //verifica nr jogadores
+        if(IDjogadores.size() < 2 || IDjogadores.size() > 4){
             return false;
         }
 
+        //verificar nomes dos jogadores
+        for (int i = 0; i < playersInfo.length; i++) {
+            if (playersInfo[i][1] == null || playersInfo[i][1].equals("")) {
+                return false;
+            }
+        }
+
+        if(jungleSize < IDjogadores.size() * 2){
+            return false;
+        }
         return true;
     }
 
