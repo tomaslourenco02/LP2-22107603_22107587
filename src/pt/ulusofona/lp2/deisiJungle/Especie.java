@@ -6,9 +6,9 @@ public class Especie {
 
     char identificador;
     String nome;
-    JPanel imagem;
+    String imagem;
 
-    public Especie(char identificador, String nome, JPanel imagem) {
+    public Especie(char identificador, String nome, String imagem) {
 
         this.identificador = identificador;
         this.nome = nome;
