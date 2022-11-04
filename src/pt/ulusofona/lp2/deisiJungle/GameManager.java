@@ -5,10 +5,6 @@ import java.util.ArrayList;
 
 public class GameManager {
 
-    public static void main(String[] args) {
-
-    }
-
     public String[][] getSpecies() {
 
         String[][] especies = new String[5][3];
@@ -38,6 +34,32 @@ public class GameManager {
 
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
 
+        //verificar dados iniciais
+        if (jungleSize == 0 || initialEnergy == 0 || playersInfo == null) {
+            return false;
+        }
+
+        //verificar ID´s dos jogadores
+
+        for (int i = 0; i < playersInfo.length; i++) {
+            if(playersInfo[i][1] == null || playersInfo[i][1].equals("")){
+                return false;
+            }
+        }
+
+        //verificar ID´s duplicados e iguais COM HASH MAP ou HASH SET
+
+
+
+        //verificar nomes jogadores
+        if ((playersInfo[0][1] == null || playersInfo[0][1].equals("")) ||
+                (playersInfo[1][1] == null || playersInfo[1][1].equals("")) ||
+                (playersInfo[2][1] == null || playersInfo[2][1].equals("")) ||
+                (playersInfo[3][1] == null || playersInfo[3][1].equals(""))) {
+
+            return false;
+        }
+
         return true;
     }
 
@@ -47,7 +69,7 @@ public class GameManager {
 
         int[] identificadoresJogadores = new int[0];
 
-        if(squareNr == 0 /* || não existam jogadores na posição indicada*/){
+        if (squareNr == 0 /* || não existam jogadores na posição indicada*/) {
             return null;
         }
 
