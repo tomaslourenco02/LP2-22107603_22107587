@@ -51,11 +51,21 @@ public class GameManager {
             }
         }
 
-        //verifica especies jogadores
+        /* //verifica especies jogadores
         for (int i = 0; i < playersInfo.length; i++) {
             if (!(playersInfo[i][2].equals("L") || playersInfo[i][2].equals("E") || playersInfo[i][2].equals("P") || playersInfo[i][2].equals("T")
                     || playersInfo[i][2].equals("Z"))) {
                 return false;
+            }
+        } */
+
+        String[][] especies = getSpecies();
+
+        for (int i = 0; i < IDjogadores.size(); i++) {
+            for (int j = 0; j < getSpecies().length; j++) {
+                if(!playersInfo[i][2].equals(especies[j][0])){
+                    return false;
+                }
             }
         }
 
