@@ -33,6 +33,7 @@ public class GameManager {
         return especies;
     }
 
+    int count = 0;
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
 
         //verificar dados iniciais
@@ -51,15 +52,22 @@ public class GameManager {
             }
         }
 
-        /* //verifica especies jogadores
+         //verifica especies jogadores
         for (int i = 0; i < playersInfo.length; i++) {
-            if (!(playersInfo[i][2].equals("L") || playersInfo[i][2].equals("E") || playersInfo[i][2].equals("P") || playersInfo[i][2].equals("T")
+            if (!(playersInfo[i][2].equals("L") || playersInfo[i][2].equals("E") || playersInfo[i][2].equals("P")
+                    || playersInfo[i][2].equals("T")
                     || playersInfo[i][2].equals("Z"))) {
+                if(playersInfo[i][2].equals("T")){
+                    count++;
+                }
                 return false;
             }
-        } */
+            if( count > 1 ){
+                return false;
+            }
+        }
 
-        String[][] especies = getSpecies();
+        /* String[][] especies = getSpecies();
 
         for (int i = 0; i < IDjogadores.size(); i++) {
             for (int j = 0; j < getSpecies().length; j++) {
@@ -67,7 +75,7 @@ public class GameManager {
                     return false;
                 }
             }
-        }
+        }*/
 
         //verifica nr jogadores
         if (IDjogadores.size() < 2 || IDjogadores.size() > 4) {
