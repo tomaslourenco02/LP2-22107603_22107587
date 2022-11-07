@@ -166,7 +166,7 @@ public class GameManager {
 
         for (int i = 0; i < jogadores.size(); i++) {
             if (jogadores.get(i).posicaoAtual == squareNr) {
-                idJogadores[i] = jogadores.get(i).identificador;
+                idJogadores[count] = jogadores.get(i).identificador;
                 count++;
             }
         }
@@ -239,7 +239,7 @@ public class GameManager {
 
         String identificadores = "";
 
-        if (squareNr == 0 || squareNr > tabuleiro.size()) {
+        if (squareNr <= 0/* || squareNr > tabuleiro.size()*/) {
             return null;
         }
 

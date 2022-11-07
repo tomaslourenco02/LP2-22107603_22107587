@@ -23,6 +23,12 @@ public class Jogador {
         this.energiaAtual = energiaAtual;
     }
 
+    public Jogador(int identificador, String nome, int posicaoAtual) {
+        this.identificador = identificador;
+        this.nome = nome;
+        this.posicaoAtual = posicaoAtual;
+    }
+
     public Jogador() {
         identificador = 0;
         nome = null;
