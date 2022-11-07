@@ -136,6 +136,7 @@ public class GameManager {
         if (jungleSize < playersInfo.length * 2) {
             return false;
         }
+
         if (!verificaJogadores(playersInfo)) {
             return false;
         }
