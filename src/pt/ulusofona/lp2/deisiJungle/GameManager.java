@@ -8,10 +8,6 @@ import java.util.Objects;
 
 
 public class GameManager {
-
-    String ola = ".|.";
-
-
     ArrayList<Jogador> jogadores = new ArrayList();
     ArrayList<SquareInfo> tabuleiro = new ArrayList<>();
 
@@ -161,11 +157,30 @@ public class GameManager {
     }
 
     public int[] getPlayerIds(int squareNr) {
-        int[] IDjogadores = new int[4];
+        int[] idJogadores = new int[jogadores.size()];
         int count1 = 0;
+        int count = 0;
 
+        if (squareNr <= 0) {
+            return new int[0];
+        }
 
-        for (int j = 0; j < IDjogadores.length; j++) {
+        for (int i = 0; i < jogadores.size(); i++) {
+            if (jogadores.get(i).posicaoAtual == squareNr) {
+                idJogadores[i] = jogadores.get(i).identificador;
+                count ++;
+            }
+        }
+
+        int[] idJogadoresRetornar = new int[count];
+
+        for (int i = 0; i < idJogadores.length; i++) {
+            idJogadoresRetornar[i] = idJogadores[i];
+        }
+
+        return idJogadoresRetornar;
+
+        /*for (int j = 0; j < idJogadores.length; j++) {
             for (int i = 0; i < jogadores.size(); i++) {
                 if (squareNr == 0) {
                     return new int[0];
@@ -174,7 +189,7 @@ public class GameManager {
                     count1++;
                 }
                 if (squareNr == jogadores.get(i).posicaoAtual) {
-                    IDjogadores[j] = jogadores.get(i).identificador;
+                    idJogadores[j] = jogadores.get(i).identificador;
                 }
             }
         }
@@ -182,7 +197,7 @@ public class GameManager {
         int[] IDjogadores_retornar = new int[count1];
 
         for (int i = 0; i < IDjogadores_retornar.length; i++) {
-            IDjogadores_retornar[i] = IDjogadores[i];
+            IDjogadores_retornar[i] = idJogadores[i];
         }
 
         return IDjogadores_retornar;
