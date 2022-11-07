@@ -133,7 +133,7 @@ public class GameManager {
             return false;
         }
 
-        if (jungleSize * 2 < playersInfo.length) {
+        if (jungleSize < playersInfo.length * 2) {
             return false;
         }
         if (!verificaJogadores(playersInfo)) {
