@@ -106,6 +106,7 @@ public class GameManager {
             if (Integer.parseInt(playersInfo[i][0]) <= 0) {
                 return false;
             }
+
             ids[i] = Integer.parseInt(playersInfo[i][0]);
         }
         for (int i = 0; i < ids.length; i++) {
