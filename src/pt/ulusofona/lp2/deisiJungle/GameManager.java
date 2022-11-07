@@ -38,13 +38,37 @@ public class GameManager {
 
     int count = 0;
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
+        String[][] casosPossiveis = new String[4][3];
 
         //verificar dados iniciais
         if (jungleSize == 0 || initialEnergy == 0 || initialEnergy < 0 || playersInfo == null) {
             return false;
         }
+        if(playersInfo.length > casosPossiveis.length){
+            return false;
+        }
 
         tabuleiro.tamanho = jungleSize;
+
+        int[] IDjogador = new int[4];
+        IDjogador[0] = Integer.parseInt(playersInfo[0][0]);
+        IDjogador[1] = Integer.parseInt(playersInfo[1][0]);
+        IDjogador[2] = Integer.parseInt(playersInfo[2][0]);
+        IDjogador[3] = Integer.parseInt(playersInfo[3][0]);
+
+        int[] IDjogador_comparacao = new int[4];
+        IDjogador_comparacao[0] = Integer.parseInt(playersInfo[0][0]);
+        IDjogador_comparacao[1] = Integer.parseInt(playersInfo[1][0]);
+        IDjogador_comparacao[2] = Integer.parseInt(playersInfo[2][0]);
+        IDjogador_comparacao[3] = Integer.parseInt(playersInfo[3][0]);
+
+        for (int i = 0; i < IDjogador.length; i++) {
+            for (int j = 0; j < IDjogador_comparacao.length; j++) {
+                if(IDjogador[i] == IDjogador_comparacao[j]){
+                    return false;
+                }
+            }
+        }
 
         HashMap<String, Integer> IDjogadores = new HashMap<>();
 
@@ -72,6 +96,7 @@ public class GameManager {
             }
         }
 
+        /*
         String[][] especies = getSpecies();
 
         for (int i = 0; i < IDjogadores.size(); i++) {
@@ -81,6 +106,7 @@ public class GameManager {
                 }
             }
         }
+        */
 
         //verificar nomes dos jogadores
         for (int i = 0; i < playersInfo.length; i++) {
