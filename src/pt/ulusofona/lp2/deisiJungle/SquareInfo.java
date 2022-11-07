@@ -13,7 +13,7 @@ public class SquareInfo {
     public SquareInfo(String imagemAColocar, String texto, ArrayList<String> identificadoresNoQuadrado) {
         this.imagemAColocar = "blank.png";
         this.texto = "Vazio";
-        this.identificadoresNoQuadrado = identificadoresNoQuadrado;
+        this.identificadoresNoQuadrado = new ArrayList<>();
         meta = false;
         tamanho = 0;
     }
@@ -22,5 +22,6 @@ public class SquareInfo {
         imagemAColocar = "blank.png";
         texto = "Vazio";
         tamanho = 0;
+        identificadoresNoQuadrado = new ArrayList<>();
     }
 }

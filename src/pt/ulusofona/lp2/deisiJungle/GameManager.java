@@ -133,7 +133,7 @@ public class GameManager {
         if (jungleSize < playersInfo.length * 2) {
             return false;
         }
-        if(!verificaJogadores(playersInfo)){
+        if (!verificaJogadores(playersInfo)) {
             return false;
         }
 
@@ -142,7 +142,9 @@ public class GameManager {
 
         for (int i = 0; i < playersInfo.length; i++) {
             jogadores.add(new Jogador(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2]));
-            tabuleiro.get(0).identificadoresNoQuadrado.add(playersInfo[i][0]); //NAO POSSO FAZER ISTO
+            if (tabuleiro != null) {
+                tabuleiro.get(0).identificadoresNoQuadrado.add(playersInfo[i][0]); //NAO POSSO FAZER ISTO
+            }
         }
 
         return true;
