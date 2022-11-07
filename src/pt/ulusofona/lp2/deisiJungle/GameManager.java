@@ -9,6 +9,8 @@ import java.util.Objects;
 
 public class GameManager {
 
+    //jdiwdiwm
+
 
     ArrayList<Jogador> jogadores = new ArrayList();
     ArrayList<SquareInfo> tabuleiro = new ArrayList<>();
