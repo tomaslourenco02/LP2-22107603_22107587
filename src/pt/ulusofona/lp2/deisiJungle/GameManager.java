@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class GameManager {
 
-    //jdiwdiwm
+    String ola = ".|.";
 
 
     ArrayList<Jogador> jogadores = new ArrayList();
