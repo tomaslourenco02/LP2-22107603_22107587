@@ -118,6 +118,7 @@ public class GameManager {
                 }
             }
         }
+
         for (int i = 0; i < playersInfo.length; i++) {
             if (Objects.equals(playersInfo[i][2], "T")) {
                 countTarzan++;
