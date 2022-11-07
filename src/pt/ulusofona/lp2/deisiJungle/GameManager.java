@@ -89,7 +89,7 @@ public class GameManager {
                 return false;
             }
 
-            for (int j = 0; j < playersInfo[i][0].length(); j++) {
+            /*for (int j = 0; j < playersInfo[i][0].length(); j++) {
 
                 if(playersInfo[i][0].charAt(j) == 0){
                     return false;
@@ -98,7 +98,7 @@ public class GameManager {
                 if (!((playersInfo[i][0].charAt(j)) < '9') || playersInfo[i][9].charAt(j) > '0') {
                     return false;
                 }
-            }
+            }*/
             if (Integer.parseInt(playersInfo[i][0]) <= 0) {
                 return false;
             }
@@ -133,7 +133,7 @@ public class GameManager {
             return false;
         }
 
-        if (jungleSize < playersInfo.length * 2) {
+        if (jungleSize * 2 < playersInfo.length) {
             return false;
         }
         if (!verificaJogadores(playersInfo)) {
