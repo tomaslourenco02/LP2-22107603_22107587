@@ -158,7 +158,6 @@ public class GameManager {
 
     public int[] getPlayerIds(int squareNr) {
         int[] idJogadores = new int[jogadores.size()];
-        int count1 = 0;
         int count = 0;
 
         if (squareNr <= 0) {
@@ -178,7 +177,7 @@ public class GameManager {
 
         int[] idJogadoresRetornar = new int[count];
 
-        for (int i = 0; i < idJogadores.length; i++) {
+        for (int i = 0; i < idJogadoresRetornar.length; i++) {
             idJogadoresRetornar[i] = idJogadores[i];
         }
 
@@ -252,7 +251,7 @@ public class GameManager {
             if(i == square.identificadoresNoQuadrado.size()-1){
                 identificadores += square.identificadoresNoQuadrado + "";
             }else{
-            identificadores += square.identificadoresNoQuadrado + ",";
+                identificadores += square.identificadoresNoQuadrado + ",";
             }
         }
 
