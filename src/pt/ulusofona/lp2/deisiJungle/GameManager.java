@@ -232,19 +232,35 @@ public class GameManager {
 
     public String[] getSquareInfo(int squareNr) {
 
-        if (squareNr == 0) {
-            return null;
-        }
-
         SquareInfo square = new SquareInfo();
 
         String[] squareInfo = new String[3];
 
+        int[] jogadoresNoSquare = getPlayerIds(squareNr);
+
+        String identificadores = "";
+
+        if (squareNr == 0 || squareNr > tabuleiro.size()) {
+            return null;
+        }
+
+        for (int i = 0; i < jogadoresNoSquare.length; i++) {
+            square.identificadoresNoQuadrado.add(Integer.toString(jogadoresNoSquare[i]));
+        }
+
+        for (int i = 0; i < square.identificadoresNoQuadrado.size(); i++) {
+            if(i == square.identificadoresNoQuadrado.size()-1){
+                identificadores += square.identificadoresNoQuadrado + "";
+            }else{
+            identificadores += square.identificadoresNoQuadrado + ",";
+            }
+        }
+
         squareInfo[0] = square.imagemAColocar;
         squareInfo[1] = square.texto;
-        //squareInfo[2] = square.identificadoresNoQuadrado;
+        squareInfo[2] = identificadores;
 
-        if (square.meta == true) {
+        if (square.meta) {
             square.imagemAColocar = "Finish.png";
             square.texto = "Meta";
         }
