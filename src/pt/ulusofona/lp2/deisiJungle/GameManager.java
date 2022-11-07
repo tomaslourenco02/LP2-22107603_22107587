@@ -91,6 +91,10 @@ public class GameManager {
 
             for (int j = 0; j < playersInfo[i][0].length(); j++) {
 
+                if(playersInfo[i][0].charAt(j) == 0){
+                    return false;
+                }
+
                 if (!((playersInfo[i][0].charAt(j)) < '9') || playersInfo[i][9].charAt(j) > '0') {
                     return false;
                 }
