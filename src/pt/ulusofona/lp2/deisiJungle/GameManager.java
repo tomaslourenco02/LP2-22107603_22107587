@@ -10,8 +10,15 @@ import static java.lang.Character.isDigit;
 
 public class GameManager {
 
+
     ArrayList<Jogador> jogadores = new ArrayList();
     ArrayList<SquareInfo> tabuleiro = new ArrayList<>();
+
+    public GameManager() {
+
+        ArrayList<Jogador> jogadores = new ArrayList<>();
+        ArrayList<SquareInfo> tabuleiro = new ArrayList<>();
+    }
 
     public String[][] getSpecies() {
 
@@ -129,6 +136,8 @@ public class GameManager {
         if(!verificaJogadores(playersInfo)){
             return false;
         }
+
+        tabuleiro.add(new SquareInfo());
 
 
         for (int i = 0; i < playersInfo.length; i++) {
