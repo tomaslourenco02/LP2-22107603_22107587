@@ -172,6 +172,10 @@ public class GameManager {
             }
         }
 
+        if(idJogadores.length == 0){
+            return new int[0];
+        }
+
         int[] idJogadoresRetornar = new int[count];
 
         for (int i = 0; i < idJogadores.length; i++) {
@@ -254,7 +258,7 @@ public class GameManager {
             if (jogadores.get(i).identificador == playerId) {
                 infoJogador[0] = Integer.toString(jogadores.get(i).identificador);
                 infoJogador[1] = jogadores.get(i).nome;
-                //infoJogador[2] = jogadores.get(i).especieDoJogador.identificador;
+                infoJogador[2] = jogadores.get(i).especieDoJogador;
                 infoJogador[3] = Integer.toString(jogadores.get(i).energiaAtual);
             }
         }
