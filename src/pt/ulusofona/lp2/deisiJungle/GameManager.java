@@ -39,7 +39,7 @@ public class GameManager {
     int count = 0;
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
         String[][] casosPossiveis = new String[4][3];
-
+        tabuleiro.tamanho = jungleSize;
         //verificar dados iniciais
         if (jungleSize == 0 || initialEnergy == 0 || initialEnergy < 0 || playersInfo == null) {
             return false;
@@ -48,22 +48,13 @@ public class GameManager {
             return false;
         }
 
-        tabuleiro.tamanho = jungleSize;
-
         int[] IDjogador = new int[4];
-        IDjogador[0] = Integer.parseInt(playersInfo[0][0]);
-        IDjogador[1] = Integer.parseInt(playersInfo[1][0]);
-        IDjogador[2] = Integer.parseInt(playersInfo[2][0]);
-        IDjogador[3] = Integer.parseInt(playersInfo[3][0]);
-
         int[] IDjogador_comparacao = new int[4];
-        IDjogador_comparacao[0] = Integer.parseInt(playersInfo[0][0]);
-        IDjogador_comparacao[1] = Integer.parseInt(playersInfo[1][0]);
-        IDjogador_comparacao[2] = Integer.parseInt(playersInfo[2][0]);
-        IDjogador_comparacao[3] = Integer.parseInt(playersInfo[3][0]);
 
         for (int i = 0; i < IDjogador.length; i++) {
+            IDjogador[i] = Integer.parseInt(playersInfo[i][0]);
             for (int j = 0; j < IDjogador_comparacao.length; j++) {
+                IDjogador_comparacao[j] = Integer.parseInt(playersInfo[j][0]);
                 if(IDjogador[i] == IDjogador_comparacao[j]){
                     return false;
                 }
@@ -214,23 +205,21 @@ public class GameManager {
         return squareInfo;
     }
 
-    //ARRANJAR ESTA FUNCAO COM O ENUNCIADO, ESTÁ MAL FEITA
     public String[] getPlayerInfo(int playerId) {
-
         String[] infoJogador = new String[4];
 
-        Jogador jogador = new Jogador();
-
-        infoJogador[0] = Integer.toString(jogador.identificador);
-        infoJogador[1] = jogador.nome;
-        infoJogador[2] = jogador.especieDoJogador.toString();
-        infoJogador[3] = Integer.toString(jogador.energiaAtual);
-
-        if(infoJogador[0] == null){
-
+        for (int i = 0; i < jogadores.size(); i++) {
+            if(jogadores.get(i).identificador == playerId){
+            infoJogador[0] = Integer.toString(jogadores.get(i).identificador);
+            infoJogador[1] = jogadores.get(i).nome;
+            infoJogador[2] = jogadores.get(i).especieDoJogador.identificador;
+            infoJogador[3] = Integer.toString(jogadores.get(i).energiaAtual);
+            }
         }
-
-        return null;
+        if(infoJogador[0] == null && infoJogador[1] == null && infoJogador[2] == null && infoJogador[3] == null){
+            return null;
+        }
+        return infoJogador;
     }
 
     public String[] getCurrentPlayerInfo() {
