@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.Objects;
 
 
-
-
 public class GameManager {
 
 
@@ -85,11 +83,11 @@ public class GameManager {
                 return false;
             }
 
-            if(playersInfo[i][0] == null){
+            if (playersInfo[i][0] == null) {
                 return false;
             }
 
-            if(!playersInfo[i][0].matches("[0-9]*")){
+            if (!playersInfo[i][0].matches("[0-9]*")) {
                 return false;
             }
 
