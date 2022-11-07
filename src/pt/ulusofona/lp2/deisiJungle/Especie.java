@@ -4,11 +4,11 @@ import javax.swing.*;
 
 public class Especie {
 
-    char identificador;
+    String identificador;
     String nome;
     String imagem;
 
-    public Especie(char identificador, String nome, String imagem) {
+    public Especie(String identificador, String nome, String imagem) {
 
         this.identificador = identificador;
         this.nome = nome;

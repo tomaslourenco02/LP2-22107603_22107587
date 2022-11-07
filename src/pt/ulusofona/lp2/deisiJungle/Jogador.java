@@ -18,5 +18,10 @@ public class Jogador {
     }
 
     public Jogador() {
+        identificador = 0;
+        nome = "";
+        especieDoJogador = null;
+        energiaInicial = 0;
+        posicaoAtual = 1;
     }
 }

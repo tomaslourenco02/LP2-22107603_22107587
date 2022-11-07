@@ -6,6 +6,9 @@ import java.util.HashMap;
 
 public class GameManager {
 
+    ArrayList<Jogador> jogadores = new ArrayList();
+    SquareInfo tabuleiro = new SquareInfo();
+
     public String[][] getSpecies() {
 
         String[][] especies = new String[5][3];
@@ -37,9 +40,11 @@ public class GameManager {
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
 
         //verificar dados iniciais
-        if (jungleSize == 0 || initialEnergy == 0 || playersInfo == null) {
+        if (jungleSize == 0 || initialEnergy == 0 || initialEnergy < 0 || playersInfo == null) {
             return false;
         }
+
+        tabuleiro.tamanho = jungleSize;
 
         HashMap<String, Integer> IDjogadores = new HashMap<>();
 
@@ -67,7 +72,7 @@ public class GameManager {
             }
         }
 
-        /* String[][] especies = getSpecies();
+        String[][] especies = getSpecies();
 
         for (int i = 0; i < IDjogadores.size(); i++) {
             for (int j = 0; j < getSpecies().length; j++) {
@@ -75,11 +80,6 @@ public class GameManager {
                     return false;
                 }
             }
-        }*/
-
-        //verifica nr jogadores
-        if (IDjogadores.size() < 2 || IDjogadores.size() > 4) {
-            return false;
         }
 
         //verificar nomes dos jogadores
@@ -89,35 +89,82 @@ public class GameManager {
             }
         }
 
+        //verifica nr jogadores
+        if (IDjogadores.size() < 2 || IDjogadores.size() > 4) {
+            return false;
+        }
+
         if (jungleSize < IDjogadores.size() * 2) {
             return false;
         }
+
+        int i = 0;
+
+        while(i < 4){
+            Jogador bro = new Jogador();
+            bro.identificador = Integer.parseInt(playersInfo[i][1]);
+            bro.nome = playersInfo[i][2];
+            bro.especieDoJogador.identificador = playersInfo[i][3];
+            bro.energiaInicial = initialEnergy;
+
+            jogadores.add(bro);
+
+            i++;
+        }
+
         return true;
+
     }
 
     public int[] getPlayerIds(int squareNr) {
+        int[] IDjogadores = new int[4];
+        int count1 = 0;
 
-        int[] identificadoresJogadores = new int[4];
+
+        for (int j = 0; j < IDjogadores.length ; j++) {
+            for (int i = 0; i < jogadores.size(); i++) {
+             if (squareNr == 0 || squareNr > tabuleiro.tamanho) {
+                 return new int[0];
+             }
+             if (squareNr != jogadores.get(i).posicaoAtual) {
+                 count1++;
+             }
+             if (squareNr == jogadores.get(i).posicaoAtual) {
+                 IDjogadores[j] = jogadores.get(i).identificador;
+             }
+         }
+        }
+
+        int[] IDjogadores_retornar = new int[count1];
+
+        for (int i = 0; i < IDjogadores_retornar.length; i++) {
+            IDjogadores_retornar[i] = IDjogadores[i];
+        }
+
+        return IDjogadores_retornar;
+
+         /* int[] identificadoresJogadores = new int[4];
 
         Jogador[] jogadoresEmJogo = new Jogador[4];
-
-        jogadoresEmJogo[0] = new Jogador();
 
         if (squareNr == 0) {
             return new int[0]; //array vazio
         }
 
         for (int i = 0; i < jogadoresEmJogo.length; i++) {
-            if(jogadoresEmJogo[i] == null){
+            jogadoresEmJogo[i] = new Jogador();
+
+            if(jogadoresEmJogo[i].posicaoAtual != squareNr){
                 return new int[0];
             }
+
             else{
                 if(jogadoresEmJogo[i].posicaoAtual == squareNr){
                     identificadoresJogadores[i] = jogadoresEmJogo[i].identificador;
                 }
             }
         }
-        return identificadoresJogadores;
+        return identificadoresJogadores; */
     }
 
     public String[] getSquareInfo(int squareNr) {
