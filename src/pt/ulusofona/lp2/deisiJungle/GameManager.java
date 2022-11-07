@@ -89,6 +89,10 @@ public class GameManager {
                 return false;
             }
 
+            if(!playersInfo[i][0].matches("[0-9]*")){
+                return false;
+            }
+
             /*for (int j = 0; j < playersInfo[i][0].length(); j++) {
 
                 if(playersInfo[i][0].charAt(j) == 0){
