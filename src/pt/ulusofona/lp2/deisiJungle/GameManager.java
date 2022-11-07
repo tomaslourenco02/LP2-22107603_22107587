@@ -6,7 +6,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
 
-import static java.lang.Character.isDigit;
+
+
 
 public class GameManager {
 
@@ -84,10 +85,13 @@ public class GameManager {
                 return false;
             }
 
+            if(playersInfo[i][0] == null){
+                return false;
+            }
 
             for (int j = 0; j < playersInfo[i][0].length(); j++) {
 
-                if (!isDigit(playersInfo[i][0].charAt(j))) {
+                if (!((playersInfo[i][0].charAt(j)) < '9') || playersInfo[i][9].charAt(j) > '0') {
                     return false;
                 }
             }
@@ -120,11 +124,6 @@ public class GameManager {
     int count = 0;
 
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
-        /*String[][] casosPossiveis = new String[4][3];
-        tabuleiro.tamanho = jungleSize;*/
-
-        //int[] IDjogador = new int[4];
-        //int[] IDjogador_comparacao = new int[4];
 
         if (initialEnergy <= 0) {
             return false;
@@ -148,111 +147,6 @@ public class GameManager {
         }
 
         return true;
-
-        /*if (playersInfo.length > casosPossiveis.length) {
-            return false;
-        }
-        for (int i = 0; i < playersInfo.length; i++) {
-            if (Integer.parseInt(playersInfo[i][0]) < 0) {        //ID > 0
-                return false;
-            }
-        }
-        for (int i = 0; i < IDjogador.length; i++) {
-            IDjogador[i] = Integer.parseInt(playersInfo[i][0]);
-            for (int j = 0; j < IDjogador_comparacao.length; j++) {  //NÃ£o podem haver dois jogadores com o mesmo ID
-                IDjogador_comparacao[j] = Integer.parseInt(playersInfo[j][0]);
-                if (IDjogador[i] == IDjogador_comparacao[j]) {
-                    return false;
-                }
-            }
-        }
-        String[][] especies = getSpecies();
-
-        for (int i = 0; i < IDjogador.length; i++) { // A espÃ©cie
-            for (int j = 0; j < getSpecies().length; j++) {
-                if (playersInfo[i][2].equals(especies[j][0])) {
-                    if (playersInfo[i][2].equals("T")) {
-                        count++;
-                    }
-                } else {
-                    return false;
-                }
-            }
-            if (count >= 2) {  // sÃ³ um tarzan
-                return false;
-            }
-        }
-
-        //verificar nomes dos jogadores
-        for (int i = 0; i < playersInfo.length; i++) {
-            if (playersInfo[i][1] == null || playersInfo[i][1].isEmpty()) {
-                return false;
-            }
-        }
-
-        //verificar dados iniciais
-        if (jungleSize == 0) {
-            return false;
-        }
-
-        /*
-        //verifica IDÂ´s Jogadores
-        for (int i = 0; i < playersInfo.length; i++) {
-            if (!IDjogadores.containsKey(playersInfo[i][0])) {
-                IDjogadores.put(playersInfo[i][0], Integer.valueOf(playersInfo[i][(1)]));
-            } else {
-                return false;
-            }
-        }
-
-         //verifica especies jogadores
-        for (int i = 0; i < playersInfo.length; i++) {
-            if (!(playersInfo[i][2].equals("L") || playersInfo[i][2].equals("E") || playersInfo[i][2].equals("P")
-                    || playersInfo[i][2].equals("T")
-                    || playersInfo[i][2].equals("Z"))) {
-                if(playersInfo[i][2].equals("T")){
-                    count++;
-                }
-                return false;
-            }
-            if( count > 1 ){
-                return false;
-            }
-        }
-
-        String[][] especies = getSpecies();
-
-        for (int i = 0; i < IDjogadores.size(); i++) {
-            for (int j = 0; j < getSpecies().length; j++) {
-                if(!playersInfo[i][2].equals(especies[j][0])){
-                    return false;
-                }
-            }
-        }
-
-
-        int i = 0;
-        while (i < 4) {
-            Jogador bro = new Jogador();
-            bro.identificador = Integer.parseInt(playersInfo[i][1]);
-            bro.nome = playersInfo[i][2];
-            bro.especieDoJogador.identificador = playersInfo[i][3];
-            bro.energiaInicial = initialEnergy;
-
-            jogadores.add(bro);
-
-            i++;
-        }
-
-        //verifica nr jogadores
-        if (jogadores.size() < 2 || jogadores.size() > 4) {
-            return false;
-        }
-
-        if (jungleSize < jogadores.size() * 2) {
-            return false;
-        }
-        return true;*/
     }
 
     public int[] getPlayerIds(int squareNr) {
