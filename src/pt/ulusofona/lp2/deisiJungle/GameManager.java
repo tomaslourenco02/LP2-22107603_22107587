@@ -111,6 +111,9 @@ public class GameManager {
                     if (ids[i] == ids[j]) {
                         return false;
                     }
+                    if (ids[i] == ids[j] - 1 || ids[i] == ids[j] + 1 || ids[j] == ids[i] - 1 || ids[j] == ids[i] + 1){
+                        return false;
+                    }
                 }
             }
         }
@@ -248,9 +251,9 @@ public class GameManager {
         }
 
         for (int i = 0; i < square.identificadoresNoQuadrado.size(); i++) {
-            if(i == square.identificadoresNoQuadrado.size()-1){
+            if (i == square.identificadoresNoQuadrado.size() - 1) {
                 identificadores += square.identificadoresNoQuadrado + "";
-            }else{
+            } else {
                 identificadores += square.identificadoresNoQuadrado + ",";
             }
         }
