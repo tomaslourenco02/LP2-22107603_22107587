@@ -2,12 +2,16 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
+
+import static java.lang.Character.isDigit;
 
 public class GameManager {
 
     ArrayList<Jogador> jogadores = new ArrayList();
-    SquareInfo tabuleiro = new SquareInfo();
+    ArrayList<SquareInfo> tabuleiro = new ArrayList<>();
 
     public String[][] getSpecies() {
 
@@ -36,44 +40,134 @@ public class GameManager {
         return especies;
     }
 
+    public boolean verificaEspecies(String especie) {
+
+        String[][] especies = getSpecies();
+        ArrayList<String> especiesArrayList = new ArrayList<>();
+
+        for (int i = 0; i < especies.length; i++) {
+            especiesArrayList.add(especies[i][0]);
+        }
+        if (especiesArrayList.contains(especie)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean verificaJogadores(String[][] playersInfo) {
+
+        int countTarzan = 0;
+
+        if (playersInfo == null) {
+            return false;
+        }
+
+        int[] ids = new int[playersInfo.length];
+
+        if (playersInfo.length > 4 || playersInfo.length < 2) {
+            return false;
+        }
+
+        for (int i = 0; i < playersInfo.length; i++) {
+
+            if (playersInfo[i][1] == null || Objects.equals(playersInfo[i][1], "")) {
+                return false;
+            }
+            if (!verificaEspecies(playersInfo[i][2])) {
+                return false;
+            }
+
+
+            for (int j = 0; j < playersInfo[i][0].length(); j++) {
+
+                if (!isDigit(playersInfo[i][0].charAt(j))) {
+                    return false;
+                }
+            }
+            if (Integer.parseInt(playersInfo[i][0]) <= 0) {
+                return false;
+            }
+            ids[i] = Integer.parseInt(playersInfo[i][0]);
+        }
+        for (int i = 0; i < ids.length; i++) {
+            for (int j = 0; j < ids.length; j++) {
+                if (i != j) {
+                    if (ids[i] == ids[j]) {
+                        return false;
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < playersInfo.length; i++) {
+            if (Objects.equals(playersInfo[i][2], "T")) {
+                countTarzan++;
+            }
+        }
+        if (countTarzan > 1) {
+            return false;
+        }
+
+        return true;
+    }
+
     int count = 0;
+
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
-        String[][] casosPossiveis = new String[4][3];
-        tabuleiro.tamanho = jungleSize;
+        /*String[][] casosPossiveis = new String[4][3];
+        tabuleiro.tamanho = jungleSize;*/
 
-        int[] IDjogador = new int[4];
-        int[] IDjogador_comparacao = new int[4];
+        //int[] IDjogador = new int[4];
+        //int[] IDjogador_comparacao = new int[4];
 
-        if(playersInfo == null){return false;}
+        if (initialEnergy <= 0) {
+            return false;
+        }
 
-        if(playersInfo.length > casosPossiveis.length){
+        if (jungleSize < playersInfo.length * 2) {
+            return false;
+        }
+        if(!verificaJogadores(playersInfo)){
+            return false;
+        }
+
+
+        for (int i = 0; i < playersInfo.length; i++) {
+            jogadores.add(new Jogador(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2]));
+            tabuleiro.get(0).identificadoresNoQuadrado.add(playersInfo[i][0]); //NAO POSSO FAZER ISTO
+        }
+
+        return true;
+
+        /*if (playersInfo.length > casosPossiveis.length) {
             return false;
         }
         for (int i = 0; i < playersInfo.length; i++) {
-            if(Integer.parseInt(playersInfo[i][0]) < 0){        //ID > 0
+            if (Integer.parseInt(playersInfo[i][0]) < 0) {        //ID > 0
                 return false;
             }
         }
         for (int i = 0; i < IDjogador.length; i++) {
             IDjogador[i] = Integer.parseInt(playersInfo[i][0]);
-            for (int j = 0; j < IDjogador_comparacao.length; j++) {  //Não podem haver dois jogadores com o mesmo ID
+            for (int j = 0; j < IDjogador_comparacao.length; j++) {  //NÃ£o podem haver dois jogadores com o mesmo ID
                 IDjogador_comparacao[j] = Integer.parseInt(playersInfo[j][0]);
-                if(IDjogador[i] == IDjogador_comparacao[j]){
+                if (IDjogador[i] == IDjogador_comparacao[j]) {
                     return false;
                 }
             }
         }
         String[][] especies = getSpecies();
 
-        for (int i = 0; i < IDjogador.length; i++) { // A espécie
+        for (int i = 0; i < IDjogador.length; i++) { // A espÃ©cie
             for (int j = 0; j < getSpecies().length; j++) {
-                if(playersInfo[i][2].equals(especies[j][0])) {
+                if (playersInfo[i][2].equals(especies[j][0])) {
                     if (playersInfo[i][2].equals("T")) {
                         count++;
                     }
-                }else {return false;}
+                } else {
+                    return false;
+                }
             }
-            if( count >= 2 ){  // só um tarzan
+            if (count >= 2) {  // sÃ³ um tarzan
                 return false;
             }
         }
@@ -91,7 +185,7 @@ public class GameManager {
         }
 
         /*
-        //verifica ID´s Jogadores
+        //verifica IDÂ´s Jogadores
         for (int i = 0; i < playersInfo.length; i++) {
             if (!IDjogadores.containsKey(playersInfo[i][0])) {
                 IDjogadores.put(playersInfo[i][0], Integer.valueOf(playersInfo[i][(1)]));
@@ -124,10 +218,10 @@ public class GameManager {
                 }
             }
         }
-        */
+
 
         int i = 0;
-        while(i < 4){
+        while (i < 4) {
             Jogador bro = new Jogador();
             bro.identificador = Integer.parseInt(playersInfo[i][1]);
             bro.nome = playersInfo[i][2];
@@ -144,10 +238,10 @@ public class GameManager {
             return false;
         }
 
-        if (jungleSize < jogadores.size()*2) {
+        if (jungleSize < jogadores.size() * 2) {
             return false;
         }
-        return true;
+        return true;*/
     }
 
     public int[] getPlayerIds(int squareNr) {
@@ -155,18 +249,18 @@ public class GameManager {
         int count1 = 0;
 
 
-        for (int j = 0; j < IDjogadores.length ; j++) {
+        for (int j = 0; j < IDjogadores.length; j++) {
             for (int i = 0; i < jogadores.size(); i++) {
-             if (squareNr == 0 || squareNr > tabuleiro.tamanho) {
-                 return new int[0];
-             }
-             if (squareNr != jogadores.get(i).posicaoAtual) {
-                 count1++;
-             }
-             if (squareNr == jogadores.get(i).posicaoAtual) {
-                 IDjogadores[j] = jogadores.get(i).identificador;
-             }
-         }
+                if (squareNr == 0) {
+                    return new int[0];
+                }
+                if (squareNr != jogadores.get(i).posicaoAtual) {
+                    count1++;
+                }
+                if (squareNr == jogadores.get(i).posicaoAtual) {
+                    IDjogadores[j] = jogadores.get(i).identificador;
+                }
+            }
         }
 
         int[] IDjogadores_retornar = new int[count1];
@@ -203,7 +297,7 @@ public class GameManager {
 
     public String[] getSquareInfo(int squareNr) {
 
-        if(squareNr == 0){
+        if (squareNr == 0) {
             return null;
         }
 
@@ -213,11 +307,11 @@ public class GameManager {
 
         squareInfo[0] = square.imagemAColocar;
         squareInfo[1] = square.texto;
-        squareInfo[2] = square.identificadoresNoQuadrado;
+        //squareInfo[2] = square.identificadoresNoQuadrado;
 
-        if(square.meta == true){
-        square.imagemAColocar = "Finish.png";
-        square.texto = "Meta";
+        if (square.meta == true) {
+            square.imagemAColocar = "Finish.png";
+            square.texto = "Meta";
         }
         return squareInfo;
     }
@@ -226,14 +320,14 @@ public class GameManager {
         String[] infoJogador = new String[4];
 
         for (int i = 0; i < jogadores.size(); i++) {
-            if(jogadores.get(i).identificador == playerId){
-            infoJogador[0] = Integer.toString(jogadores.get(i).identificador);
-            infoJogador[1] = jogadores.get(i).nome;
-            infoJogador[2] = jogadores.get(i).especieDoJogador.identificador;
-            infoJogador[3] = Integer.toString(jogadores.get(i).energiaAtual);
+            if (jogadores.get(i).identificador == playerId) {
+                infoJogador[0] = Integer.toString(jogadores.get(i).identificador);
+                infoJogador[1] = jogadores.get(i).nome;
+                //infoJogador[2] = jogadores.get(i).especieDoJogador.identificador;
+                infoJogador[3] = Integer.toString(jogadores.get(i).energiaAtual);
             }
         }
-        if(infoJogador[0] == null && infoJogador[1] == null && infoJogador[2] == null && infoJogador[3] == null){
+        if (infoJogador[0] == null && infoJogador[1] == null && infoJogador[2] == null && infoJogador[3] == null) {
             return null;
         }
         return infoJogador;

@@ -4,12 +4,18 @@ public class Jogador {
 
     int identificador; //Os IDs dos jogadores podem não ser consecutivos, por exemplo J1 = 1, J2 = 3, J3 = 5;
     String nome;       //Apenas poderá existir um jogador da espécie Tarzan
-    Especie especieDoJogador;
+    String especieDoJogador;
     int energiaInicial;
     int energiaAtual;
     int posicaoAtual;
 
-    public Jogador(int identificador, String nome, Especie especieDoJogador, int energiaInicial, int energiaAtual) {
+    public Jogador(int identificador, String nome, String especieDoJogador) {
+        this.identificador = identificador;
+        this.nome = nome;
+        this.especieDoJogador = especieDoJogador;
+    }
+
+    public Jogador(int identificador, String nome, String especieDoJogador, int energiaInicial, int energiaAtual) {
         this.identificador = identificador;
         this.nome = nome;
         this.especieDoJogador = especieDoJogador;
@@ -19,7 +25,7 @@ public class Jogador {
 
     public Jogador() {
         identificador = 0;
-        nome = "";
+        nome = null;
         especieDoJogador = null;
         energiaInicial = 0;
         posicaoAtual = 1;
