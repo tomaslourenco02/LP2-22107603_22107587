@@ -90,7 +90,6 @@ public class GameManager {
             return false;
         }
 
-
         /*
         //verifica ID´s Jogadores
         for (int i = 0; i < playersInfo.length; i++) {
