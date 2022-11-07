@@ -71,27 +71,25 @@ public class GameManager {
                     if (playersInfo[i][2].equals("T")) {
                         count++;
                     }
-                }else
-                    return false;
+                }else {return false;}
             }
-            if( count > 1 ){  // só um tarzan
+            if( count >= 2 ){  // só um tarzan
                 return false;
             }
         }
 
         //verificar nomes dos jogadores
         for (int i = 0; i < playersInfo.length; i++) {
-            if (playersInfo[i][1] == null || playersInfo[i][1].equals("")) {
+            if (playersInfo[i][1] == null || playersInfo[i][1].isEmpty()) {
                 return false;
             }
         }
 
         //verificar dados iniciais
-        if (jungleSize == 0 || initialEnergy == 0 || initialEnergy < 0) {
+        if (jungleSize == 0) {
             return false;
         }
 
-        HashMap<String, Integer> IDjogadores = new HashMap<>();
 
         /*
         //verifica ID´s Jogadores
@@ -147,11 +145,10 @@ public class GameManager {
             return false;
         }
 
-        if (jungleSize < jogadores.size() * 2) {
+        if (jungleSize < jogadores.size()*2) {
             return false;
         }
         return true;
-
     }
 
     public int[] getPlayerIds(int squareNr) {
