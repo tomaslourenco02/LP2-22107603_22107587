@@ -168,11 +168,11 @@ public class GameManager {
         for (int i = 0; i < jogadores.size(); i++) {
             if (jogadores.get(i).posicaoAtual == squareNr) {
                 idJogadores[i] = jogadores.get(i).identificador;
-                count ++;
+                count++;
             }
         }
 
-        if(idJogadores.length == 0){
+        if (idJogadores.length == 0) {
             return new int[0];
         }
 
@@ -269,6 +269,7 @@ public class GameManager {
 
     public String[] getPlayerInfo(int playerId) {
         String[] infoJogador = new String[4];
+        int count = 0;
 
         for (int i = 0; i < jogadores.size(); i++) {
             if (jogadores.get(i).identificador == playerId) {
@@ -276,9 +277,13 @@ public class GameManager {
                 infoJogador[1] = jogadores.get(i).nome;
                 infoJogador[2] = jogadores.get(i).especieDoJogador;
                 infoJogador[3] = Integer.toString(jogadores.get(i).energiaAtual);
+                count++;
             }
         }
-        if (infoJogador[0] == null && infoJogador[1] == null && infoJogador[2] == null && infoJogador[3] == null) {
+        if (count <= 0) {
+            return null;
+        }
+        if (infoJogador[0] == null || infoJogador[1] == null || infoJogador[2] == null || infoJogador[3] == null) {
             return null;
         }
         return infoJogador;
