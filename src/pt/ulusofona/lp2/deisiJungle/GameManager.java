@@ -99,6 +99,9 @@ public class GameManager {
                     if (ids[i] == ids[j]) {
                         return false;
                     }
+                    if(ids[i] == ids[j]-1 || ids[j] == ids[i]-1 || ids[i] == ids[j]+1 || ids[j] == ids[i]+1){
+                        return false;
+                    }
                 }
             }
         }
@@ -212,9 +215,9 @@ public class GameManager {
 
         for (int i = 0; i < square.identificadoresNoQuadrado.size(); i++) {
             if(i == square.identificadoresNoQuadrado.size()-1){
-                identificadores += square.identificadoresNoQuadrado.get(i) + "";
+                identificadores += square.identificadoresNoQuadrado + "";
             }else{
-                identificadores += square.identificadoresNoQuadrado.get(i) + ",";
+                identificadores += square.identificadoresNoQuadrado + ",";
             }
         }
 
@@ -257,10 +260,24 @@ public class GameManager {
     }
 
     public String[][] getPlayersInfo() {
-     return null;
+        return getPlayersInfo();
     }
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
+
+        if (bypassValidations == false) {
+
+            if (nrSquares <= 0 || nrSquares > 6) {
+                return false;
+            }
+        }
+        else{
+            for (int i = 0; i < jogadores.size(); i++) {
+                if(jogadores.get(i).aJogar){
+                    jogadores.get(i).posicaoAtual = jogadores.get(i).posicaoAtual + nrSquares;
+                }
+            }
+        }
         return true;
     }
 
