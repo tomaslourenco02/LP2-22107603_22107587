@@ -165,7 +165,7 @@ public class GameManager {
         }
 
         for (int i = 0; i < jogadores.size(); i++) {
-            if (jogadores.get(i).posicaoAtual == squareNr) {
+            if (jogadores.get(i).posicaoAtual == squareNr - 1) {
                 idJogadores[count] = jogadores.get(i).identificador;
                 count++;
             }
