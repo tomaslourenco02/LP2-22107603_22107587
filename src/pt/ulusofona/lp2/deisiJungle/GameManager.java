@@ -105,14 +105,10 @@ public class GameManager {
 
             ids[i] = Integer.parseInt(playersInfo[i][0]);
         }
-
         for (int i = 0; i < ids.length; i++) {
             for (int j = 0; j < ids.length; j++) {
                 if (i != j) {
                     if (ids[i] == ids[j]) {
-                        return false;
-                    }
-                    if (ids[i] == ids[j] - 1 || ids[i] == ids[j] + 1 || ids[j] == ids[i] - 1 || ids[j] == ids[i] + 1){
                         return false;
                     }
                 }
@@ -252,9 +248,9 @@ public class GameManager {
         }
 
         for (int i = 0; i < square.identificadoresNoQuadrado.size(); i++) {
-            if (i == square.identificadoresNoQuadrado.size() - 1) {
+            if(i == square.identificadoresNoQuadrado.size()-1){
                 identificadores += square.identificadoresNoQuadrado + "";
-            } else {
+            }else{
                 identificadores += square.identificadoresNoQuadrado + ",";
             }
         }
