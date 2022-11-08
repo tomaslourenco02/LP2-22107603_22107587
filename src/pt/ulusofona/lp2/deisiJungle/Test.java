@@ -15,7 +15,7 @@ public class Test {
 
         String[][] jogadores = {jogador1, jogador2};
 
-        assertTrue(gamemaneger.createInitialJungle(5,2, jogadores));
+        System.out.println(gamemaneger.createInitialJungle(5,2, jogadores));
 
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
     }

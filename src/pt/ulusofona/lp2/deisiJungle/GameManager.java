@@ -84,21 +84,9 @@ public class GameManager {
             if (playersInfo[i][0] == null) {
                 return false;
             }
-
             if (!playersInfo[i][0].matches("[0-9]*")) {
                 return false;
             }
-
-            /*for (int j = 0; j < playersInfo[i][0].length(); j++) {
-
-                if(playersInfo[i][0].charAt(j) == 0){
-                    return false;
-                }
-
-                if (!((playersInfo[i][0].charAt(j)) < '9') || playersInfo[i][9].charAt(j) > '0') {
-                    return false;
-                }
-            }*/
             if (Integer.parseInt(playersInfo[i][0]) <= 0) {
                 return false;
             }
@@ -109,6 +97,9 @@ public class GameManager {
             for (int j = 0; j < ids.length; j++) {
                 if (i != j) {
                     if (ids[i] == ids[j]) {
+                        return false;
+                    }
+                    if(ids[i] == ids[j]-1 || ids[j] == ids[i]-1 || ids[i] == ids[j]+1 || ids[j] == ids[i]+1){
                         return false;
                     }
                 }
@@ -182,51 +173,6 @@ public class GameManager {
         }
 
         return idJogadoresRetornar;
-
-        /*for (int j = 0; j < idJogadores.length; j++) {
-            for (int i = 0; i < jogadores.size(); i++) {
-                if (squareNr == 0) {
-                    return new int[0];
-                }
-                if (squareNr != jogadores.get(i).posicaoAtual) {
-                    count1++;
-                }
-                if (squareNr == jogadores.get(i).posicaoAtual) {
-                    idJogadores[j] = jogadores.get(i).identificador;
-                }
-            }
-        }
-
-        int[] IDjogadores_retornar = new int[count1];
-
-        for (int i = 0; i < IDjogadores_retornar.length; i++) {
-            IDjogadores_retornar[i] = idJogadores[i];
-        }
-
-        return IDjogadores_retornar;
-
-         /* int[] identificadoresJogadores = new int[4];
-
-        Jogador[] jogadoresEmJogo = new Jogador[4];
-
-        if (squareNr == 0) {
-            return new int[0]; //array vazio
-        }
-
-        for (int i = 0; i < jogadoresEmJogo.length; i++) {
-            jogadoresEmJogo[i] = new Jogador();
-
-            if(jogadoresEmJogo[i].posicaoAtual != squareNr){
-                return new int[0];
-            }
-
-            else{
-                if(jogadoresEmJogo[i].posicaoAtual == squareNr){
-                    identificadoresJogadores[i] = jogadoresEmJogo[i].identificador;
-                }
-            }
-        }
-        return identificadoresJogadores; */
     }
 
     public String[] getSquareInfo(int squareNr) {
