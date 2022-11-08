@@ -99,9 +99,6 @@ public class GameManager {
                     if (ids[i] == ids[j]) {
                         return false;
                     }
-                    if(ids[i] == ids[j]-1 || ids[j] == ids[i]-1 || ids[i] == ids[j]+1 || ids[j] == ids[i]+1){
-                        return false;
-                    }
                 }
             }
         }
