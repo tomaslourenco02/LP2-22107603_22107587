@@ -266,6 +266,7 @@ public class GameManager {
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
 
+        //oi
         if (bypassValidations == false) {
 
             if (nrSquares <= 0 || nrSquares > 6) {
