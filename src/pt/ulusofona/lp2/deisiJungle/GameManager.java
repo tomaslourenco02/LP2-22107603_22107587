@@ -141,6 +141,26 @@ public class GameManager {
             }
         }
 
+        int menorID = 0;
+
+        for (int i = 0; i < jogadores.size(); i++) {
+            for (int j = 0; j < jogadores.size(); j++) {
+                if (i != j) {
+                    if (jogadores.get(i).identificador < jogadores.get(j).identificador) {
+                        menorID = jogadores.get(i).identificador;
+                    } else {
+                        menorID = jogadores.get(j).identificador;
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < jogadores.size(); i++) {
+            if(menorID == jogadores.get(i).identificador){
+                jogadores.get(i).aJogar = true;
+            }
+        }
+
         return true;
     }
 
@@ -241,7 +261,6 @@ public class GameManager {
     }
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
-
         return true;
     }
 

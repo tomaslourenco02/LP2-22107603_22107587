@@ -8,6 +8,7 @@ public class Jogador {
     int energiaInicial;
     int energiaAtual;
     int posicaoAtual;
+    boolean aJogar = false;
 
     public Jogador(int identificador, String nome, String especieDoJogador) {
         this.identificador = identificador;
