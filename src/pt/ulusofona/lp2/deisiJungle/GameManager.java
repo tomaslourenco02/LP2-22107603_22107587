@@ -192,9 +192,9 @@ public class GameManager {
 
         for (int i = 0; i < square.identificadoresNoQuadrado.size(); i++) {
             if(i == square.identificadoresNoQuadrado.size()-1){
-                identificadores += square.identificadoresNoQuadrado + "";
+                identificadores += square.identificadoresNoQuadrado.get(i) + "";
             }else{
-                identificadores += square.identificadoresNoQuadrado + ",";
+                identificadores += square.identificadoresNoQuadrado.get(i) + ",";
             }
         }
 
@@ -237,7 +237,7 @@ public class GameManager {
     }
 
     public String[][] getPlayersInfo() {
-        return getPlayersInfo();
+     return null;
     }
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
