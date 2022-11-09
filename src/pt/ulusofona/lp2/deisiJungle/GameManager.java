@@ -277,14 +277,12 @@ public class GameManager {
             }
 
             Arrays.sort(ids);
-        System.out.println(String.valueOf(ids[countJogadores]));
 
                     for (int i = 0; i < jogadores.size(); i++) {
                         if (jogadores.get(i).identificador == ids[countJogadores]) {
                             jogadores.get(i).aJogar = true;
                             jogadores.get(i).posicaoAtual += nrSquares;
                             jogadores.get(i).aJogar = false;
-                            System.out.println("O jogador " + jogadores.get(i).nome + " andou até " + jogadores.get(i).posicaoAtual);
                         }
                     }
 
