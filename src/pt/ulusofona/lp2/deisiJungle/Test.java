@@ -26,14 +26,20 @@ public class Test {
         GameManager gamemaneger = new GameManager();
         String[] jogador1 = {"4", "Joao", "E"};
         String[] jogador2 = {"5", "Miguel", "L"};
-        String[] jogador3 = {"89", "José", "Z"};
-        String[] jogador4 = {"34", "Ana", "P"};
+        String[] jogador3 = {"1", "José", "Z"};
+        String[] jogador4 = {"90", "Ana", "P"};
 
         String[][] jogadores = {jogador1, jogador2,jogador3,jogador4};
 
         System.out.println(gamemaneger.createInitialJungle(60,2, jogadores));
 
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
+        System.out.println(gamemaneger.moveCurrentPlayer(4, false));
+        System.out.println(gamemaneger.moveCurrentPlayer(5, false));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, false));
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
+
     }
 
     @org.junit.Test

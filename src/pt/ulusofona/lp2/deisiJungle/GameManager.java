@@ -11,6 +11,7 @@ import java.util.Objects;
 public class GameManager {
     ArrayList<Jogador> jogadores = new ArrayList();
     ArrayList<SquareInfo> tabuleiro = new ArrayList<>();
+    int countJogadores = 0;
 
     public GameManager() {
 
@@ -162,14 +163,6 @@ public class GameManager {
             }
         }
 
-        int[] ids = new int[jogadores.size()];
-
-        for (int i = 0; i < jogadores.size(); i++) {
-            ids[i] = jogadores.get(i).identificador;
-        }
-
-        Arrays.sort(ids);
-
         return true;
     }
 
@@ -272,18 +265,40 @@ public class GameManager {
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
 
         if (bypassValidations == false) {
-
             if (nrSquares <= 0 || nrSquares > 6) {
                 return false;
             }
         }
-        else{
+
+            int[] ids = new int[jogadores.size()];
+
             for (int i = 0; i < jogadores.size(); i++) {
-                if(jogadores.get(i).aJogar){
-                    jogadores.get(i).posicaoAtual = jogadores.get(i).posicaoAtual + nrSquares;
-                }
+                ids[i] = jogadores.get(i).identificador;
             }
-        }
+
+            Arrays.sort(ids);
+        System.out.println(String.valueOf(ids[countJogadores]));
+
+                    for (int i = 0; i < jogadores.size(); i++) {
+                        if (jogadores.get(i).identificador == ids[countJogadores]) {
+                            jogadores.get(i).aJogar = true;
+                            jogadores.get(i).posicaoAtual += nrSquares;
+                            jogadores.get(i).aJogar = false;
+                            System.out.println("O jogador " + jogadores.get(i).nome + " andou até " + jogadores.get(i).posicaoAtual);
+                        }
+                    }
+
+
+                    if(jogadores.get(countJogadores).posicaoAtual >= tabuleiro.size()){
+                        jogadores.get(countJogadores).ganhou = true;
+                    }
+
+                    countJogadores++;
+
+                    if(countJogadores == jogadores.size()){
+                        countJogadores = 0;
+                    }
+
         return true;
     }
 
