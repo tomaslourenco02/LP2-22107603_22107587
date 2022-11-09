@@ -1,7 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -162,14 +161,7 @@ public class GameManager {
             }
         }
 
-        int[] ids = new int[jogadores.size()];
-
-        for (int i = 0; i < jogadores.size(); i++) {
-            ids[i] = jogadores.get(i).identificador;
-        }
-
-        Arrays.sort(ids);
-
+        // oi
         return true;
     }
 
@@ -271,6 +263,7 @@ public class GameManager {
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
 
+        //oi
         if (bypassValidations == false) {
 
             if (nrSquares <= 0 || nrSquares > 6) {
