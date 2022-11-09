@@ -10,7 +10,7 @@ public class Test {
     public void testJungle(){
         GameManager gamemaneger = new GameManager();
         String[] jogador1 = {"4", "Joao", "E"};
-        String[] jogador2 = {"5", "Pedro", "L"};
+        String[] jogador2 = {"6", "Pedro", "L"};
 
         String[][] jogadores = {jogador1, jogador2};
 
