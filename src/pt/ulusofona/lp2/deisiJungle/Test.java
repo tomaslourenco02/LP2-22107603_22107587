@@ -35,9 +35,13 @@ public class Test {
 
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
         System.out.println(gamemaneger.moveCurrentPlayer(4, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(5, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(2, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(6, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(6, false));
 
     }
@@ -50,10 +54,17 @@ public class Test {
         String[] jogador3 = {"89", "José", "Z"};
         String[] jogador4 = {"34", "Ana", "P"};
 
+        Jogador jogadorPos2 = new Jogador(1, "Joana", "L", 2);
+        Jogador jogadorPos2_2 = new Jogador(2, "Tomas", "E", 2);
+
+
+
+
         String[][] jogadores = {jogador1, jogador2,jogador3,jogador4};
 
         gamemaneger.createInitialJungle(10,2, jogadores);
 
         System.out.println(Arrays.toString(gamemaneger.getSquareInfo(1)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
     }
     }

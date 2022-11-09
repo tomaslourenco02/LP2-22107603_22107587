@@ -26,6 +26,13 @@ public class Jogador {
         this.energiaAtual = energiaAtual;
     }
 
+    public Jogador(int identificador, String nome, String especieDoJogador, int posicaoAtual) {
+        this.identificador = identificador;
+        this.nome = nome;
+        this.especieDoJogador = especieDoJogador;
+        this.posicaoAtual = posicaoAtual;
+    }
+
     public Jogador(int identificador, String nome, int posicaoAtual) {
         this.identificador = identificador;
         this.nome = nome;

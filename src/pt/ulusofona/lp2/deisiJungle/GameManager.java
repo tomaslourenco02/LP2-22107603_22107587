@@ -158,7 +158,7 @@ public class GameManager {
         }
 
         for (int i = 0; i < jogadores.size(); i++) {
-            if(menorID == jogadores.get(i).identificador){
+            if (menorID == jogadores.get(i).identificador) {
                 jogadores.get(i).aJogar = true;
             }
         }
@@ -213,10 +213,10 @@ public class GameManager {
         }
 
         for (int i = 0; i < square.identificadoresNoQuadrado.size(); i++) {
-            if(i == square.identificadoresNoQuadrado.size()-1){
-                identificadores += square.identificadoresNoQuadrado + "";
-            }else{
-                identificadores += square.identificadoresNoQuadrado + ",";
+            if (i == square.identificadoresNoQuadrado.size() - 1) {
+                identificadores += square.identificadoresNoQuadrado.get(i) + "";
+            } else {
+                identificadores += square.identificadoresNoQuadrado.get(i) + ",";
             }
         }
 
@@ -254,8 +254,40 @@ public class GameManager {
     }
 
     public String[] getCurrentPlayerInfo() {
+        int[] ids = ordenarIds();
+        String[] infoJogadorAtual = new String[4];
 
-        return null;
+        for (int i = 0; i < jogadores.size(); i++) {
+            if(countJogadores == 0){
+                if(jogadores.get(i).identificador == ids[countJogadores]){
+                    infoJogadorAtual[0] = String.valueOf(jogadores.get(i).identificador);
+                    infoJogadorAtual[1] = jogadores.get(i).nome;
+                    infoJogadorAtual[2] = jogadores.get(i).especieDoJogador;
+                    infoJogadorAtual[3] = String.valueOf(jogadores.get(i).energiaAtual);
+            }
+        }else{
+                if(jogadores.get(i).identificador == ids[countJogadores-1]){
+                    infoJogadorAtual[0] = String.valueOf(jogadores.get(i).identificador);
+                    infoJogadorAtual[1] = jogadores.get(i).nome;
+                    infoJogadorAtual[2] = jogadores.get(i).especieDoJogador;
+                    infoJogadorAtual[3] = String.valueOf(jogadores.get(i).energiaAtual);
+                }
+            }
+        }
+        return infoJogadorAtual;
+    }
+
+    //EXTRA ORDENAR IDS
+    public int[] ordenarIds() {
+        int[] ids = new int[jogadores.size()];
+
+        for (int i = 0; i < jogadores.size(); i++) {
+            ids[i] = jogadores.get(i).identificador;
+        }
+
+        Arrays.sort(ids);
+
+        return ids;
     }
 
     public String[][] getPlayersInfo() {
@@ -270,32 +302,26 @@ public class GameManager {
             }
         }
 
-            int[] ids = new int[jogadores.size()];
+        int[] ids = ordenarIds();
 
-            for (int i = 0; i < jogadores.size(); i++) {
-                ids[i] = jogadores.get(i).identificador;
+        if (countJogadores == jogadores.size()) {
+            countJogadores = 0;
+        }
+
+        for (int i = 0; i < jogadores.size(); i++) {
+            if (jogadores.get(i).identificador == ids[countJogadores]) {
+                jogadores.get(i).aJogar = true;
+                jogadores.get(i).posicaoAtual += nrSquares;
+                jogadores.get(i).aJogar = false;
             }
-
-            Arrays.sort(ids);
-
-                    for (int i = 0; i < jogadores.size(); i++) {
-                        if (jogadores.get(i).identificador == ids[countJogadores]) {
-                            jogadores.get(i).aJogar = true;
-                            jogadores.get(i).posicaoAtual += nrSquares;
-                            jogadores.get(i).aJogar = false;
-                        }
-                    }
+        }
 
 
-                    if(jogadores.get(countJogadores).posicaoAtual >= tabuleiro.size()){
-                        jogadores.get(countJogadores).ganhou = true;
-                    }
+        if (jogadores.get(countJogadores).posicaoAtual >= tabuleiro.size()) {
+            jogadores.get(countJogadores).ganhou = true;
+        }
 
-                    countJogadores++;
-
-                    if(countJogadores == jogadores.size()){
-                        countJogadores = 0;
-                    }
+        countJogadores++;
 
         return true;
     }
