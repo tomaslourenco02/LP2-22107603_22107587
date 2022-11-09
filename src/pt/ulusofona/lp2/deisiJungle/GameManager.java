@@ -259,7 +259,7 @@ public class GameManager {
     }
 
     public String[][] getPlayersInfo() {
-        return getPlayersInfo();
+        return null;
     }
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
