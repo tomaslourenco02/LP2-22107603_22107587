@@ -16,8 +16,7 @@ public class Test {
 
         assertTrue(gamemaneger.createInitialJungle(5,2, jogadores));
 
-        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
     }
 
     @org.junit.Test

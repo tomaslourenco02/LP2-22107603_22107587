@@ -176,9 +176,10 @@ public class GameManager {
     public int[] getPlayerIds(int squareNr) {
         int[] idJogadores = new int[jogadores.size()];
         int count = 0;
-        squareNr-- ;
 
-        if (squareNr <= 0) {
+        squareNr--;
+
+        if (squareNr < 0) {
             return new int[0];
         }
 
@@ -204,7 +205,7 @@ public class GameManager {
 
     public String[] getSquareInfo(int squareNr) {
 
-        squareNr-- ;
+        squareNr--;
 
         SquareInfo square = new SquareInfo();
 
@@ -214,7 +215,7 @@ public class GameManager {
 
         String identificadores = "";
 
-        if (squareNr <= 0 || squareNr > tamanhoTabuleiro) {
+        if (squareNr < 0 || squareNr > tamanhoTabuleiro) {
             return null;
         }
 
@@ -342,24 +343,7 @@ public class GameManager {
                             jogadoresSemEnergia++;
 
                             if (jogadoresSemEnergia == jogadores.size()) {
-                                System.out.println("Os jogadores ficaram sem energia");
                                 jogoAcabou = true;
-
-
-
-                               /* for (int i = tamanhoTabuleiro; i < 0; i--) {
-                                    for (int j = 0; j < jogadores.size(); j++) {
-                                        if (jogadores.get(j).posicaoAtual == i){
-                                            if(jogadoresNaCasa.length < 1){
-                                                count++;
-                                            }
-                                            jogadoresNaCasa[count] = jogadores.get(j);
-                                        }
-                                    }
-                                } */
-
-                                int count3 = 0;
-                                int posicaoQueGanha = 0;
 
                                 //ver as posicoes e caso as posicoes sejam iguais ganha o id menor
                             }
