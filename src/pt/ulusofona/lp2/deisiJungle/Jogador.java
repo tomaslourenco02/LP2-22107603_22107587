@@ -2,8 +2,8 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class Jogador {
 
-    int identificador; //Os IDs dos jogadores podem nÃ£o ser consecutivos, por exemplo J1 = 1, J2 = 3, J3 = 5;
-    String nome;       //Apenas poderÃ¡ existir um jogador da espÃ©cie Tarzan
+    int identificador; //Os IDs dos jogadores podem nÃƒÂ£o ser consecutivos, por exemplo J1 = 1, J2 = 3, J3 = 5;
+    String nome;       //Apenas poderÃƒÂ¡ existir um jogador da espÃƒÂ©cie Tarzan
     String especieDoJogador;
     int energiaInicial;
     int energiaAtual;
@@ -24,7 +24,7 @@ public class Jogador {
         this.especieDoJogador = especieDoJogador;
         this.energiaInicial = energiaInicial;
         this.energiaAtual = energiaInicial;
-        posicaoAtual = 1;
+        posicaoAtual = 0;
     }
 
     public Jogador(int identificador, String nome, String especieDoJogador, int energiaAtual) {
@@ -32,6 +32,7 @@ public class Jogador {
         this.nome = nome;
         this.especieDoJogador = especieDoJogador;
         this.energiaAtual = energiaAtual;
+        posicaoAtual = 0;
     }
 
     public Jogador(int identificador, String nome, int posicaoAtual) {
@@ -46,5 +47,16 @@ public class Jogador {
         especieDoJogador = null;
         energiaInicial = 0;
         posicaoAtual = 1;
+    }
+
+    public String[] infoJogador() {
+        String[] infoJogador = new String[4];
+
+        infoJogador[0] = Integer.toString(identificador);
+        infoJogador[1] = nome;
+        infoJogador[2] = especieDoJogador;
+        infoJogador[3] = Integer.toString(energiaAtual);
+
+        return infoJogador;
     }
 }

@@ -5,8 +5,8 @@ import java.util.Arrays;
 import static org.junit.Assert.assertTrue;
 
 public class Test {
-    @org.junit.Test
 
+    @org.junit.Test
     public void testJungle(){
         GameManager gamemaneger = new GameManager();
         String[] jogador1 = {"4", "Joao", "E"};
@@ -22,6 +22,28 @@ public class Test {
     }
 
     @org.junit.Test
+    public void testMovePlayer(){
+
+        GameManager gamemaneger = new GameManager();
+        String[] jogador1 = {"4", "Joao", "E"};
+        String[] jogador2 = {"5", "Miguel", "L"};
+
+        String[][] jogadores = {jogador1, jogador2};
+
+        System.out.println(gamemaneger.createInitialJungle(10,4, jogadores));
+
+        System.out.println(gamemaneger.moveCurrentPlayer(5, false));
+        System.out.println(gamemaneger.moveCurrentPlayer(5, false));
+        System.out.println(gamemaneger.moveCurrentPlayer(3, false));
+        System.out.println(gamemaneger.moveCurrentPlayer(3, false));
+        System.out.println(gamemaneger.moveCurrentPlayer(3, false));
+
+        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(10)));
+
+    }
+
+
+    @org.junit.Test
     public void testGetPlayersIds(){
         GameManager gamemaneger = new GameManager();
         String[] jogador1 = {"4", "Joao", "E"};
@@ -32,7 +54,6 @@ public class Test {
         String[][] jogadores = {jogador1, jogador2,jogador3,jogador4};
 
         System.out.println(gamemaneger.createInitialJungle(10,4, jogadores));
-
 
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
         System.out.println(gamemaneger.moveCurrentPlayer(5, false));
