@@ -347,8 +347,6 @@ public class GameManager {
             }
         }
 
-
-
         if (jogadores.get(countJogadores).posicaoAtual >= tabuleiro.size()) {
             jogadores.get(countJogadores).ganhou = true;
             jogadores.get(countJogadores).posicaoAtual = tabuleiro.size();
@@ -382,7 +380,7 @@ public class GameManager {
                 winnerInfo[1] = jogadores.get(i).nome;
                 winnerInfo[2] = jogadores.get(i).especieDoJogador;
                 winnerInfo[3] = String.valueOf(jogadores.get(i).energiaAtual);
-            }
+            }else {return null;}
         }
         return winnerInfo;
     }

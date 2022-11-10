@@ -15,7 +15,7 @@ public class Jogador {
         this.identificador = identificador;
         this.nome = nome;
         this.especieDoJogador = especieDoJogador;
-        posicaoAtual = 0;
+        posicaoAtual = 1;
     }
 
     public Jogador(int identificador, String nome, String especieDoJogador, int energiaInicial, int energiaAtual) {
@@ -24,6 +24,7 @@ public class Jogador {
         this.especieDoJogador = especieDoJogador;
         this.energiaInicial = energiaInicial;
         this.energiaAtual = energiaInicial;
+        posicaoAtual = 1;
     }
 
     public Jogador(int identificador, String nome, String especieDoJogador, int energiaAtual) {

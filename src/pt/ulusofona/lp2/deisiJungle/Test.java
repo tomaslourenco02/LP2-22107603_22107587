@@ -31,7 +31,7 @@ public class Test {
 
         String[][] jogadores = {jogador1, jogador2,jogador3,jogador4};
 
-        System.out.println(gamemaneger.createInitialJungle(10,2, jogadores));
+        System.out.println(gamemaneger.createInitialJungle(10,4, jogadores));
 
 
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
