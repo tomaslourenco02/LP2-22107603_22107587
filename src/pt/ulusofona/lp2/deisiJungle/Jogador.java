@@ -2,8 +2,8 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class Jogador {
 
-    int identificador; //Os IDs dos jogadores podem não ser consecutivos, por exemplo J1 = 1, J2 = 3, J3 = 5;
-    String nome;       //Apenas poderá existir um jogador da espécie Tarzan
+    int identificador; //Os IDs dos jogadores podem nÃ£o ser consecutivos, por exemplo J1 = 1, J2 = 3, J3 = 5;
+    String nome;       //Apenas poderÃ¡ existir um jogador da espÃ©cie Tarzan
     String especieDoJogador;
     int energiaInicial;
     int energiaAtual;
