@@ -31,9 +31,10 @@ public class Test {
 
         String[][] jogadores = {jogador1, jogador2,jogador3,jogador4};
 
-        System.out.println(gamemaneger.createInitialJungle(60,2, jogadores));
+        System.out.println(gamemaneger.createInitialJungle(60,8, jogadores));
 
-        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
+
+        /*System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
         System.out.println(gamemaneger.moveCurrentPlayer(4, false));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(5, false));
@@ -41,8 +42,18 @@ public class Test {
         System.out.println(gamemaneger.moveCurrentPlayer(2, false));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(6, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));*/
+
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(7)));
+
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(6, false));
+
+        for (String[] row: gamemaneger.getPlayersInfo()) {
+            System.out.println(Arrays.toString(row));
+        }
+
 
     }
 
