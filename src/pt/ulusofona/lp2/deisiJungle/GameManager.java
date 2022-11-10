@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,7 +10,12 @@ import java.util.Objects;
 
 public class GameManager {
     ArrayList<Jogador> jogadores = new ArrayList();
-    ArrayList<SquareInfo> tabuleiro = new ArrayList<>();
+    ArrayList<SquareInfo> squares = new ArrayList<>();
+    int countJogadores = 0;
+    int jogadoresSemEnergia = 0;
+    int jogadorVencedorID = 0;
+    int tamanhoTabuleiro = 0;
+    boolean jogoAcabou = false;
 
     public GameManager() {
 
@@ -84,21 +90,9 @@ public class GameManager {
             if (playersInfo[i][0] == null) {
                 return false;
             }
-
             if (!playersInfo[i][0].matches("[0-9]*")) {
                 return false;
             }
-
-            /*for (int j = 0; j < playersInfo[i][0].length(); j++) {
-
-                if(playersInfo[i][0].charAt(j) == 0){
-                    return false;
-                }
-
-                if (!((playersInfo[i][0].charAt(j)) < '9') || playersInfo[i][9].charAt(j) > '0') {
-                    return false;
-                }
-            }*/
             if (Integer.parseInt(playersInfo[i][0]) <= 0) {
                 return false;
             }
@@ -109,9 +103,6 @@ public class GameManager {
             for (int j = 0; j < ids.length; j++) {
                 if (i != j) {
                     if (ids[i] == ids[j]) {
-                        return false;
-                    }
-                    if (ids[i] == ids[j] - 1 || ids[i] == ids[j] + 1 || ids[j] == ids[i] - 1 || ids[j] == ids[i] + 1){
                         return false;
                     }
                 }
@@ -142,17 +133,40 @@ public class GameManager {
             return false;
         }
 
+        tamanhoTabuleiro = jungleSize;
+
+
         if (!verificaJogadores(playersInfo)) {
             return false;
         }
 
-        tabuleiro.add(new SquareInfo());
+        squares.add(new SquareInfo());
 
 
         for (int i = 0; i < playersInfo.length; i++) {
-            jogadores.add(new Jogador(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2]));
-            if (tabuleiro != null) {
-                tabuleiro.get(0).identificadoresNoQuadrado.add(playersInfo[i][0]); //NAO POSSO FAZER ISTO
+            jogadores.add(new Jogador(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2], initialEnergy));
+            if (squares != null) {
+                squares.get(0).identificadoresNoQuadrado.add(playersInfo[i][0]); //NAO POSSO FAZER ISTO
+            }
+        }
+
+        int menorID = 0;
+
+        for (int i = 0; i < jogadores.size(); i++) {
+            for (int j = 0; j < jogadores.size(); j++) {
+                if (i != j) {
+                    if (jogadores.get(i).identificador < jogadores.get(j).identificador) {
+                        menorID = jogadores.get(i).identificador;
+                    } else {
+                        menorID = jogadores.get(j).identificador;
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < jogadores.size(); i++) {
+            if (menorID == jogadores.get(i).identificador) {
+                jogadores.get(i).aJogar = true;
             }
         }
 
@@ -185,51 +199,6 @@ public class GameManager {
         }
 
         return idJogadoresRetornar;
-
-        /*for (int j = 0; j < idJogadores.length; j++) {
-            for (int i = 0; i < jogadores.size(); i++) {
-                if (squareNr == 0) {
-                    return new int[0];
-                }
-                if (squareNr != jogadores.get(i).posicaoAtual) {
-                    count1++;
-                }
-                if (squareNr == jogadores.get(i).posicaoAtual) {
-                    idJogadores[j] = jogadores.get(i).identificador;
-                }
-            }
-        }
-
-        int[] IDjogadores_retornar = new int[count1];
-
-        for (int i = 0; i < IDjogadores_retornar.length; i++) {
-            IDjogadores_retornar[i] = idJogadores[i];
-        }
-
-        return IDjogadores_retornar;
-
-         /* int[] identificadoresJogadores = new int[4];
-
-        Jogador[] jogadoresEmJogo = new Jogador[4];
-
-        if (squareNr == 0) {
-            return new int[0]; //array vazio
-        }
-
-        for (int i = 0; i < jogadoresEmJogo.length; i++) {
-            jogadoresEmJogo[i] = new Jogador();
-
-            if(jogadoresEmJogo[i].posicaoAtual != squareNr){
-                return new int[0];
-            }
-
-            else{
-                if(jogadoresEmJogo[i].posicaoAtual == squareNr){
-                    identificadoresJogadores[i] = jogadoresEmJogo[i].identificador;
-                }
-            }
-        }
-        return identificadoresJogadores; */
     }
 
     public String[] getSquareInfo(int squareNr) {
@@ -252,9 +221,9 @@ public class GameManager {
 
         for (int i = 0; i < square.identificadoresNoQuadrado.size(); i++) {
             if (i == square.identificadoresNoQuadrado.size() - 1) {
-                identificadores += square.identificadoresNoQuadrado + "";
+                identificadores += square.identificadoresNoQuadrado.get(i) + "";
             } else {
-                identificadores += square.identificadoresNoQuadrado + ",";
+                identificadores += square.identificadoresNoQuadrado.get(i) + ",";
             }
         }
 
@@ -292,21 +261,188 @@ public class GameManager {
     }
 
     public String[] getCurrentPlayerInfo() {
+        int[] ids = ordenarIds();
+        String[] infoJogadorAtual = new String[4];
 
-        return null;
+        for (int i = 0; i < jogadores.size(); i++) {
+            if (countJogadores == 0) {
+                if (jogadores.get(i).identificador == ids[countJogadores]) {
+                    infoJogadorAtual[0] = String.valueOf(jogadores.get(i).identificador);
+                    infoJogadorAtual[1] = jogadores.get(i).nome;
+                    infoJogadorAtual[2] = jogadores.get(i).especieDoJogador;
+                    infoJogadorAtual[3] = String.valueOf(jogadores.get(i).energiaAtual);
+
+                }
+            } else {
+                if (jogadores.get(i).identificador == ids[countJogadores - 1]) {
+                    infoJogadorAtual[0] = String.valueOf(jogadores.get(i).identificador);
+                    infoJogadorAtual[1] = jogadores.get(i).nome;
+                    infoJogadorAtual[2] = jogadores.get(i).especieDoJogador;
+                    infoJogadorAtual[3] = String.valueOf(jogadores.get(i).energiaAtual);
+
+                }
+            }
+        }
+        return infoJogadorAtual;
+    }
+
+    //EXTRA ORDENAR IDS
+    public int[] ordenarIds() {
+        int[] ids = new int[jogadores.size()];
+
+        for (int i = 0; i < jogadores.size(); i++) {
+            ids[i] = jogadores.get(i).identificador;
+        }
+
+        Arrays.sort(ids);
+
+        return ids;
     }
 
     public String[][] getPlayersInfo() {
-        return getPlayersInfo();
+        String[][] informacaoDosJogadores = new String[jogadores.size()][4];
+        int[] ids = ordenarIds();
+        int jogador = 0;
+
+
+        for (int j = 0; j < ids.length; j++) {
+            for (int i = 0; i < jogadores.size(); i++) { //ids Ordenados
+                if (jogadores.get(i).identificador == ids[j]) {
+                    informacaoDosJogadores[jogador][0] = String.valueOf(jogadores.get(i).identificador);
+                    informacaoDosJogadores[jogador][1] = jogadores.get(i).nome;
+                    informacaoDosJogadores[jogador][2] = jogadores.get(i).especieDoJogador;
+                    informacaoDosJogadores[jogador][3] = String.valueOf(jogadores.get(i).energiaAtual);
+                    jogador++;
+                }
+            }
+
+        }
+        return informacaoDosJogadores;
     }
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
 
-        return true;
+        if (bypassValidations == false) {
+            if (nrSquares <= 0 || nrSquares > 6) {
+                return false;
+            }
+        }
+
+        int[] ids = ordenarIds();
+
+        if (countJogadores == jogadores.size()) {
+            countJogadores = 0;
+        }
+        if (jogoAcabou == false) {
+            for (int i = 0; i < jogadores.size(); i++) {
+                if (jogadores.get(i).identificador == ids[countJogadores]) {
+                    if (jogadores.get(i).energiaAtual >= 2) {
+                        jogadores.get(i).aJogar = true;
+                        jogadores.get(i).posicaoAtual += nrSquares;
+                        jogadores.get(i).energiaAtual -= 2;
+
+                        countJogadores++;
+
+                        if (jogadores.get(i).posicaoAtual >= tamanhoTabuleiro) {
+                            jogadores.get(i).posicaoAtual = tamanhoTabuleiro;
+                            jogoAcabou = true;
+                            jogadores.get(i).ganhou = true;
+                        }
+
+                        System.out.println(jogadores.get(i).posicaoAtual);
+                        return true;
+                    }else {
+                        jogadoresSemEnergia ++;
+
+                        if(jogadoresSemEnergia == jogadores.size()){
+                            System.out.println("Os jogadores ficaram sem energia");
+                            jogoAcabou = true;
+                            winnerPlayer();
+                        }
+                    }
+                    jogadores.get(i).aJogar = false;
+                }
+
+            }
+        }
+
+        return false;
     }
+
+    int id = 0;
+
+    public int[] ordenarPosicoes() {
+        int[] posicoesOrdenadas = new int[jogadores.size()];
+
+        if (jogoAcabou == true) {
+            for (int i = 0; i < jogadores.size(); i++) {
+                posicoesOrdenadas[i] = jogadores.get(i).posicaoAtual;
+            }
+        }
+        Arrays.sort(posicoesOrdenadas);
+        return posicoesOrdenadas;
+    }
+
+    public void winnerPlayer() {
+
+        for (int i = 0; i < jogadores.size(); i++) {
+            if (jogadores.get(i).posicaoAtual == tamanhoTabuleiro) {
+                jogadorVencedorID = jogadores.get(i).identificador;
+            }
+        }
+
+        if (jogadoresSemEnergia == jogadores.size()) {
+            for (int x = 0; x < jogadores.size(); x++) {
+                for (int j = 0; j < jogadores.size(); j++) {
+                    if (x != j) {
+                        if (jogadores.get(x).posicaoAtual == jogadores.get(j).posicaoAtual) {
+                            if (jogadores.get(x).identificador < jogadores.get(j).identificador) {
+                                jogadores.get(x).ganhou = true;
+                                jogadores.get(j).ganhou = false;
+                                jogadorVencedorID = jogadores.get(x).identificador;
+
+                            } else if (jogadores.get(x).identificador > jogadores.get(j).identificador) {
+                                jogadores.get(x).ganhou = false;
+                                jogadores.get(j).ganhou = true;
+                                jogadorVencedorID = jogadores.get(j).identificador;
+                            }
+                        }
+
+                        if (jogadores.get(x).posicaoAtual > jogadores.get(j).posicaoAtual) {
+                            jogadores.get(x).ganhou = true;
+                            jogadores.get(j).ganhou = false;
+                            jogadorVencedorID = jogadores.get(x).identificador;
+
+                        }
+
+                        if (jogadores.get(x).posicaoAtual < jogadores.get(j).posicaoAtual) {
+                            jogadores.get(x).ganhou = false;
+                            jogadores.get(j).ganhou = true;
+                            jogadorVencedorID = jogadores.get(j).identificador;
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
 
     public String[] getWinnerInfo() {
 
+        String[] winnerInfo = new String[4];
+
+        if(jogoAcabou == true){
+            for (int i = 0; i < jogadores.size(); i++) {
+                if (jogadores.get(i).ganhou == true) {
+                    winnerInfo[0] = String.valueOf(jogadores.get(i).identificador);
+                    winnerInfo[1] = jogadores.get(i).nome;
+                    winnerInfo[2] = jogadores.get(i).especieDoJogador;
+                    winnerInfo[3] = String.valueOf(jogadores.get(i).energiaAtual);
+                    return winnerInfo;
+                }
+            }
+        }
         return null;
     }
 
