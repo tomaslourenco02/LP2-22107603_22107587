@@ -47,4 +47,19 @@ public class Jogador {
         energiaInicial = 0;
         posicaoAtual = 1;
     }
+
+    public String[] infoJogador() {
+        String[] infoJogador = new String[4];
+
+        infoJogador[0] = Integer.toString(identificador);
+        infoJogador[1] = nome;
+        infoJogador[2] = especieDoJogador;
+        infoJogador[3] = Integer.toString(energiaAtual);
+
+        return infoJogador;
+    }
 }
+
+
+
+

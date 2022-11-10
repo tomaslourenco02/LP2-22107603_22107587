@@ -176,6 +176,7 @@ public class GameManager {
     public int[] getPlayerIds(int squareNr) {
         int[] idJogadores = new int[jogadores.size()];
         int count = 0;
+        squareNr-- ;
 
         if (squareNr <= 0) {
             return new int[0];
@@ -203,6 +204,8 @@ public class GameManager {
 
     public String[] getSquareInfo(int squareNr) {
 
+        squareNr-- ;
+
         SquareInfo square = new SquareInfo();
 
         String[] squareInfo = new String[3];
@@ -211,7 +214,7 @@ public class GameManager {
 
         String identificadores = "";
 
-        if (squareNr <= 0/* || squareNr > tabuleiro.size()*/) {
+        if (squareNr <= 0 || squareNr > tamanhoTabuleiro) {
             return null;
         }
 
@@ -239,25 +242,15 @@ public class GameManager {
     }
 
     public String[] getPlayerInfo(int playerId) {
-        String[] infoJogador = new String[4];
-        int count = 0;
+
 
         for (int i = 0; i < jogadores.size(); i++) {
-            if (jogadores.get(i).identificador == playerId) {
-                infoJogador[0] = Integer.toString(jogadores.get(i).identificador);
-                infoJogador[1] = jogadores.get(i).nome;
-                infoJogador[2] = jogadores.get(i).especieDoJogador;
-                infoJogador[3] = Integer.toString(jogadores.get(i).energiaAtual);
-                count++;
+            if(jogadores.get(i).identificador == playerId){
+                return jogadores.get(i).infoJogador();
             }
         }
-        if (count <= 0) {
-            return null;
-        }
-        if (infoJogador[0] == null || infoJogador[1] == null || infoJogador[2] == null || infoJogador[3] == null) {
-            return null;
-        }
-        return infoJogador;
+
+        return null;
     }
 
     public String[] getCurrentPlayerInfo() {
@@ -267,18 +260,11 @@ public class GameManager {
         for (int i = 0; i < jogadores.size(); i++) {
             if (countJogadores == 0) {
                 if (jogadores.get(i).identificador == ids[countJogadores]) {
-                    infoJogadorAtual[0] = String.valueOf(jogadores.get(i).identificador);
-                    infoJogadorAtual[1] = jogadores.get(i).nome;
-                    infoJogadorAtual[2] = jogadores.get(i).especieDoJogador;
-                    infoJogadorAtual[3] = String.valueOf(jogadores.get(i).energiaAtual);
-
+                    infoJogadorAtual = jogadores.get(i).infoJogador();
                 }
             } else {
                 if (jogadores.get(i).identificador == ids[countJogadores - 1]) {
-                    infoJogadorAtual[0] = String.valueOf(jogadores.get(i).identificador);
-                    infoJogadorAtual[1] = jogadores.get(i).nome;
-                    infoJogadorAtual[2] = jogadores.get(i).especieDoJogador;
-                    infoJogadorAtual[3] = String.valueOf(jogadores.get(i).energiaAtual);
+                    infoJogadorAtual = jogadores.get(i).infoJogador();
 
                 }
             }
@@ -308,16 +294,23 @@ public class GameManager {
         for (int j = 0; j < ids.length; j++) {
             for (int i = 0; i < jogadores.size(); i++) { //ids Ordenados
                 if (jogadores.get(i).identificador == ids[j]) {
-                    informacaoDosJogadores[jogador][0] = String.valueOf(jogadores.get(i).identificador);
-                    informacaoDosJogadores[jogador][1] = jogadores.get(i).nome;
-                    informacaoDosJogadores[jogador][2] = jogadores.get(i).especieDoJogador;
-                    informacaoDosJogadores[jogador][3] = String.valueOf(jogadores.get(i).energiaAtual);
+                    informacaoDosJogadores[j] = jogadores.get(i).infoJogador();
                     jogador++;
                 }
             }
 
         }
         return informacaoDosJogadores;
+    }
+
+    public boolean verificaEnergia(){
+
+        for (int i = 0; i < jogadores.size(); i++) {
+            if(jogadores.get(i).energiaAtual >= 2){
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
@@ -418,13 +411,12 @@ public class GameManager {
         int count = 0;
         Jogador[] jogadoresNaCasa = new Jogador[jogadores.size()];
 
-        for (int i = tamanhoTabuleiro; i < 0; i--) {
-            for (int j = 0; j < jogadores.size(); j++) {
-                if (jogadores.get(j).posicaoAtual == i) {
-                    if (jogadoresNaCasa.length > 1) {
-                        count++;
+        if(!verificaEnergia()){
+            for (int i = tamanhoTabuleiro; i > 0; i--) {
+                if(squares.get(i).identificadoresNoQuadrado.size() > 0){
+                    if(squares.get(i).identificadoresNoQuadrado.size() ==1){
+
                     }
-                    jogadoresNaCasa[count] = jogadores.get(j);
                 }
             }
         }
