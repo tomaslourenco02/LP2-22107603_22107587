@@ -36,14 +36,17 @@ public class Test {
         System.out.println(gamemaneger.moveCurrentPlayer(6, false));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
 
-        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
+        System.out.println(gamemaneger.moveCurrentPlayer(3, false));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+
+        System.out.println("Quem ganhou " + Arrays.toString(gamemaneger.getWinnerInfo()) + "\n");
 
         System.out.println(gamemaneger.moveCurrentPlayer(6, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
 
         System.out.println(gamemaneger.moveCurrentPlayer(6, false));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println("Quem ganhou "  + Arrays.toString(gamemaneger.getWinnerInfo()) + "\n");
 
         /*
         System.out.println("1 jogada \n");
