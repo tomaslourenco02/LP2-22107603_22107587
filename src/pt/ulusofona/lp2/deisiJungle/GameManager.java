@@ -335,13 +335,18 @@ public class GameManager {
                     jogadores.get(i).aJogar = true;
                     jogadores.get(i).posicaoAtual += nrSquares;
                     jogadores.get(i).energiaAtual -= 2;
+                    countJogadores++;
+
+                    return true;
                 }else
                     if(jogadores.get(i).energiaAtual < 2 || jogadores.get(i).energiaAtual >= 0){
                     jogadoresSemEnergia++;
                 }
                 jogadores.get(i).aJogar = false;
+
             }
         }
+
 
 
         if (jogadores.get(countJogadores).posicaoAtual >= tabuleiro.size()) {
@@ -355,27 +360,31 @@ public class GameManager {
                     if(jogadores.get(i).posicaoAtual > jogadores.get(j).posicaoAtual){
                         jogadores.get(i).ganhou = true;
                         jogadores.get(j).ganhou = false;
-                        maior = jogadores.get(i).nome;
                     }else
                         if(jogadores.get(i).posicaoAtual < jogadores.get(j).posicaoAtual){
                             jogadores.get(i).ganhou = false;
                             jogadores.get(j).ganhou = true;
-                            maior = jogadores.get(j).nome;
                         }
                 }
-
             }
-            System.out.println(maior);
+
         }
 
-        countJogadores++;
-
-        return true;
+        return false;
     }
 
     public String[] getWinnerInfo() {
+        String[] winnerInfo = new String[4];
 
-        return null;
+        for (int i = 0; i < jogadores.size(); i++) {
+            if(jogadores.get(i).ganhou == true){
+                winnerInfo[0] = String.valueOf(jogadores.get(i).identificador);
+                winnerInfo[1] = jogadores.get(i).nome;
+                winnerInfo[2] = jogadores.get(i).especieDoJogador;
+                winnerInfo[3] = String.valueOf(jogadores.get(i).energiaAtual);
+            }
+        }
+        return winnerInfo;
     }
 
     public ArrayList<String> getGameResults() {
