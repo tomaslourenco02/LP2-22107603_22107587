@@ -35,7 +35,7 @@ public class Test {
 
 
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
-        System.out.println(gamemaneger.moveCurrentPlayer(4, false));
+        System.out.println(gamemaneger.moveCurrentPlayer(5, false));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(5, false));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
@@ -44,15 +44,20 @@ public class Test {
         System.out.println(gamemaneger.moveCurrentPlayer(6, false));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
 
-        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
-
         System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
+
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
+        System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
+
 
 
 
