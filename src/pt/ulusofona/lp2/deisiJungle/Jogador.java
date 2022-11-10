@@ -60,3 +60,7 @@ public class Jogador {
         return infoJogador;
     }
 }
+
+
+
+
