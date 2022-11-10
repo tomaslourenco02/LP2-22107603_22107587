@@ -31,34 +31,40 @@ public class Test {
 
         String[][] jogadores = {jogador1, jogador2,jogador3,jogador4};
 
-        System.out.println(gamemaneger.createInitialJungle(10,4, jogadores));
+        System.out.println(gamemaneger.createInitialJungle(20,2, jogadores));
 
-
-        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
-        System.out.println(gamemaneger.moveCurrentPlayer(5, false));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(5, false));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(2, false));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-
-        System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
-
-        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(6, false));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
 
         System.out.println(gamemaneger.moveCurrentPlayer(6, false));
-        System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+
+        System.out.println(gamemaneger.moveCurrentPlayer(6, true));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+
+        /*
+        System.out.println("1 jogada \n");
+
+        System.out.println("quem está a ganhar:");
+        System.out.println(gamemaneger.winnerPlayer() );
+        System.out.println(Arrays.toString(gamemaneger.getWinnerInfo())+ "\n"); */
+
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));
 
 
+        System.out.println("Quem ganhou" + Arrays.toString(gamemaneger.getWinnerInfo()) + "\n");
 
 
     }
