@@ -342,26 +342,53 @@ public class GameManager {
         int posJogador = jogadores.get(countJogadores).posicaoAtual;
         int posDestino = posJogador + nrSquares;
 
-        if (jogadores.get(countJogadores).energiaAtual >= 2 || posDestino < tamanhoTabuleiro) {
+        if (verificaEnergia() || posDestino < tamanhoTabuleiro) {
+            if (jogoAcabou == false) {
 
-            if (posDestino > tamanhoTabuleiro) {
-                posDestino = tamanhoTabuleiro;
+                if (posDestino > tamanhoTabuleiro - 1) {
+                    posDestino = tamanhoTabuleiro - 1;
+                    jogadores.get(countJogadores).ganhou = true;
+                    jogoAcabou = true;
+                }
+
+                squares.get(posJogador).identificadoresNoQuadrado.remove(new Integer(jogadores.get(countJogadores).identificador));
+                squares.get(posDestino).identificadoresNoQuadrado.add(jogadores.get(countJogadores).identificador);
+
+                jogadores.get(countJogadores).posicaoAtual = posDestino;
+
+                jogadores.get(countJogadores).energiaAtual -= 2;
+
+                if (jogadores.get(countJogadores).energiaAtual < 2) {
+                    jogadoresSemEnergia++;
+                }
+
+                countJogadores++;
+
+                if (countJogadores > jogadores.size() - 1) {
+                    countJogadores = 0;
+                }
+
+                if (jogadoresSemEnergia == jogadores.size()) {
+                    jogoAcabou = true;
+
+                    for (int i = tamanhoTabuleiro - 1 ; i > 0; i--) {
+                        if (squares.get(i).identificadoresNoQuadrado.size() > 0) {
+                            ArrayList<Integer> idMenor = squares.get(i).identificadoresNoQuadrado;
+                            for (int j = 0; j < jogadores.size(); j++) {
+                                if (jogadores.get(j).identificador == idMenor.get(0)){
+                                    jogadores.get(j).ganhou = true;
+                                    i = 0;
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                return true;
             }
-            squares.get(posJogador).identificadoresNoQuadrado.remove(new Integer(jogadores.get(countJogadores).identificador));
-            squares.get(posDestino).identificadoresNoQuadrado.add(jogadores.get(countJogadores).identificador);
-
-            jogadores.get(countJogadores).posicaoAtual = posDestino;
-
-            jogadores.get(countJogadores).energiaAtual -= 2;
-            countJogadores++;
-
-            if (countJogadores > jogadores.size()-1) {
-                countJogadores = 0;
-            } else {
-                jogadoresSemEnergia++;
-            }
-            return true;
         }
+
 
 
         /*if (jogoAcabou == false) {
@@ -430,7 +457,7 @@ public class GameManager {
         Jogador[] jogadoresNaCasa = new Jogador[jogadores.size()];
 
 
-        if (!verificaEnergia()) {
+        /*if (!verificaEnergia()) {
             for (int i = tamanhoTabuleiro; i > 0; i--) {
                 if (squares.get(i).identificadoresNoQuadrado.size() > 0) {
                     if (squares.get(i).identificadoresNoQuadrado.size() == 1) {
@@ -438,7 +465,7 @@ public class GameManager {
                     }
                 }
             }
-        }
+        }*/
 
         for (int i = 0; i < jogadores.size(); i++) {
             if (jogadores.get(i).ganhou == true) {

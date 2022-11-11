@@ -17,18 +17,18 @@ public class Test {
 
         String[][] jogadores = {jogador1, jogador2, jogador3, jogador4};
 
-        assertTrue(gamemaneger.createInitialJungle(10,10, jogadores));
+        assertTrue(gamemaneger.createInitialJungle(8,10, jogadores));
 
-        System.out.println(gamemaneger.moveCurrentPlayer(2, false));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, true));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(gamemaneger.moveCurrentPlayer(5, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(gamemaneger.moveCurrentPlayer(7, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(2, false));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(2, false));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(2, false));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(2, false));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+
+        System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
 
         System.out.println(Arrays.toString(gamemaneger.getSquareInfo(5)));
         System.out.println(Arrays.toString(gamemaneger.getSquareInfo(3)));
