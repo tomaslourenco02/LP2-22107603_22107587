@@ -17,10 +17,15 @@ public class Test {
 
         assertTrue(gamemaneger.createInitialJungle(10,10, jogadores));
 
-        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(10)));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
 
+        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(10)));
         System.out.println(Arrays.toString(gamemaneger.getSquareInfo(1)));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
+
+
+
+        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(3)));
     }
 
     @org.junit.Test

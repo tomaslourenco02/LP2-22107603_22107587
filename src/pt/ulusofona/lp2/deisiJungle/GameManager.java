@@ -276,13 +276,12 @@ public class GameManager {
 
         for (int i = 0; i < jogadores.size(); i++) {
             if (countJogadores == 0) {
-                if (jogadores.get(i).identificador == ids[countJogadores]) {
+                if (jogadores.get(i).identificador == ids[countJogadores-1]) {
                     infoJogadorAtual = jogadores.get(i).infoJogador();
                 }
             } else {
-                if (jogadores.get(i).identificador == ids[countJogadores - 1]) {
+                if (jogadores.get(i).identificador == ids[countJogadores ]) {
                     infoJogadorAtual = jogadores.get(i).infoJogador();
-
                 }
             }
         }
@@ -341,7 +340,6 @@ public class GameManager {
 
         int[] ids = ordenarIds();
 
-
         /*for (int i = 0; i < jogadores.size(); i++) {
 
             if(jogadores.get(i).identificador == ids[i]){
@@ -357,9 +355,6 @@ public class GameManager {
                 if (jogadores.get(i).identificador == ids[countJogadores]) {
                     if (jogadores.get(i).energiaAtual >= 2) {
                         jogadores.get(i).aJogar = true;
-                        if(jogadores.get(i).posicaoAtual == 0){
-                            jogadores.get(i).posicaoAtual = 1;
-                        }
                         jogadores.get(i).posicaoAtual += nrSquares;
                         jogadores.get(i).energiaAtual -= 2;
 
