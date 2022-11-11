@@ -13,10 +13,10 @@ public class Test {
 
         GameManager gameManager = new GameManager();
 
-        String[] jogador1 = {"120", "joana", "E"};
-        String[] jogador3 = {"420", "tom", "E"};
-        String[] jogador5 = {"99999", "ju", "E"};
-        String[] jogador2 = {"1", "Pedro", "L"};
+        String[] jogador1 = {"1", "joana", "E"};
+        String[] jogador3 = {"2", "tom", "E"};
+        String[] jogador5 = {"9", "ju", "E"};
+        String[] jogador2 = {"8", "Pedro", "L"};
 
         String[][] jogadores = {jogador1, jogador2, jogador5, jogador3};
 
@@ -24,7 +24,14 @@ public class Test {
 
 
         System.out.println(Arrays.toString(gameManager.getCurrentPlayerInfo()));
-        System.out.println(gameManager.moveCurrentPlayer(2, true));
+        System.out.println(gameManager.moveCurrentPlayer(5, false));
+        System.out.println(Arrays.toString(gameManager.getCurrentPlayerInfo()));
+        System.out.println(gameManager.moveCurrentPlayer(3, false));
+        System.out.println(Arrays.toString(gameManager.getCurrentPlayerInfo()));
+        System.out.println(gameManager.moveCurrentPlayer(8, true));
+        System.out.println(Arrays.toString(gameManager.getWinnerInfo()));
+        System.out.println(Arrays.toString(gameManager.getCurrentPlayerInfo()));
+        System.out.println(gameManager.moveCurrentPlayer(1, false));
 
 
 
