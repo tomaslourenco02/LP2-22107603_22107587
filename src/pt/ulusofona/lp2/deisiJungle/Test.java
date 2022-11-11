@@ -14,9 +14,8 @@ public class Test {
 
         String[][] jogadores = {jogador1, jogador2};
 
-        assertTrue(gamemaneger.createInitialJungle(5,2, jogadores));
+        assertTrue(gamemaneger.createInitialJungle(10,10, jogadores));
 
-        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
         System.out.println(Arrays.toString(gamemaneger.getSquareInfo(1)));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
     }
@@ -31,6 +30,7 @@ public class Test {
         String[][] jogadores = {jogador1, jogador2};
 
         System.out.println(gamemaneger.createInitialJungle(10,4, jogadores));
+        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(1)));
 
         System.out.println(gamemaneger.moveCurrentPlayer(5, false));
         System.out.println(gamemaneger.moveCurrentPlayer(5, false));
@@ -39,7 +39,6 @@ public class Test {
         System.out.println(gamemaneger.moveCurrentPlayer(3, false));
 
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(10)));
-
     }
 
 
