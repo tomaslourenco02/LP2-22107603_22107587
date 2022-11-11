@@ -32,7 +32,7 @@ public class GameManager {
         especies[0][2] = "elephant.png";
 
         especies[1][0] = "L";
-        especies[1][1] = "LeÃƒÂ£o";
+        especies[1][1] = "Leão";
         especies[1][2] = "lion.png";
 
         especies[2][0] = "T";
@@ -40,7 +40,7 @@ public class GameManager {
         especies[2][2] = "turtle.png";
 
         especies[3][0] = "P";
-        especies[3][1] = "PÃƒÂ¡ssaro";
+        especies[3][1] = "Pássaro";
         especies[3][2] = "bird.png";
 
         especies[4][0] = "Z";
