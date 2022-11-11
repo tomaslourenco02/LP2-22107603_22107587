@@ -333,6 +333,10 @@ public class GameManager {
 
         if (!bypassValidations) {
             if (nrSquares <= 0 || nrSquares > 6) {
+                countJogadores++;
+                if (countJogadores > jogadores.size() - 1) {
+                    countJogadores = 0;
+                }
                 return false;
             }
         }
@@ -390,44 +394,10 @@ public class GameManager {
                 return true;
             }
         }
-
-
-
-        /*if (jogoAcabou == false) {
-            for (int i = 0; i < jogadores.size(); i++) {
-                if (jogadores.get(i).identificador == ids[countJogadores]) {
-                    if (jogadores.get(i).energiaAtual >= 2) {
-                        jogadores.get(i).aJogar = true;
-                        jogadores.get(i).posicaoAtual += nrSquares;
-                        jogadores.get(i).energiaAtual -= 2;
-
-                        countJogadores++;
-
-                        if (countJogadores == jogadores.size()) {
-                            countJogadores = 0;
-                        }
-
-                        if (jogadores.get(i).energiaAtual <= 0) {
-                            jogadoresSemEnergia++;
-
-                            if (jogadoresSemEnergia == jogadores.size()) {
-                                jogoAcabou = true;
-
-                                //ver as posicoes e caso as posicoes sejam iguais ganha o id menor
-                            }
-                        }
-
-                        if (jogadores.get(i).posicaoAtual >= tamanhoTabuleiro) {
-                            jogadores.get(i).posicaoAtual = tamanhoTabuleiro;
-                            jogoAcabou = true;
-                            jogadores.get(i).ganhou = true;
-                        }
-                        return true;
-                    }
-                    jogadores.get(i).aJogar = false;
-                }
-            }
-        }*/
+        countJogadores++;
+        if (countJogadores > jogadores.size() - 1) {
+            countJogadores = 0;
+        }
         return false;
     }
 
@@ -484,7 +454,8 @@ public class GameManager {
 
     public ArrayList<String> getGameResults() {
 
-        return null;
+
+        return new ArrayList<>();
     }
 
     public JPanel getAuthorsPanel() {
