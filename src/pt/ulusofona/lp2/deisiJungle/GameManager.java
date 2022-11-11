@@ -355,7 +355,7 @@ public class GameManager {
             jogadores.get(countJogadores).energiaAtual -= 2;
             countJogadores++;
 
-            if (countJogadores == jogadores.size()) {
+            if (countJogadores > jogadores.size()-1) {
                 countJogadores = 0;
             } else {
                 jogadoresSemEnergia++;
