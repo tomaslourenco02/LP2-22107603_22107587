@@ -32,7 +32,7 @@ public class GameManager {
         especies[0][2] = "elephant.png";
 
         especies[1][0] = "L";
-        especies[1][1] = "LeÃ£o";
+        especies[1][1] = "LeÃƒÂ£o";
         especies[1][2] = "lion.png";
 
         especies[2][0] = "T";
@@ -40,7 +40,7 @@ public class GameManager {
         especies[2][2] = "turtle.png";
 
         especies[3][0] = "P";
-        especies[3][1] = "PÃ¡ssaro";
+        especies[3][1] = "PÃƒÂ¡ssaro";
         especies[3][2] = "bird.png";
 
         especies[4][0] = "Z";
@@ -212,17 +212,23 @@ public class GameManager {
 
     public String[] getSquareInfo(int squareNr) {
 
+        int[] jogadoresNoSquare = new int[0];
+
         //squareNr--;
 
         SquareInfo square = new SquareInfo();
 
         String[] squareInfo = new String[3];
 
-        int[] jogadoresNoSquare = getPlayerIds(squareNr);
+        if (squareNr - 1 == 0) {
+            jogadoresNoSquare = getPlayerIds(squareNr - 1);
+        } else if (squareNr - 1 > 0) {
+            jogadoresNoSquare = getPlayerIds(squareNr);
+        }
 
         String identificadores = "";
 
-        if (squareNr <= 0 || squareNr > tamanhoTabuleiro) {
+        if (squareNr < 0 || squareNr > tamanhoTabuleiro) {
             return null;
         }
 
@@ -237,18 +243,16 @@ public class GameManager {
                 identificadores += square.identificadoresNoQuadrado.get(i) + ",";
             }
         }
-
-        squareInfo[0] = square.imagemAColocar;
-        squareInfo[1] = square.texto;
-        squareInfo[2] = identificadores;
-        if(squareNr == tamanhoTabuleiro){
-            square.meta = true;
-        }
-
-        if (square.meta) {
+        if (squareNr == tamanhoTabuleiro) {
             squareInfo[0] = "Finish.png";
             squareInfo[1] = "Meta";
+            squareInfo[2] = identificadores;
             return squareInfo;
+        } else {
+
+            squareInfo[0] = square.imagemAColocar;
+            squareInfo[1] = square.texto;
+            squareInfo[2] = identificadores;
         }
         return squareInfo;
     }
@@ -257,7 +261,7 @@ public class GameManager {
 
 
         for (int i = 0; i < jogadores.size(); i++) {
-            if(jogadores.get(i).identificador == playerId){
+            if (jogadores.get(i).identificador == playerId) {
                 return jogadores.get(i).infoJogador();
             }
         }
@@ -314,10 +318,10 @@ public class GameManager {
         return informacaoDosJogadores;
     }
 
-    public boolean verificaEnergia(){
+    public boolean verificaEnergia() {
 
         for (int i = 0; i < jogadores.size(); i++) {
-            if(jogadores.get(i).energiaAtual >= 2){
+            if (jogadores.get(i).energiaAtual >= 2) {
                 return true;
             }
         }
@@ -413,10 +417,10 @@ public class GameManager {
         int count = 0;
         Jogador[] jogadoresNaCasa = new Jogador[jogadores.size()];
 
-        if(!verificaEnergia()){
+        if (!verificaEnergia()) {
             for (int i = tamanhoTabuleiro; i > 0; i--) {
-                if(squares.get(i).identificadoresNoQuadrado.size() > 0){
-                    if(squares.get(i).identificadoresNoQuadrado.size() ==1){
+                if (squares.get(i).identificadoresNoQuadrado.size() > 0) {
+                    if (squares.get(i).identificadoresNoQuadrado.size() == 1) {
 
                     }
                 }
