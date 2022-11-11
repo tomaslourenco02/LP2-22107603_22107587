@@ -329,7 +329,7 @@ public class GameManager {
         return false;
     }
 
-    public ArrayList<Jogador> ordenarJogadores(){
+    public ArrayList<Jogador> ordenarJogadores() {
         int[] ids = ordenarIds();
 
         ArrayList<Jogador> jogadoresOrdenados = new ArrayList<>();
@@ -337,7 +337,7 @@ public class GameManager {
 
         for (int i = 0; i < ids.length; i++) {
             for (int j = 0; j < jogadores.size(); j++) {
-                if(jogadores.get(j).identificador == ids[i]){
+                if (jogadores.get(j).identificador == ids[i]) {
                     jogadoresOrdenados.add(jogadores.get(j));
                 }
             }
@@ -365,7 +365,7 @@ public class GameManager {
             if (jogoAcabou == false) {
 
                 if (posDestino >= tamanhoTabuleiro) {
-                    posDestino = tamanhoTabuleiro ;
+                    posDestino = tamanhoTabuleiro;
                     jogadoresOrdenados.get(countJogadores).ganhou = true;
                     jogoAcabou = true;
                 }
@@ -426,14 +426,22 @@ public class GameManager {
         if (jogoAcabou == true) {
             for (int i = 0; i < idsOrdenados.length; i++) {
                 for (int j = 0; j < jogadores.size(); j++) {
-                    if (jogadores.get(i).identificador == idsOrdenados[1]) {
+                    if (jogadores.get(j).identificador == idsOrdenados[i]) {
                         posicoesOrdenadas[i] = jogadores.get(i).posicaoAtual;
                     }
                 }
+            }
+            for (int i = 0; i < posicoesOrdenadas.length; i++) {
+                for (int j = 0; j < i; j++) {
+                    if (posicoesOrdenadas[i] > posicoesOrdenadas[j]) {
+                        int temp = posicoesOrdenadas[i];
+                        posicoesOrdenadas[i] = posicoesOrdenadas[j];
+                        posicoesOrdenadas[j] = temp;
+                    }
 
+                }
             }
         }
-        Arrays.sort(posicoesOrdenadas);
         return posicoesOrdenadas;
     }
 
@@ -470,8 +478,29 @@ public class GameManager {
 
     public ArrayList<String> getGameResults() {
 
+        int classificacao = 1;
+        ArrayList<String> resultadosDoJogo = new ArrayList<>();
+        ArrayList<Jogador> ordenadosClassificacao = new ArrayList<>();
+        ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
+        int[] posicoes = ordenarPosicoes();
 
-        return new ArrayList<>();
+        for (int i = 0; i < posicoes.length; i++) {
+                for (int j = 0; j < jogadoresOrdenados.size(); j++) {
+                    if (jogadoresOrdenados.get(j).posicaoAtual == posicoes[i]) {
+                        if (!ordenadosClassificacao.contains(jogadoresOrdenados.get(j))) {
+                            ordenadosClassificacao.add(jogadoresOrdenados.get(j));
+                        }
+                    }
+                }
+        }
+
+        for (int i = 0; i < ordenadosClassificacao.size(); i++) {
+            resultadosDoJogo.add("#" + classificacao + " " + ordenadosClassificacao.get(i).nome + ", " + ordenadosClassificacao.get(i).especieDoJogador + ", " + ordenadosClassificacao.get(i).posicaoAtual + "\n");
+            classificacao++;
+        }
+
+
+        return resultadosDoJogo;
     }
 
     public JPanel getAuthorsPanel() {

@@ -30,8 +30,8 @@ public class Test {
         System.out.println(gameManager.moveCurrentPlayer(8, true));
         System.out.println(Arrays.toString(gameManager.getWinnerInfo()));
 
-
-
+        System.out.println(Arrays.toString(gameManager.ordenarPosicoes()));
+        System.out.println(gameManager.getGameResults());
 
     }
 
