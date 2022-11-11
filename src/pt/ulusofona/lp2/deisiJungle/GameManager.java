@@ -132,6 +132,7 @@ public class GameManager {
         jogadorVencedorID = 0;
         tamanhoTabuleiro = 0;
         jogoAcabou = false;
+        count = 0;
 
         if (initialEnergy <= 0) {
             return false;
@@ -356,6 +357,9 @@ public class GameManager {
                 if (jogadores.get(i).identificador == ids[countJogadores]) {
                     if (jogadores.get(i).energiaAtual >= 2) {
                         jogadores.get(i).aJogar = true;
+                        if(jogadores.get(i).posicaoAtual == 0){
+                            jogadores.get(i).posicaoAtual = 1;
+                        }
                         jogadores.get(i).posicaoAtual += nrSquares;
                         jogadores.get(i).energiaAtual -= 2;
 
