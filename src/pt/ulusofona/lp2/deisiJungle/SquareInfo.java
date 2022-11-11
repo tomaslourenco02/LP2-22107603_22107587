@@ -20,13 +20,11 @@ public class SquareInfo {
         this.texto = "Vazio";
         this.identificadoresNoQuadrado = new ArrayList<>();
         meta = false;
-        tamanho = 0;
     }
 
     public SquareInfo() {
         imagemAColocar = "blank.png";
         texto = "Vazio";
-        tamanho = 0;
         identificadoresNoQuadrado = new ArrayList<>();
     }
 }
