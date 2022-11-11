@@ -18,7 +18,7 @@ public class Test {
 
         System.out.println(gamemaneger.moveCurrentPlayer(1, false));
 
-        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(2)));
+        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(10)));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
     }
 

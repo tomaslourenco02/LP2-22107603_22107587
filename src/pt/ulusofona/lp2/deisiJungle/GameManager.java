@@ -229,7 +229,7 @@ public class GameManager {
 
         String identificadores = "";
 
-        if (squareNr < 0 || squareNr > tamanhoTabuleiro) {
+        if (squareNr <= 0 || squareNr > tamanhoTabuleiro) {
             return null;
         }
 
@@ -380,8 +380,6 @@ public class GameManager {
                             jogoAcabou = true;
                             jogadores.get(i).ganhou = true;
                         }
-
-                        System.out.println(jogadores.get(i).posicaoAtual);
                         return true;
 
 
