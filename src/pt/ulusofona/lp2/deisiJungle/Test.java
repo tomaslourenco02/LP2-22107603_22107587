@@ -16,7 +16,7 @@ public class Test {
 
         assertTrue(gamemaneger.createInitialJungle(10,10, jogadores));
 
-        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(1)));
+        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(0)));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
     }
 

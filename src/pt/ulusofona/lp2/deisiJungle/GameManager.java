@@ -222,7 +222,7 @@ public class GameManager {
 
         String identificadores = "";
 
-        if (squareNr < 0 || squareNr > tamanhoTabuleiro) {
+        if (squareNr <= 0 || squareNr > tamanhoTabuleiro) {
             return null;
         }
 
