@@ -185,6 +185,7 @@ public class GameManager {
         int[] idJogadores = new int[jogadores.size()];
         int count = 0;
 
+        squareNr--;
 
         if (squareNr < 0) {
             return new int[0];
@@ -211,6 +212,8 @@ public class GameManager {
     }
 
     public String[] getSquareInfo(int squareNr) {
+
+        squareNr--;
 
         SquareInfo square = new SquareInfo();
 
@@ -332,17 +335,13 @@ public class GameManager {
         int[] ids = ordenarIds();
 
 
-        for (int i = 0; i < jogadores.size(); i++) {
+        /*for (int i = 0; i < jogadores.size(); i++) {
 
             if(jogadores.get(i).identificador == ids[i]){
-                if(jogadores.get(i).energiaAtual >= 2){
-                    jogadores.get(i).aJogar = true;
-                    jogadores.get(i).posicaoAtual += nrSquares;
-                    jogadores.get(i).energiaAtual -= 2;
-                }
+                if(jogadores.get(i).energiaAtual >= 2)
             }
 
-        }
+        }*/
         if (countJogadores == jogadores.size()) {
             countJogadores = 0;
         }
