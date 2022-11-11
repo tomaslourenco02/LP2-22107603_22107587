@@ -185,7 +185,6 @@ public class GameManager {
         int[] idJogadores = new int[jogadores.size()];
         int count = 0;
 
-        squareNr--;
 
         if (squareNr < 0) {
             return new int[0];
@@ -307,7 +306,6 @@ public class GameManager {
                     jogador++;
                 }
             }
-
         }
         return informacaoDosJogadores;
     }

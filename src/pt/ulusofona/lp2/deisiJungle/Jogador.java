@@ -7,7 +7,7 @@ public class Jogador {
     String especieDoJogador;
     int energiaInicial;
     int energiaAtual;
-    int posicaoAtual = 0;
+    int posicaoAtual = 1;
     boolean aJogar = false;
     boolean ganhou = false;
 
