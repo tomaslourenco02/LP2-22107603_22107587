@@ -6,6 +6,31 @@ import static org.junit.Assert.assertTrue;
 
 public class Test {
 
+
+
+    @org.junit.Test
+    public void testMove(){
+
+        GameManager gameManager = new GameManager();
+
+        String[] jogador1 = {"120", "joana", "E"};
+        String[] jogador3 = {"420", "tom", "E"};
+        String[] jogador5 = {"99999", "ju", "E"};
+        String[] jogador2 = {"1", "Pedro", "L"};
+
+        String[][] jogadores = {jogador1, jogador2, jogador5, jogador3};
+
+        assertTrue(gameManager.createInitialJungle(8,10, jogadores));
+
+
+        System.out.println(Arrays.toString(gameManager.getCurrentPlayerInfo()));
+        System.out.println(gameManager.moveCurrentPlayer(2, true));
+
+
+
+    }
+
+
     @org.junit.Test
     public void testJungle(){
         GameManager gamemaneger = new GameManager();

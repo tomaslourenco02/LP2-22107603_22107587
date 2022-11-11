@@ -362,7 +362,9 @@ public class GameManager {
                     jogadoresSemEnergia++;
                 }
 
-                countJogadores++;
+                if (!jogoAcabou) {
+                    countJogadores++;
+                }
 
                 if (countJogadores > jogadores.size() - 1) {
                     countJogadores = 0;
@@ -371,11 +373,11 @@ public class GameManager {
                 if (jogadoresSemEnergia == jogadores.size()) {
                     jogoAcabou = true;
 
-                    for (int i = tamanhoTabuleiro - 1 ; i > 0; i--) {
+                    for (int i = tamanhoTabuleiro - 1; i > 0; i--) {
                         if (squares.get(i).identificadoresNoQuadrado.size() > 0) {
                             ArrayList<Integer> idMenor = squares.get(i).identificadoresNoQuadrado;
                             for (int j = 0; j < jogadores.size(); j++) {
-                                if (jogadores.get(j).identificador == idMenor.get(0)){
+                                if (jogadores.get(j).identificador == idMenor.get(0)) {
                                     jogadores.get(j).ganhou = true;
                                     i = 0;
                                 }
