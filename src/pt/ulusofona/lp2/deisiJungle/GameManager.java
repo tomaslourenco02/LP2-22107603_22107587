@@ -329,6 +329,22 @@ public class GameManager {
         return false;
     }
 
+    public ArrayList<Jogador> ordenarJogadores(){
+        int[] ids = ordenarIds();
+
+        ArrayList<Jogador> jogadoresOrdenados = new ArrayList<>();
+
+
+        for (int i = 0; i < ids.length; i++) {
+            for (int j = 0; j < jogadores.size(); j++) {
+                if(jogadores.get(j).identificador == ids[i]){
+                    jogadoresOrdenados.add(jogadores.get(j));
+                }
+            }
+        }
+        return jogadoresOrdenados;
+    }
+
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
 
         if (!bypassValidations) {
@@ -340,23 +356,23 @@ public class GameManager {
                 return false;
             }
         }
+        ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
 
-        int[] ids = ordenarIds();
-
-        int posJogador = jogadores.get(countJogadores).posicaoAtual;
+        int posJogador = jogadoresOrdenados.get(countJogadores).posicaoAtual;
         int posDestino = posJogador + nrSquares;
 
         if (verificaEnergia() || posDestino < tamanhoTabuleiro) {
             if (jogoAcabou == false) {
 
-                if (posDestino > tamanhoTabuleiro - 1) {
-                    posDestino = tamanhoTabuleiro - 1;
-                    jogadores.get(countJogadores).ganhou = true;
+                if (posDestino >= tamanhoTabuleiro) {
+                    posDestino = tamanhoTabuleiro ;
+                    jogadoresOrdenados.get(countJogadores).ganhou = true;
                     jogoAcabou = true;
+                    countJogadores = countJogadores;
                 }
 
                 squares.get(posJogador).identificadoresNoQuadrado.remove(new Integer(jogadores.get(countJogadores).identificador));
-                squares.get(posDestino).identificadoresNoQuadrado.add(jogadores.get(countJogadores).identificador);
+                squares.get(posDestino - 1).identificadoresNoQuadrado.add(jogadores.get(countJogadores).identificador);
 
                 jogadores.get(countJogadores).posicaoAtual = posDestino;
 
@@ -383,6 +399,7 @@ public class GameManager {
                             for (int j = 0; j < jogadores.size(); j++) {
                                 if (jogadores.get(j).identificador == idMenor.get(0)) {
                                     jogadores.get(j).ganhou = true;
+                                    getWinnerInfo();
                                     i = 0;
                                 }
                             }
