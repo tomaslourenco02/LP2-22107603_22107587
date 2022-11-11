@@ -381,8 +381,6 @@ public class GameManager {
                             jogadores.get(i).ganhou = true;
                         }
                         return true;
-
-
                     }
                     jogadores.get(i).aJogar = false;
                 }
