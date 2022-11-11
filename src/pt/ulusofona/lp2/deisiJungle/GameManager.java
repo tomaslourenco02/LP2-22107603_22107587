@@ -57,6 +57,7 @@ public class GameManager {
 
         for (int i = 0; i < especies.length; i++) {
             especiesArrayList.add(especies[i][0]);
+
         }
         if (especiesArrayList.contains(especie)) {
             return true;
@@ -154,7 +155,7 @@ public class GameManager {
 
 
         for (int i = 0; i < playersInfo.length; i++) {
-            jogadores.add(new Jogador(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2], initialEnergy));
+            jogadores.add(new Jogador(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2], initialEnergy));;
             if (squares != null) {
                 squares.get(0).identificadoresNoQuadrado.add(Integer.valueOf(playersInfo[i][0])); //NAO POSSO FAZER ISTO
             }
@@ -479,6 +480,7 @@ public class GameManager {
     public ArrayList<String> getGameResults() {
 
         int classificacao = 1;
+        String nomeDaEspecie = "";
         ArrayList<String> resultadosDoJogo = new ArrayList<>();
         ArrayList<Jogador> ordenadosClassificacao = new ArrayList<>();
         ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
@@ -495,7 +497,22 @@ public class GameManager {
         }
 
         for (int i = 0; i < ordenadosClassificacao.size(); i++) {
-            resultadosDoJogo.add("#" + classificacao + " " + ordenadosClassificacao.get(i).nome + ", " + ordenadosClassificacao.get(i).especieDoJogador + ", " + ordenadosClassificacao.get(i).posicaoAtual + "\n");
+            if(ordenadosClassificacao.get(i).especieDoJogador == "T"){
+                nomeDaEspecie = "Tartaruga";
+            }
+            if(ordenadosClassificacao.get(i).especieDoJogador == "L"){
+                nomeDaEspecie = "Leão";
+            }
+            if(ordenadosClassificacao.get(i).especieDoJogador == "P"){
+                nomeDaEspecie = "Pássaro";
+            }
+            if(ordenadosClassificacao.get(i).especieDoJogador == "Z"){
+                nomeDaEspecie = "Tarzan";
+            }
+            if(ordenadosClassificacao.get(i).especieDoJogador == "E"){
+                nomeDaEspecie = "Elefante";
+            }
+            resultadosDoJogo.add("#" + classificacao + " " + ordenadosClassificacao.get(i).nome + ", " + nomeDaEspecie + ", " + ordenadosClassificacao.get(i).posicaoAtual);
             classificacao++;
         }
 
