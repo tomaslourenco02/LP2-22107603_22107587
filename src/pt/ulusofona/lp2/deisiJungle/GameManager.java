@@ -212,13 +212,13 @@ public class GameManager {
 
     public String[] getSquareInfo(int squareNr) {
 
-        squareNr--;
+        //squareNr--;
 
         SquareInfo square = new SquareInfo();
 
         String[] squareInfo = new String[3];
 
-        int[] jogadoresNoSquare = getPlayerIds(squareNr);
+        int[] jogadoresNoSquare = getPlayerIds(squareNr-1);
 
         String identificadores = "";
 
