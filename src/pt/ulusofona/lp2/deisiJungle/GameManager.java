@@ -218,7 +218,7 @@ public class GameManager {
 
         String[] squareInfo = new String[3];
 
-        int[] jogadoresNoSquare = getPlayerIds(squareNr-1);
+        int[] jogadoresNoSquare = getPlayerIds(squareNr);
 
         String identificadores = "";
 
@@ -241,10 +241,14 @@ public class GameManager {
         squareInfo[0] = square.imagemAColocar;
         squareInfo[1] = square.texto;
         squareInfo[2] = identificadores;
+        if(squareNr == tamanhoTabuleiro){
+            square.meta = true;
+        }
 
         if (square.meta) {
-            square.imagemAColocar = "Finish.png";
-            square.texto = "Meta";
+            squareInfo[0] = "Finish.png";
+            squareInfo[1] = "Meta";
+            return squareInfo;
         }
         return squareInfo;
     }
