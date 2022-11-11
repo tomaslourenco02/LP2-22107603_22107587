@@ -368,17 +368,16 @@ public class GameManager {
                     posDestino = tamanhoTabuleiro ;
                     jogadoresOrdenados.get(countJogadores).ganhou = true;
                     jogoAcabou = true;
-                    countJogadores = countJogadores;
                 }
 
-                squares.get(posJogador).identificadoresNoQuadrado.remove(new Integer(jogadores.get(countJogadores).identificador));
-                squares.get(posDestino - 1).identificadoresNoQuadrado.add(jogadores.get(countJogadores).identificador);
+                squares.get(posJogador).identificadoresNoQuadrado.remove(new Integer(jogadoresOrdenados.get(countJogadores).identificador));
+                squares.get(posDestino - 1).identificadoresNoQuadrado.add(jogadoresOrdenados.get(countJogadores).identificador);
 
-                jogadores.get(countJogadores).posicaoAtual = posDestino;
+                jogadoresOrdenados.get(countJogadores).posicaoAtual = posDestino;
 
-                jogadores.get(countJogadores).energiaAtual -= 2;
+                jogadoresOrdenados.get(countJogadores).energiaAtual -= 2;
 
-                if (jogadores.get(countJogadores).energiaAtual < 2) {
+                if (jogadoresOrdenados.get(countJogadores).energiaAtual < 2) {
                     jogadoresSemEnergia++;
                 }
 
@@ -397,8 +396,8 @@ public class GameManager {
                         if (squares.get(i).identificadoresNoQuadrado.size() > 0) {
                             ArrayList<Integer> idMenor = squares.get(i).identificadoresNoQuadrado;
                             for (int j = 0; j < jogadores.size(); j++) {
-                                if (jogadores.get(j).identificador == idMenor.get(0)) {
-                                    jogadores.get(j).ganhou = true;
+                                if (jogadoresOrdenados.get(j).identificador == idMenor.get(0)) {
+                                    jogadoresOrdenados.get(j).ganhou = true;
                                     getWinnerInfo();
                                     i = 0;
                                 }
