@@ -142,20 +142,21 @@ public class GameManager {
             return false;
         }
 
-        tamanhoTabuleiro = jungleSize;
-
-
         if (!verificaJogadores(playersInfo)) {
             return false;
         }
 
-        squares.add(new SquareInfo());
+        tamanhoTabuleiro = jungleSize;
+
+        for (int i = 0; i < tamanhoTabuleiro; i++) {
+            squares.add(new SquareInfo());
+        }
 
 
         for (int i = 0; i < playersInfo.length; i++) {
             jogadores.add(new Jogador(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2], initialEnergy));
             if (squares != null) {
-                squares.get(0).identificadoresNoQuadrado.add(playersInfo[i][0]); //NAO POSSO FAZER ISTO
+                squares.get(0).identificadoresNoQuadrado.add(Integer.valueOf(playersInfo[i][0])); //NAO POSSO FAZER ISTO
             }
         }
 
@@ -234,7 +235,7 @@ public class GameManager {
         }
 
         for (int i = 0; i < jogadoresNoSquare.length; i++) {
-            square.identificadoresNoQuadrado.add(Integer.toString(jogadoresNoSquare[i]));
+            square.identificadoresNoQuadrado.add(Integer.valueOf(Integer.toString(jogadoresNoSquare[i])));
         }
 
         for (int i = 0; i < square.identificadoresNoQuadrado.size(); i++) {
@@ -280,7 +281,7 @@ public class GameManager {
                     infoJogadorAtual = jogadores.get(i).infoJogador();
                 }
             } else {
-                if (jogadores.get(i).identificador == ids[countJogadores ]) {
+                if (jogadores.get(i).identificador == ids[countJogadores]) {
                     infoJogadorAtual = jogadores.get(i).infoJogador();
                 }
             }
@@ -330,8 +331,6 @@ public class GameManager {
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
 
-        Jogador[] jogadoresNaCasa = new Jogador[jogadores.size()];
-
         if (!bypassValidations) {
             if (nrSquares <= 0 || nrSquares > 6) {
                 return false;
@@ -340,17 +339,32 @@ public class GameManager {
 
         int[] ids = ordenarIds();
 
-        /*for (int i = 0; i < jogadores.size(); i++) {
+        int posJogador = jogadores.get(countJogadores).posicaoAtual;
+        int posDestino = posJogador + nrSquares;
 
-            if(jogadores.get(i).identificador == ids[i]){
-                if(jogadores.get(i).energiaAtual >= 2)
+        if (jogadores.get(countJogadores).energiaAtual >= 2 || posDestino < tamanhoTabuleiro) {
+
+            if (posDestino > tamanhoTabuleiro) {
+                posDestino = tamanhoTabuleiro;
             }
+            squares.get(posJogador).identificadoresNoQuadrado.remove(new Integer(jogadores.get(countJogadores).identificador));
+            squares.get(posDestino).identificadoresNoQuadrado.add(jogadores.get(countJogadores).identificador);
 
-        }*/
-        /*if (countJogadores == jogadores.size()) {
-            countJogadores = 0;
-        }*/
-        if (jogoAcabou == false) {
+            jogadores.get(countJogadores).posicaoAtual = posDestino;
+
+            jogadores.get(countJogadores).energiaAtual -= 2;
+            countJogadores++;
+
+            if (countJogadores == jogadores.size()) {
+                countJogadores = 0;
+            } else {
+                jogadoresSemEnergia++;
+            }
+            return true;
+        }
+
+
+        /*if (jogoAcabou == false) {
             for (int i = 0; i < jogadores.size(); i++) {
                 if (jogadores.get(i).identificador == ids[countJogadores]) {
                     if (jogadores.get(i).energiaAtual >= 2) {
@@ -384,7 +398,7 @@ public class GameManager {
                     jogadores.get(i).aJogar = false;
                 }
             }
-        }
+        }*/
         return false;
     }
 
@@ -414,6 +428,7 @@ public class GameManager {
         int[] posicaoOrdenada = ordenarPosicoes();
         int count = 0;
         Jogador[] jogadoresNaCasa = new Jogador[jogadores.size()];
+
 
         if (!verificaEnergia()) {
             for (int i = tamanhoTabuleiro; i > 0; i--) {
