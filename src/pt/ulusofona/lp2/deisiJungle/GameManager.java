@@ -245,7 +245,7 @@ public class GameManager {
             }
         }
         if (squareNr == tamanhoTabuleiro) {
-            squareInfo[0] = "Finish.png";
+            squareInfo[0] = "finish.png";
             squareInfo[1] = "Meta";
             squareInfo[2] = identificadores;
             return squareInfo;
