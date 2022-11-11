@@ -9,22 +9,28 @@ public class Test {
     @org.junit.Test
     public void testJungle(){
         GameManager gamemaneger = new GameManager();
-        String[] jogador1 = {"4", "Joao", "E"};
-        String[] jogador2 = {"6", "Pedro", "L"};
+        String[] jogador1 = {"1", "joana", "E"};
+        String[] jogador2 = {"2", "Pedro", "L"};
+        String[] jogador3 = {"3", "tomas", "P"};
+        String[] jogador4 = {"4", "miguel", "Z"};
 
 
-        String[][] jogadores = {jogador1, jogador2};
+        String[][] jogadores = {jogador1, jogador2, jogador3, jogador4};
 
         assertTrue(gamemaneger.createInitialJungle(10,10, jogadores));
 
         System.out.println(gamemaneger.moveCurrentPlayer(2, false));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, false));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
 
-        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(10)));
-        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(1)));
-
-
-
+        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(5)));
         System.out.println(Arrays.toString(gamemaneger.getSquareInfo(3)));
     }
 

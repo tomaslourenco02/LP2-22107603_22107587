@@ -276,7 +276,7 @@ public class GameManager {
 
         for (int i = 0; i < jogadores.size(); i++) {
             if (countJogadores == 0) {
-                if (jogadores.get(i).identificador == ids[countJogadores-1]) {
+                if (jogadores.get(i).identificador == ids[countJogadores]) {
                     infoJogadorAtual = jogadores.get(i).infoJogador();
                 }
             } else {
@@ -347,9 +347,9 @@ public class GameManager {
             }
 
         }*/
-        if (countJogadores == jogadores.size()) {
+        /*if (countJogadores == jogadores.size()) {
             countJogadores = 0;
-        }
+        }*/
         if (jogoAcabou == false) {
             for (int i = 0; i < jogadores.size(); i++) {
                 if (jogadores.get(i).identificador == ids[countJogadores]) {
@@ -359,6 +359,10 @@ public class GameManager {
                         jogadores.get(i).energiaAtual -= 2;
 
                         countJogadores++;
+
+                        if (countJogadores == jogadores.size()) {
+                            countJogadores = 0;
+                        }
 
                         if (jogadores.get(i).energiaAtual <= 0) {
                             jogadoresSemEnergia++;
@@ -379,7 +383,6 @@ public class GameManager {
                     }
                     jogadores.get(i).aJogar = false;
                 }
-
             }
         }
         return false;
