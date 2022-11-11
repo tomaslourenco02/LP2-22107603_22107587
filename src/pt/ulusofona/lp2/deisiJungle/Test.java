@@ -12,6 +12,7 @@ public class Test {
         String[] jogador1 = {"4", "Joao", "E"};
         String[] jogador2 = {"6", "Pedro", "L"};
 
+
         String[][] jogadores = {jogador1, jogador2};
 
         assertTrue(gamemaneger.createInitialJungle(10,10, jogadores));
