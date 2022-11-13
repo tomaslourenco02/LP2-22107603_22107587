@@ -368,7 +368,8 @@ public class GameManager {
                     jogoAcabou = true;
                 }
 
-                squares.get(posJogador).identificadoresNoQuadrado.remove(jogadoresOrdenados.get(countJogadores).identificador);
+                squares.get(posJogador).identificadoresNoQuadrado.remove(Integer.valueOf(jogadoresOrdenados.get(countJogadores).identificador));
+                //squares.get(posJogador).identificadoresNoQuadrado.remove(new Integer(jogadoresOrdenados.get(countJogadores).identificador));
                 squares.get(posDestino - 1).identificadoresNoQuadrado.add(jogadoresOrdenados.get(countJogadores).identificador);
 
                 jogadoresOrdenados.get(countJogadores).posicaoAtual = posDestino;
