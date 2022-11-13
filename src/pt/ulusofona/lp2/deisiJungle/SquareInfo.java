@@ -13,8 +13,6 @@ public class SquareInfo {
         this.meta = meta;
     }
 
-    int tamanho;
-
     public SquareInfo(String imagemAColocar, String texto, ArrayList<String> identificadoresNoQuadrado) {
         this.imagemAColocar = "blank.png";
         this.texto = "Vazio";
