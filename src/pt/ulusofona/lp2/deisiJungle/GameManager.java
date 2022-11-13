@@ -338,9 +338,7 @@ public class GameManager {
                 countJogadores++;
                 if (countJogadores > jogadores.size() - 1) {
                     countJogadores = 0;
-                }
-                return false;
-            }
+                }return false;}
         }
         ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
 
@@ -362,15 +360,9 @@ public class GameManager {
 
                 jogadoresOrdenados.get(countJogadores).energiaAtual -= 2;
 
-                if (jogadoresOrdenados.get(countJogadores).energiaAtual < 2) {
-                    jogadoresSemEnergia++;
-                }
-                if (!jogoAcabou) {
-                    countJogadores++;
-                }
-                if (countJogadores > jogadores.size() - 1) {
-                    countJogadores = 0;
-                }
+                if (jogadoresOrdenados.get(countJogadores).energiaAtual < 2) {jogadoresSemEnergia++;}
+                if (!jogoAcabou) {countJogadores++;}
+                if (countJogadores > jogadores.size() - 1) {countJogadores = 0;}
                 if (jogadoresSemEnergia == jogadores.size()) {
                     jogoAcabou = true;
 
@@ -396,8 +388,6 @@ public class GameManager {
         }
         return false;
     }
-
-    int id = 0;
 
     public int[] ordenarPosicoes() {
         int[] posicoesOrdenadas = new int[jogadores.size()];
@@ -493,10 +483,10 @@ public class GameManager {
         panel.setBackground(Color.white);
         JButton b1 = new JButton("Botão 1");
         b1.setBounds(50, 100, 80, 30);
-        b1.setBackground(Color.blue);
+        b1.setBackground(Color.pink);
         JButton b2 = new JButton("Botão 2");
         b2.setBounds(100, 100, 80, 30);
-        b2.setBackground(Color.blue);
+        b2.setBackground(Color.pink);
         panel.add(b1);
         panel.add(b2);
         f.add(panel);
