@@ -1,15 +1,13 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Objects;
 
 
 public class GameManager {
-    ArrayList<Jogador> jogadores = new ArrayList();
+    ArrayList<Jogador> jogadores = new ArrayList<>();
     ArrayList<SquareInfo> squares = new ArrayList<>();
     int countJogadores = 0;
     int jogadoresSemEnergia = 0;
@@ -369,7 +367,6 @@ public class GameManager {
                 }
 
                 squares.get(posJogador).identificadoresNoQuadrado.remove(Integer.valueOf(jogadoresOrdenados.get(countJogadores).identificador));
-                //squares.get(posJogador).identificadoresNoQuadrado.remove(new Integer(jogadoresOrdenados.get(countJogadores).identificador));
                 squares.get(posDestino - 1).identificadoresNoQuadrado.add(jogadoresOrdenados.get(countJogadores).identificador);
 
                 jogadoresOrdenados.get(countJogadores).posicaoAtual = posDestino;
