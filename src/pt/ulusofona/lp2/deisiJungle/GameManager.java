@@ -353,9 +353,7 @@ public class GameManager {
                 countJogadores++;
                 if (countJogadores > jogadores.size() - 1) {
                     countJogadores = 0;
-                }
-                return false;
-            }
+                }return false;}
         }
         ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
 
@@ -364,32 +362,22 @@ public class GameManager {
 
         if (verificaEnergia() || posDestino < tamanhoTabuleiro) {
             if (jogoAcabou == false) {
-
                 if (posDestino >= tamanhoTabuleiro) {
                     posDestino = tamanhoTabuleiro;
                     jogadoresOrdenados.get(countJogadores).ganhou = true;
                     jogoAcabou = true;
                 }
 
-                squares.get(posJogador).identificadoresNoQuadrado.remove(new Integer(jogadoresOrdenados.get(countJogadores).identificador));
+                squares.get(posJogador).identificadoresNoQuadrado.remove(jogadoresOrdenados.get(countJogadores).identificador);
                 squares.get(posDestino - 1).identificadoresNoQuadrado.add(jogadoresOrdenados.get(countJogadores).identificador);
 
                 jogadoresOrdenados.get(countJogadores).posicaoAtual = posDestino;
 
                 jogadoresOrdenados.get(countJogadores).energiaAtual -= 2;
 
-                if (jogadoresOrdenados.get(countJogadores).energiaAtual < 2) {
-                    jogadoresSemEnergia++;
-                }
-
-                if (!jogoAcabou) {
-                    countJogadores++;
-                }
-
-                if (countJogadores > jogadores.size() - 1) {
-                    countJogadores = 0;
-                }
-
+                if (jogadoresOrdenados.get(countJogadores).energiaAtual < 2) {jogadoresSemEnergia++;}
+                if (!jogoAcabou) {countJogadores++;}
+                if (countJogadores > jogadores.size() - 1) {countJogadores = 0;}
                 if (jogadoresSemEnergia == jogadores.size()) {
                     jogoAcabou = true;
 
@@ -406,8 +394,6 @@ public class GameManager {
                         }
                     }
                 }
-
-
                 return true;
             }
         }
