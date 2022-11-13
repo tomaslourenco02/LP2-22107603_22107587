@@ -5,28 +5,12 @@ public class Jogador {
     int identificador; //Os IDs dos jogadores podem nÃƒÆ’Ã‚Â£o ser consecutivos, por exemplo J1 = 1, J2 = 3, J3 = 5;
     String nome;       //Apenas poderÃƒÆ’Ã‚Â¡ existir um jogador da espÃƒÆ’Ã‚Â©cie Tarzan
     String especieDoJogador;
-    String nomeEspecie;
     int energiaInicial;
     int energiaAtual;
     int posicaoAtual = 1;
     boolean aJogar = false;
     boolean ganhou = false;
 
-    public Jogador(int identificador, String nome, String especieDoJogador) {
-        this.identificador = identificador;
-        this.nome = nome;
-        this.especieDoJogador = especieDoJogador;
-        posicaoAtual = 1;
-    }
-
-    public Jogador(int identificador, String nome, String especieDoJogador, int energiaInicial, int energiaAtual) {
-        this.identificador = identificador;
-        this.nome = nome;
-        this.especieDoJogador = especieDoJogador;
-        this.energiaInicial = energiaInicial;
-        this.energiaAtual = energiaInicial;
-        posicaoAtual = 0;
-    }
 
     public Jogador(int identificador, String nome, String especieDoJogador, int energiaAtual) {
         this.identificador = identificador;
@@ -36,19 +20,6 @@ public class Jogador {
         posicaoAtual = 1;
     }
 
-    public Jogador(int identificador, String nome, int posicaoAtual) {
-        this.identificador = identificador;
-        this.nome = nome;
-        this.posicaoAtual = posicaoAtual;
-    }
-
-    public Jogador() {
-        identificador = 0;
-        nome = null;
-        especieDoJogador = null;
-        energiaInicial = 0;
-        posicaoAtual = 1;
-    }
 
     public String[] infoJogador() {
         String[] infoJogador = new String[4];
@@ -59,5 +30,12 @@ public class Jogador {
         infoJogador[3] = Integer.toString(energiaAtual);
 
         return infoJogador;
+    }
+
+    public int idJogador(){
+
+        int id = identificador;
+
+        return id;
     }
 }
