@@ -10,7 +10,8 @@ public class Jogador {
     int posicaoAtual = 1;
     boolean aJogar = false;
     boolean ganhou = false;
-
+    int nrCasasMovimentou = 0;
+    int nrAlimentosIngeridos = 0;
 
     public Jogador(int identificador, String nome, String especieDoJogador, int energiaAtual) {
         this.identificador = identificador;
