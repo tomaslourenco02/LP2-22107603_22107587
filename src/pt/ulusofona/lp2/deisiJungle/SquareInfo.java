@@ -20,6 +20,25 @@ public class SquareInfo {
         meta = false;
     }
 
+    public String getImagemAColocar() {
+
+        return imagemAColocar;
+    }
+
+    public String getTexto() {
+
+        return texto;
+    }
+
+    public ArrayList<Integer> getIdentificadoresNoQuadrado() {
+
+        return identificadoresNoQuadrado;
+    }
+
+    public Boolean getMeta() {
+        return meta;
+    }
+
     public SquareInfo() {
         imagemAColocar = "blank.png";
         texto = "Vazio";

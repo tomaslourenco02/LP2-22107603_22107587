@@ -21,6 +21,22 @@ public class Jogador {
     }
 
 
+    public int getIdentificador() {
+        return identificador;
+    }
+
+    public int getPosicaoAtual() {
+        return posicaoAtual;
+    }
+
+    public boolean AJogar() {
+        return aJogar;
+    }
+
+    public boolean Ganhou() {
+        return ganhou;
+    }
+
     public String[] infoJogador() {
         String[] infoJogador = new String[4];
 
@@ -32,10 +48,32 @@ public class Jogador {
         return infoJogador;
     }
 
-    public int idJogador(){
+    public String getNome(){
 
-        int id = identificador;
+        return nome;
+    }
 
-        return id;
+    public String getEspecieDoJogador(){
+
+        return especieDoJogador;
+    }
+
+    public int getEnergiaAtual(){
+
+        return energiaAtual;
+    }
+
+    public int getEnergiaInicial(){
+
+        return energiaInicial;
+    }
+
+    public int verificaEnergiaAtual(){
+
+        if(energiaAtual > 200){
+
+            energiaAtual = 200;
+        }
+        return energiaAtual;
     }
 }

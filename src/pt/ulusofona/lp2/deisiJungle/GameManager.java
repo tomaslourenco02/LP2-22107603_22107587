@@ -160,17 +160,17 @@ public class GameManager {
         for (int i = 0; i < jogadores.size(); i++) {
             for (int j = 0; j < jogadores.size(); j++) {
                 if (i != j) {
-                    if (jogadores.get(i).identificador < jogadores.get(j).identificador) {
-                        menorID = jogadores.get(i).identificador;
+                    if (jogadores.get(i).getIdentificador() < jogadores.get(j).getIdentificador()) {
+                        menorID = jogadores.get(i).getIdentificador();
                     } else {
-                        menorID = jogadores.get(j).identificador;
+                        menorID = jogadores.get(j).getIdentificador();
                     }
                 }
             }
         }
 
         for (int i = 0; i < jogadores.size(); i++) {
-            if (menorID == jogadores.get(i).identificador) {
+            if (menorID == jogadores.get(i).getIdentificador()) {
                 jogadores.get(i).aJogar = true;
             }
         }
@@ -187,8 +187,8 @@ public class GameManager {
         }
 
         for (int i = 0; i < jogadores.size(); i++) {
-            if (jogadores.get(i).posicaoAtual == squareNr) {
-                idJogadores[count] = jogadores.get(i).idJogador();
+            if (jogadores.get(i).getPosicaoAtual() == squareNr) {
+                idJogadores[count] = jogadores.get(i).getIdentificador();
                 count++;
             }
         }
@@ -257,7 +257,7 @@ public class GameManager {
 
 
         for (int i = 0; i < jogadores.size(); i++) {
-            if (jogadores.get(i).identificador == playerId) {
+            if (jogadores.get(i).getIdentificador() == playerId) {
                 return jogadores.get(i).infoJogador();
             }
         }
@@ -270,7 +270,7 @@ public class GameManager {
         String[] infoJogadorAtual = new String[4];
 
         for (int i = 0; i < jogadores.size(); i++) {
-            if (jogadores.get(i).identificador == ids[countJogadores]) {
+            if (jogadores.get(i).getIdentificador() == ids[countJogadores]) {
                 infoJogadorAtual = jogadores.get(i).infoJogador();
             }
         }
@@ -282,7 +282,7 @@ public class GameManager {
         int[] ids = new int[jogadores.size()];
 
         for (int i = 0; i < jogadores.size(); i++) {
-            ids[i] = jogadores.get(i).identificador;
+            ids[i] = jogadores.get(i).getIdentificador();
         }
 
         Arrays.sort(ids);
@@ -297,7 +297,7 @@ public class GameManager {
 
         for (int j = 0; j < ids.length; j++) {
             for (int i = 0; i < jogadores.size(); i++) { //ids Ordenados
-                if (jogadores.get(i).identificador == ids[j]) {
+                if (jogadores.get(i).getIdentificador() == ids[j]) {
                     informacaoDosJogadores[j] = jogadores.get(i).infoJogador();
                 }
             }
@@ -308,7 +308,7 @@ public class GameManager {
     public boolean verificaEnergia() {
 
         for (int i = 0; i < jogadores.size(); i++) {
-            if (jogadores.get(i).energiaAtual >= 2) {
+            if (jogadores.get(i).getEnergiaAtual() >= 2) {
                 return true;
             }
         }
@@ -323,7 +323,7 @@ public class GameManager {
 
         for (int i = 0; i < ids.length; i++) {
             for (int j = 0; j < jogadores.size(); j++) {
-                if (jogadores.get(j).identificador == ids[i]) {
+                if (jogadores.get(j).getIdentificador() == ids[i]) {
                     jogadoresOrdenados.add(jogadores.get(j));
                 }
             }
@@ -342,7 +342,7 @@ public class GameManager {
         }
         ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
 
-        int posJogador = jogadoresOrdenados.get(countJogadores).posicaoAtual;
+        int posJogador = jogadoresOrdenados.get(countJogadores).getPosicaoAtual();
         int posDestino = posJogador + nrSquares;
 
         if (verificaEnergia() || posDestino < tamanhoTabuleiro) {
@@ -360,7 +360,7 @@ public class GameManager {
 
                 jogadoresOrdenados.get(countJogadores).energiaAtual -= 2;
 
-                if (jogadoresOrdenados.get(countJogadores).energiaAtual < 2) {jogadoresSemEnergia++;}
+                if (jogadoresOrdenados.get(countJogadores).getEnergiaAtual() < 2) {jogadoresSemEnergia++;}
                 if (!jogoAcabou) {countJogadores++;}
                 if (countJogadores > jogadores.size() - 1) {countJogadores = 0;}
                 if (jogadoresSemEnergia == jogadores.size()) {
@@ -368,9 +368,9 @@ public class GameManager {
 
                     for (int i = tamanhoTabuleiro - 1; i > 0; i--) {
                         if (squares.get(i).identificadoresNoQuadrado.size() > 0) {
-                            ArrayList<Integer> idMenor = squares.get(i).identificadoresNoQuadrado;
+                            ArrayList<Integer> idMenor = squares.get(i).getIdentificadoresNoQuadrado();
                             for (int j = 0; j < jogadores.size(); j++) {
-                                if (jogadoresOrdenados.get(j).identificador == idMenor.get(0)) {
+                                if (jogadoresOrdenados.get(j).getIdentificador() == idMenor.get(0)) {
                                     jogadoresOrdenados.get(j).ganhou = true;
                                     getWinnerInfo();
                                     i = 0;
@@ -396,8 +396,8 @@ public class GameManager {
         if (jogoAcabou == true) {
             for (int i = 0; i < idsOrdenados.length; i++) {
                 for (int j = 0; j < jogadores.size(); j++) {
-                    if (jogadores.get(j).identificador == idsOrdenados[i]) {
-                        posicoesOrdenadas[i] = jogadores.get(i).posicaoAtual;
+                    if (jogadores.get(j).getIdentificador() == idsOrdenados[i]) {
+                        posicoesOrdenadas[i] = jogadores.get(i).getPosicaoAtual();
                     }
                 }
             }
@@ -420,11 +420,11 @@ public class GameManager {
         String[] winnerInfo = new String[4];
 
         for (int i = 0; i < jogadores.size(); i++) {
-            if (jogadores.get(i).ganhou == true) {
-                winnerInfo[0] = String.valueOf(jogadores.get(i).identificador);
-                winnerInfo[1] = jogadores.get(i).nome;
-                winnerInfo[2] = jogadores.get(i).especieDoJogador;
-                winnerInfo[3] = String.valueOf(jogadores.get(i).energiaAtual);
+            if (jogadores.get(i).Ganhou() == true) {
+                winnerInfo[0] = String.valueOf(jogadores.get(i).getIdentificador());
+                winnerInfo[1] = jogadores.get(i).getNome();
+                winnerInfo[2] = jogadores.get(i).getEspecieDoJogador();
+                winnerInfo[3] = String.valueOf(jogadores.get(i).getEnergiaAtual());
                 return winnerInfo;
             }
         }
@@ -443,7 +443,7 @@ public class GameManager {
 
         for (int i = 0; i < posicoes.length; i++) {
             for (int j = 0; j < jogadoresOrdenados.size(); j++) {
-                if (jogadoresOrdenados.get(j).posicaoAtual == posicoes[i]) {
+                if (jogadoresOrdenados.get(j).getPosicaoAtual() == posicoes[i]) {
                     if (!ordenadosClassificacao.contains(jogadoresOrdenados.get(j))) {
                         ordenadosClassificacao.add(jogadoresOrdenados.get(j));
                     }
@@ -452,22 +452,22 @@ public class GameManager {
         }
 
         for (int i = 0; i < ordenadosClassificacao.size(); i++) {
-            if (Objects.equals(ordenadosClassificacao.get(i).especieDoJogador, "T")) {
+            if (Objects.equals(ordenadosClassificacao.get(i).getEspecieDoJogador(), "T")) {
                 nomeDaEspecie = "Tartaruga";
             }
-            if (Objects.equals(ordenadosClassificacao.get(i).especieDoJogador, "L")) {
+            if (Objects.equals(ordenadosClassificacao.get(i).getEspecieDoJogador(), "L")) {
                 nomeDaEspecie = "Leão";
             }
-            if (Objects.equals(ordenadosClassificacao.get(i).especieDoJogador, "P")) {
+            if (Objects.equals(ordenadosClassificacao.get(i).getEspecieDoJogador(), "P")) {
                 nomeDaEspecie = "Pássaro";
             }
-            if (Objects.equals(ordenadosClassificacao.get(i).especieDoJogador, "Z")) {
+            if (Objects.equals(ordenadosClassificacao.get(i).getEspecieDoJogador(), "Z")) {
                 nomeDaEspecie = "Tarzan";
             }
-            if (Objects.equals(ordenadosClassificacao.get(i).especieDoJogador, "E")) {
+            if (Objects.equals(ordenadosClassificacao.get(i).getEspecieDoJogador(), "E")) {
                 nomeDaEspecie = "Elefante";
             }
-            resultadosDoJogo.add("#" + classificacao + " " + ordenadosClassificacao.get(i).nome + ", " + nomeDaEspecie + ", " + ordenadosClassificacao.get(i).posicaoAtual);
+            resultadosDoJogo.add("#" + classificacao + " " + ordenadosClassificacao.get(i).getNome() + ", " + nomeDaEspecie + ", " + ordenadosClassificacao.get(i).getPosicaoAtual());
             classificacao++;
         }
 
@@ -487,8 +487,8 @@ public class GameManager {
         JButton b2 = new JButton("Botão 2");
         b2.setBounds(100, 100, 80, 30);
         b2.setBackground(Color.pink);
-        panel.add(b1);
-        panel.add(b2);
+        f.add(b1);
+        f.add(b2);
         f.add(panel);
         f.setSize(300, 300);
         f.setLayout(null);
