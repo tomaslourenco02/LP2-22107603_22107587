@@ -2,6 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -42,6 +43,21 @@ public class GameManager {
         especies[4][2] = "tarzan.png";
 
         return especies;
+    }
+
+    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo){
+
+        return null;
+    }
+
+    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
+
+        return null;
+    }
+
+    public String[] getCurrentPlayerEnergyInfo(int nrPositions){
+
+        return null;
     }
 
     public boolean verificaEspecies(String especie) {
@@ -117,6 +133,13 @@ public class GameManager {
     }
 
     int count = 0;
+
+    public String[][] getFoodTypes(){
+
+
+
+        return null;
+    }
 
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
 
@@ -331,14 +354,25 @@ public class GameManager {
         return jogadoresOrdenados;
     }
 
-    public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
+    public boolean saveGame(File file){
+
+        return true;
+    }
+
+    public boolean loadGame(File file){
+
+        return true;
+    }
+
+
+    public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
 
         if (!bypassValidations) {
             if (nrSquares <= 0 || nrSquares > 6) {
                 countJogadores++;
                 if (countJogadores > jogadores.size() - 1) {
                     countJogadores = 0;
-                }return false;}
+                }return null;}
         }
         ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
 
@@ -379,14 +413,14 @@ public class GameManager {
                         }
                     }
                 }
-                return true;
+                return null;
             }
         }
         countJogadores++;
         if (countJogadores > jogadores.size() - 1) {
             countJogadores = 0;
         }
-        return false;
+        return null;
     }
 
     public int[] ordenarPosicoes() {
