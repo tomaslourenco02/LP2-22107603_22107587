@@ -63,10 +63,10 @@ public class GameManager {
         especies[4][0] = "Z";
         especies[4][1] = "Tarzan";
         especies[4][2] = "tarzan.png";
-        especies[1][3] = String.valueOf(70);
-        especies[1][4] = String.valueOf(2);
-        especies[1][5] = String.valueOf(20);
-        especies[1][6] = "1..6";
+        especies[4][3] = String.valueOf(70);
+        especies[4][4] = String.valueOf(2);
+        especies[4][5] = String.valueOf(20);
+        especies[4][6] = "1..6";
 
         return especies;
     }
