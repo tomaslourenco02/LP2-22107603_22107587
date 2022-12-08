@@ -20,27 +20,47 @@ public class GameManager {
 
     public String[][] getSpecies() {
 
-        String[][] especies = new String[5][3];
+        String[][] especies = new String[5][7];
 
         especies[0][0] = "E";
         especies[0][1] = "Elefante";
         especies[0][2] = "elephant.png";
+        especies[0][3] = "180";
+        especies[0][4] = "4";
+        especies[0][5] = "10";
+        especies[0][6] = "1..6";
 
         especies[1][0] = "L";
         especies[1][1] = "Leão";
         especies[1][2] = "lion.png";
+        especies[1][3] = "80";
+        especies[1][4] = "2";
+        especies[1][5] = "10";
+        especies[1][6] = "4..6";
 
         especies[2][0] = "T";
         especies[2][1] = "Tartaruga";
         especies[2][2] = "turtle.png";
+        especies[2][3] = "150";
+        especies[2][4] = "1";
+        especies[2][5] = "5";
+        especies[2][6] = "1..3";
 
         especies[3][0] = "P";
         especies[3][1] = "Pássaro";
         especies[3][2] = "bird.png";
+        especies[3][3] = "70";
+        especies[3][4] = "4";
+        especies[3][5] = "50";
+        especies[3][6] = "5..6";
 
         especies[4][0] = "Z";
         especies[4][1] = "Tarzan";
         especies[4][2] = "tarzan.png";
+        especies[1][3] = "70";
+        especies[1][4] = "2";
+        especies[1][5] = "20";
+        especies[1][6] = "1..6";
 
         return especies;
     }
@@ -454,7 +474,7 @@ public class GameManager {
         String[] winnerInfo = new String[4];
 
         for (int i = 0; i < jogadores.size(); i++) {
-            if (jogadores.get(i).Ganhou() == true) {
+            if (jogadores.get(i).ganhou() == true) {
                 winnerInfo[0] = String.valueOf(jogadores.get(i).getIdentificador());
                 winnerInfo[1] = jogadores.get(i).getNome();
                 winnerInfo[2] = jogadores.get(i).getEspecieDoJogador();

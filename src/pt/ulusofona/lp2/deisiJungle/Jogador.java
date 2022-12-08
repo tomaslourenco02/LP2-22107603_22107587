@@ -30,11 +30,11 @@ public class Jogador {
         return posicaoAtual;
     }
 
-    public boolean AJogar() {
+    public boolean aJogar() {
         return aJogar;
     }
 
-    public boolean Ganhou() {
+    public boolean ganhou() {
         return ganhou;
     }
 
