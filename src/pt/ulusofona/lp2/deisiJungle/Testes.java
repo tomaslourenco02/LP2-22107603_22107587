@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import org.junit.Test;
+
 import java.util.Arrays;
 
 import static org.junit.Assert.assertTrue;
@@ -85,4 +87,4 @@ public class Testes {
         System.out.println(Arrays.toString(gamemaneger.getSquareInfo(1)));
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
     }
-    }
+}

@@ -6,6 +6,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Random;
 
 
 public class GameManager {
@@ -17,50 +18,55 @@ public class GameManager {
     int tamanhoTabuleiro = 0;
     boolean jogoAcabou = false;
 
+    public static int getRandomInteger(int max, int min){  // retorna um numero random entre 1 e 6 caso 1_min e 6_max
+        return ((int) (Math.random()*(max - min))) + min;
+    }
 
     public String[][] getSpecies() {
 
         String[][] especies = new String[5][7];
 
+        Random aleatorio = new Random();
+
         especies[0][0] = "E";
         especies[0][1] = "Elefante";
         especies[0][2] = "elephant.png";
-        especies[0][3] = "180";
-        especies[0][4] = "4";
-        especies[0][5] = "10";
-        especies[0][6] = "1..6";
+        especies[0][3] =  String.valueOf(180);
+        especies[0][4] =  String.valueOf(4);
+        especies[0][5] =  String.valueOf(10);
+        especies[0][6] = String.valueOf(getRandomInteger(7,1));
 
         especies[1][0] = "L";
         especies[1][1] = "Leão";
         especies[1][2] = "lion.png";
-        especies[1][3] = "80";
-        especies[1][4] = "2";
-        especies[1][5] = "10";
-        especies[1][6] = "4..6";
+        especies[1][3] =  String.valueOf(80);
+        especies[1][4] =  String.valueOf(2);
+        especies[1][5] =  String.valueOf(10);
+        especies[1][6] = String.valueOf(getRandomInteger(7,4));
 
         especies[2][0] = "T";
         especies[2][1] = "Tartaruga";
         especies[2][2] = "turtle.png";
-        especies[2][3] = "150";
-        especies[2][4] = "1";
-        especies[2][5] = "5";
-        especies[2][6] = "1..3";
+        especies[2][3] =  String.valueOf(150);
+        especies[2][4] =  String.valueOf(1);
+        especies[2][5] =  String.valueOf(5);
+        especies[2][6] = String.valueOf(getRandomInteger(4,1));
 
         especies[3][0] = "P";
         especies[3][1] = "Pássaro";
         especies[3][2] = "bird.png";
-        especies[3][3] = "70";
-        especies[3][4] = "4";
-        especies[3][5] = "50";
-        especies[3][6] = "5..6";
+        especies[3][3] = String.valueOf(70);
+        especies[3][4] = String.valueOf(4);
+        especies[3][5] = String.valueOf(50);
+        especies[3][6] = String.valueOf(getRandomInteger(7,5));
 
         especies[4][0] = "Z";
         especies[4][1] = "Tarzan";
         especies[4][2] = "tarzan.png";
-        especies[1][3] = "70";
-        especies[1][4] = "2";
-        especies[1][5] = "20";
-        especies[1][6] = "1..6";
+        especies[1][3] = String.valueOf(70);
+        especies[1][4] = String.valueOf(2);
+        especies[1][5] = String.valueOf(20);
+        especies[1][6] = String.valueOf(getRandomInteger(7,1));
 
         return especies;
     }
