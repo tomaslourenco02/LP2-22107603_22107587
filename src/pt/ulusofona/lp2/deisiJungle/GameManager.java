@@ -155,10 +155,29 @@ public class GameManager {
     int count = 0;
 
     public String[][] getFoodTypes(){
+      String[][] alimentos = new String[5][3];
 
+        alimentos[0][0] = "e";
+        alimentos[0][1] = "Erva";
+        alimentos[0][2] = "grass.png";
 
+        alimentos[1][0] = "a";
+        alimentos[1][1] = "Agua";
+        alimentos[1][2] = "water.png";
 
-        return null;
+        alimentos[2][0] = "b";
+        alimentos[2][1] = "Cacho de bananas";
+        alimentos[2][2] = "bananas.png";
+
+        alimentos[3][0] = "c";
+        alimentos[3][1] = "Carne";
+        alimentos[3][2] = "meat.png";
+
+        alimentos[4][0] = "m";
+        alimentos[4][1] = "Cogumelos magicos";
+        alimentos[4][2] = "mushroom.png";
+
+        return alimentos;
     }
 
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
