@@ -34,7 +34,7 @@ public class GameManager {
         especies[0][3] =  String.valueOf(180);
         especies[0][4] =  String.valueOf(4);
         especies[0][5] =  String.valueOf(10);
-        especies[0][6] = String.valueOf(getRandomInteger(7,1));
+        especies[0][6] = "1..6";
 
         especies[1][0] = "L";
         especies[1][1] = "Leão";
@@ -42,7 +42,7 @@ public class GameManager {
         especies[1][3] =  String.valueOf(80);
         especies[1][4] =  String.valueOf(2);
         especies[1][5] =  String.valueOf(10);
-        especies[1][6] = String.valueOf(getRandomInteger(7,4));
+        especies[1][6] = "4..6";
 
         especies[2][0] = "T";
         especies[2][1] = "Tartaruga";
@@ -50,7 +50,7 @@ public class GameManager {
         especies[2][3] =  String.valueOf(150);
         especies[2][4] =  String.valueOf(1);
         especies[2][5] =  String.valueOf(5);
-        especies[2][6] = String.valueOf(getRandomInteger(4,1));
+        especies[2][6] = "1..3";
 
         especies[3][0] = "P";
         especies[3][1] = "Pássaro";
@@ -58,7 +58,7 @@ public class GameManager {
         especies[3][3] = String.valueOf(70);
         especies[3][4] = String.valueOf(4);
         especies[3][5] = String.valueOf(50);
-        especies[3][6] = String.valueOf(getRandomInteger(7,5));
+        especies[3][6] = "5..6";
 
         especies[4][0] = "Z";
         especies[4][1] = "Tarzan";
@@ -66,13 +66,63 @@ public class GameManager {
         especies[1][3] = String.valueOf(70);
         especies[1][4] = String.valueOf(2);
         especies[1][5] = String.valueOf(20);
-        especies[1][6] = String.valueOf(getRandomInteger(7,1));
+        especies[1][6] = "1..6";
 
         return especies;
     }
 
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo){
+        jogadores.clear();
+        squares.clear();
+        countJogadores = 0;
+        jogadoresSemEnergia = 0;
+        jogadorVencedorID = 0;
+        tamanhoTabuleiro = 0;
+        jogoAcabou = false;
+        count = 0;
 
+
+        if (jungleSize < playersInfo.length * 2) {
+            return new InitializationError();
+        }
+
+        if (!verificaJogadores(playersInfo)) {
+            return new InitializationError();
+        }
+
+        tamanhoTabuleiro = jungleSize;
+
+        for (int i = 0; i < tamanhoTabuleiro; i++) {
+            squares.add(new SquareInfo());
+        }
+
+
+        for (int i = 0; i < playersInfo.length; i++) {
+            jogadores.add(new Jogador(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2]));
+            if (squares != null) {
+                squares.get(0).identificadoresNoQuadrado.add(Integer.valueOf(playersInfo[i][0])); //NAO POSSO FAZER ISTO
+            }
+        }
+
+        int menorID = 0;
+
+        for (int i = 0; i < jogadores.size(); i++) {
+            for (int j = 0; j < jogadores.size(); j++) {
+                if (i != j) {
+                    if (jogadores.get(i).getIdentificador() < jogadores.get(j).getIdentificador()) {
+                        menorID = jogadores.get(i).getIdentificador();
+                    } else {
+                        menorID = jogadores.get(j).getIdentificador();
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < jogadores.size(); i++) {
+            if (menorID == jogadores.get(i).getIdentificador()) {
+                jogadores.get(i).aJogar = true;
+            }
+        }
         return null;
     }
 
