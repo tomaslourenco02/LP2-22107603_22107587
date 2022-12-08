@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertTrue;
 
-public class Test {
+public class Testes {
     @org.junit.Test
 
     public void testJungle(){
@@ -77,12 +77,6 @@ public class Test {
         String[] jogador2 = {"5", "Miguel", "L"};
         String[] jogador3 = {"89", "José", "Z"};
         String[] jogador4 = {"34", "Ana", "P"};
-
-        Jogador jogadorPos2 = new Jogador(1, "Joana", "L", 2);
-        Jogador jogadorPos2_2 = new Jogador(2, "Tomas", "E", 2);
-
-
-
 
         String[][] jogadores = {jogador1, jogador2,jogador3,jogador4};
 
