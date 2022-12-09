@@ -39,13 +39,28 @@ public class Jogador {
     }
 
     public String[] infoJogador() {
-        String[] infoJogador = new String[4];
+        String[] infoJogador = new String[5];
 
         infoJogador[0] = Integer.toString(identificador);
         infoJogador[1] = nome;
         infoJogador[2] = especieDoJogador;
         infoJogador[3] = Integer.toString(energiaAtual);
 
+        if(especieDoJogador == "E"){
+            infoJogador[4] = "1..6";
+        }
+        if(especieDoJogador == "Z"){
+            infoJogador[4] = "1..6";
+        }
+        if(especieDoJogador == "L"){
+            infoJogador[4] = "4..6";
+        }
+        if(especieDoJogador == "P"){
+            infoJogador[4] = "5..6";
+        }
+        if(especieDoJogador == "E"){
+            infoJogador[4] = "1..3";
+        }
         return infoJogador;
     }
 

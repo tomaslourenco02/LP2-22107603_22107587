@@ -103,6 +103,13 @@ public class GameManager {
 
         for (int i = 0; i < foodsInfo.length; i++) {
 
+            if(Integer.parseInt(foodsInfo[i][1])> squares.size() || Integer.parseInt(foodsInfo[i][1]) < 1){
+                return new InitializationError("Erro na inicialização do terreno!");
+            }
+        }
+
+        for (int i = 0; i < foodsInfo.length; i++) {
+
             if(!verificaPosicaoAlimentos()){
                 return new InitializationError("Erro na inicialização do terreno!");
             }
@@ -120,6 +127,7 @@ public class GameManager {
                 squares.get(0).identificadoresAlimentosNoQuadrado.add(foodsInfo[i][0]); //NAO POSSO FAZER ISTO
             }
         }
+
 
         int menorID = 0;
 
