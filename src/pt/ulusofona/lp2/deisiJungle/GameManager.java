@@ -101,16 +101,23 @@ public class GameManager {
             }
         }
 
+        for (int i = 0; i < foodsInfo.length; i++) {
+
+            if(!verificaPosicaoAlimentos()){
+                return new InitializationError("Erro na inicialização do terreno!");
+            }
+        }
+
         tamanhoTabuleiro = jungleSize;
 
         for (int i = 0; i < tamanhoTabuleiro; i++) {
             squares.add(new SquareInfo());
         }
 
-
         for (int i = 0; i < playersInfo.length; i++) {
             if (squares != null) {
                 squares.get(0).identificadoresNoQuadrado.add(Integer.valueOf(playersInfo[i][0])); //NAO POSSO FAZER ISTO
+                squares.get(0).identificadoresAlimentosNoQuadrado.add(foodsInfo[i][0]); //NAO POSSO FAZER ISTO
             }
         }
 
@@ -146,6 +153,34 @@ public class GameManager {
         return null;
     }
 
+    public boolean verificaPosicaoAlimentos(){
+
+        String[][] alimentos = getFoodTypes();
+        ArrayList<String> alimentosArrayList = new ArrayList<>();
+        int count = 0;
+
+        int posFinal = squares.size();
+
+        if(!(squares.get(0).identificadoresAlimentosNoQuadrado.isEmpty()) || !(squares.get(posFinal-1).identificadoresAlimentosNoQuadrado.isEmpty())) {
+
+            return false;
+        }
+
+        for (int i = 0; i < alimentos.length; i++) {
+            alimentosArrayList.add(alimentos[i][0]);
+        }
+        for (int i = 0; i < squares.size(); i++) {
+
+            if(squares.get(i).identificadoresAlimentosNoQuadrado.isEmpty()){
+                count++;
+            }
+        }
+        if(alimentosArrayList.size() != count){
+            return false;
+        }
+        return true;
+    }
+
     public boolean verificaIdAlimentos(String alimento){
 
         String[][] alimentos = getFoodTypes();
@@ -153,7 +188,6 @@ public class GameManager {
 
         for (int i = 0; i < alimentos.length; i++) {
             alimentosArrayList.add(alimentos[i][0]);
-
         }
         if(alimentosArrayList.contains(alimento)){
 
