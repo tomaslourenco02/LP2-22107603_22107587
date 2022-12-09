@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import java.util.Objects;
+
 public class Jogador {
 
     int identificador; //Os IDs dos jogadores podem nÃƒÆ’Ã‚Â£o ser consecutivos, por exemplo J1 = 1, J2 = 3, J3 = 5;
@@ -46,19 +48,19 @@ public class Jogador {
         infoJogador[2] = especieDoJogador;
         infoJogador[3] = Integer.toString(energiaAtual);
 
-        if(especieDoJogador == "E"){
+        if(Objects.equals(especieDoJogador, "E")){
             infoJogador[4] = "1..6";
         }
-        if(especieDoJogador == "Z"){
+        if(Objects.equals(especieDoJogador, "Z")){
             infoJogador[4] = "1..6";
         }
-        if(especieDoJogador == "L"){
+        if(Objects.equals(especieDoJogador, "L")){
             infoJogador[4] = "4..6";
         }
-        if(especieDoJogador == "P"){
+        if(Objects.equals(especieDoJogador, "P")){
             infoJogador[4] = "5..6";
         }
-        if(especieDoJogador == "E"){
+        if(Objects.equals(especieDoJogador, "E")){
             infoJogador[4] = "1..3";
         }
         return infoJogador;
