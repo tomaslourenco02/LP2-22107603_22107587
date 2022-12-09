@@ -81,13 +81,24 @@ public class GameManager {
         jogoAcabou = false;
         count = 0;
 
+        if(foodsInfo == null || foodsInfo.length <= 0){
+            return new InitializationError("Erro na inicialização do terreno!");
+        }
+
 
         if (jungleSize < playersInfo.length * 2) {
-            return new InitializationError();
+            return new InitializationError("Erro na inicialização do terreno!");
         }
 
         if (!verificaJogadores(playersInfo)) {
-            return new InitializationError();
+            return new InitializationError("Erro na inicialização do terreno!");
+        }
+
+        for (int i = 0; i < foodsInfo.length; i++) {
+
+            if(!verificaIdAlimentos(foodsInfo[i][0])){
+                return new InitializationError("Erro na inicialização do terreno!");
+            }
         }
 
         tamanhoTabuleiro = jungleSize;
@@ -127,12 +138,28 @@ public class GameManager {
 
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
 
-        return null;
+        return createInitialJungle(jungleSize, playersInfo, null);
     }
 
     public String[] getCurrentPlayerEnergyInfo(int nrPositions){
 
         return null;
+    }
+
+    public boolean verificaIdAlimentos(String alimento){
+
+        String[][] alimentos = getFoodTypes();
+        ArrayList<String> alimentosArrayList = new ArrayList<>();
+
+        for (int i = 0; i < alimentos.length; i++) {
+            alimentosArrayList.add(alimentos[i][0]);
+
+        }
+        if(alimentosArrayList.contains(alimento)){
+
+            return true;
+        }
+        return false;
     }
 
     public boolean verificaEspecies(String especie) {
@@ -235,7 +262,7 @@ public class GameManager {
         return alimentos;
     }
 
-    public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
+    /*public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
 
         jogadores.clear();
         squares.clear();
@@ -292,7 +319,7 @@ public class GameManager {
             }
         }
         return true;
-    }
+    }*/
 
     public int[] getPlayerIds(int squareNr) {
         int[] idJogadores = new int[jogadores.size()];
