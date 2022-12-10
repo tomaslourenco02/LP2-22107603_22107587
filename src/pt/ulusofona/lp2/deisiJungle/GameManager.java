@@ -81,14 +81,6 @@ public class GameManager {
         jogoAcabou = false;
         count = 0;
 
-        if (!verificaJogadores(playersInfo)) {
-            return new InitializationError("Erro na inicialização do terreno!");
-        }
-
-        if (jungleSize < playersInfo.length * 2) {
-            return new InitializationError("Erro na inicialização do terreno!");
-        }
-
         /* for (int i = 0; i < foodsInfo.length; i++) {
             if(foodsInfo!=null) {
                 if (!verificaIdAlimentos(foodsInfo[i][0])) {
@@ -110,6 +102,14 @@ public class GameManager {
             }
         }
         */
+
+        if (!verificaJogadores(playersInfo)) {
+            return new InitializationError("Erro na inicialização do terreno!");
+        }
+
+        if (jungleSize < playersInfo.length * 2) {
+            return new InitializationError("Erro na inicialização do terreno!");
+        }
 
         tamanhoTabuleiro = jungleSize;
 
@@ -237,7 +237,6 @@ public class GameManager {
             if (!verificaEspecies(playersInfo[i][2])) {
                 return false;
             }
-
             if (playersInfo[i][0] == null) {
                 return false;
             }
