@@ -98,7 +98,7 @@ public class GameManager {
         }
 
         for (int i = 0; i < foodsInfo.length; i++) {
-            if(Integer.parseInt(foodsInfo[i][1])> squares.size() || Integer.parseInt(foodsInfo[i][1]) < 1){
+            if(Integer.parseInt(foodsInfo[i][1]) > squares.size() || Integer.parseInt(foodsInfo[i][1]) < 1){
                 return new InitializationError("Erro na inicialização do terreno!");
             }
         }
