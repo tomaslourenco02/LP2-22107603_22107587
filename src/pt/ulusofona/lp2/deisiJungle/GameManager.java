@@ -89,13 +89,13 @@ public class GameManager {
             return new InitializationError("Erro na inicialização do terreno!");
         }
 
-        for (int i = 0; i < foodsInfo.length; i++) {
+        /* for (int i = 0; i < foodsInfo.length; i++) {
             if(foodsInfo!=null) {
                 if (!verificaIdAlimentos(foodsInfo[i][0])) {
                     return new InitializationError("Erro na inicialização do terreno!");
                 }
             }
-        }
+        }*/
 
         for (int i = 0; i < foodsInfo.length; i++) {
             if(Integer.parseInt(foodsInfo[i][1]) > squares.size() || Integer.parseInt(foodsInfo[i][1]) < 1){
