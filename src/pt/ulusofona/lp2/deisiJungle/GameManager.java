@@ -103,12 +103,13 @@ public class GameManager {
             }
         }
 
-        for (int i = 0; i < foodsInfo.length; i++) {
+       /*
+       for (int i = 0; i < foodsInfo.length; i++) {
             if(!verificaPosicaoAlimentos()){
                 return new InitializationError("Erro na inicialização do terreno!");
             }
         }
-
+        */
         tamanhoTabuleiro = jungleSize;
 
         for (int i = 0; i < tamanhoTabuleiro; i++) {
@@ -125,8 +126,6 @@ public class GameManager {
                 squares.get(0).identificadoresAlimentosNoQuadrado.add(foodsInfo[i][0]); //NAO POSSO FAZER ISTO
             }
         }
-
-
         int menorID = 0;
 
         for (int i = 0; i < jogadores.size(); i++) {
@@ -140,7 +139,6 @@ public class GameManager {
                 }
             }
         }
-
         for (int i = 0; i < jogadores.size(); i++) {
             if (menorID == jogadores.get(i).getIdentificador()) {
                 jogadores.get(i).aJogar = true;
