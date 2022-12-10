@@ -81,35 +81,29 @@ public class GameManager {
         jogoAcabou = false;
         count = 0;
 
-        if(foodsInfo == null){
+        if (!verificaJogadores(playersInfo)) {
             return new InitializationError("Erro na inicialização do terreno!");
         }
-
 
         if (jungleSize < playersInfo.length * 2) {
             return new InitializationError("Erro na inicialização do terreno!");
         }
 
-        if (!verificaJogadores(playersInfo)) {
-            return new InitializationError("Erro na inicialização do terreno!");
-        }
-
         for (int i = 0; i < foodsInfo.length; i++) {
-
-            if(!verificaIdAlimentos(foodsInfo[i][0])){
-                return new InitializationError("Erro na inicialização do terreno!");
+            if(foodsInfo!=null) {
+                if (!verificaIdAlimentos(foodsInfo[i][0])) {
+                    return new InitializationError("Erro na inicialização do terreno!");
+                }
             }
         }
 
         for (int i = 0; i < foodsInfo.length; i++) {
-
             if(Integer.parseInt(foodsInfo[i][1])> squares.size() || Integer.parseInt(foodsInfo[i][1]) < 1){
                 return new InitializationError("Erro na inicialização do terreno!");
             }
         }
 
         for (int i = 0; i < foodsInfo.length; i++) {
-
             if(!verificaPosicaoAlimentos()){
                 return new InitializationError("Erro na inicialização do terreno!");
             }
@@ -173,7 +167,8 @@ public class GameManager {
 
         int posFinal = squares.size();
 
-        if(!(squares.get(0).identificadoresAlimentosNoQuadrado.isEmpty()) || !(squares.get(posFinal-1).identificadoresAlimentosNoQuadrado.isEmpty())) {
+        if(!(squares.get(0).identificadoresAlimentosNoQuadrado.isEmpty()) ||
+                !(squares.get(posFinal-1).identificadoresAlimentosNoQuadrado.isEmpty())) {
 
             return false;
         }
@@ -202,7 +197,6 @@ public class GameManager {
             alimentosArrayList.add(alimentos[i][0]);
         }
         if(alimentosArrayList.contains(alimento)){
-
             return true;
         }
         return false;
@@ -214,8 +208,7 @@ public class GameManager {
         ArrayList<String> especiesArrayList = new ArrayList<>();
 
         for (int i = 0; i < especies.length; i++) {
-            especiesArrayList.add(especies[i][0]);
-
+            especiesArrayList.add(especies[i][1]);
         }
         if (especiesArrayList.contains(especie)) {
             return true;
