@@ -81,7 +81,7 @@ public class GameManager {
         jogoAcabou = false;
         count = 0;
 
-        if(foodsInfo == null || foodsInfo.length <= 0){
+        if(foodsInfo == null){
             return new InitializationError("Erro na inicialização do terreno!");
         }
 
@@ -124,6 +124,10 @@ public class GameManager {
         for (int i = 0; i < playersInfo.length; i++) {
             if (squares != null) {
                 squares.get(0).identificadoresNoQuadrado.add(Integer.valueOf(playersInfo[i][0])); //NAO POSSO FAZER ISTO
+            }
+        }
+        for (int i = 0; i < foodsInfo.length; i++) {
+            if (squares != null) {
                 squares.get(0).identificadoresAlimentosNoQuadrado.add(foodsInfo[i][0]); //NAO POSSO FAZER ISTO
             }
         }
