@@ -95,7 +95,7 @@ public class GameManager {
                     return new InitializationError("Erro na inicialização do terreno!");
                 }
             }
-        }*/
+        }
 
         for (int i = 0; i < foodsInfo.length; i++) {
             if(Integer.parseInt(foodsInfo[i][1]) > squares.size() || Integer.parseInt(foodsInfo[i][1]) < 1){
@@ -103,13 +103,14 @@ public class GameManager {
             }
         }
 
-       /*
+
        for (int i = 0; i < foodsInfo.length; i++) {
             if(!verificaPosicaoAlimentos()){
                 return new InitializationError("Erro na inicialização do terreno!");
             }
         }
         */
+
         tamanhoTabuleiro = jungleSize;
 
         for (int i = 0; i < tamanhoTabuleiro; i++) {
