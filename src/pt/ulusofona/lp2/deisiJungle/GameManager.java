@@ -530,7 +530,7 @@ public class GameManager {
                 countJogadores++;
                 if (countJogadores > jogadores.size() - 1) {
                     countJogadores = 0;
-                }return null;}
+                }return new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Erro");}
         }
         ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
 
@@ -571,14 +571,14 @@ public class GameManager {
                         }
                     }
                 }
-                return null;
+                return new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Erro");
             }
         }
         countJogadores++;
         if (countJogadores > jogadores.size() - 1) {
             countJogadores = 0;
         }
-        return null;
+        return new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Erro");
     }
 
     public int[] ordenarPosicoes() {
