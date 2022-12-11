@@ -273,7 +273,7 @@ public class GameManager {
     }
 
     int count = 0;
-    
+
     public String[][] getFoodTypes(){
       String[][] alimentos = new String[5][3];
 
@@ -526,7 +526,7 @@ public class GameManager {
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
 
         if (!bypassValidations) {
-            if (nrSquares <= 0 || nrSquares > 6) {
+            if (nrSquares <= -6 || nrSquares > 6) {
                 countJogadores++;
                 if (countJogadores > jogadores.size() - 1) {
                     countJogadores = 0;
