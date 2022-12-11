@@ -95,7 +95,7 @@ public class GameManager {
                     return new InitializationError("Erro na inicialização do terreno!");
                 }
                 if(foodsInfo[i][1].matches("[0-9]*")) {
-                    if (Integer.parseInt(foodsInfo[i][1]) > jungleSize || Integer.parseInt(foodsInfo[i][1]) <= 1) {
+                    if (Integer.parseInt(foodsInfo[i][1]) >= jungleSize || Integer.parseInt(foodsInfo[i][1]) <= 1) {
                         return new InitializationError("Erro na inicialização do terreno!");
                     }
                 }
