@@ -23,4 +23,25 @@ public class Especie {
         this.velocidade = velocidade;
         this.tipo = tipo;
     }
+
+    public Especie() {}
+
+    public Especie definirEspecie(String idEspecie) {
+        if(!idEspecie.equals(null)) {
+            if (idEspecie.equals("E")) {
+                return new Elefante("E", "Elefante", "elephant.png", 180, 4, 10, "1..6", "Herbívoro");
+            }
+            if (idEspecie.equals("L")) {
+                return new Leao("L", "Leão", "lion.png", 80, 2, 10, "4..6", "Carnívoro");
+            }
+            if (idEspecie.equals("P")) {
+                return new Passaro("P", "Pássaro", "bird.png", 70, 4, 50, "5..6", "Omnívoro");
+            }
+            if (idEspecie.equals("T")) {
+                return new Tartaruga("T", "Tartaruga", "turtle.png", 150, 1, 5, "1..3", "Carnívoro");
+            }
+            return new Tarzan("Z", "Tarzan", "tarzan.png", 70, 2, 20, "1..6", "Omnívoro");
+        }
+        return new Especie();
+    }
 }

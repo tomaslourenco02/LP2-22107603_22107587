@@ -15,14 +15,21 @@ public class Jogador {
     int nrCasasMovimentou = 0;
     int nrAlimentosIngeridos = 0;
 
-    public Jogador(int identificador, String nome, String especieDoJogador, int energiaAtual) {
+    Especie especie = new Especie();
+
+    public Jogador(int identificador, String nome, String especieDoJogador) {
         this.identificador = identificador;
         this.nome = nome;
         this.especieDoJogador = especieDoJogador;
-        this.energiaAtual = energiaAtual;
+        this.especie = setEspecie(especieDoJogador);
+        this.energiaAtual = especie.energiaInicial;
         posicaoAtual = 1;
     }
 
+
+    public Especie setEspecie(String especieDoJogador) {
+        return especie.definirEspecie(especieDoJogador);
+    }
 
     public int getIdentificador() {
         return identificador;

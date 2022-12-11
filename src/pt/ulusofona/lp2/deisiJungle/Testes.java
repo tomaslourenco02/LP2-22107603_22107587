@@ -38,10 +38,8 @@ public class Testes {
 
         String[][] comida = {comida1, comida2,comida3};
 
-        System.out.println(gamemaneger.createInitialJungle(14,jogadores,null));
-
-        System.out.println(gamemaneger.createInitialJungle(9,jogadores,comida));
-        System.out.println(gamemaneger.createInitialJungle(10, jogadores));
+        gamemaneger.createInitialJungle(9,jogadores,comida);
+        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
 
 }
 }
