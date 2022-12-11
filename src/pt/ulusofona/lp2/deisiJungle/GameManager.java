@@ -90,7 +90,10 @@ public class GameManager {
         }
         if(foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
-                if (Integer.parseInt(foodsInfo[i][1]) > jungleSize || Integer.parseInt(foodsInfo[i][1]) < 1) {
+                if(foodsInfo[i][1].matches("[0-9]*")) {
+                    if (Integer.parseInt(foodsInfo[i][1]) > jungleSize || Integer.parseInt(foodsInfo[i][1]) < 1) {
+                        return new InitializationError("Erro na inicialização do terreno!");
+                    }
                     return new InitializationError("Erro na inicialização do terreno!");
                 }
             }
@@ -154,11 +157,6 @@ public class GameManager {
         return createInitialJungle(jungleSize, playersInfo, null);
     }
 
-    public String[] getCurrentPlayerEnergyInfo(int nrPositions){
-
-        return null;
-    }
-
     public boolean verificaPosicaoAlimentos(){
 
         String[][] alimentos = getFoodTypes();
@@ -190,15 +188,15 @@ public class GameManager {
 
     public boolean verificaIdAlimentos(String alimento){
 
-        String[][] alimentos = getFoodTypes();
-        ArrayList<String> alimentosArrayList = new ArrayList<>();
+            String[][] alimentos = getFoodTypes();
+            ArrayList<String> alimentosArrayList = new ArrayList<>();
 
-        for (int i = 0; i < alimentos.length; i++) {
-            alimentosArrayList.add(alimentos[i][0]);
-        }
-        if(alimentosArrayList.contains(alimento)){
-            return true;
-        }
+            for (int i = 0; i < alimentos.length; i++) {
+                alimentosArrayList.add(alimentos[i][0]);
+            }
+            if (alimentosArrayList.contains(alimento)) {
+                return true;
+            }
         return false;
     }
 
@@ -456,6 +454,12 @@ public class GameManager {
             }
         }
         return infoJogadorAtual;
+    }
+
+    public String[] getCurrentPlayerEnergyInfo(int nrPositions){
+        String[] energyInfo = new String[2];
+
+        return null;
     }
 
     //EXTRA ORDENAR IDS

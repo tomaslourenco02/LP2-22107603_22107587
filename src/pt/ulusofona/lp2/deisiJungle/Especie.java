@@ -40,8 +40,10 @@ public class Especie {
             if (idEspecie.equals("T")) {
                 return new Tartaruga("T", "Tartaruga", "turtle.png", 150, 1, 5, "1..3", "Carnívoro");
             }
-            return new Tarzan("Z", "Tarzan", "tarzan.png", 70, 2, 20, "1..6", "Omnívoro");
+            if(idEspecie.equals("Z")) {
+                return new Tarzan("Z", "Tarzan", "tarzan.png", 70, 2, 20, "1..6", "Omnívoro");
+            }
         }
-        return new Especie();
+        return null;
     }
 }
