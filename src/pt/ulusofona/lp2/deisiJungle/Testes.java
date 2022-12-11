@@ -32,9 +32,9 @@ public class Testes {
 
         String[][] jogadores = {jogador1, jogador2,jogador3,jogador4};
 
-        String[] comida1 = {"b", "w"};
+        String[] comida1 = {"b", String.valueOf(6)};
         String[] comida2 = {"b", String.valueOf(7)};
-        String[] comida3 = {"a", String.valueOf(1)};
+        String[] comida3 = {"a", String.valueOf(4)};
 
         String[][] comida = {comida1, comida2,comida3};
 
