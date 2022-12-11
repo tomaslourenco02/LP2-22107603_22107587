@@ -88,16 +88,17 @@ public class GameManager {
                 }
             }
         }
+
         if(foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
                 if(foodsInfo[i][1].matches("[0-9]*")) {
                     if (Integer.parseInt(foodsInfo[i][1]) > jungleSize || Integer.parseInt(foodsInfo[i][1]) < 1) {
                         return new InitializationError("Erro na inicialização do terreno!");
                     }
-                    return new InitializationError("Erro na inicialização do terreno!");
                 }
             }
         }
+
         if (!verificaJogadores(playersInfo)) {
             return new InitializationError("Erro na inicialização do terreno!");
         }
