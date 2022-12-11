@@ -81,7 +81,11 @@ public class GameManager {
         jogoAcabou = false;
         count = 0;
 
-        /* for (int i = 0; i < foodsInfo.length; i++) {
+        if(foodsInfo == null){
+            return new InitializationError("Erro na inicialização do terreno!");
+        }
+
+        for (int i = 0; i < foodsInfo.length; i++) {
             if(foodsInfo!=null) {
                 if (!verificaIdAlimentos(foodsInfo[i][0])) {
                     return new InitializationError("Erro na inicialização do terreno!");
@@ -95,13 +99,11 @@ public class GameManager {
             }
         }
 
-
        for (int i = 0; i < foodsInfo.length; i++) {
             if(!verificaPosicaoAlimentos()){
                 return new InitializationError("Erro na inicialização do terreno!");
             }
         }
-        */
 
         if (!verificaJogadores(playersInfo)) {
             return new InitializationError("Erro na inicialização do terreno!");
