@@ -273,7 +273,7 @@ public class GameManager {
     }
 
     int count = 0;
-
+    
     public String[][] getFoodTypes(){
       String[][] alimentos = new String[5][3];
 
@@ -578,7 +578,7 @@ public class GameManager {
         if (countJogadores > jogadores.size() - 1) {
             countJogadores = 0;
         }
-        return new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Erro");
+        return new MovementResult(MovementResultCode.VALID_MOVEMENT, "Erro");
     }
 
     public int[] ordenarPosicoes() {
