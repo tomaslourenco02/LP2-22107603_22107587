@@ -207,7 +207,7 @@ public class GameManager {
         ArrayList<String> especiesArrayList = new ArrayList<>();
 
         for (int i = 0; i < especies.length; i++) {
-            especiesArrayList.add(especies[i][1]);
+            especiesArrayList.add(especies[i][0]);
         }
         if (especiesArrayList.contains(especie)) {
             return true;
