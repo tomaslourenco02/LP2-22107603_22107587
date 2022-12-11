@@ -99,11 +99,11 @@ public class GameManager {
             }
         }
 
-       for (int i = 0; i < foodsInfo.length; i++) {
+       /*for (int i = 0; i < foodsInfo.length; i++) {
             if(!verificaPosicaoAlimentos()){
                 return new InitializationError("Erro na inicialização do terreno!");
             }
-        }
+        }*/
 
         if (!verificaJogadores(playersInfo)) {
             return new InitializationError("Erro na inicialização do terreno!");
