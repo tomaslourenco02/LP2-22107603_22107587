@@ -32,14 +32,13 @@ public class Testes {
 
         String[][] jogadores = {jogador1, jogador2,jogador3,jogador4};
 
-        String[] comida1 = {"b", String.valueOf(9)};
-        String[] comida2 = {"c", String.valueOf(2)};
-        String[] comida3 = {"m", String.valueOf(1)};
+        String[] comida1 = {"b", "4"};
+        String[] comida2 = {"c", "2"};
+        String[] comida3 = {"m", "1"};
 
         String[][] comida = {comida1, comida2,comida3};
 
-        gamemaneger.createInitialJungle(9,jogadores,comida);
-        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
+        System.out.println(gamemaneger.createInitialJungle(9,jogadores,comida));
 
 }
 }
