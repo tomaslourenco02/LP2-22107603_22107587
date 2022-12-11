@@ -493,11 +493,11 @@ public class GameManager {
     public boolean verificaEnergia() {
 
         for (int i = 0; i < jogadores.size(); i++) {
-            if (jogadores.get(i).getEnergiaAtual() >= 2) {
-                return true;
+            if (jogadores.get(i).getEnergiaAtual() > 200) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     public ArrayList<Jogador> ordenarJogadores() {
@@ -530,7 +530,7 @@ public class GameManager {
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
 
         if (!bypassValidations) {
-            if (nrSquares <= -6 || nrSquares > 6) {
+            if (nrSquares <= -6 || nrSquares >= 6) {
                 countJogadores++;
                 if (countJogadores > jogadores.size() - 1) {
                     countJogadores = 0;
