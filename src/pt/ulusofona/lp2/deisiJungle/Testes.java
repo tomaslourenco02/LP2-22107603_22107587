@@ -32,14 +32,16 @@ public class Testes {
 
         String[][] jogadores = {jogador1, jogador2,jogador3,jogador4};
 
-        String[] comida1 = {"b", String.valueOf(4)};
+        String[] comida1 = {"b", String.valueOf(9)};
         String[] comida2 = {"c", String.valueOf(2)};
         String[] comida3 = {"m", String.valueOf(1)};
 
         String[][] comida = {comida1, comida2,comida3};
 
+        System.out.println(gamemaneger.createInitialJungle(14,jogadores,null));
+
         System.out.println(gamemaneger.createInitialJungle(9,jogadores,comida));
-        System.out.println(gamemaneger.createInitialJungle(11, jogadores));
+        System.out.println(gamemaneger.createInitialJungle(10, jogadores));
 
 }
 }
