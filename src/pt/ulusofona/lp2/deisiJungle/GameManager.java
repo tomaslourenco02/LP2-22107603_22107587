@@ -546,7 +546,7 @@ public class GameManager {
                 if (countJogadores > jogadores.size() - 1) {
                     countJogadores = 0;
                 }
-                return new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Erro");
+                return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
             }
         }
         ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
@@ -574,12 +574,12 @@ public class GameManager {
                 }
 
                 if (posDestinoParaTras < 1) {
-                    return new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Erro");
+                    return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
                 }
                 if ((squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).energiaAtual) - gastaEnergia(
                         squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).especie.energiaInicial), nrSquares)) < 0) {
 
-                    return new MovementResult(MovementResultCode.NO_ENERGY, "Sem energia");
+                    return new MovementResult(MovementResultCode.NO_ENERGY, null);
                 }
 
                 squares.get(posJogador).identificadoresNoQuadrado.remove(Integer.valueOf(jogadoresOrdenados.get(countJogadores).identificador));
@@ -616,14 +616,14 @@ public class GameManager {
                         }
                     }
                 }*/
-                return new MovementResult(MovementResultCode.VALID_MOVEMENT, "Erro");
+                return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
             }
         }
         countJogadores++;
         if (countJogadores > jogadores.size() - 1) {
             countJogadores = 0;
         }
-        return new MovementResult(MovementResultCode.VALID_MOVEMENT, "Sucesso");
+        return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
     }
 
     public int[] ordenarPosicoes() {
