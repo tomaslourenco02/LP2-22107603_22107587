@@ -23,25 +23,40 @@ public class Testes {
     }*/
 
     @org.junit.Test
-    public void testGetPlayersIds(){
+    public void testGetPlayersIds() {
         GameManager gamemaneger = new GameManager();
         String[] jogador1 = {"4", "Joao", "E"};
         String[] jogador2 = {"5", "Miguel", "L"};
         String[] jogador3 = {"1", "José", "Z"};
         String[] jogador4 = {"90", "Ana", "P"};
 
-        String[][] jogadores = {jogador1, jogador2,jogador3,jogador4};
+        String[][] jogadores = {jogador1, jogador2, jogador3, jogador4};
 
         String[] comida1 = {"b", String.valueOf(6)};
-        String[] comida2 = {"b", String.valueOf(7)};
-        String[] comida3 = {"a", String.valueOf(9)};
+        String[] comida2 = {"c", String.valueOf(7)};
+        String[] comida3 = {"a", String.valueOf(4)};
 
-        String[][] comida = {comida1, comida2,comida3};
+        String[][] comida = {comida1, comida2, comida3};
 
-        System.out.println(gamemaneger.createInitialJungle(9,jogadores,comida));
+        System.out.println(gamemaneger.createInitialJungle(9, jogadores, comida));
+    }
+
+    @Test
+    public void testMove(){
+
+        GameManager gamemaneger = new GameManager();
+        String[] jogador1 = {"4", "Joao", "E"};
+        String[] jogador2 = {"5", "Miguel", "L"};
+
+        String[][] jogadores = {jogador1, jogador2};
 
 
-}
+        gamemaneger.createInitialJungle(5, jogadores);
+        gamemaneger.moveCurrentPlayer(2,false);
+        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(2)));
+
+
+    }
 }
 
     /*@org.junit.Test

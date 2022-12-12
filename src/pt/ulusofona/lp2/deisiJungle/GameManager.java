@@ -573,8 +573,11 @@ public class GameManager {
                     }
                 }
 
-                if (posDestinoParaTras < 1) {
-                    return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
+                if (nrSquares < 0) {
+
+                    if (posDestinoParaTras < 1) {
+                        return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
+                    }
                 }
                 if ((squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).energiaAtual) - gastaEnergia(
                         squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).especie.energiaInicial), nrSquares)) < 0) {
