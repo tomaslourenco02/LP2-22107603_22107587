@@ -18,8 +18,8 @@ public class GameManager {
     int tamanhoTabuleiro = 0;
     boolean jogoAcabou = false;
 
-    public static int getRandomInteger(int max, int min){  // retorna um numero random entre 1 e 6 caso 1_min e 6_max
-        return ((int) (Math.random()*(max - min))) + min;
+    public static int getRandomInteger(int max, int min) {  // retorna um numero random entre 1 e 6 caso 1_min e 6_max
+        return ((int) (Math.random() * (max - min))) + min;
     }
 
     public String[][] getSpecies() {
@@ -31,25 +31,25 @@ public class GameManager {
         especies[0][0] = "E";
         especies[0][1] = "Elefante";
         especies[0][2] = "elephant.png";
-        especies[0][3] =  String.valueOf(180);
-        especies[0][4] =  String.valueOf(4);
-        especies[0][5] =  String.valueOf(10);
+        especies[0][3] = String.valueOf(180);
+        especies[0][4] = String.valueOf(4);
+        especies[0][5] = String.valueOf(10);
         especies[0][6] = "1..6";
 
         especies[1][0] = "L";
         especies[1][1] = "Leão";
         especies[1][2] = "lion.png";
-        especies[1][3] =  String.valueOf(80);
-        especies[1][4] =  String.valueOf(2);
-        especies[1][5] =  String.valueOf(10);
+        especies[1][3] = String.valueOf(80);
+        especies[1][4] = String.valueOf(2);
+        especies[1][5] = String.valueOf(10);
         especies[1][6] = "4..6";
 
         especies[2][0] = "T";
         especies[2][1] = "Tartaruga";
         especies[2][2] = "turtle.png";
-        especies[2][3] =  String.valueOf(150);
-        especies[2][4] =  String.valueOf(1);
-        especies[2][5] =  String.valueOf(5);
+        especies[2][3] = String.valueOf(150);
+        especies[2][4] = String.valueOf(1);
+        especies[2][5] = String.valueOf(5);
         especies[2][6] = "1..3";
 
         especies[3][0] = "P";
@@ -71,7 +71,7 @@ public class GameManager {
         return especies;
     }
 
-    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo){
+    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo) {
         jogadores.clear();
         squares.clear();
         countJogadores = 0;
@@ -89,12 +89,12 @@ public class GameManager {
             }
         }
 
-        if(foodsInfo != null) {
+        if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
-                if(foodsInfo[i][1].matches("[a-zA-Z]+")){
+                if (foodsInfo[i][1].matches("[a-zA-Z]+")) {
                     return new InitializationError("Erro na inicialização do terreno!");
                 }
-                if(foodsInfo[i][1].matches("[0-9]*")) {
+                if (foodsInfo[i][1].matches("[0-9]*")) {
                     if (Integer.parseInt(foodsInfo[i][1]) >= jungleSize || Integer.parseInt(foodsInfo[i][1]) <= 1) {
                         return new InitializationError("Erro na inicialização do terreno!");
                     }
@@ -156,12 +156,12 @@ public class GameManager {
         return null;
     }
 
-    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
+    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo) {
 
         return createInitialJungle(jungleSize, playersInfo, null);
     }
 
-    public boolean verificaPosicaoAlimentos(){
+    public boolean verificaPosicaoAlimentos() {
 
         String[][] alimentos = getFoodTypes();
         ArrayList<String> alimentosArrayList = new ArrayList<>();
@@ -169,8 +169,8 @@ public class GameManager {
 
         int posFinal = squares.size();
 
-        if(!(squares.get(0).identificadoresAlimentosNoQuadrado.isEmpty()) ||
-                !(squares.get(posFinal-1).identificadoresAlimentosNoQuadrado.isEmpty())) {
+        if (!(squares.get(0).identificadoresAlimentosNoQuadrado.isEmpty()) ||
+                !(squares.get(posFinal - 1).identificadoresAlimentosNoQuadrado.isEmpty())) {
 
             return false;
         }
@@ -180,27 +180,27 @@ public class GameManager {
         }
         for (int i = 0; i < squares.size(); i++) {
 
-            if(squares.get(i).identificadoresAlimentosNoQuadrado.isEmpty()){
+            if (squares.get(i).identificadoresAlimentosNoQuadrado.isEmpty()) {
                 count++;
             }
         }
-        if(alimentosArrayList.size() != count){
+        if (alimentosArrayList.size() != count) {
             return false;
         }
         return true;
     }
 
-    public boolean verificaIdAlimentos(String alimento){
+    public boolean verificaIdAlimentos(String alimento) {
 
-            String[][] alimentos = getFoodTypes();
-            ArrayList<String> alimentosArrayList = new ArrayList<>();
+        String[][] alimentos = getFoodTypes();
+        ArrayList<String> alimentosArrayList = new ArrayList<>();
 
-            for (int i = 0; i < alimentos.length; i++) {
-                alimentosArrayList.add(alimentos[i][0]);
-            }
-            if (alimentosArrayList.contains(alimento)) {
-                return true;
-            }
+        for (int i = 0; i < alimentos.length; i++) {
+            alimentosArrayList.add(alimentos[i][0]);
+        }
+        if (alimentosArrayList.contains(alimento)) {
+            return true;
+        }
         return false;
     }
 
@@ -276,8 +276,8 @@ public class GameManager {
 
     int count = 0;
 
-    public String[][] getFoodTypes(){
-      String[][] alimentos = new String[5][3];
+    public String[][] getFoodTypes() {
+        String[][] alimentos = new String[5][3];
 
         alimentos[0][0] = "e";
         alimentos[0][1] = "Erva";
@@ -460,7 +460,7 @@ public class GameManager {
         return infoJogadorAtual;
     }
 
-    public String[] getCurrentPlayerEnergyInfo(int nrPositions){
+    public String[] getCurrentPlayerEnergyInfo(int nrPositions) {
         String[] energyInfo = new String[2];
 
         return null;
@@ -520,30 +520,40 @@ public class GameManager {
         return jogadoresOrdenados;
     }
 
-    public boolean saveGame(File file){
+    public boolean saveGame(File file) {
 
         return true;
     }
 
-    public boolean loadGame(File file){
+    public boolean loadGame(File file) {
 
         return true;
+    }
+
+    public int gastaEnergia(int consumoEnergia, int nrSquares){
+
+        int energiaFinal = consumoEnergia * nrSquares;
+
+        return energiaFinal;
     }
 
 
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
 
         if (!bypassValidations) {
-            if (nrSquares <= -6 || nrSquares >= 6) {
+            if (nrSquares < -6 || nrSquares > 6) {
                 countJogadores++;
                 if (countJogadores > jogadores.size() - 1) {
                     countJogadores = 0;
-                }return new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Erro");}
+                }
+                return new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Erro");
+            }
         }
         ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
 
         int posJogador = jogadoresOrdenados.get(countJogadores).getPosicaoAtual();
         int posDestino = posJogador + nrSquares;
+        int posDestinoParaTras = posJogador - nrSquares;
 
         if (verificaEnergia() || posDestino < tamanhoTabuleiro) {
             if (jogoAcabou == false) {
@@ -553,17 +563,34 @@ public class GameManager {
                     jogoAcabou = true;
                 }
 
+                if(posDestinoParaTras < 1){
+                    return new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Erro");
+                }
+                if((squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).energiaAtual) - gastaEnergia(
+                        squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).especie.energiaInicial), nrSquares)) < 0){
+
+                    return new MovementResult(MovementResultCode.NO_ENERGY, "Sem energia");
+                }
+
                 squares.get(posJogador).identificadoresNoQuadrado.remove(Integer.valueOf(jogadoresOrdenados.get(countJogadores).identificador));
                 squares.get(posDestino - 1).identificadoresNoQuadrado.add(jogadoresOrdenados.get(countJogadores).identificador);
 
                 jogadoresOrdenados.get(countJogadores).posicaoAtual = posDestino;
 
-                jogadoresOrdenados.get(countJogadores).energiaAtual -= 2;
+                jogadoresOrdenados.get(countJogadores).energiaAtual -= gastaEnergia((jogadoresOrdenados.get(countJogadores).especie.consumoEnergia), nrSquares);
 
-                if (jogadoresOrdenados.get(countJogadores).getEnergiaAtual() < 2) {jogadoresSemEnergia++;}
-                if (!jogoAcabou) {countJogadores++;}
-                if (countJogadores > jogadores.size() - 1) {countJogadores = 0;}
-                if (jogadoresSemEnergia == jogadores.size()) {
+                /*if (jogadoresOrdenados.get(countJogadores).getEnergiaAtual() < 2) {
+                    jogadoresSemEnergia++;
+                }*/
+                if (!jogoAcabou) {
+                    countJogadores++;
+                }
+                if (countJogadores > jogadores.size() - 1) {
+                    countJogadores = 0;
+                }
+
+
+                /*if (jogadoresSemEnergia == jogadores.size()) {
                     jogoAcabou = true;
 
                     for (int i = tamanhoTabuleiro - 1; i > 0; i--) {
@@ -578,7 +605,7 @@ public class GameManager {
                             }
                         }
                     }
-                }
+                }*/
                 return new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Erro");
             }
         }
@@ -586,7 +613,7 @@ public class GameManager {
         if (countJogadores > jogadores.size() - 1) {
             countJogadores = 0;
         }
-        return new MovementResult(MovementResultCode.VALID_MOVEMENT, "Erro");
+        return new MovementResult(MovementResultCode.VALID_MOVEMENT, "Sucesso");
     }
 
     public int[] ordenarPosicoes() {
