@@ -530,7 +530,7 @@ public class GameManager {
         return true;
     }
 
-    public int gastaEnergia(int consumoEnergia, int nrSquares){
+    public int gastaEnergia(int consumoEnergia, int nrSquares) {
 
         int energiaFinal = consumoEnergia * nrSquares;
 
@@ -563,11 +563,21 @@ public class GameManager {
                     jogoAcabou = true;
                 }
 
-                if(posDestinoParaTras < 1){
+                if (nrSquares == 0) { //descanso
+
+                    if (!(jogadoresOrdenados.get(countJogadores).energiaAtual + jogadoresOrdenados.get(countJogadores).especie.ganhoEnergiaEmDescanso > 200)) {
+
+                        jogadoresOrdenados.get(countJogadores).energiaAtual = 200;
+                    } else {
+                        jogadoresOrdenados.get(countJogadores).energiaAtual += jogadoresOrdenados.get(countJogadores).especie.ganhoEnergiaEmDescanso;
+                    }
+                }
+
+                if (posDestinoParaTras < 1) {
                     return new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Erro");
                 }
-                if((squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).energiaAtual) - gastaEnergia(
-                        squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).especie.energiaInicial), nrSquares)) < 0){
+                if ((squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).energiaAtual) - gastaEnergia(
+                        squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).especie.energiaInicial), nrSquares)) < 0) {
 
                     return new MovementResult(MovementResultCode.NO_ENERGY, "Sem energia");
                 }
@@ -606,7 +616,7 @@ public class GameManager {
                         }
                     }
                 }*/
-                return new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Erro");
+                return new MovementResult(MovementResultCode.VALID_MOVEMENT, "Erro");
             }
         }
         countJogadores++;
