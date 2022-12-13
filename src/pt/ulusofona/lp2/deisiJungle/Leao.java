@@ -10,6 +10,13 @@ public class Leao extends Especie{
         return Especie.getRandomNrSquare(7,4); //o dado tem os lados 4,5,6
     }
 
+    public void movimentoPossivel(){
+        nrSquaresPossiveis = new int[3];
+        nrSquaresPossiveis[0] = 4;
+        nrSquaresPossiveis[1] = 5;
+        nrSquaresPossiveis[2] = 6;
+    }
+
     public String getIdentificador() {
         return identificador;
     }

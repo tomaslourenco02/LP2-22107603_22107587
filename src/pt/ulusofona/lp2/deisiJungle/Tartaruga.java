@@ -10,6 +10,13 @@ public class Tartaruga extends Especie{
         return Especie.getRandomNrSquare(4,1); //o dado tem os lados 1,2,3
     }
 
+    public void movimentoPossivel(){
+        nrSquaresPossiveis = new int[3];
+        nrSquaresPossiveis[0] = 1;
+        nrSquaresPossiveis[1] = 2;
+        nrSquaresPossiveis[2] = 3;
+    }
+
     public String getIdentificador() {
         return identificador;
     }

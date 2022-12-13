@@ -12,6 +12,7 @@ public class Especie {
     protected int ganhoEnergiaEmDescanso;
     protected String velocidade;
     protected String tipo;
+    protected int[] nrSquaresPossiveis;
 
     public Especie(String identificador, String nome, String imagem, int energiaInicial, int consumoEnergia, int ganhoEnergiaEmDescanso, String velocidade, String tipo) {
         this.identificador = identificador;

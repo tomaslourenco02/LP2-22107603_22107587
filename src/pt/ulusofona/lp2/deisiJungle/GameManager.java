@@ -535,7 +535,6 @@ public class GameManager {
 
 
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
-
         if (!bypassValidations) {
             if (nrSquares < -6 || nrSquares > 6) {
                 countJogadores++;
@@ -546,6 +545,7 @@ public class GameManager {
             }
         }
         ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
+        Jogador jogadorAJogar = jogadoresOrdenados.get(countJogadores);
 
         int posJogador = jogadoresOrdenados.get(countJogadores).getPosicaoAtual();
         int posDestino = posJogador + nrSquares;
@@ -567,18 +567,26 @@ public class GameManager {
                     }
                 }
 
-                if ((squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).energiaAtual) - gastaEnergia(
-                        squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).especie.energiaInicial), nrSquares)) < 0) {
+                for (int i = 0; i < squares.size(); i++) { //energia
+                    for (int j = 0; j < squares.get(i).identificadoresNoQuadrado.size(); j++) {
+                        if(squares.get(i).identificadoresNoQuadrado.get(j) == jogadorAJogar.identificador){
+                            int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
+                            if(jogadorAJogar.energiaAtual - energiaGasta < 0){
+                                return new MovementResult(MovementResultCode.NO_ENERGY, null);
+                            }
+                            squares.get(i).identificadoresNoQuadrado.remove(jogadorAJogar.identificador);
+                            squares.get(posDestino-1).identificadoresNoQuadrado.add(jogadorAJogar.identificador);
+                            jogadorAJogar.posicaoAtual = posDestino;
+                            jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
 
-                    return new MovementResult(MovementResultCode.NO_ENERGY, null);
+                        }
+                    }
                 }
 
-                squares.get(posJogador).identificadoresNoQuadrado.remove(Integer.valueOf(jogadoresOrdenados.get(countJogadores).identificador));
-                squares.get(posDestino - 1).identificadoresNoQuadrado.add(jogadoresOrdenados.get(countJogadores).identificador);
-
-                jogadoresOrdenados.get(countJogadores).posicaoAtual = posDestino;
-
-                jogadoresOrdenados.get(countJogadores).energiaAtual -= gastaEnergia((jogadoresOrdenados.get(countJogadores).especie.consumoEnergia), nrSquares);
+               /* if ((squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).energiaAtual) - gastaEnergia(
+                        squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).especie.energiaInicial), nrSquares)) < 0) {
+                    return new MovementResult(MovementResultCode.NO_ENERGY, null);
+                } */
 
                 /*if (jogadoresOrdenados.get(countJogadores).getEnergiaAtual() < 2) {
                     jogadoresSemEnergia++;
