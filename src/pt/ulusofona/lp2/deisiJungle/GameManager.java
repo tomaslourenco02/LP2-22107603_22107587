@@ -574,11 +574,10 @@ public class GameManager {
                             if(jogadorAJogar.energiaAtual - energiaGasta < 0){
                                 return new MovementResult(MovementResultCode.NO_ENERGY, null);
                             }
-                            squares.get(i).identificadoresNoQuadrado.remove(jogadorAJogar.identificador);
+                            squares.get(i).identificadoresNoQuadrado.remove(Integer.valueOf(jogadorAJogar.identificador));
                             squares.get(posDestino-1).identificadoresNoQuadrado.add(jogadorAJogar.identificador);
                             jogadorAJogar.posicaoAtual = posDestino;
                             jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
-
                         }
                     }
                 }
@@ -615,6 +614,7 @@ public class GameManager {
                         }
                     }
                 }*/
+
                 return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
             }
         }
