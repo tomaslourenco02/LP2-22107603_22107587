@@ -18,10 +18,6 @@ public class GameManager {
     int tamanhoTabuleiro = 0;
     boolean jogoAcabou = false;
 
-    public static int getRandomInteger(int max, int min) {  // retorna um numero random entre 1 e 6 caso 1_min e 6_max
-        return ((int) (Math.random() * (max - min))) + min;
-    }
-
     public String[][] getSpecies() {
 
         String[][] especies = new String[5][7];
@@ -553,9 +549,9 @@ public class GameManager {
 
         int posJogador = jogadoresOrdenados.get(countJogadores).getPosicaoAtual();
         int posDestino = posJogador + nrSquares;
-        int posDestinoParaTras = posJogador - nrSquares;
+        // int posDestinoParaTras = posJogador - nrSquares;
 
-        if (verificaEnergia() || posDestino < tamanhoTabuleiro) {
+        if (verificaEnergia() && posDestino <= tamanhoTabuleiro && posDestino >= 1) {
             if (jogoAcabou == false) {
                 if (posDestino >= tamanhoTabuleiro) {
                     posDestino = tamanhoTabuleiro;
@@ -564,18 +560,13 @@ public class GameManager {
                 }
 
                 if (nrSquares == 0) { //descanso
-
-                    if (!(jogadoresOrdenados.get(countJogadores).energiaAtual + jogadoresOrdenados.get(countJogadores).especie.ganhoEnergiaEmDescanso > 200)) {
-
+                    if (!(jogadoresOrdenados.get(countJogadores).getEnergiaAtual() + jogadoresOrdenados.get(countJogadores).especie.ganhoEnergiaEmDescanso > 200)) {
                         jogadoresOrdenados.get(countJogadores).energiaAtual = 200;
                     } else {
                         jogadoresOrdenados.get(countJogadores).energiaAtual += jogadoresOrdenados.get(countJogadores).especie.ganhoEnergiaEmDescanso;
                     }
                 }
 
-                if (posDestinoParaTras < 1) {
-                    return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
-                }
                 if ((squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).energiaAtual) - gastaEnergia(
                         squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).especie.energiaInicial), nrSquares)) < 0) {
 
@@ -623,7 +614,7 @@ public class GameManager {
         if (countJogadores > jogadores.size() - 1) {
             countJogadores = 0;
         }
-        return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
+        return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
     }
 
     public int[] ordenarPosicoes() {

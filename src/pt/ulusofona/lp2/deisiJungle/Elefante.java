@@ -6,6 +6,10 @@ public class Elefante extends Especie{
         super("E", "Elefante", "elephant.png", 180, 4, 10, "1..6", "Herbívoro");
     }
 
+    public static int dado(){
+        return Especie.getRandomNrSquare(7,1); //o dado tem os lados 1,2,3,4,5,6
+    }
+
     public String getIdentificador() {
         return identificador;
     }

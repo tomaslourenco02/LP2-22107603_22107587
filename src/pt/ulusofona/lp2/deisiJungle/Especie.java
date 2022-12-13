@@ -26,6 +26,10 @@ public class Especie {
 
     public Especie() {}
 
+    public static int getRandomNrSquare(int max, int min) {  // retorna um numero random entre 1 e 6 caso 1_min e 6_max
+        return ((int) (Math.random() * (max - min))) + min;
+    }
+
     public Especie definirEspecie(String idEspecie) {
         if(!idEspecie.equals(null)) {
             if (idEspecie.equals("E")) {

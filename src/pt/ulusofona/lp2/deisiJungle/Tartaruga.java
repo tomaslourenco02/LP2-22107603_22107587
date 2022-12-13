@@ -6,6 +6,10 @@ public class Tartaruga extends Especie{
         super("T", "Tartaruga", "turtle.png", 150, 1, 5, "1..3", "Carnívoro");
     }
 
+    public static int dado(){
+        return Especie.getRandomNrSquare(4,1); //o dado tem os lados 1,2,3
+    }
+
     public String getIdentificador() {
         return identificador;
     }

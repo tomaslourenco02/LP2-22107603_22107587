@@ -6,6 +6,9 @@ public class Tarzan extends Especie{
         super("Z", "Tarzan", "tarzan.png", 70, 2, 20, "1..6", "Omnívoro");
     }
 
+    public static int dado(){
+        return Especie.getRandomNrSquare(7,1); //o dado tem os lados 1,2,3,4,5,6
+    }
     public String getIdentificador() {
         return identificador;
     }
