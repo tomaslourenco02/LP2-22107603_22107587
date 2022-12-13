@@ -496,6 +496,9 @@ public class GameManager {
             if (jogadores.get(i).getEnergiaAtual() > 200) {
                 return false;
             }
+            if(jogadores.get(i).getEnergiaAtual() <= 0){
+                return false;
+            }
         }
         return true;
     }
@@ -550,6 +553,15 @@ public class GameManager {
         int posJogador = jogadoresOrdenados.get(countJogadores).getPosicaoAtual();
         int posDestino = posJogador + nrSquares;
         // int posDestinoParaTras = posJogador - nrSquares;
+        int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
+
+        if(jogadorAJogar.energiaAtual - energiaGasta <= 0){
+            countJogadores++;
+            if (countJogadores > jogadores.size() - 1) {
+                countJogadores = 0;
+            }
+            return new MovementResult(MovementResultCode.NO_ENERGY, null);
+        }
 
         if (verificaEnergia() && posDestino <= tamanhoTabuleiro && posDestino >= 1) {
             if (jogoAcabou == false) {
@@ -567,10 +579,6 @@ public class GameManager {
                     }
                 }
 
-                int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
-                if(jogadorAJogar.energiaAtual - energiaGasta <= 0){
-                    return new MovementResult(MovementResultCode.NO_ENERGY, null);
-                }
 
                 for (int i = 0; i < squares.size(); i++) { //energia
                     for (int j = 0; j < squares.get(i).identificadoresNoQuadrado.size(); j++) {
@@ -619,6 +627,7 @@ public class GameManager {
                 return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
             }
         }
+
         countJogadores++;
         if (countJogadores > jogadores.size() - 1) {
             countJogadores = 0;
