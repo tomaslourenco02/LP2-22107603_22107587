@@ -6,6 +6,15 @@ public class Passaro extends Especie{
         super("P", "Pássaro", "bird.png", 70, 4, 50, "5..6", "Omnívoro");
     }
 
+    public static int dado(){
+        return Especie.getRandomNrSquare(7,5); //o dado tem os lados 5,6
+    }
+    public void movimentoPossivel(){
+        nrSquaresPossiveis = new int[2];
+        nrSquaresPossiveis[0] = 5;
+        nrSquaresPossiveis[1] = 6;
+    }
+
     public String getIdentificador() {
         return identificador;
     }

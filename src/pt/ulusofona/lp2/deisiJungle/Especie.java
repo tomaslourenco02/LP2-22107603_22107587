@@ -12,6 +12,7 @@ public class Especie {
     protected int ganhoEnergiaEmDescanso;
     protected String velocidade;
     protected String tipo;
+    protected int[] nrSquaresPossiveis;
 
     public Especie(String identificador, String nome, String imagem, int energiaInicial, int consumoEnergia, int ganhoEnergiaEmDescanso, String velocidade, String tipo) {
         this.identificador = identificador;
@@ -25,6 +26,10 @@ public class Especie {
     }
 
     public Especie() {}
+
+    public static int getRandomNrSquare(int max, int min) {  // retorna um numero random entre 1 e 6 caso 1_min e 6_max
+        return ((int) (Math.random() * (max - min))) + min;
+    }
 
     public Especie definirEspecie(String idEspecie) {
         if(!idEspecie.equals(null)) {

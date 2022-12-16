@@ -18,10 +18,6 @@ public class GameManager {
     int tamanhoTabuleiro = 0;
     boolean jogoAcabou = false;
 
-    public static int getRandomInteger(int max, int min) {  // retorna um numero random entre 1 e 6 caso 1_min e 6_max
-        return ((int) (Math.random() * (max - min))) + min;
-    }
-
     public String[][] getSpecies() {
 
         String[][] especies = new String[5][7];
@@ -500,6 +496,9 @@ public class GameManager {
             if (jogadores.get(i).getEnergiaAtual() > 200) {
                 return false;
             }
+            if(jogadores.get(i).getEnergiaAtual() <= 0){
+                return false;
+            }
         }
         return true;
     }
@@ -539,7 +538,6 @@ public class GameManager {
 
 
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
-
         if (!bypassValidations) {
             if (nrSquares < -6 || nrSquares > 6) {
                 countJogadores++;
@@ -550,12 +548,22 @@ public class GameManager {
             }
         }
         ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
+        Jogador jogadorAJogar = jogadoresOrdenados.get(countJogadores);
 
         int posJogador = jogadoresOrdenados.get(countJogadores).getPosicaoAtual();
         int posDestino = posJogador + nrSquares;
-        int posDestinoParaTras = posJogador - nrSquares;
+        // int posDestinoParaTras = posJogador - nrSquares;
+        int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
 
-        if (verificaEnergia() || posDestino < tamanhoTabuleiro) {
+        if(jogadorAJogar.energiaAtual - energiaGasta <= 0){
+            countJogadores++;
+            if (countJogadores > jogadores.size() - 1) {
+                countJogadores = 0;
+            }
+            return new MovementResult(MovementResultCode.NO_ENERGY, null);
+        }
+
+        if (verificaEnergia() && posDestino <= tamanhoTabuleiro && posDestino >= 1) {
             if (jogoAcabou == false) {
                 if (posDestino >= tamanhoTabuleiro) {
                     posDestino = tamanhoTabuleiro;
@@ -564,33 +572,29 @@ public class GameManager {
                 }
 
                 if (nrSquares == 0) { //descanso
-
-                    if (!(jogadoresOrdenados.get(countJogadores).energiaAtual + jogadoresOrdenados.get(countJogadores).especie.ganhoEnergiaEmDescanso > 200)) {
-
+                    if (!(jogadoresOrdenados.get(countJogadores).getEnergiaAtual() + jogadoresOrdenados.get(countJogadores).especie.ganhoEnergiaEmDescanso > 200)) {
                         jogadoresOrdenados.get(countJogadores).energiaAtual = 200;
                     } else {
                         jogadoresOrdenados.get(countJogadores).energiaAtual += jogadoresOrdenados.get(countJogadores).especie.ganhoEnergiaEmDescanso;
                     }
                 }
 
-                if (nrSquares < 0) {
 
-                    if (posDestinoParaTras < 1) {
-                        return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
+                for (int i = 0; i < squares.size(); i++) { //energia
+                    for (int j = 0; j < squares.get(i).identificadoresNoQuadrado.size(); j++) {
+                        if(squares.get(i).identificadoresNoQuadrado.get(j) == jogadorAJogar.identificador){
+                            squares.get(i).identificadoresNoQuadrado.remove(Integer.valueOf(jogadorAJogar.identificador));
+                            squares.get(posDestino-1).identificadoresNoQuadrado.add(jogadorAJogar.identificador);
+                            jogadorAJogar.posicaoAtual = posDestino;
+                            jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
+                        }
                     }
                 }
-                if ((squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).energiaAtual) - gastaEnergia(
+
+               /* if ((squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).energiaAtual) - gastaEnergia(
                         squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).especie.energiaInicial), nrSquares)) < 0) {
-
                     return new MovementResult(MovementResultCode.NO_ENERGY, null);
-                }
-
-                squares.get(posJogador).identificadoresNoQuadrado.remove(Integer.valueOf(jogadoresOrdenados.get(countJogadores).identificador));
-                squares.get(posDestino - 1).identificadoresNoQuadrado.add(jogadoresOrdenados.get(countJogadores).identificador);
-
-                jogadoresOrdenados.get(countJogadores).posicaoAtual = posDestino;
-
-                jogadoresOrdenados.get(countJogadores).energiaAtual -= gastaEnergia((jogadoresOrdenados.get(countJogadores).especie.consumoEnergia), nrSquares);
+                } */
 
                 /*if (jogadoresOrdenados.get(countJogadores).getEnergiaAtual() < 2) {
                     jogadoresSemEnergia++;
@@ -619,14 +623,16 @@ public class GameManager {
                         }
                     }
                 }*/
+
                 return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
             }
         }
+
         countJogadores++;
         if (countJogadores > jogadores.size() - 1) {
             countJogadores = 0;
         }
-        return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
+        return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
     }
 
     public int[] ordenarPosicoes() {
