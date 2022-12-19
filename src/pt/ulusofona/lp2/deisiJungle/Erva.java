@@ -13,4 +13,5 @@ public class Erva extends Alimento{
     public String toString() {
         return "Erva : +- 20 energia";
     }
+
 }

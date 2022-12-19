@@ -10,6 +10,8 @@ public class CogumelosMagicos extends Alimento{
 
     int nrAleatorio;
 
+
+
     public CogumelosMagicos(String identificador, String nome, String imagem) {
         super("m", "Cogumelos Magicos", "mushroom.png");
     }

@@ -12,4 +12,6 @@ public class Agua extends Alimento{
     public String toString() {
         return "Agua : + 10U|20% energia";
     }
+
 }
+

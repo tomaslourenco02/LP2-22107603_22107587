@@ -10,6 +10,7 @@ public class Jogador {
     int energiaAtual;
     int posicaoAtual = 1;
     boolean aJogar = false;
+    int bananasConsumidas = 0;
     boolean ganhou = false;
     int nrCasasMovimentou = 0;
     int nrAlimentosIngeridos = 0;
