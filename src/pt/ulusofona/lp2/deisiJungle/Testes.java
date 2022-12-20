@@ -10,7 +10,7 @@ public class Testes {
 
     @org.junit.Test
 
-    public void testJungle(){
+    public void testJungle() {
         GameManager gamemaneger = new GameManager();
         String[] jogador1 = {"4", "Joao", "E"};
         String[] jogador2 = {"6", "Pedro", "L"};
@@ -18,49 +18,50 @@ public class Testes {
         String[][] jogadores = {jogador1, jogador2};
 
         String[] comida1 = {"b", String.valueOf(2)};
-        String[] comida2 = {"m", String.valueOf(3)};
+        String[] comida2 = {"b", String.valueOf(3)};
         String[] comida3 = {"a", String.valueOf(4)};
 
-        String[][] comida = {comida1, comida2,comida3};
+        String[][] comida = {comida1, comida2, comida3};
 
-        System.out.println((gamemaneger.createInitialJungle(5,jogadores, comida)));
+        System.out.println((gamemaneger.createInitialJungle(5, jogadores, comida)));
         gamemaneger.moveCurrentPlayer(2, true);
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(3)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
 
     }
 
 
     @org.junit.Test
-    public void testGetPlayersIds(){
+    public void testGetPlayersIds() {
         GameManager gamemaneger = new GameManager();
         String[] jogador1 = {"4", "Joao", "E"};
         String[] jogador2 = {"5", "Miguel", "L"};
         String[] jogador3 = {"1", "José", "Z"};
         String[] jogador4 = {"90", "Ana", "P"};
 
-        String[][] jogadores = {jogador1, jogador2,jogador3,jogador4};
+        String[][] jogadores = {jogador1, jogador2, jogador3, jogador4};
 
         String[] comida1 = {"b", String.valueOf(6)};
         String[] comida2 = {"b", String.valueOf(7)};
         String[] comida3 = {"a", String.valueOf(3)};
 
-        String[][] comida = {comida1, comida2,comida3};
+        String[][] comida = {comida1, comida2, comida3};
 
-        System.out.println(gamemaneger.createInitialJungle(9,jogadores,comida));
-        System.out.println(gamemaneger.moveCurrentPlayer(2,true));
+        System.out.println(gamemaneger.createInitialJungle(9, jogadores, comida));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(3,true));
+        System.out.println(gamemaneger.moveCurrentPlayer(3, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(5,true));
+        System.out.println(gamemaneger.moveCurrentPlayer(5, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(3,true));
+        System.out.println(gamemaneger.moveCurrentPlayer(3, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(1,true));
+        System.out.println(gamemaneger.moveCurrentPlayer(1, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
 
 
-}
+    }
 }
 
     /*@org.junit.Test

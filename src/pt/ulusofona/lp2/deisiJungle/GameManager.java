@@ -471,14 +471,12 @@ public class GameManager {
 
     public boolean verificaEnergia() {
 
-        for (int i = 0; i < jogadores.size(); i++) {
-            if (jogadores.get(i).getEnergiaAtual() > 200) {
+            if (jogadores.get(countJogadores).getEnergiaAtual() > 200) {
                 return false;
             }
-            if (jogadores.get(i).getEnergiaAtual() < 0) {
+            if (jogadores.get(countJogadores).getEnergiaAtual() < 0) {
                 return false;
             }
-        }
         return true;
     }
 
