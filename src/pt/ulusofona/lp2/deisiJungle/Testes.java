@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 
 public class Testes {
 
-    /*@org.junit.Test
+    @org.junit.Test
 
     public void testJungle(){
         GameManager gamemaneger = new GameManager();
@@ -17,10 +17,17 @@ public class Testes {
 
         String[][] jogadores = {jogador1, jogador2};
 
-        assertTrue(gamemaneger.createInitialJungle(5,2, jogadores));
+        String[] comida1 = {"b", String.valueOf(2)};
+        String[] comida2 = {"m", String.valueOf(3)};
+        String[] comida3 = {"a", String.valueOf(4)};
+
+        String[][] comida = {comida1, comida2,comida3};
+
+        System.out.println((gamemaneger.createInitialJungle(5,jogadores, comida)));
 
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
-    }*/
+    }
+
 
     @org.junit.Test
     public void testGetPlayersIds(){
