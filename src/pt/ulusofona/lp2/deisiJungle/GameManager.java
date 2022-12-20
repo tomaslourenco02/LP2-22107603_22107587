@@ -475,7 +475,7 @@ public class GameManager {
             if (jogadores.get(i).getEnergiaAtual() > 200) {
                 return false;
             }
-            if (jogadores.get(i).getEnergiaAtual() <= 0) {
+            if (jogadores.get(i).getEnergiaAtual() < 0) {
                 return false;
             }
         }
@@ -563,6 +563,11 @@ public class GameManager {
             if (nrSquares == 0) {
 
                 jogadorAJogar.energiaAtual += jogadorAJogar.especie.ganhoEnergiaEmDescanso;
+                countJogadores++;
+                if (countJogadores > jogadores.size() - 1) {
+                    countJogadores = 0;
+                }
+                return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
             }
             countJogadores++;
             if (countJogadores > jogadores.size() - 1) {
@@ -645,7 +650,6 @@ public class GameManager {
                         }
                     }
                 }
-
             }
 
                /* if ((squares.get(posJogador).identificadoresNoQuadrado.get(jogadoresOrdenados.get(countJogadores).energiaAtual) - gastaEnergia(
