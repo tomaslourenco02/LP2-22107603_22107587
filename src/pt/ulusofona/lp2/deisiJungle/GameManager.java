@@ -82,63 +82,37 @@ public class GameManager {
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
                 if (!verificaIdAlimentos(foodsInfo[i][0])) {
-                    return new InitializationError("Erro na inicialização do terreno!");
-                }
-            }
-        }
+                    return new InitializationError("Erro na inicialização do terreno!");}}}
 
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
-                if (foodsInfo[i][1].matches("[a-zA-Z]+")) {
-                    return new InitializationError("Erro na inicialização do terreno!");
-                }
-                if (foodsInfo[i][1].matches("[0-9]*")) {
-                    if (Integer.parseInt(foodsInfo[i][1]) >= jungleSize || Integer.parseInt(foodsInfo[i][1]) <= 1) {
-                        return new InitializationError("Erro na inicialização do terreno!");
-                    }
-                }
-            }
-        }
+                if (foodsInfo[i][1].matches("[a-zA-Z]+")) {return new InitializationError("Erro na inicialização do terreno!");}
 
-        if (!verificaJogadores(playersInfo)) {
-            return new InitializationError("Erro na inicialização do terreno!");
-        }
-        if (jungleSize < playersInfo.length * 2) {
-            return new InitializationError("Erro na inicialização do terreno!");
-        }
+                if (foodsInfo[i][1].matches("[0-9]*")) {
+                    if (Integer.parseInt(foodsInfo[i][1]) >= jungleSize || Integer.parseInt(foodsInfo[i][1]) <= 1) {return new InitializationError("Erro na inicialização do terreno!");}}}}
+
+        if (!verificaJogadores(playersInfo)) {return new InitializationError("Erro na inicialização do terreno!");}
+
+        if (jungleSize < playersInfo.length * 2) {return new InitializationError("Erro na inicialização do terreno!");}
 
         tamanhoTabuleiro = jungleSize;
 
-        for (int i = 0; i < tamanhoTabuleiro; i++) {
-            squares.add(new SquareInfo());
-        }
+        for (int i = 0; i < tamanhoTabuleiro; i++) {squares.add(new SquareInfo());}
 
         for (int i = 0; i < playersInfo.length; i++) {
-            if (squares != null) {
-                squares.get(0).identificadoresNoQuadrado.add(Integer.valueOf(playersInfo[i][0])); //NAO POSSO FAZER ISTO
-            }
-        }
+            if (squares != null) {squares.get(0).identificadoresNoQuadrado.add(Integer.valueOf(playersInfo[i][0]));}}
 
         for (int i = 0; i < playersInfo.length; i++) {
             jogadores.add(new Jogador(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2]));
-            if (squares != null) {
-                squares.get(0).identificadoresNoQuadrado.add(Integer.valueOf(playersInfo[i][0])); //NAO POSSO FAZER ISTO
-            }
-        }
+            if (squares != null) {squares.get(0).identificadoresNoQuadrado.add(Integer.valueOf(playersInfo[i][0]));}}
 
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
                 for (int j = 0; j < squares.size(); j++) {
 
-                    if(j == Integer.parseInt(foodsInfo[i][1])){
-                        squares.get(j).identificadoresAlimentosNoQuadrado = foodsInfo[i][0];
-                    }
-                    if (foodsInfo[i][0].equals("b")) {
-                        squares.get(j).bananas = 3;
-                    }
-                }
-            }
-        }
+                    if(j == Integer.parseInt(foodsInfo[i][1])){squares.get(j).identificadoresAlimentosNoQuadrado = foodsInfo[i][0];}
+
+                    if (foodsInfo[i][0].equals("b")) {squares.get(j).bananas = 3;}}}}
 
         int menorID = 0;
 
@@ -147,16 +121,12 @@ public class GameManager {
                 if (i != j) {
                     if (jogadores.get(i).getIdentificador() < jogadores.get(j).getIdentificador()) {
                         menorID = jogadores.get(i).getIdentificador();
-                    } else {
-                        menorID = jogadores.get(j).getIdentificador();
-                    }
+                    } else {menorID = jogadores.get(j).getIdentificador();}
                 }
             }
         }
         for (int i = 0; i < jogadores.size(); i++) {
-            if (menorID == jogadores.get(i).getIdentificador()) {
-                jogadores.get(i).aJogar = true;
-            }
+            if (menorID == jogadores.get(i).getIdentificador()) {jogadores.get(i).aJogar = true;}
         }
         return null;
     }
@@ -617,7 +587,6 @@ public class GameManager {
                         jogadoresOrdenados.get(countJogadores).energiaAtual += jogadoresOrdenados.get(countJogadores).especie.ganhoEnergiaEmDescanso;
                     }
                 }
-
 
                 for (int i = 0; i < squares.size(); i++) { //energia
                     for (int j = 0; j < squares.get(i).identificadoresNoQuadrado.size(); j++) {
