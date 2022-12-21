@@ -564,22 +564,15 @@ public class GameManager {
         // int posDestinoParaTras = posJogador - nrSquares;
         int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
 
-        if (jogadorAJogar.energiaAtual - energiaGasta <= 0) {
-            if (nrSquares == 0) {
-                jogadorAJogar.energiaAtual += jogadorAJogar.especie.ganhoEnergiaEmDescanso;
+        if(nrSquares != 0) {
+            if (jogadorAJogar.energiaAtual - energiaGasta <= 0) {
                 countJogadores++;
                 if (countJogadores > jogadores.size() - 1) {
                     countJogadores = 0;
                 }
-                return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
+                return new MovementResult(MovementResultCode.NO_ENERGY, null);
             }
-            countJogadores++;
-            if (countJogadores > jogadores.size() - 1) {
-                countJogadores = 0;
-            }
-            return new MovementResult(MovementResultCode.NO_ENERGY, null);
         }
-
 
         if (verificaEnergia() && posDestino <= tamanhoTabuleiro && posDestino >= 1) {
             if (jogoAcabou == false) {
@@ -589,13 +582,19 @@ public class GameManager {
                     jogoAcabou = true;
                 }
 
-                if (nrSquares == 0) { //descanso
+                if (nrSquares == 0) {//descanso
+                    jogadorAJogar.energiaAtual += jogadorAJogar.especie.ganhoEnergiaEmDescanso;
                     if (!(jogadoresOrdenados.get(countJogadores).getEnergiaAtual() + jogadoresOrdenados.get(countJogadores).especie.ganhoEnergiaEmDescanso > 200)) {
                         jogadoresOrdenados.get(countJogadores).energiaAtual = 200;
                     } else {
                         jogadoresOrdenados.get(countJogadores).energiaAtual += jogadoresOrdenados.get(countJogadores).especie.ganhoEnergiaEmDescanso;
                     }
-                }
+                    countJogadores++;
+                    if (countJogadores > jogadores.size() - 1) {
+                        countJogadores = 0;
+                    }
+                    return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
+                    }
 
                 for (int i = 0; i < squares.size(); i++) {
                     for (int j = 0; j < squares.get(i).identificadoresNoQuadrado.size(); j++) {
