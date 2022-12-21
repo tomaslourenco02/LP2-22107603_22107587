@@ -535,6 +535,16 @@ public class GameManager {
         return null;
     }
 
+    public void turnoDejogadores(){
+        if (!jogoAcabou) {
+            countJogadores++;
+        }
+        if (countJogadores > jogadores.size() - 1) {
+            countJogadores = 0;
+        }
+        jogadasFeitas++;
+    }
+
 
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
         if (!bypassValidations) {
@@ -603,6 +613,8 @@ public class GameManager {
                                         } else if (jogadorAJogar.especie.tipo.equals("Carnívoro")) {
                                             jogadorAJogar.energiaAtual -= 20;
                                         }
+                                        turnoDejogadores();
+                                        return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Erva");
                                     }
                                     if (alimento.equals("a")) {
                                         if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
@@ -610,6 +622,8 @@ public class GameManager {
                                         } else if (jogadorAJogar.especie.tipo.equals("Omnívoro")) {
                                             jogadorAJogar.energiaAtual += ((jogadorAJogar.energiaAtual * 20) / 100);
                                         }
+                                        turnoDejogadores();
+                                        return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Agua");
                                     }
                                     if (alimento.equals("b")) {
                                         if (jogadorAJogar.bananasConsumidas > 1) {
@@ -619,6 +633,8 @@ public class GameManager {
                                             jogadorAJogar.bananasConsumidas++;
                                             squares.get(posDestino-1).bananas--;
                                         }
+                                        turnoDejogadores();
+                                        return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cacho de Bananas");
                                     }
                                     if (alimento.equals("c")) {
                                         if (jogadasFeitas > 12) {
@@ -626,6 +642,8 @@ public class GameManager {
                                         } else if (jogadorAJogar.especie.tipo.equals("Omnívoros") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
                                             jogadorAJogar.energiaAtual += 50;
                                         }
+                                        turnoDejogadores();
+                                        return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Carne");
                                     }
                                     if (alimento.equals("m")) {
                                         CogumelosMagicos cogumelo = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
@@ -635,17 +653,13 @@ public class GameManager {
                                         if (jogadasFeitas % 2 != 0) {
                                             jogadorAJogar.energiaAtual -= (jogadorAJogar.energiaAtual / cogumelo.nrAleatorio) * 100;
                                         }
+                                        turnoDejogadores();
+                                        return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou " + cogumelo.nome);
                                     }
                                 }
                         }
-                        if (!jogoAcabou) {
-                            countJogadores++;
-                        }
-                        if (countJogadores > jogadores.size() - 1) {
-                            countJogadores = 0;
-                        }
+                        turnoDejogadores();
 
-                        jogadasFeitas++;
                         return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
                     }
                 }
