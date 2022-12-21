@@ -51,4 +51,8 @@ public class Especie {
         }
         return null;
     }
+
+    boolean podeMover(int nrSquares) {
+        return true;
+    }
 }

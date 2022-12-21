@@ -16,6 +16,13 @@ public class Tartaruga extends Especie{
         nrSquaresPossiveis[1] = 2;
         nrSquaresPossiveis[2] = 3;
     }
+    @Override
+    boolean podeMover(int nrSquares) {
+        if(nrSquares > 3 || nrSquares < -3){
+            return false;
+        }
+        return true;
+    }
 
     public String getIdentificador() {
         return identificador;

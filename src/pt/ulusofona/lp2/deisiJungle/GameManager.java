@@ -537,6 +537,14 @@ public class GameManager {
 
 
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
+        ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
+        Jogador jogadorAJogar = jogadoresOrdenados.get(countJogadores);
+
+        int posJogador = jogadoresOrdenados.get(countJogadores).getPosicaoAtual();
+        int posDestino = posJogador + nrSquares;
+        // int posDestinoParaTras = posJogador - nrSquares;
+        int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
+
         if (!bypassValidations) {
             if (nrSquares < -6 || nrSquares > 6) {
                 countJogadores++;
@@ -546,13 +554,22 @@ public class GameManager {
                 return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
             }
         }
-        ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
-        Jogador jogadorAJogar = jogadoresOrdenados.get(countJogadores);
 
-        int posJogador = jogadoresOrdenados.get(countJogadores).getPosicaoAtual();
-        int posDestino = posJogador + nrSquares;
-        // int posDestinoParaTras = posJogador - nrSquares;
-        int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
+        if(posDestino >= tamanhoTabuleiro || posDestino <= 1){
+            countJogadores++;
+            if (countJogadores > jogadores.size() - 1) {
+                countJogadores = 0;
+            }
+            return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
+        }
+
+        if(!jogadorAJogar.especie.podeMover(nrSquares)){
+            countJogadores++;
+            if (countJogadores > jogadores.size() - 1) {
+                countJogadores = 0;
+            }
+            return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
+        }
 
         if (jogadorAJogar.energiaAtual - energiaGasta <= 0) {
             if (nrSquares == 0) {
@@ -561,12 +578,14 @@ public class GameManager {
                 if (countJogadores > jogadores.size() - 1) {
                     countJogadores = 0;
                 }
+                jogadasFeitas++;
                 return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
             }
             countJogadores++;
             if (countJogadores > jogadores.size() - 1) {
                 countJogadores = 0;
             }
+            jogadasFeitas++;
             return new MovementResult(MovementResultCode.NO_ENERGY, null);
         }
 
@@ -644,8 +663,6 @@ public class GameManager {
                         if (countJogadores > jogadores.size() - 1) {
                             countJogadores = 0;
                         }
-
-
                         jogadasFeitas++;
                         return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
                     }

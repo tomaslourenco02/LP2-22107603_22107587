@@ -17,6 +17,17 @@ public class Leao extends Especie{
         nrSquaresPossiveis[2] = 6;
     }
 
+    @Override
+    boolean podeMover(int nrSquares) {
+        if(nrSquares == 0){
+            return true;
+        }
+        if (nrSquares < -6 || nrSquares > -4 || nrSquares < 4 || nrSquares > 6) {
+                return false;
+            }
+        return true;
+    }
+
     public String getIdentificador() {
         return identificador;
     }

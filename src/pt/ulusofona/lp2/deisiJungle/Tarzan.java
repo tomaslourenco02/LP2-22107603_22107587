@@ -18,6 +18,13 @@ public class Tarzan extends Especie{
         nrSquaresPossiveis[4] = 5;
         nrSquaresPossiveis[5] = 6;
     }
+    @Override
+    boolean podeMover(int nrSquares) {
+        if(nrSquares > 6 || nrSquares < -6){
+            return false;
+        }
+        return true;
+    }
     public String getIdentificador() {
         return identificador;
     }
