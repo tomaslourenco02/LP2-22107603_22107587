@@ -645,6 +645,7 @@ public class GameManager {
                             countJogadores = 0;
                         }
 
+
                         jogadasFeitas++;
                         return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
                     }
