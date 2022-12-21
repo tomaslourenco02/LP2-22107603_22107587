@@ -594,45 +594,64 @@ public class GameManager {
                             jogadorAJogar.posicaoAtual = posDestino;
                             jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
 
-                                if (squares.get(posDestino-1).identificadoresAlimentosNoQuadrado != null) {
-                                    String alimento = squares.get(posDestino-1).identificadoresAlimentosNoQuadrado;
+                                if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
+                                    String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
                                     if (alimento.equals("e")) {
                                         if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Omnívoro")) {
                                             jogadorAJogar.energiaAtual += 20;
+                                            return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Erva");
                                         } else if (jogadorAJogar.especie.tipo.equals("Carnívoro")) {
                                             jogadorAJogar.energiaAtual -= 20;
+                                            return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Erva");
+
                                         }
                                     }
                                     if (alimento.equals("a")) {
                                         if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
                                             jogadorAJogar.energiaAtual += 15;
+                                            return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Agua");
+
                                         } else if (jogadorAJogar.especie.tipo.equals("Omnívoro")) {
                                             jogadorAJogar.energiaAtual += ((jogadorAJogar.energiaAtual * 20) / 100);
+                                            return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Agua");
+
                                         }
                                     }
                                     if (alimento.equals("b")) {
                                         if (jogadorAJogar.bananasConsumidas > 1) {
                                             jogadorAJogar.energiaAtual -= 40;
+                                            return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Banana");
+
                                         } else if (squares.get(posDestino-1).bananas > 0) {
                                             jogadorAJogar.energiaAtual += 40;
                                             jogadorAJogar.bananasConsumidas++;
                                             squares.get(posDestino-1).bananas--;
+                                            return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Banana");
+
                                         }
                                     }
                                     if (alimento.equals("c")) {
                                         if (jogadasFeitas > 12) {
                                             jogadorAJogar.energiaAtual = jogadorAJogar.energiaAtual / 2;
+                                            return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Carne");
+
                                         } else if (jogadorAJogar.especie.tipo.equals("Omnívoros") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
                                             jogadorAJogar.energiaAtual += 50;
+                                            return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Carne");
+
                                         }
                                     }
                                     if (alimento.equals("m")) {
                                         CogumelosMagicos cogumelo = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
                                         if (jogadasFeitas % 2 == 0) {
                                             jogadorAJogar.energiaAtual += (jogadorAJogar.energiaAtual / cogumelo.nrAleatorio) * 100;
+                                            return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelos Magicos");
+
                                         }
                                         if (jogadasFeitas % 2 != 0) {
                                             jogadorAJogar.energiaAtual -= (jogadorAJogar.energiaAtual / cogumelo.nrAleatorio) * 100;
+                                            return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelos Magicos");
+
                                         }
                                     }
                                 }
