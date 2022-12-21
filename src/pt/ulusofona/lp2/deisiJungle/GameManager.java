@@ -570,8 +570,6 @@ public class GameManager {
             return new MovementResult(MovementResultCode.NO_ENERGY, null);
         }
 
-
-
         if (verificaEnergia() && posDestino <= tamanhoTabuleiro && posDestino >= 1) {
             if (jogoAcabou == false) {
                 if (posDestino >= tamanhoTabuleiro) {
