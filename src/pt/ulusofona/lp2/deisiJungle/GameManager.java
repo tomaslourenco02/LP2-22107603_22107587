@@ -100,9 +100,6 @@ public class GameManager {
         for (int i = 0; i < tamanhoTabuleiro; i++) {squares.add(new SquareInfo());}
 
         for (int i = 0; i < playersInfo.length; i++) {
-            if (squares != null) {squares.get(0).identificadoresNoQuadrado.add(Integer.valueOf(playersInfo[i][0]));}}
-
-        for (int i = 0; i < playersInfo.length; i++) {
             jogadores.add(new Jogador(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2]));
             if (squares != null) {squares.get(0).identificadoresNoQuadrado.add(Integer.valueOf(playersInfo[i][0]));}}
 
