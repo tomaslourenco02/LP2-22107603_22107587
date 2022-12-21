@@ -571,6 +571,7 @@ public class GameManager {
         }
 
 
+
         if (verificaEnergia() && posDestino <= tamanhoTabuleiro && posDestino >= 1) {
             if (jogoAcabou == false) {
                 if (posDestino >= tamanhoTabuleiro) {
