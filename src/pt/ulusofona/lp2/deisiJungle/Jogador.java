@@ -67,7 +67,7 @@ public class Jogador {
         if(Objects.equals(especieDoJogador, "P")){
             infoJogador[4] = "5..6";
         }
-        if(Objects.equals(especieDoJogador, "E")){
+        if(Objects.equals(especieDoJogador, "T")){
             infoJogador[4] = "1..3";
         }
         return infoJogador;
