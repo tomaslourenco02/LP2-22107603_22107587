@@ -395,12 +395,12 @@ public class GameManager {
             }
         }
         if (squareNr == tamanhoTabuleiro) {
+            if(square.identificadoresAlimentosNoQuadrado != null){} ////////
             squareInfo[0] = "finish.png";
             squareInfo[1] = "Meta";
             squareInfo[2] = identificadores.toString();
             return squareInfo;
         } else {
-
             squareInfo[0] = square.imagemAColocar;
             squareInfo[1] = square.texto;
             squareInfo[2] = identificadores.toString();
