@@ -577,6 +577,7 @@ public class GameManager {
         }
     }
 
+
     public MovementResult moveCurrentPlayer2(int nrSquares, boolean bypassValidations) {
 
         if (!bypassValidations) {
