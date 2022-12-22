@@ -397,12 +397,16 @@ public class GameManager {
         SquareInfo square = new SquareInfo();
 
         String[] squareInfo = new String[3];
+        if (squareNr < squares.size() && squareNr >= 0) {
 
-        if(squares.get(squareNr).identificadoresAlimentosNoQuadrado != null){
-            Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
-            squareInfo = alimento.info();
-            if(squares.get(squareNr).identificadoresAlimentosNoQuadrado.equals("b")){squareInfo[1] = String.valueOf(squares.get(squareNr).bananas);}
-            return squareInfo;
+            if (squares.get(squareNr).identificadoresAlimentosNoQuadrado != null) {
+                Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
+                squareInfo = alimento.info();
+                if (squares.get(squareNr).identificadoresAlimentosNoQuadrado.equals("b")) {
+                    squareInfo[1] = String.valueOf(squares.get(squareNr).bananas);
+                }
+                return squareInfo;
+            }
         }
 
         if (squareNr - 1 == 0) {
@@ -560,6 +564,7 @@ public class GameManager {
         }
         if (idAlimento == "c") {
             Carne alimento = new Carne("c", "Carne", "meat.png");
+            alimento.jogadasEfetuadas = jogadasFeitas;
             return alimento;
         }
         if (idAlimento == "m") {
@@ -871,6 +876,9 @@ public class GameManager {
 
         ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
         Jogador jogadorAJogar = jogadoresOrdenados.get(countJogadores);
+        int posJogador = jogadorAJogar.getPosicaoAtual();
+        int posDestino = posJogador + nrSquares;
+        int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
 
         if (!bypassValidations) {
             if (nrSquares < -6 || nrSquares > 6) {
@@ -892,11 +900,17 @@ public class GameManager {
             }
         }
 
+        /*for (int i = squares.size()-1; i > 0; i--) {
 
-        int posJogador = jogadorAJogar.getPosicaoAtual();
-        int posDestino = posJogador + nrSquares;
-        int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
+                if(squares.get(i).identificadoresNoQuadrado != null){
 
+                    int distancia = posDestino - i+1;
+                    if(distancia > tamanhoTabuleiro/2){
+                        jogadorAJogar.ganhou = true;
+                        jogoAcabou = true;
+                    }
+                }
+        }*/
 
         if (posDestino <= 0) {
 

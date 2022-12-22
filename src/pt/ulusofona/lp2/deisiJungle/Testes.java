@@ -17,21 +17,22 @@ public class Testes {
 
         String[][] jogadores = {jogador1, jogador2};
 
-        String[] comida1 = {"a", String.valueOf(4)};
+        String[] comida1 = {"m", String.valueOf(4)};
 
         String[][] comida = {comida1};
 
         System.out.println((gamemaneger.createInitialJungle(10, jogadores, comida)));
-        System.out.println(gamemaneger.moveCurrentPlayer(3, false));
+        System.out.println(gamemaneger.moveCurrentPlayer(1, false));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
-        System.out.println(gamemaneger.moveCurrentPlayer(5, false));
+        System.out.println(gamemaneger.moveCurrentPlayer(7, false));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(6)));
-        System.out.println(gamemaneger.moveCurrentPlayer(0, false));
+        System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
+        /*System.out.println(gamemaneger.moveCurrentPlayer(0, false));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
         System.out.println(gamemaneger.moveCurrentPlayer(4, false));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
         System.out.println(Arrays.toString(gamemaneger.getSquareInfo(4)));
-        System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
+        System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));*/
 
     }
 
