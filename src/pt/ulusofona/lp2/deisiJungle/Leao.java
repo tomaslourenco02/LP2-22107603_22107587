@@ -19,10 +19,13 @@ public class Leao extends Especie{
 
     @Override
     boolean podeMover(int nrSquares) {
-        if(nrSquares == 0 || nrSquares == 6 || nrSquares == 5 || nrSquares == 4 || nrSquares == -6 || nrSquares == -5 || nrSquares == -4){
+        if(nrSquares == 0){
             return true;
         }
-        return false;
+        if (nrSquares < -6 || nrSquares > -4 || nrSquares < 4 || nrSquares > 6) {
+                return false;
+            }
+        return true;
     }
 
     public String getIdentificador() {
