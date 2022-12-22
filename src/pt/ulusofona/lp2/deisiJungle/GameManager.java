@@ -606,6 +606,7 @@ public class GameManager {
         int posDestino = posJogador + nrSquares;
         int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
 
+
         if (posDestino <= 1) {
 
             countJogadores++;
