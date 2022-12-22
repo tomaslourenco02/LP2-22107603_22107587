@@ -17,7 +17,7 @@ public class Testes {
 
         String[][] jogadores = {jogador1, jogador2};
 
-        String[] comida1 = {"e", String.valueOf(9)};
+        String[] comida1 = {"a", String.valueOf(4)};
 
         String[][] comida = {comida1};
 
@@ -29,8 +29,8 @@ public class Testes {
         System.out.println(gamemaneger.moveCurrentPlayer(0, false));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
         System.out.println(gamemaneger.moveCurrentPlayer(4, false));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(6)));
-        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(10)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
+        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(4)));
         System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
 
     }

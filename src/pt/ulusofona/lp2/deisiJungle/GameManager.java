@@ -394,11 +394,16 @@ public class GameManager {
 
         int[] jogadoresNoSquare = new int[0];
 
-        //squareNr--;
-
         SquareInfo square = new SquareInfo();
 
         String[] squareInfo = new String[3];
+
+        if(squares.get(squareNr).identificadoresAlimentosNoQuadrado != null){
+            Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
+            squareInfo = alimento.info();
+            if(squares.get(squareNr).identificadoresAlimentosNoQuadrado.equals("b")){squareInfo[1] = String.valueOf(squares.get(squareNr).bananas);}
+            return squareInfo;
+        }
 
         if (squareNr - 1 == 0) {
             jogadoresNoSquare = getPlayerIds(squareNr);
@@ -1121,7 +1126,7 @@ public class GameManager {
                                     if (countJogadores > jogadores.size() - 1) {
                                         countJogadores = 0;
                                     }
-                                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Banana");
+                                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Bananas");
 
                                 } else if (squares.get(posDestino - 1).bananas > 0) {
 
@@ -1133,7 +1138,7 @@ public class GameManager {
                                     if (countJogadores > jogadores.size() - 1) {
                                         countJogadores = 0;
                                     }
-                                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Banana");
+                                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Bananas");
                                 }
                             }
                             if (alimento.equals("c")) {

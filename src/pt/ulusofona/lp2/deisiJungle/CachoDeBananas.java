@@ -17,6 +17,16 @@ public class CachoDeBananas extends Alimento{
     }
 
     @Override
+    String[] info() {
+        String[] info = new String[3];
+        info[0] = "Bananas : ";
+        info[1] = String.valueOf(nrBananas);
+        info[2] = " : + 40 energia";
+
+        return info;
+    }
+
+    @Override
     public String toString() {
         return "Bananas : " + nrBananas + " : 40 energia";
 
