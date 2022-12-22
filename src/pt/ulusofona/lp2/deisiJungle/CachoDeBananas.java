@@ -12,6 +12,16 @@ public class CachoDeBananas extends Alimento{
 
     int nrBananas;
 
+    @Override
+    String[] info() {
+        String[] info = new String[3];
+        info[0] = "Bananas : ";
+        info[1] = String.valueOf(nrBananas);
+        info[2] = " : + 40 energia";
+
+        return info;
+    }
+
     public CachoDeBananas(String identificador, String nome, String imagem) {
         super("b", "Cacho de bananas", "bananas.png");
     }

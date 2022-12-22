@@ -21,10 +21,20 @@ public class Carne extends Alimento{
     }
 
     @Override
+    String[] info() {
+        String[] info = new String[3];
+        info[0] = "Carne : + 50 energia : ";
+        info[1] = String.valueOf(jogadasEfetuadas);
+        info[2] = " jogadas";
+
+        return info;
+    }
+
+    @Override
     public String toString() {
 
         if(jogadasEfetuadas > 12){
-            return "“Carne toxica";
+            return "Carne toxica";
         }
         return "Carne : +- 50 energia : " + jogadasEfetuadas + " jogadas";
     }

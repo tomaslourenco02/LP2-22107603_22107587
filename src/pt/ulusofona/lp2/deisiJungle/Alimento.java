@@ -16,6 +16,4 @@ public abstract class Alimento {
     public int getPosicao() {
         return posicao;
     }
-
-    abstract String[] info();
 }
