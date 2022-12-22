@@ -865,9 +865,6 @@ public class GameManager {
 
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
 
-        ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
-        Jogador jogadorAJogar = jogadoresOrdenados.get(countJogadores);
-
         if (!bypassValidations) {
             if (nrSquares < -6 || nrSquares > 6) {
                 countJogadores++;
@@ -876,16 +873,10 @@ public class GameManager {
                 }
                 return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
             }
-            if(!jogadorAJogar.especie.podeMover(nrSquares)){
-                countJogadores++;
-                if (countJogadores > jogadores.size() - 1) {
-                    countJogadores = 0;
-                }
-                return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
-            }
         }
 
-
+        ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
+        Jogador jogadorAJogar = jogadoresOrdenados.get(countJogadores);
 
         int posJogador = jogadorAJogar.getPosicaoAtual();
         int posDestino = posJogador + nrSquares;
