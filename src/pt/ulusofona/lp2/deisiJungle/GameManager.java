@@ -1071,6 +1071,7 @@ public class GameManager {
                                     return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Erva");
                                 }
                             }
+
                             if (alimento.equals("a")) {
 
                                 if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
