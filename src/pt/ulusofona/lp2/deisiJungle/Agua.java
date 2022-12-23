@@ -18,16 +18,6 @@ public class Agua extends Alimento{
     }
 
     @Override
-    String[] info() {
-        String[] info = new String[3];
-        info[0] = "Agua : ";
-        info[1] = "+ 10U|20%";
-        info[2] = " energia";
-
-        return info;
-    }
-
-    @Override
     public String toString() {
         return "Agua : + 10U|20% energia";
     }

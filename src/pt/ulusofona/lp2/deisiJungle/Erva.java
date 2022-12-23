@@ -19,16 +19,6 @@ public class Erva extends Alimento{
     }
 
     @Override
-    String[] info() {
-        String[] info = new String[3];
-        info[0] = "Erva : ";
-        info[1] = "+- 20 energia";
-        info[2] = "";
-
-        return info;
-    }
-
-    @Override
     public String toString() {
         return "Erva : +- 20 energia";
     }
