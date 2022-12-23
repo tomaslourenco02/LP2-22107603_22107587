@@ -725,7 +725,7 @@ public class GameManager {
                 if (countJogadores > jogadores.size() - 1) {
                     countJogadores = 0;
                 }
-                return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelos Magicos");
+                return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelo Magico");
             }
         }
         if (posDestino >= tamanhoTabuleiro) {
@@ -853,7 +853,7 @@ public class GameManager {
                                 if (countJogadores > jogadores.size() - 1) {
                                     countJogadores = 0;
                                 }
-                                return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelos Magicos");
+                                return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelo Magico");
                             }
                         }
                         break;
@@ -1045,7 +1045,7 @@ public class GameManager {
                     if (countJogadores > jogadores.size() - 1) {
                         countJogadores = 0;
                     }
-                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelos Magicos");
+                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelo Magico");
                 }
             }
             jogadasFeitas++;
@@ -1083,6 +1083,7 @@ public class GameManager {
                             jogadorAJogar.ganhou = true;
                             jogoAcabou = true;
                         }
+
                         if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
 
                             String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
@@ -1192,7 +1193,7 @@ public class GameManager {
                                 if (countJogadores > jogadores.size() - 1) {
                                     countJogadores = 0;
                                 }
-                                return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelos Magicos");
+                                return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelo Magico");
                             }
                         }
                         jogadasFeitas++;
@@ -1213,11 +1214,37 @@ public class GameManager {
         return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
     }
 
+    public boolean jogadorAvancado(Jogador jogador){
+        int posicaoJogador = jogador.posicaoAtual;
+        int[] posicoesJogadores = ordenarPosicoes();
+        int distancia;
+
+        if(posicoesJogadores[posicoesJogadores.length-1] == posicaoJogador){
+            distancia = posicoesJogadores[posicoesJogadores.length-2] - posicaoJogador;
+        }else {
+            distancia = posicoesJogadores[posicoesJogadores.length-1] - posicaoJogador;
+        }
+
+        for (int i = 0; i < jogadores.size(); i++) {
+            if(distancia < 0){
+                if(jogadores.get(i).posicaoAtual == (distancia + posicaoJogador)){
+                    
+                }
+            }
+        }
+
+        if(distancia > tamanhoTabuleiro / 2){
+            jogador.ganhou = true;
+            jogoAcabou = true;
+            return true;
+        }
+        return false;
+    }
+
     public int[] ordenarPosicoes() {
         int[] posicoesOrdenadas = new int[jogadores.size()];
         int[] idsOrdenados = ordenarIds();
 
-        if (jogoAcabou == true) {
             for (int i = 0; i < idsOrdenados.length; i++) {
                 for (int j = 0; j < jogadores.size(); j++) {
                     if (jogadores.get(j).getIdentificador() == idsOrdenados[i]) {
@@ -1232,10 +1259,8 @@ public class GameManager {
                         posicoesOrdenadas[i] = posicoesOrdenadas[j];
                         posicoesOrdenadas[j] = temp;
                     }
-
                 }
             }
-        }
         return posicoesOrdenadas;
     }
 
