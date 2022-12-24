@@ -472,8 +472,57 @@ public class GameManager {
 
     public String[] getCurrentPlayerEnergyInfo(int nrPositions) {
         String[] energyInfo = new String[2];
+        ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
+        Jogador jogadorAJogar = jogadoresOrdenados.get(countJogadores);
+        int posJogador = jogadorAJogar.getPosicaoAtual();
+        int posDestino = posJogador + nrPositions;
+        int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrPositions);
+        int ganhoDeEnergia = 0;
 
-        return null;
+        if (squares.get(jogadorAJogar.posicaoAtual).identificadoresAlimentosNoQuadrado != null) {
+            String alimento = squares.get(jogadorAJogar.posicaoAtual).identificadoresAlimentosNoQuadrado;
+            if (alimento.equals("e")) {
+                if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Omnívoro")) {
+                    ganhoDeEnergia = 20;
+                } else if (jogadorAJogar.especie.tipo.equals("Carnívoro")) {
+                    ganhoDeEnergia = 20;
+                }
+            }
+            if (alimento.equals("a")) {
+                if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
+                    ganhoDeEnergia = 15;
+                } else if (jogadorAJogar.especie.tipo.equals("Omnívoro")) {
+                    ganhoDeEnergia = ((jogadorAJogar.energiaAtual * 20) / 100);
+                }
+            }
+            if (alimento.equals("b")) {
+                if (jogadorAJogar.bananasConsumidas > 1) {
+                    ganhoDeEnergia = -40;
+                } else if (squares.get(posDestino - 1).bananas > 0) {
+                    ganhoDeEnergia = 40;
+                }
+            }
+            if (alimento.equals("c")) {
+                if (jogadasFeitas > 12) {
+                    ganhoDeEnergia = jogadorAJogar.energiaAtual - jogadorAJogar.energiaAtual / 2;
+                } else if (jogadorAJogar.especie.tipo.equals("Omnívoros") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
+                    ganhoDeEnergia = 50;
+                }
+            }
+            if (alimento.equals("m")) {
+                CogumelosMagicos cogumelo = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
+                if (jogadasFeitas % 2 == 0) {
+                    ganhoDeEnergia = (jogadorAJogar.energiaAtual / cogumelo.nrAleatorio) * 100;
+                } else {
+                    ganhoDeEnergia = jogadorAJogar.energiaAtual - (jogadorAJogar.energiaAtual / cogumelo.nrAleatorio) * 100;
+                }
+            }
+        }
+
+        energyInfo[0] = String.valueOf(energiaGasta);
+        energyInfo[1] = String.valueOf(ganhoDeEnergia);
+
+        return energyInfo;
     }
 
     //EXTRA ORDENAR IDS

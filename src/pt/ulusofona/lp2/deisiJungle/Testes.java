@@ -72,14 +72,19 @@ public class Testes {
         String[][] comida = {comida1, comida2, comida3};
 
         System.out.println(gamemaneger.createInitialJungle(9, jogadores, comida));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerEnergyInfo(2)));
+
         System.out.println(gamemaneger.moveCurrentPlayer(2, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(3, true));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(5, true));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerEnergyInfo(1)));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(3, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerEnergyInfo(2)));
+
         System.out.println(gamemaneger.moveCurrentPlayer(1, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
 
