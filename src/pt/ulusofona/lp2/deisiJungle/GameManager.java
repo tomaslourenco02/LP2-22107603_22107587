@@ -519,6 +519,7 @@ public class GameManager {
             }
         }
         if(ganhoDeEnergia == 0){
+
             ganhoDeEnergia = jogadorAJogar.especie.ganhoEnergiaEmDescanso;
         }
 
