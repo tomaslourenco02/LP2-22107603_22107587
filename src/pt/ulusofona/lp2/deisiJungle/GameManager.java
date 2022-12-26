@@ -594,6 +594,10 @@ public class GameManager {
 
         int energiaFinal = consumoEnergia * nrSquares;
 
+        if(energiaFinal < 0){
+            energiaFinal *= -1;
+        }
+
         return energiaFinal;
     }
 
