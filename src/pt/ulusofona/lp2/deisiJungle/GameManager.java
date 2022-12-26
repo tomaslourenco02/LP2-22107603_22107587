@@ -518,6 +518,9 @@ public class GameManager {
                 }
             }
         }
+        if(ganhoDeEnergia == 0){
+            ganhoDeEnergia = jogadorAJogar.especie.ganhoEnergiaEmDescanso;
+        }
 
         energyInfo[0] = String.valueOf(energiaGasta);
         energyInfo[1] = String.valueOf(ganhoDeEnergia);

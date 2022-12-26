@@ -60,7 +60,7 @@ public class Testes {
         GameManager gamemaneger = new GameManager();
         String[] jogador1 = {"4", "Joao", "E"};
         String[] jogador2 = {"5", "Miguel", "L"};
-        String[] jogador3 = {"1", "José", "Z"};
+        String[] jogador3 = {"1", "José", "E"};
         String[] jogador4 = {"90", "Ana", "P"};
 
         String[][] jogadores = {jogador1, jogador2, jogador3, jogador4};
@@ -72,7 +72,7 @@ public class Testes {
         String[][] comida = {comida1, comida2, comida3};
 
         System.out.println(gamemaneger.createInitialJungle(9, jogadores, comida));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerEnergyInfo(2)));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerEnergyInfo(0)));
 
         System.out.println(gamemaneger.moveCurrentPlayer(2, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
