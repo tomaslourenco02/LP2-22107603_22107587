@@ -479,8 +479,8 @@ public class GameManager {
         int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrPositions);
         int ganhoDeEnergia = 0;
 
-        if (squares.get(jogadorAJogar.posicaoAtual).identificadoresAlimentosNoQuadrado != null) {
-            String alimento = squares.get(jogadorAJogar.posicaoAtual).identificadoresAlimentosNoQuadrado;
+        if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
+            String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
             if (alimento.equals("e")) {
                 if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Omnívoro")) {
                     ganhoDeEnergia = 20;
