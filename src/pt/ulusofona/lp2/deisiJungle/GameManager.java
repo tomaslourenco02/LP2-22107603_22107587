@@ -1239,6 +1239,12 @@ public class GameManager {
                                         countJogadores = 0;
                                     }
                                     return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Carne");
+                                } else if(jogadorAJogar.especie.tipo.equals("Herbívoro")){
+                                    jogadasFeitas++;
+                                    countJogadores++;
+                                    if (countJogadores > jogadores.size() - 1) {
+                                        countJogadores = 0;
+                                    }
                                 }
                             }
                             if (alimento.equals("m")) {

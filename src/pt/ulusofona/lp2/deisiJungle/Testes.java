@@ -57,7 +57,7 @@ public class Testes {
     @org.junit.Test
     public void testComida() {
         GameManager gamemaneger = new GameManager();
-        String[] jogador1 = {"4", "Joao", "P"};
+        String[] jogador1 = {"4", "Joao", "E"};
         String[] jogador2 = {"6", "Pedro", "Z"};
 
         String[][] jogadores = {jogador1, jogador2};
@@ -70,7 +70,9 @@ public class Testes {
 
         System.out.println((gamemaneger.createInitialJungle(10, jogadores, comida)));
         System.out.println(gamemaneger.moveCurrentPlayer(2, true));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
         System.out.println(gamemaneger.moveCurrentPlayer(2, true));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(2, true));
         System.out.println(gamemaneger.moveCurrentPlayer(4, true));
         System.out.println(gamemaneger.moveCurrentPlayer(6, true));
