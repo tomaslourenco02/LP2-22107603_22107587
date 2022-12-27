@@ -403,7 +403,7 @@ public class GameManager {
                 Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
                 squareInfo = alimento.info();
                 if (squares.get(squareNr).identificadoresAlimentosNoQuadrado.equals("b")) {
-                    squareInfo[1] = String.valueOf(squares.get(squareNr).bananas);
+                    squareInfo[1] = "Bananas : " + squares.get(squareNr).bananas + " : + 40 energia";
                 }
                 return squareInfo;
             }
