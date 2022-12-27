@@ -62,7 +62,7 @@ public class Testes {
 
         String[][] jogadores = {jogador1, jogador2};
 
-        String[] comida1 = {"c", String.valueOf(3)};
+        String[] comida1 = {"b", String.valueOf(3)};
         String[] comida2 = {"b", String.valueOf(5)};
         String[] comida3 = {"a", String.valueOf(7)};
 
@@ -73,7 +73,8 @@ public class Testes {
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
         System.out.println(gamemaneger.moveCurrentPlayer(2, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(2, true));
+        System.out.println(gamemaneger.moveCurrentPlayer(0, true));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
         System.out.println(gamemaneger.moveCurrentPlayer(4, true));
         System.out.println(gamemaneger.moveCurrentPlayer(6, true));
 
