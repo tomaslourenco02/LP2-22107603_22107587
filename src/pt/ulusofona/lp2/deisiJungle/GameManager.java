@@ -396,14 +396,13 @@ public class GameManager {
 
         SquareInfo square = new SquareInfo();
 
-        String[] squareInfo = new String[3];
         if (squareNr < squares.size() && squareNr >= 0) {
+            String[] squareInfo = new String[1];
 
             if (squares.get(squareNr).identificadoresAlimentosNoQuadrado != null) {
                 Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
-                squareInfo = alimento.info();
                 if (squares.get(squareNr).identificadoresAlimentosNoQuadrado.equals("b")) {
-                    squareInfo[1] = "Bananas : " + squares.get(squareNr).bananas + " : + 40 energia";
+                    squareInfo[0] = "Bananas : " + squares.get(squareNr-1).bananas + " : + 40 energia";
                 }
                 return squareInfo;
             }
@@ -433,17 +432,20 @@ public class GameManager {
             }
         }
         if (squareNr == tamanhoTabuleiro) {
+            String[] squareInfo = new String[3];
+
             squareInfo[0] = "finish.png";
             squareInfo[1] = "Meta";
             squareInfo[2] = identificadores.toString();
             return squareInfo;
         } else {
+            String[] squareInfo = new String[3];
 
             squareInfo[0] = square.imagemAColocar;
             squareInfo[1] = square.texto;
             squareInfo[2] = identificadores.toString();
+            return squareInfo;
         }
-        return squareInfo;
     }
 
     public String[] getPlayerInfo(int playerId) {
@@ -953,7 +955,7 @@ public class GameManager {
                                 }
                             }
                             if (alimento.equals("b")) {
-                                if (jogadorAJogar.bananasConsumidas > 1) {
+                                if (jogadorAJogar.bananasConsumidas >= 1) {
 
                                     jogadorAJogar.energiaAtual -= 40;
                                     jogadasFeitas++;
