@@ -479,10 +479,10 @@ public class GameManager {
         int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrPositions);
         int ganhoDeEnergia = 0;
 
-        if(posDestino < 1){
+        if (posDestino < 1) {
             posDestino = 1;
         }
-        if(posDestino > tamanhoTabuleiro){
+        if (posDestino > tamanhoTabuleiro) {
             posDestino = tamanhoTabuleiro;
         }
         if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
@@ -524,7 +524,7 @@ public class GameManager {
                 }
             }
         }
-        if(ganhoDeEnergia == 0){
+        if (ganhoDeEnergia == 0) {
 
             ganhoDeEnergia = jogadorAJogar.especie.ganhoEnergiaEmDescanso;
         }
@@ -604,7 +604,7 @@ public class GameManager {
 
         int energiaFinal = consumoEnergia * nrSquares;
 
-        if(energiaFinal < 0){
+        if (energiaFinal < 0) {
             energiaFinal *= -1;
         }
 
@@ -1231,7 +1231,7 @@ public class GameManager {
                                     }
                                     return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Carne");
 
-                                } else if (jogadorAJogar.especie.tipo.equals("Omnívoros") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
+                                } else if (jogadorAJogar.especie.tipo.equals("Omnívoro") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
                                     jogadorAJogar.energiaAtual += 50;
                                     jogadasFeitas++;
                                     countJogadores++;
@@ -1239,7 +1239,6 @@ public class GameManager {
                                         countJogadores = 0;
                                     }
                                     return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Carne");
-
                                 }
                             }
                             if (alimento.equals("m")) {
@@ -1277,26 +1276,26 @@ public class GameManager {
         return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
     }
 
-    public boolean jogadorAvancado(Jogador jogador){
+    public boolean jogadorAvancado(Jogador jogador) {
         int posicaoJogador = jogador.posicaoAtual;
         int[] posicoesJogadores = ordenarPosicoes();
         int distancia;
 
-        if(posicoesJogadores[posicoesJogadores.length-1] == posicaoJogador){
-            distancia = posicoesJogadores[posicoesJogadores.length-2] - posicaoJogador;
-        }else {
-            distancia = posicoesJogadores[posicoesJogadores.length-1] - posicaoJogador;
+        if (posicoesJogadores[posicoesJogadores.length - 1] == posicaoJogador) {
+            distancia = posicoesJogadores[posicoesJogadores.length - 2] - posicaoJogador;
+        } else {
+            distancia = posicoesJogadores[posicoesJogadores.length - 1] - posicaoJogador;
         }
 
         for (int i = 0; i < jogadores.size(); i++) {
-            if(distancia < 0){
-                if(jogadores.get(i).posicaoAtual == (distancia + posicaoJogador)){
-                    
+            if (distancia < 0) {
+                if (jogadores.get(i).posicaoAtual == (distancia + posicaoJogador)) {
+
                 }
             }
         }
 
-        if(distancia > tamanhoTabuleiro / 2){
+        if (distancia > tamanhoTabuleiro / 2) {
             jogador.ganhou = true;
             jogoAcabou = true;
             return true;
@@ -1308,22 +1307,22 @@ public class GameManager {
         int[] posicoesOrdenadas = new int[jogadores.size()];
         int[] idsOrdenados = ordenarIds();
 
-            for (int i = 0; i < idsOrdenados.length; i++) {
-                for (int j = 0; j < jogadores.size(); j++) {
-                    if (jogadores.get(j).getIdentificador() == idsOrdenados[i]) {
-                        posicoesOrdenadas[i] = jogadores.get(i).getPosicaoAtual();
-                    }
+        for (int i = 0; i < idsOrdenados.length; i++) {
+            for (int j = 0; j < jogadores.size(); j++) {
+                if (jogadores.get(j).getIdentificador() == idsOrdenados[i]) {
+                    posicoesOrdenadas[i] = jogadores.get(i).getPosicaoAtual();
                 }
             }
-            for (int i = 0; i < posicoesOrdenadas.length; i++) {
-                for (int j = 0; j < i; j++) {
-                    if (posicoesOrdenadas[i] > posicoesOrdenadas[j]) {
-                        int temp = posicoesOrdenadas[i];
-                        posicoesOrdenadas[i] = posicoesOrdenadas[j];
-                        posicoesOrdenadas[j] = temp;
-                    }
+        }
+        for (int i = 0; i < posicoesOrdenadas.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (posicoesOrdenadas[i] > posicoesOrdenadas[j]) {
+                    int temp = posicoesOrdenadas[i];
+                    posicoesOrdenadas[i] = posicoesOrdenadas[j];
+                    posicoesOrdenadas[j] = temp;
                 }
             }
+        }
         return posicoesOrdenadas;
     }
 
