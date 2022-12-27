@@ -479,6 +479,12 @@ public class GameManager {
         int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrPositions);
         int ganhoDeEnergia = 0;
 
+        if(posDestino < 1){
+            posDestino = 1;
+        }
+        if(posDestino > tamanhoTabuleiro){
+            posDestino = tamanhoTabuleiro;
+        }
         if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
             String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
             if (alimento.equals("e")) {
