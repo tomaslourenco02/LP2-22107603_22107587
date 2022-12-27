@@ -504,7 +504,7 @@ public class GameManager {
             if (alimento.equals("b")) {
                 if (jogadorAJogar.bananasConsumidas > 1) {
                     ganhoDeEnergia = -40;
-                } else if (squares.get(posDestino - 1).bananas > 0) {
+                } else if (squares.get(posDestino).bananas > 0) {
                     ganhoDeEnergia = 40;
                 }
             }
