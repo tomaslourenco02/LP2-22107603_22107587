@@ -401,6 +401,7 @@ public class GameManager {
 
             if (squares.get(squareNr).identificadoresAlimentosNoQuadrado != null) {
                 Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
+                squareInfo[0] = alimento.info();
                 if (squares.get(squareNr).identificadoresAlimentosNoQuadrado.equals("b")) {
                     squareInfo[0] = "Bananas : " + squares.get(squareNr-1).bananas + " : + 40 energia";
                 }

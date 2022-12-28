@@ -63,13 +63,13 @@ public class Testes {
         String[][] jogadores = {jogador1, jogador2};
 
         String[] comida1 = {"b", String.valueOf(5)};
-        String[] comida2 = {"b", String.valueOf(6)};
+        String[] comida2 = {"c", String.valueOf(6)};
         String[] comida3 = {"a", String.valueOf(7)};
 
         String[][] comida = {comida1, comida2, comida3};
 
         System.out.println((gamemaneger.createInitialJungle(10, jogadores, comida)));
-        System.out.println(gamemaneger.moveCurrentPlayer(4, true));
+        System.out.println(gamemaneger.moveCurrentPlayer(3, true));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
         System.out.println(gamemaneger.moveCurrentPlayer(2, true));
         System.out.println(gamemaneger.moveCurrentPlayer(1, true));

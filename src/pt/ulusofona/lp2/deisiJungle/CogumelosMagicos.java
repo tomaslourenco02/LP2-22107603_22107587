@@ -21,9 +21,8 @@ public class CogumelosMagicos extends Alimento{
     }
 
     @Override
-    String[] info() {
-        String[] info = new String[1];
-        info[0] = "Cogumelo Magico: +- " + nrAleatorio + "% energia";
+    String info() {
+        String info = "Cogumelo Magico: +- " + nrAleatorio + "% energia";
 
         return info;
     }

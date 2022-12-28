@@ -13,9 +13,8 @@ public class Carne extends Alimento{
     }
 
     @Override
-    String[] info() {
-        String[] info = new String[1];
-        info[0] = "Carne : + 50 energia : " + jogadasEfetuadas + " jogadas";
+    String info() {
+        String info ="Carne : + 50 energia : " + jogadasEfetuadas + " jogadas";
 
         return info;
     }

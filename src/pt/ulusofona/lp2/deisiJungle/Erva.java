@@ -10,10 +10,8 @@ public class Erva extends Alimento{
     }
 
     @Override
-    String[] info() {
-        String[] info = new String[1];
-        info[0] = "Erva : +- 20 energia";
-
+    String info() {
+        String info = "Erva : +- 20 energia";
 
         return info;
     }

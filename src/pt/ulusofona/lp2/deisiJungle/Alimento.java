@@ -17,5 +17,5 @@ public abstract class Alimento {
         return posicao;
     }
 
-    abstract String[] info();
+    abstract String info();
 }
