@@ -394,20 +394,9 @@ public class GameManager {
 
         int[] jogadoresNoSquare = new int[0];
 
+        String[] squareInfo = new String[3];
+
         SquareInfo square = new SquareInfo();
-
-        if (squareNr < squares.size() && squareNr >= 0) {
-            String[] squareInfo = new String[1];
-
-            if (squares.get(squareNr).identificadoresAlimentosNoQuadrado != null) {
-                Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
-                squareInfo[0] = alimento.info();
-                if (squares.get(squareNr).identificadoresAlimentosNoQuadrado.equals("b")) {
-                    squareInfo[0] = "Bananas : " + squares.get(squareNr).bananas + " : + 40 energia";
-                }
-                return squareInfo;
-            }
-        }
 
         if (squareNr - 1 == 0) {
             jogadoresNoSquare = getPlayerIds(squareNr);
@@ -417,7 +406,7 @@ public class GameManager {
 
         StringBuilder identificadores = new StringBuilder();
 
-        if (squareNr <= 0 || squareNr > tamanhoTabuleiro) {
+        if (squareNr < 1 || squareNr > tamanhoTabuleiro) {
             return null;
         }
 
@@ -432,16 +421,27 @@ public class GameManager {
                 identificadores.append(square.identificadoresNoQuadrado.get(i)).append(",");
             }
         }
-        if (squareNr == tamanhoTabuleiro) {
-            String[] squareInfo = new String[3];
 
+        if (squareNr < squares.size() && squareNr > 1) {
+
+            if (squares.get(squareNr).identificadoresAlimentosNoQuadrado != null) {
+                Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
+                squareInfo[0] = alimento.imagem;
+                squareInfo[1] = alimento.info();
+                squareInfo[2] = identificadores.toString();
+                if (squares.get(squareNr).identificadoresAlimentosNoQuadrado.equals("b")) {
+                    squareInfo[1] = "Bananas : " + squares.get(squareNr).bananas + " : + 40 energia";
+                }
+                return squareInfo;
+            }
+        }
+
+        if (squareNr == tamanhoTabuleiro) {
             squareInfo[0] = "finish.png";
             squareInfo[1] = "Meta";
             squareInfo[2] = identificadores.toString();
             return squareInfo;
         } else {
-            String[] squareInfo = new String[3];
-
             squareInfo[0] = square.imagemAColocar;
             squareInfo[1] = square.texto;
             squareInfo[2] = identificadores.toString();
