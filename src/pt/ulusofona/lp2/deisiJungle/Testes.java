@@ -72,7 +72,7 @@ public class Testes {
         System.out.println(gamemaneger.moveCurrentPlayer(3, true));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
         System.out.println(gamemaneger.moveCurrentPlayer(2, true));
-        System.out.println(gamemaneger.moveCurrentPlayer(1, true));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, true));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
         System.out.println(Arrays.toString(gamemaneger.getSquareInfo(6)));
 
