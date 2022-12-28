@@ -396,14 +396,13 @@ public class GameManager {
 
         SquareInfo square = new SquareInfo();
 
-        String[] squareInfo = new String[3];
         if (squareNr < squares.size() && squareNr >= 0) {
+            String[] squareInfo = new String[1];
 
             if (squares.get(squareNr).identificadoresAlimentosNoQuadrado != null) {
                 Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
-                squareInfo = alimento.info();
                 if (squares.get(squareNr).identificadoresAlimentosNoQuadrado.equals("b")) {
-                    squareInfo[1] = String.valueOf(squares.get(squareNr).bananas);
+                    squareInfo[0] = "Bananas : " + squares.get(squareNr-1).bananas + " : + 40 energia";
                 }
                 return squareInfo;
             }
@@ -433,17 +432,20 @@ public class GameManager {
             }
         }
         if (squareNr == tamanhoTabuleiro) {
+            String[] squareInfo = new String[3];
+
             squareInfo[0] = "finish.png";
             squareInfo[1] = "Meta";
             squareInfo[2] = identificadores.toString();
             return squareInfo;
         } else {
+            String[] squareInfo = new String[3];
 
             squareInfo[0] = square.imagemAColocar;
             squareInfo[1] = square.texto;
             squareInfo[2] = identificadores.toString();
+            return squareInfo;
         }
-        return squareInfo;
     }
 
     public String[] getPlayerInfo(int playerId) {
@@ -462,6 +464,7 @@ public class GameManager {
         int[] ids = ordenarIds();
         String[] infoJogadorAtual = new String[4];
 
+
         for (int i = 0; i < jogadores.size(); i++) {
             if (jogadores.get(i).getIdentificador() == ids[countJogadores]) {
                 infoJogadorAtual = jogadores.get(i).infoJogador();
@@ -472,8 +475,67 @@ public class GameManager {
 
     public String[] getCurrentPlayerEnergyInfo(int nrPositions) {
         String[] energyInfo = new String[2];
+        ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
+        Jogador jogadorAJogar = jogadoresOrdenados.get(countJogadores);
+        int posJogador = jogadorAJogar.getPosicaoAtual();
+        int posDestino = posJogador + nrPositions;
+        int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrPositions);
+        int ganhoDeEnergia = 0;
 
-        return null;
+        if (posDestino < 1) {
+            posDestino = 1;
+        }
+        if (posDestino > tamanhoTabuleiro) {
+            posDestino = tamanhoTabuleiro;
+        }
+        if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
+            String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
+            if (alimento.equals("e")) {
+                if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Omnívoro")) {
+                    ganhoDeEnergia = 20;
+                } else if (jogadorAJogar.especie.tipo.equals("Carnívoro")) {
+                    ganhoDeEnergia = 20;
+                }
+            }
+            if (alimento.equals("a")) {
+                if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
+                    ganhoDeEnergia = 15;
+                } else if (jogadorAJogar.especie.tipo.equals("Omnívoro")) {
+                    ganhoDeEnergia = ((jogadorAJogar.energiaAtual * 20) / 100);
+                }
+            }
+            if (alimento.equals("b")) {
+                if (jogadorAJogar.bananasConsumidas > 1) {
+                    ganhoDeEnergia = -40;
+                } else if (squares.get(posDestino).bananas > 0) {
+                    ganhoDeEnergia = 40;
+                }
+            }
+            if (alimento.equals("c")) {
+                if (jogadasFeitas > 12) {
+                    ganhoDeEnergia = jogadorAJogar.energiaAtual - jogadorAJogar.energiaAtual / 2;
+                } else if (jogadorAJogar.especie.tipo.equals("Omnívoros") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
+                    ganhoDeEnergia = 50;
+                }
+            }
+            if (alimento.equals("m")) {
+                CogumelosMagicos cogumelo = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
+                if (jogadasFeitas % 2 == 0) {
+                    ganhoDeEnergia = (jogadorAJogar.energiaAtual / cogumelo.nrAleatorio) * 100;
+                } else {
+                    ganhoDeEnergia = jogadorAJogar.energiaAtual - (jogadorAJogar.energiaAtual / cogumelo.nrAleatorio) * 100;
+                }
+            }
+        }
+        if (ganhoDeEnergia == 0) {
+
+            ganhoDeEnergia = jogadorAJogar.especie.ganhoEnergiaEmDescanso;
+        }
+
+        energyInfo[0] = String.valueOf(energiaGasta);
+        energyInfo[1] = String.valueOf(ganhoDeEnergia);
+
+        return energyInfo;
     }
 
     //EXTRA ORDENAR IDS
@@ -545,6 +607,10 @@ public class GameManager {
 
         int energiaFinal = consumoEnergia * nrSquares;
 
+        if (energiaFinal < 0) {
+            energiaFinal *= -1;
+        }
+
         return energiaFinal;
     }
 
@@ -587,292 +653,6 @@ public class GameManager {
         }
     }
 
-    public MovementResult moveCurrentPlayer2(int nrSquares, boolean bypassValidations) {
-
-        if (!bypassValidations) {
-            if (nrSquares < -6 || nrSquares > 6) {
-                countJogadores++;
-                if (countJogadores > jogadores.size() - 1) {
-                    countJogadores = 0;
-                }
-                return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
-            }
-        }
-
-        ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
-        Jogador jogadorAJogar = jogadoresOrdenados.get(countJogadores);
-
-        int posJogador = jogadorAJogar.getPosicaoAtual();
-        int posDestino = posJogador + nrSquares;
-        int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
-
-
-        if (posDestino <= 1) {
-
-            countJogadores++;
-            if (countJogadores > jogadores.size() - 1) {
-                countJogadores = 0;
-            }
-            return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
-        }
-        if (jogadorAJogar.energiaAtual <= 0 || jogadorAJogar.energiaAtual - gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares) < 0) {
-
-            countJogadores++;
-            if (countJogadores > jogadores.size() - 1) {
-                countJogadores = 0;
-            }
-            return new MovementResult(MovementResultCode.NO_ENERGY, null);
-        }
-        if (nrSquares == 0) { //descanso
-            if (jogadorAJogar.energiaAtual + jogadorAJogar.especie.ganhoEnergiaEmDescanso > 200) {
-                jogadorAJogar.energiaAtual = 200;
-            } else {
-                jogadorAJogar.energiaAtual += jogadorAJogar.especie.ganhoEnergiaEmDescanso;
-            }
-            String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
-
-            if (alimento.equals("e")) {
-
-                if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Omnívoro")) {
-
-                    jogadorAJogar.energiaAtual += 20;
-                    countJogadores++;
-                    if (countJogadores > jogadores.size() - 1) {
-                        countJogadores = 0;
-                    }
-                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Erva");
-                } else if (jogadorAJogar.especie.tipo.equals("Carnívoro")) {
-
-                    jogadorAJogar.energiaAtual -= 20;
-                    countJogadores++;
-                    if (countJogadores > jogadores.size() - 1) {
-                        countJogadores = 0;
-                    }
-                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Erva");
-                }
-            }
-            if (alimento.equals("a")) {
-
-                if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
-
-                    jogadorAJogar.energiaAtual += 15;
-                    countJogadores++;
-                    if (countJogadores > jogadores.size() - 1) {
-                        countJogadores = 0;
-                    }
-                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Agua");
-
-                } else if (jogadorAJogar.especie.tipo.equals("Omnívoro")) {
-
-                    jogadorAJogar.energiaAtual += ((jogadorAJogar.energiaAtual * 20) / 100);
-                    countJogadores++;
-                    if (countJogadores > jogadores.size() - 1) {
-                        countJogadores = 0;
-                    }
-                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Agua");
-                }
-            }
-            if (alimento.equals("b")) {
-                if (jogadorAJogar.bananasConsumidas > 1) {
-
-                    jogadorAJogar.energiaAtual -= 40;
-                    countJogadores++;
-                    if (countJogadores > jogadores.size() - 1) {
-                        countJogadores = 0;
-                    }
-                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Banana");
-
-                } else if (squares.get(posDestino - 1).bananas > 0) {
-
-                    jogadorAJogar.energiaAtual += 40;
-                    jogadorAJogar.bananasConsumidas++;
-                    squares.get(posDestino - 1).bananas--;
-                    countJogadores++;
-                    if (countJogadores > jogadores.size() - 1) {
-                        countJogadores = 0;
-                    }
-                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Banana");
-                }
-            }
-            if (alimento.equals("c")) {
-                if (jogadasFeitas > 12) {
-                    jogadorAJogar.energiaAtual = jogadorAJogar.energiaAtual / 2;
-                    countJogadores++;
-                    if (countJogadores > jogadores.size() - 1) {
-                        countJogadores = 0;
-                    }
-                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Carne");
-
-                } else if (jogadorAJogar.especie.tipo.equals("Omnívoros") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
-                    jogadorAJogar.energiaAtual += 50;
-                    countJogadores++;
-                    if (countJogadores > jogadores.size() - 1) {
-                        countJogadores = 0;
-                    }
-                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Carne");
-
-                }
-            }
-            if (alimento.equals("m")) {
-                CogumelosMagicos cogumelo = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
-                if (jogadasFeitas % 2 == 0) {
-                    jogadorAJogar.energiaAtual += (jogadorAJogar.energiaAtual / cogumelo.nrAleatorio) * 100;
-
-                } else {
-                    jogadorAJogar.energiaAtual -= (jogadorAJogar.energiaAtual / cogumelo.nrAleatorio) * 100;
-
-                }
-                countJogadores++;
-                if (countJogadores > jogadores.size() - 1) {
-                    countJogadores = 0;
-                }
-                return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelos Magicos");
-            }
-        }
-        if (posDestino >= tamanhoTabuleiro) {
-
-            jogadorAJogar.posicaoAtual = tamanhoTabuleiro;
-            jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
-            jogoAcabou = true;
-        }
-        if (!jogoAcabou) {
-            if (posDestino >= tamanhoTabuleiro) {
-                posDestino = tamanhoTabuleiro;
-                jogadoresOrdenados.get(countJogadores).ganhou = true;
-                jogoAcabou = true;
-            }
-
-            for (int i = 0; i < squares.size(); i++) {
-                for (int j = 0; j < squares.get(i).identificadoresNoQuadrado.size(); j++) {
-                    if (squares.get(i).identificadoresNoQuadrado.get(j) == jogadorAJogar.identificador) {
-
-                        squares.get(i).identificadoresNoQuadrado.remove(Integer.valueOf(jogadorAJogar.identificador));
-                        squares.get(posDestino).identificadoresNoQuadrado.add(jogadorAJogar.identificador);
-                        jogadorAJogar.posicaoAtual = posDestino;
-                        jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
-
-                        if (posDestino >= tamanhoTabuleiro) {
-                            jogadorAJogar.ganhou = true;
-                            jogoAcabou = true;
-                        }
-                        if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
-
-                            String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
-
-                            if (alimento.equals("e")) {
-
-                                if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Omnívoro")) {
-
-                                    jogadorAJogar.energiaAtual += 20;
-                                    countJogadores++;
-                                    if (countJogadores > jogadores.size() - 1) {
-                                        countJogadores = 0;
-                                    }
-                                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Erva");
-                                } else if (jogadorAJogar.especie.tipo.equals("Carnívoro")) {
-
-                                    jogadorAJogar.energiaAtual -= 20;
-                                    countJogadores++;
-                                    if (countJogadores > jogadores.size() - 1) {
-                                        countJogadores = 0;
-                                    }
-                                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Erva");
-                                }
-                            }
-                            if (alimento.equals("a")) {
-
-                                if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
-
-                                    jogadorAJogar.energiaAtual += 15;
-                                    countJogadores++;
-                                    if (countJogadores > jogadores.size() - 1) {
-                                        countJogadores = 0;
-                                    }
-                                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Agua");
-
-                                } else if (jogadorAJogar.especie.tipo.equals("Omnívoro")) {
-
-                                    jogadorAJogar.energiaAtual += ((jogadorAJogar.energiaAtual * 20) / 100);
-                                    countJogadores++;
-                                    if (countJogadores > jogadores.size() - 1) {
-                                        countJogadores = 0;
-                                    }
-                                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Agua");
-                                }
-                            }
-                            if (alimento.equals("b")) {
-                                if (jogadorAJogar.bananasConsumidas > 1) {
-
-                                    jogadorAJogar.energiaAtual -= 40;
-                                    countJogadores++;
-                                    if (countJogadores > jogadores.size() - 1) {
-                                        countJogadores = 0;
-                                    }
-                                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Banana");
-
-                                } else if (squares.get(posDestino - 1).bananas > 0) {
-
-                                    jogadorAJogar.energiaAtual += 40;
-                                    jogadorAJogar.bananasConsumidas++;
-                                    squares.get(posDestino - 1).bananas--;
-                                    countJogadores++;
-                                    if (countJogadores > jogadores.size() - 1) {
-                                        countJogadores = 0;
-                                    }
-                                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Banana");
-                                }
-                            }
-                            if (alimento.equals("c")) {
-                                if (jogadasFeitas > 12) {
-                                    jogadorAJogar.energiaAtual = jogadorAJogar.energiaAtual / 2;
-                                    countJogadores++;
-                                    if (countJogadores > jogadores.size() - 1) {
-                                        countJogadores = 0;
-                                    }
-                                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Carne");
-
-                                } else if (jogadorAJogar.especie.tipo.equals("Omnívoros") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
-                                    jogadorAJogar.energiaAtual += 50;
-                                    countJogadores++;
-                                    if (countJogadores > jogadores.size() - 1) {
-                                        countJogadores = 0;
-                                    }
-                                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Carne");
-
-                                }
-                            }
-                            if (alimento.equals("m")) {
-                                CogumelosMagicos cogumelo = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
-                                if (jogadasFeitas % 2 == 0) {
-                                    jogadorAJogar.energiaAtual += (jogadorAJogar.energiaAtual / cogumelo.nrAleatorio) * 100;
-
-                                } else {
-                                    jogadorAJogar.energiaAtual -= (jogadorAJogar.energiaAtual / cogumelo.nrAleatorio) * 100;
-
-                                }
-                                countJogadores++;
-                                if (countJogadores > jogadores.size() - 1) {
-                                    countJogadores = 0;
-                                }
-                                return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelos Magicos");
-                            }
-                        }
-                        break;
-                    }
-                }
-                break;
-            }
-        }
-
-        countJogadores++;
-        if (countJogadores > jogadores.size() - 1) {
-            countJogadores = 0;
-        }
-        return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
-
-    }
-
-
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
 
         ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
@@ -914,7 +694,6 @@ public class GameManager {
         }*/
 
         if (posDestino <= 0) {
-
             jogadasFeitas++;
             countJogadores++;
             if (countJogadores > jogadores.size() - 1) {
@@ -922,6 +701,7 @@ public class GameManager {
             }
             return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
         }
+
         if (jogadorAJogar.energiaAtual <= 0 || jogadorAJogar.energiaAtual - gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares) < 0) {
 
             jogadasFeitas++;
@@ -931,6 +711,7 @@ public class GameManager {
             }
             return new MovementResult(MovementResultCode.NO_ENERGY, null);
         }
+
         if (nrSquares == 0) { //descanso
             if (jogadorAJogar.energiaAtual + jogadorAJogar.especie.ganhoEnergiaEmDescanso > 200) {
                 jogadorAJogar.energiaAtual = 200;
@@ -951,6 +732,9 @@ public class GameManager {
                         if (countJogadores > jogadores.size() - 1) {
                             countJogadores = 0;
                         }
+                        if(jogadorAJogar.energiaAtual > 200){
+                            jogadorAJogar.energiaAtual = 200;
+                        }
                         return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Erva");
                     } else if (jogadorAJogar.especie.tipo.equals("Carnívoro")) {
 
@@ -959,6 +743,9 @@ public class GameManager {
                         countJogadores++;
                         if (countJogadores > jogadores.size() - 1) {
                             countJogadores = 0;
+                        }
+                        if(jogadorAJogar.energiaAtual > 200){
+                            jogadorAJogar.energiaAtual = 200;
                         }
                         return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Erva");
                     }
@@ -973,6 +760,9 @@ public class GameManager {
                         if (countJogadores > jogadores.size() - 1) {
                             countJogadores = 0;
                         }
+                        if(jogadorAJogar.energiaAtual > 200){
+                            jogadorAJogar.energiaAtual = 200;
+                        }
                         return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Agua");
 
                     } else if (jogadorAJogar.especie.tipo.equals("Omnívoro")) {
@@ -982,6 +772,9 @@ public class GameManager {
                         countJogadores++;
                         if (countJogadores > jogadores.size() - 1) {
                             countJogadores = 0;
+                        }
+                        if(jogadorAJogar.energiaAtual > 200){
+                            jogadorAJogar.energiaAtual = 200;
                         }
                         return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Agua");
                     }
@@ -995,17 +788,23 @@ public class GameManager {
                         if (countJogadores > jogadores.size() - 1) {
                             countJogadores = 0;
                         }
+                        if(jogadorAJogar.energiaAtual > 200){
+                            jogadorAJogar.energiaAtual = 200;
+                        }
                         return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Banana");
 
-                    } else if (squares.get(posDestino - 1).bananas > 0) {
+                    } else if (squares.get(posDestino).bananas > 0) {
 
                         jogadorAJogar.energiaAtual += 40;
                         jogadorAJogar.bananasConsumidas++;
-                        squares.get(posDestino - 1).bananas--;
+                        squares.get(posDestino).bananas--;
                         jogadasFeitas++;
                         countJogadores++;
                         if (countJogadores > jogadores.size() - 1) {
                             countJogadores = 0;
+                        }
+                        if(jogadorAJogar.energiaAtual > 200){
+                            jogadorAJogar.energiaAtual = 200;
                         }
                         return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Banana");
                     }
@@ -1018,6 +817,9 @@ public class GameManager {
                         if (countJogadores > jogadores.size() - 1) {
                             countJogadores = 0;
                         }
+                        if(jogadorAJogar.energiaAtual > 200){
+                            jogadorAJogar.energiaAtual = 200;
+                        }
                         return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Carne");
 
                     } else if (jogadorAJogar.especie.tipo.equals("Omnívoros") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
@@ -1026,6 +828,9 @@ public class GameManager {
                         countJogadores++;
                         if (countJogadores > jogadores.size() - 1) {
                             countJogadores = 0;
+                        }
+                        if(jogadorAJogar.energiaAtual > 200){
+                            jogadorAJogar.energiaAtual = 200;
                         }
                         return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Carne");
 
@@ -1045,7 +850,10 @@ public class GameManager {
                     if (countJogadores > jogadores.size() - 1) {
                         countJogadores = 0;
                     }
-                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelos Magicos");
+                    if(jogadorAJogar.energiaAtual > 200){
+                        jogadorAJogar.energiaAtual = 200;
+                    }
+                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelo Magico");
                 }
             }
             jogadasFeitas++;
@@ -1066,6 +874,7 @@ public class GameManager {
             if (posDestino >= tamanhoTabuleiro) {
                 posDestino = tamanhoTabuleiro;
                 jogadoresOrdenados.get(countJogadores).ganhou = true;
+                jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
                 jogoAcabou = true;
             }
 
@@ -1082,6 +891,7 @@ public class GameManager {
                             jogadorAJogar.ganhou = true;
                             jogoAcabou = true;
                         }
+
                         if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
 
                             String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
@@ -1096,6 +906,9 @@ public class GameManager {
                                     if (countJogadores > jogadores.size() - 1) {
                                         countJogadores = 0;
                                     }
+                                    if(jogadorAJogar.energiaAtual > 200){
+                                        jogadorAJogar.energiaAtual = 200;
+                                    }
                                     return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Erva");
                                 } else if (jogadorAJogar.especie.tipo.equals("Carnívoro")) {
 
@@ -1104,6 +917,9 @@ public class GameManager {
                                     countJogadores++;
                                     if (countJogadores > jogadores.size() - 1) {
                                         countJogadores = 0;
+                                    }
+                                    if(jogadorAJogar.energiaAtual > 200){
+                                        jogadorAJogar.energiaAtual = 200;
                                     }
                                     return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Erva");
                                 }
@@ -1119,6 +935,9 @@ public class GameManager {
                                     if (countJogadores > jogadores.size() - 1) {
                                         countJogadores = 0;
                                     }
+                                    if(jogadorAJogar.energiaAtual > 200){
+                                        jogadorAJogar.energiaAtual = 200;
+                                    }
                                     return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Agua");
 
                                 } else if (jogadorAJogar.especie.tipo.equals("Omnívoro")) {
@@ -1129,11 +948,14 @@ public class GameManager {
                                     if (countJogadores > jogadores.size() - 1) {
                                         countJogadores = 0;
                                     }
+                                    if(jogadorAJogar.energiaAtual > 200){
+                                        jogadorAJogar.energiaAtual = 200;
+                                    }
                                     return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Agua");
                                 }
                             }
                             if (alimento.equals("b")) {
-                                if (jogadorAJogar.bananasConsumidas > 1) {
+                                if (jogadorAJogar.bananasConsumidas >= 1) {
 
                                     jogadorAJogar.energiaAtual -= 40;
                                     jogadasFeitas++;
@@ -1141,17 +963,23 @@ public class GameManager {
                                     if (countJogadores > jogadores.size() - 1) {
                                         countJogadores = 0;
                                     }
+                                    if(jogadorAJogar.energiaAtual > 200){
+                                        jogadorAJogar.energiaAtual = 200;
+                                    }
                                     return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Bananas");
 
-                                } else if (squares.get(posDestino - 1).bananas > 0) {
+                                } else if (squares.get(posDestino).bananas > 0) {
 
                                     jogadorAJogar.energiaAtual += 40;
                                     jogadorAJogar.bananasConsumidas++;
-                                    squares.get(posDestino - 1).bananas--;
+                                    squares.get(posDestino).bananas--;
                                     jogadasFeitas++;
                                     countJogadores++;
                                     if (countJogadores > jogadores.size() - 1) {
                                         countJogadores = 0;
+                                    }
+                                    if(jogadorAJogar.energiaAtual > 200){
+                                        jogadorAJogar.energiaAtual = 200;
                                     }
                                     return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Bananas");
                                 }
@@ -1164,17 +992,28 @@ public class GameManager {
                                     if (countJogadores > jogadores.size() - 1) {
                                         countJogadores = 0;
                                     }
+                                    if(jogadorAJogar.energiaAtual > 200){
+                                        jogadorAJogar.energiaAtual = 200;
+                                    }
                                     return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Carne");
 
-                                } else if (jogadorAJogar.especie.tipo.equals("Omnívoros") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
+                                } else if (jogadorAJogar.especie.tipo.equals("Omnívoro") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
                                     jogadorAJogar.energiaAtual += 50;
                                     jogadasFeitas++;
                                     countJogadores++;
                                     if (countJogadores > jogadores.size() - 1) {
                                         countJogadores = 0;
                                     }
+                                    if(jogadorAJogar.energiaAtual > 200){
+                                        jogadorAJogar.energiaAtual = 200;
+                                    }
                                     return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Carne");
-
+                                } else if(jogadorAJogar.especie.tipo.equals("Herbívoro")){
+                                    jogadasFeitas++;
+                                    countJogadores++;
+                                    if (countJogadores > jogadores.size() - 1) {
+                                        countJogadores = 0;
+                                    }
                                 }
                             }
                             if (alimento.equals("m")) {
@@ -1191,13 +1030,20 @@ public class GameManager {
                                 if (countJogadores > jogadores.size() - 1) {
                                     countJogadores = 0;
                                 }
-                                return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelos Magicos");
+                                if(jogadorAJogar.energiaAtual > 200){
+                                    jogadorAJogar.energiaAtual = 200;
+                                }
+                                return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelo Magico");
                             }
                         }
-                        break;
+                        jogadasFeitas++;
+                        countJogadores++;
+                        if (countJogadores > jogadores.size() - 1) {
+                            countJogadores = 0;
+                        }
+                        return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
                     }
                 }
-                break;
             }
         }
         jogadasFeitas++;
@@ -1208,26 +1054,50 @@ public class GameManager {
         return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
     }
 
+    public boolean jogadorAvancado(Jogador jogador) {
+        int posicaoJogador = jogador.posicaoAtual;
+        int[] posicoesJogadores = ordenarPosicoes();
+        int distancia;
+
+        if (posicoesJogadores[posicoesJogadores.length - 1] == posicaoJogador) {
+            distancia = posicoesJogadores[posicoesJogadores.length - 2] - posicaoJogador;
+        } else {
+            distancia = posicoesJogadores[posicoesJogadores.length - 1] - posicaoJogador;
+        }
+
+        for (int i = 0; i < jogadores.size(); i++) {
+            if (distancia < 0) {
+                if (jogadores.get(i).posicaoAtual == (distancia + posicaoJogador)) {
+
+                }
+            }
+        }
+
+        if (distancia > tamanhoTabuleiro / 2) {
+            jogador.ganhou = true;
+            jogoAcabou = true;
+            return true;
+        }
+        return false;
+    }
+
     public int[] ordenarPosicoes() {
         int[] posicoesOrdenadas = new int[jogadores.size()];
         int[] idsOrdenados = ordenarIds();
 
-        if (jogoAcabou == true) {
-            for (int i = 0; i < idsOrdenados.length; i++) {
-                for (int j = 0; j < jogadores.size(); j++) {
-                    if (jogadores.get(j).getIdentificador() == idsOrdenados[i]) {
-                        posicoesOrdenadas[i] = jogadores.get(i).getPosicaoAtual();
-                    }
+        for (int i = 0; i < idsOrdenados.length; i++) {
+            for (int j = 0; j < jogadores.size(); j++) {
+                if (jogadores.get(j).getIdentificador() == idsOrdenados[i]) {
+                    posicoesOrdenadas[i] = jogadores.get(i).getPosicaoAtual();
                 }
             }
-            for (int i = 0; i < posicoesOrdenadas.length; i++) {
-                for (int j = 0; j < i; j++) {
-                    if (posicoesOrdenadas[i] > posicoesOrdenadas[j]) {
-                        int temp = posicoesOrdenadas[i];
-                        posicoesOrdenadas[i] = posicoesOrdenadas[j];
-                        posicoesOrdenadas[j] = temp;
-                    }
-
+        }
+        for (int i = 0; i < posicoesOrdenadas.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (posicoesOrdenadas[i] > posicoesOrdenadas[j]) {
+                    int temp = posicoesOrdenadas[i];
+                    posicoesOrdenadas[i] = posicoesOrdenadas[j];
+                    posicoesOrdenadas[j] = temp;
                 }
             }
         }

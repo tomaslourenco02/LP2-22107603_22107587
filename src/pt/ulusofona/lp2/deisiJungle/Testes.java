@@ -12,26 +12,69 @@ public class Testes {
 
     public void testJungle() {
         GameManager gamemaneger = new GameManager();
-        String[] jogador1 = {"4", "Joao", "Z"};
-        String[] jogador2 = {"6", "Pedro", "L"};
+        String[] jogador1 = {"4", "Joao", "P"};
+        String[] jogador2 = {"6", "Pedro", "Z"};
 
         String[][] jogadores = {jogador1, jogador2};
 
-        String[] comida1 = {"c", String.valueOf(4)};
 
-        String[][] comida = {comida1};
+        System.out.println((gamemaneger.createInitialJungle(26, jogadores, null)));
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));      //6*4=24   70-24=46
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, false));      //2*2=4     70-4=66
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(6)));
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));      //6*4=24   46-24=22
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
+        System.out.println(gamemaneger.moveCurrentPlayer(4, false));     //4*2=8     66-8=58
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(6)));
+        System.out.println(gamemaneger.moveCurrentPlayer(5, false));     //5*4=20    22-20=2
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
+        System.out.println(gamemaneger.moveCurrentPlayer(4, false));     //4*2=8     58-8=50
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(6)));
+        System.out.println(gamemaneger.moveCurrentPlayer(5, false));     //5*4=20    20-20=0 NO Energy
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
+        System.out.println(gamemaneger.moveCurrentPlayer(4, false));     //4*2=8     58-8=50
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(6)));
+
+
+        System.out.println(gamemaneger.moveCurrentPlayer(5, false));     //5*4=20    20-20=0 NO Energy
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));     //4*2=8     58-8=50
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(6)));
+        System.out.println(gamemaneger.moveCurrentPlayer(5, false));     //5*4=20    20-20=0 NO Energy
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));     //4*2=8     58-8=50
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(6)));
+        System.out.println(gamemaneger.moveCurrentPlayer(5, false));     //5*4=20    20-20=0 NO Energy
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
+        System.out.println(gamemaneger.moveCurrentPlayer(6, false));     //4*2=8     58-8=50
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(6)));
+
+        System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
+
+    }
+
+    @org.junit.Test
+    public void testComida() {
+        GameManager gamemaneger = new GameManager();
+        String[] jogador1 = {"4", "Joao", "L"};
+        String[] jogador2 = {"6", "Pedro", "Z"};
+
+        String[][] jogadores = {jogador1, jogador2};
+
+        String[] comida1 = {"b", String.valueOf(5)};
+        String[] comida2 = {"b", String.valueOf(6)};
+        String[] comida3 = {"a", String.valueOf(7)};
+
+        String[][] comida = {comida1, comida2, comida3};
 
         System.out.println((gamemaneger.createInitialJungle(10, jogadores, comida)));
-        System.out.println(gamemaneger.moveCurrentPlayer(1, false));
+        System.out.println(gamemaneger.moveCurrentPlayer(4, true));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
-        System.out.println(gamemaneger.moveCurrentPlayer(5, false));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(6)));
-        System.out.println(gamemaneger.moveCurrentPlayer(0, false));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, true));
+        System.out.println(gamemaneger.moveCurrentPlayer(1, true));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
-        System.out.println(gamemaneger.moveCurrentPlayer(4, false));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
-        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(4)));
-        System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
+        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(6)));
 
     }
 
@@ -41,7 +84,7 @@ public class Testes {
         GameManager gamemaneger = new GameManager();
         String[] jogador1 = {"4", "Joao", "E"};
         String[] jogador2 = {"5", "Miguel", "L"};
-        String[] jogador3 = {"1", "José", "Z"};
+        String[] jogador3 = {"1", "José", "E"};
         String[] jogador4 = {"90", "Ana", "P"};
 
         String[][] jogadores = {jogador1, jogador2, jogador3, jogador4};
@@ -53,14 +96,19 @@ public class Testes {
         String[][] comida = {comida1, comida2, comida3};
 
         System.out.println(gamemaneger.createInitialJungle(9, jogadores, comida));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerEnergyInfo(0)));
+
         System.out.println(gamemaneger.moveCurrentPlayer(2, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(3, true));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(5, true));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerEnergyInfo(1)));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(3, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerEnergyInfo(2)));
+
         System.out.println(gamemaneger.moveCurrentPlayer(1, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
 

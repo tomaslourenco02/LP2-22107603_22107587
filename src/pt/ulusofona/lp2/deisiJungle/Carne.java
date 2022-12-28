@@ -24,8 +24,8 @@ public class Carne extends Alimento{
     public String toString() {
 
         if(jogadasEfetuadas > 12){
-            return "“Carne toxica";
+            return "Carne toxica";
         }
-        return "Carne : +- 50 energia : " + jogadasEfetuadas + " jogadas";
+        return "Carne : + 50 energia : " + jogadasEfetuadas + " jogadas";
     }
 }
