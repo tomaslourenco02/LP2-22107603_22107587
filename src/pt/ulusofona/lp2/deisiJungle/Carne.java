@@ -14,8 +14,10 @@ public class Carne extends Alimento{
 
     @Override
     String info() {
+        if(jogadasEfetuadas > 12){
+            return "Carne toxica";
+        }
         String info ="Carne : + 50 energia : " + jogadasEfetuadas + " jogadas";
-
         return info;
     }
 
