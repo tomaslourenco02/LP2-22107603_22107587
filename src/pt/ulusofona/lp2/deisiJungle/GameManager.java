@@ -831,11 +831,11 @@ public class GameManager {
                 if (alimento.equals("m")) {
                     CogumelosMagicos cogumelo = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
                     if (jogadasFeitas % 2 == 0) {
-                        int energia = ((cogumelo.nrAleatorio*jogadorAJogar.energiaAtual)/100);
-                        jogadorAJogar.energiaAtual += energia;
+                        double energia = jogadorAJogar.energiaAtual+(Math.floor(cogumelo.nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
+                        jogadorAJogar.energiaAtual = (int) energia;
                     } else {
-                        int energiaAtirar = ((cogumelo.nrAleatorio*jogadorAJogar.energiaAtual)/100);
-                        jogadorAJogar.energiaAtual -= energiaAtirar;
+                        double energia = jogadorAJogar.energiaAtual-(Math.floor(cogumelo.nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
+                        jogadorAJogar.energiaAtual = (int) energia;
                     }
                     countJogadores++;
                     if (countJogadores > jogadores.size() - 1) {
@@ -1000,8 +1000,8 @@ public class GameManager {
                             if (alimento.equals("m")) {
                                 CogumelosMagicos cogumelo = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
                                 if (jogadasFeitas % 2 == 0) {
-                                    int energia = ((cogumelo.nrAleatorio*jogadorAJogar.energiaAtual)/100);
-                                    jogadorAJogar.energiaAtual += energia;
+                                    double energia = jogadorAJogar.energiaAtual+(Math.floor(cogumelo.nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
+                                    jogadorAJogar.energiaAtual = (int) energia;
                                 } else {
                                     double energia = jogadorAJogar.energiaAtual-(Math.floor(cogumelo.nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
                                     jogadorAJogar.energiaAtual = (int) energia;
