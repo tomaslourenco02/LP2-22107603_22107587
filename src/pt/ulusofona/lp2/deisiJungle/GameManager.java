@@ -833,7 +833,7 @@ public class GameManager {
                 }
                 if (alimento.equals("m")) {
                     if (jogadasFeitas % 2 == 0) {
-                        double energia = jogadorAJogar.energiaAtual+(Math.round(nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
+                        double energia = jogadorAJogar.energiaAtual+((nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
                         jogadorAJogar.energiaAtual = (int) Math.round(energia);
                     } else {
                         double energia = jogadorAJogar.energiaAtual-((nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
