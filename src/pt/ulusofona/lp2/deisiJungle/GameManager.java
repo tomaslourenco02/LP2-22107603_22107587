@@ -1000,9 +1000,11 @@ public class GameManager {
                             if (alimento.equals("m")) {
                                 CogumelosMagicos cogumelo = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
                                 if (jogadasFeitas % 2 == 0) {
-                                    jogadorAJogar.energiaAtual += ((cogumelo.nrAleatorio / 100) * jogadorAJogar.energiaAtual);
+                                    int energia = ((cogumelo.nrAleatorio*jogadorAJogar.energiaAtual)/100);
+                                    jogadorAJogar.energiaAtual += energia;
                                 } else {
-                                    jogadorAJogar.energiaAtual = (jogadorAJogar.energiaAtual-((cogumelo.nrAleatorio / 100)*jogadorAJogar.energiaAtual));
+                                    int energiaAtirar = ((cogumelo.nrAleatorio*jogadorAJogar.energiaAtual)/100);
+                                    jogadorAJogar.energiaAtual -= energiaAtirar;
                                 }
                                 countJogadores++;
                                 if (countJogadores > jogadores.size() - 1) {
