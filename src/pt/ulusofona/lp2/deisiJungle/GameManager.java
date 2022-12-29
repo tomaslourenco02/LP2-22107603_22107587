@@ -525,10 +525,10 @@ public class GameManager {
             if (alimento.equals("m")) {
                 int nrAleatorio = squares.get(posDestino).cogumelo.nrAleatorio;
                 if (jogadasFeitas % 2 == 0) {
-                    double energia = jogadorAJogar.energiaAtual+(Math.floor(nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
+                    double energia = jogadorAJogar.energiaAtual+((nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
                     jogadorAJogar.energiaAtual = (int) energia;
                 } else {
-                    double energia = jogadorAJogar.energiaAtual-(Math.floor(nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
+                    double energia = jogadorAJogar.energiaAtual-((nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
                     jogadorAJogar.energiaAtual = (int) energia;
                 }
             }
@@ -666,8 +666,6 @@ public class GameManager {
         int posJogador = jogadorAJogar.getPosicaoAtual();
         int posDestino = posJogador + nrSquares;
         int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
-        int nrAleatorio = squares.get(posDestino).cogumelo.nrAleatorio;
-
         jogadasFeitas++;
 
         if (!bypassValidations) {
@@ -718,6 +716,7 @@ public class GameManager {
         }
 
         if (nrSquares == 0) { //descanso
+            int nrAleatorio = squares.get(posJogador).cogumelo.nrAleatorio;
             if (jogadorAJogar.energiaAtual + jogadorAJogar.especie.ganhoEnergiaEmDescanso > 200) {
                 jogadorAJogar.energiaAtual = 200;
             } else {
@@ -726,9 +725,7 @@ public class GameManager {
             if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
                 String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
 
-
                 if (alimento.equals("e")) {
-
                     if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Omnívoro")) {
 
                         jogadorAJogar.energiaAtual += 20;
@@ -836,10 +833,10 @@ public class GameManager {
                 }
                 if (alimento.equals("m")) {
                     if (jogadasFeitas % 2 == 0) {
-                        double energia = jogadorAJogar.energiaAtual+(Math.floor(nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
+                        double energia = jogadorAJogar.energiaAtual+((nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
                         jogadorAJogar.energiaAtual = (int) energia;
                     } else {
-                        double energia = jogadorAJogar.energiaAtual-(Math.floor(nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
+                        double energia = jogadorAJogar.energiaAtual-((nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
                         jogadorAJogar.energiaAtual = (int) energia;
                     }
                     countJogadores++;
@@ -872,6 +869,8 @@ public class GameManager {
                 jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
                 jogoAcabou = true;
             }
+
+            int nrAleatorio = squares.get(posDestino).cogumelo.nrAleatorio;
 
             for (int i = 0; i < squares.size(); i++) {
                 for (int j = 0; j < squares.get(i).identificadoresNoQuadrado.size(); j++) {
@@ -1004,10 +1003,10 @@ public class GameManager {
                             }
                             if (alimento.equals("m")) {
                                 if (jogadasFeitas % 2 == 0) {
-                                    double energia = jogadorAJogar.energiaAtual+(Math.floor(nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
+                                    double energia = jogadorAJogar.energiaAtual+((nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
                                     jogadorAJogar.energiaAtual = (int) energia;
                                 } else {
-                                    double energia = jogadorAJogar.energiaAtual-(Math.floor(nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
+                                    double energia = jogadorAJogar.energiaAtual-((nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
                                     jogadorAJogar.energiaAtual = (int) energia;
                                 }
                                 if (countJogadores > jogadores.size() - 1) {
