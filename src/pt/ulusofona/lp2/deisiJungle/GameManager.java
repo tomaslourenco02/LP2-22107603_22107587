@@ -1003,8 +1003,8 @@ public class GameManager {
                                     int energia = ((cogumelo.nrAleatorio*jogadorAJogar.energiaAtual)/100);
                                     jogadorAJogar.energiaAtual += energia;
                                 } else {
-                                    double energiaAtirar = Math.floor((cogumelo.nrAleatorio*jogadorAJogar.energiaAtual)/100);
-                                    jogadorAJogar.energiaAtual -= Math.round(energiaAtirar);
+                                    double energia = jogadorAJogar.energiaAtual-(Math.floor(cogumelo.nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
+                                    jogadorAJogar.energiaAtual = (int) energia;
                                 }
                                 countJogadores++;
                                 if (countJogadores > jogadores.size() - 1) {
