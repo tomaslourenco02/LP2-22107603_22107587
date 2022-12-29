@@ -12,7 +12,7 @@ public class SquareInfo {
 
     int bananas;
 
-    CogumelosMagicos cogumelo;
+    CogumelosMagicos cogumelo = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
 
     public SquareInfo(Boolean meta) {
         this.meta = meta;

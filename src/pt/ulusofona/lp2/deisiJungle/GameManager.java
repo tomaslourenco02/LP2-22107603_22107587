@@ -428,6 +428,7 @@ public class GameManager {
 
             if (squares.get(squareNr).identificadoresAlimentosNoQuadrado != null) {
                 Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
+                System.out.println(squares.get(squareNr).cogumelo.nrAleatorio);
                 squareInfo[0] = alimento.imagem;
                 squareInfo[1] = alimento.info();
                 squareInfo[2] = identificadores.toString();
