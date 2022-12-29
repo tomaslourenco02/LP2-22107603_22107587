@@ -779,6 +779,7 @@ public class GameManager {
 
                         jogadorAJogar.energiaAtual -= 40;
                         countJogadores++;
+                        squares.get(posDestino).bananas--;
                         if (countJogadores > jogadores.size() - 1) {
                             countJogadores = 0;
                         }
@@ -999,10 +1000,9 @@ public class GameManager {
                             if (alimento.equals("m")) {
                                 CogumelosMagicos cogumelo = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
                                 if (jogadasFeitas % 2 == 0) {
-                                    jogadorAJogar.energiaAtual += (jogadorAJogar.energiaAtual / cogumelo.nrAleatorio) * 100;
+                                    jogadorAJogar.energiaAtual += ((cogumelo.nrAleatorio / 100) * jogadorAJogar.energiaAtual);
                                 } else {
-                                    jogadorAJogar.energiaAtual -= (jogadorAJogar.energiaAtual / cogumelo.nrAleatorio) * 100;
-
+                                    jogadorAJogar.energiaAtual = (jogadorAJogar.energiaAtual-((cogumelo.nrAleatorio / 100)*jogadorAJogar.energiaAtual));
                                 }
                                 countJogadores++;
                                 if (countJogadores > jogadores.size() - 1) {
@@ -1010,6 +1010,9 @@ public class GameManager {
                                 }
                                 if(jogadorAJogar.energiaAtual > 200){
                                     jogadorAJogar.energiaAtual = 200;
+                                }
+                                if(jogadorAJogar.energiaAtual < 0){
+                                    jogadorAJogar.energiaAtual = 0;
                                 }
                                 return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelo Magico");
                             }
