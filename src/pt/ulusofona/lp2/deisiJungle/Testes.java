@@ -69,7 +69,7 @@ public class Testes {
         String[][] comida = {comida1, comida2, comida3};
 
         System.out.println((gamemaneger.createInitialJungle(10, jogadores, comida)));
-        System.out.println(gamemaneger.moveCurrentPlayer(6, true));
+        System.out.println(gamemaneger.moveCurrentPlayer(4, true));
         System.out.println(gamemaneger.moveCurrentPlayer(4, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(1, true));
