@@ -12,6 +12,8 @@ public class SquareInfo {
 
     int bananas;
 
+    CogumelosMagicos cogumelo;
+
     public SquareInfo(Boolean meta) {
         this.meta = meta;
     }
