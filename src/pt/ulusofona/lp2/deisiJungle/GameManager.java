@@ -943,6 +943,7 @@ public class GameManager {
 
                                     jogadorAJogar.energiaAtual -= 40;
                                     countJogadores++;
+                                    squares.get(posDestino).bananas--;
                                     if (countJogadores > jogadores.size() - 1) {
                                         countJogadores = 0;
                                     }
