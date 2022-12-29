@@ -12,7 +12,12 @@ public class SquareInfo {
 
     int bananas;
 
-    CogumelosMagicos cogumelo;
+   int nrAleatorio = getRandomNrSquare(51,10);
+
+    public static int getRandomNrSquare(int max, int min) {  // retorna um numero random entre 1 e 6 caso 1_min e 6_max
+        return ((int) (Math.random() * (max - min))) + min;
+    }
+
 
     public SquareInfo(Boolean meta) {
         this.meta = meta;

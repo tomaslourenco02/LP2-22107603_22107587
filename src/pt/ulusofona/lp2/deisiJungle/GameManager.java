@@ -657,7 +657,6 @@ public class GameManager {
             countJogadores = 0;
         }
     }
-
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
 
         ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
@@ -665,7 +664,7 @@ public class GameManager {
         int posJogador = jogadorAJogar.getPosicaoAtual();
         int posDestino = posJogador + nrSquares;
         int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
-        int nrAleatorio = squares.get(posDestino).cogumelo.nrAleatorio;
+        int nrAleatorio = squares.get(posDestino).nrAleatorio;
 
         jogadasFeitas++;
 
