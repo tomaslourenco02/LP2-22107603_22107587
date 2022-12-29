@@ -526,10 +526,10 @@ public class GameManager {
                 int nrAleatorio = squares.get(posDestino).cogumelo.nrAleatorio;
                 if (jogadasFeitas % 2 == 0) {
                     double energia = jogadorAJogar.energiaAtual+((nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
-                    jogadorAJogar.energiaAtual = (int) energia;
+                    jogadorAJogar.energiaAtual = (int) Math.round(energia);;
                 } else {
                     double energia = jogadorAJogar.energiaAtual-((nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
-                    jogadorAJogar.energiaAtual = (int) energia;
+                    jogadorAJogar.energiaAtual = (int) Math.round(energia);;
                 }
             }
         }
@@ -833,11 +833,11 @@ public class GameManager {
                 }
                 if (alimento.equals("m")) {
                     if (jogadasFeitas % 2 == 0) {
-                        double energia =Math.ceil(jogadorAJogar.energiaAtual+(Math.round(nrAleatorio*jogadorAJogar.energiaAtual)/100.0));
-                        jogadorAJogar.energiaAtual = (int) energia;
+                        double energia = jogadorAJogar.energiaAtual+(Math.round(nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
+                        jogadorAJogar.energiaAtual = (int) Math.round(energia);
                     } else {
-                        double energia = Math.ceil(jogadorAJogar.energiaAtual-((nrAleatorio*jogadorAJogar.energiaAtual)/100.0));
-                        jogadorAJogar.energiaAtual = (int) energia;
+                        double energia = jogadorAJogar.energiaAtual-((nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
+                        jogadorAJogar.energiaAtual = (int) Math.round(energia);
                     }
                     countJogadores++;
                     if (countJogadores > jogadores.size() - 1) {
@@ -1009,6 +1009,7 @@ public class GameManager {
                                     double energia = jogadorAJogar.energiaAtual-((nrAleatorio*jogadorAJogar.energiaAtual)/100.0);
                                     jogadorAJogar.energiaAtual = (int) Math.round(energia);
                                 }
+                                countJogadores++;
                                 if (countJogadores > jogadores.size() - 1) {
                                     countJogadores = 0;
                                 }
@@ -1018,7 +1019,6 @@ public class GameManager {
                                 if(jogadorAJogar.energiaAtual < 0){
                                     jogadorAJogar.energiaAtual = 0;
                                 }
-                                countJogadores++;
                                 return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelo Magico");
                             }
                         }
