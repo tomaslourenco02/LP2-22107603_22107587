@@ -5,16 +5,17 @@ public abstract class Alimento {
     protected String identificador;
     protected String nome;
     protected String imagem;
-    protected int posicao;
+    protected String foodPos;
 
-    public Alimento(String identificador, String nome, String imagem) {
+    public Alimento(String identificador, String nome, String imagem, String foodPos) {
         this.identificador = identificador;
         this.nome = nome;
         this.imagem = imagem;
+        this.foodPos = foodPos;
     }
 
-    public int getPosicao() {
-        return posicao;
+    public String getPosicao() {
+        return foodPos;
     }
 
     abstract String info();

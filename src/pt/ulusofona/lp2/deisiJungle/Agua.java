@@ -4,8 +4,8 @@ public class Agua extends Alimento{
 
     //Se ingerido por carnívoros ou herbívoros, energia +=15 un || omnivoros, energia =+ 20% (energia)
 
-    public Agua(String identificador, String nome, String imagem) {
-        super("a", "Agua", "water.png");
+    public Agua(String identificador, String nome, String imagem, String foodPos) {
+        super("a", "Agua", "water.png", foodPos);
     }
 
     @Override

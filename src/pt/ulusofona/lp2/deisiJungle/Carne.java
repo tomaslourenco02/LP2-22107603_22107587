@@ -8,8 +8,8 @@ public class Carne extends Alimento{
     //Os herbívoros ignoram esta comida, por isso não lhes acontece nada.
     //Deteriora-se à medida que o tempo passa. Só é comestível nas primeiras 12 jogadas. A partir daí, se fôr ingerida, reduz para metade a energia do animal.
 
-    public Carne(String identificador, String nome, String imagem) {
-        super("c", "Carne", "meat.png");
+    public Carne(String identificador, String nome, String imagem, String foodPos) {
+        super("c", "Carne", "meat.png", foodPos);
     }
 
     @Override
