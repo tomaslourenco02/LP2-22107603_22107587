@@ -12,6 +12,19 @@ public class SquareInfo {
 
     int bananas;
 
+    public SquareInfo(String[] identificadoresNoQuadrado, String identificadoresAlimentosNoQuadrado) {
+
+        this.identificadoresNoQuadrado = new ArrayList<>();
+
+        for (int i = 0; i < identificadoresNoQuadrado.length; i++) {
+            identificadoresNoQuadrado[i] = identificadoresNoQuadrado[i].replace("[", "");
+            identificadoresNoQuadrado[i] = identificadoresNoQuadrado[i].replace("]", "");
+            identificadoresNoQuadrado[i] = identificadoresNoQuadrado[i].trim();
+            this.identificadoresNoQuadrado.add(i, Integer.valueOf(identificadoresNoQuadrado[i]));
+        }
+        this.identificadoresAlimentosNoQuadrado = identificadoresAlimentosNoQuadrado;
+    }
+
     CogumelosMagicos cogumelo = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
 
     public SquareInfo(Boolean meta) {

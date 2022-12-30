@@ -630,11 +630,8 @@ public class GameManager {
         texto.append("Jogo Acabou: \n");
         texto.append(jogoAcabou).append("\n");
         for (int i = 0; i < squares.size(); i++) {
-            texto.append("Quadrado numero: \n");
-            texto.append(i).append("\n");
-            texto.append("IDs jogadores no quadrado: \n");
-            texto.append(squares.get(i).identificadoresNoQuadrado).append("\n");
-            texto.append("IDs alimentos no quadrado: \n");
+            texto.append("Quadrado: \n");
+            texto.append(squares.get(i).identificadoresNoQuadrado).append(";");
             texto.append(squares.get(i).identificadoresAlimentosNoQuadrado).append("\n");
 
         }
@@ -656,6 +653,9 @@ public class GameManager {
     public boolean loadGame(File file) {
 
         ArrayList<SquareInfo> squares = new ArrayList<>();
+        String[][] guardarCasas = new String[tamanhoTabuleiro][3];
+        int index = 0;
+
 
         try {
             Scanner myReader = new Scanner(file);
@@ -673,15 +673,16 @@ public class GameManager {
                 if (data.equals("ID jogador vencedor: \n")) {
                     jogadorVencedorID = Integer.parseInt(myReader.nextLine());
                 }
-                if(data.equals("IDs jogadores no quadrado: \n")){
+                if(data.equals("Quadrado: \n")){
 
-
-                }
-                for (int i = 0; i < squares.size(); i++) {
-                    if (data.equals("Quadrado numero: \n")) {
-                        if(myReader.nextLine().equals(String.valueOf(i))){
-                        }
+                    String[] info = myReader.nextLine().split(";");
+                    if(Objects.equals(info[0], "[]")){
                     }
+                    else{
+                        String[] info2 = info[0].split(",");
+                        squares.add(new SquareInfo(info2, info[1])); // add jogadores e comidas aos quadrados
+                    }
+
                 }
             }
             myReader.close();
