@@ -57,7 +57,7 @@ public class Testes {
     @org.junit.Test
     public void testComida() {
         GameManager gamemaneger = new GameManager();
-        String[] jogador1 = {"4", "Joao", "L"};
+        String[] jogador1 = {"4", "Joao", "Z"};
         String[] jogador2 = {"6", "Pedro", "L"};
 
         String[][] jogadores = {jogador1, jogador2};
