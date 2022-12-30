@@ -655,6 +655,8 @@ public class GameManager {
 
     public boolean loadGame(File file) {
 
+        ArrayList<SquareInfo> squares = new ArrayList<>();
+
         try {
             Scanner myReader = new Scanner(file);
             while (myReader.hasNextLine()) {
@@ -670,6 +672,10 @@ public class GameManager {
                 }
                 if (data.equals("ID jogador vencedor: \n")) {
                     jogadorVencedorID = Integer.parseInt(myReader.nextLine());
+                }
+                if(data.equals("IDs jogadores no quadrado: \n")){
+
+
                 }
                 for (int i = 0; i < squares.size(); i++) {
                     if (data.equals("Quadrado numero: \n")) {
