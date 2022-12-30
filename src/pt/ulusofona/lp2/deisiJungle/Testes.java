@@ -72,11 +72,13 @@ public class Testes {
         System.out.println(gamemaneger.moveCurrentPlayer(6, true));
         System.out.println(Arrays.toString(gamemaneger.getSquareInfo(7)));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
-        System.out.println(gamemaneger.moveCurrentPlayer(6, true));
+        System.out.println(gamemaneger.moveCurrentPlayer(1, true));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(6)));
         System.out.println(gamemaneger.moveCurrentPlayer(1, true));
         System.out.println(Arrays.toString(gamemaneger.getSquareInfo(8)));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
+
+        System.out.println(gamemaneger.jogadorAvancado(gamemaneger.jogadores.get(gamemaneger.countJogadores)));
 
 
     }
