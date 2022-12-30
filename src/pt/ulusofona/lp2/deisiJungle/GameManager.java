@@ -766,8 +766,10 @@ public class GameManager {
         }
 
         if(nrSquares < 0){
-            jogadorAJogar.nrAlimentosIngeridos += nrSquares*(-1);
-        }else {jogadorAJogar.nrAlimentosIngeridos += nrSquares;}
+            jogadorAJogar.nrCasasMovimentou += nrSquares*(-1);
+        }else {
+            jogadorAJogar.nrCasasMovimentou += nrSquares;
+        }
 
         if (nrSquares == 0) { //descanso
             int nrAleatorio = squares.get(posJogador).cogumelo.nrAleatorio;
@@ -863,6 +865,7 @@ public class GameManager {
                 }
                 if (alimento.equals("c")) {
                     if (jogadorAJogar.especie.tipo.equals("Herbívoro")) {
+                        jogadorAJogar.nrAlimentosIngeridos--;
                     } else {
                         if (jogadasFeitas > 12) {
                             jogadorAJogar.energiaAtual = jogadorAJogar.energiaAtual / 2;
