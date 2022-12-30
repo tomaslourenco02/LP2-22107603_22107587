@@ -2,14 +2,13 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Random;
+
+import static java.awt.SystemColor.text;
 
 
 public class GameManager {
@@ -620,7 +619,41 @@ public class GameManager {
 
     public boolean saveGame(File file) {
 
+        StringBuilder texto = new StringBuilder();
+
+        for (int i = 0; i < squares.size(); i++) {
+
+            texto.append(squares.get(i).identificadoresNoQuadrado);
+            texto.append(" , ");
+            if(squares.get(i).identificadoresAlimentosNoQuadrado == null){
+                if(i == 0){
+                    texto.append(squares.get(i).imagemAColocar);
+                }
+                if(i == squares.size()){
+                    texto.append(squares.get(i).imagemAColocar);
+                }
+            }
+            texto.append(squares.get(i).identificadoresAlimentosNoQuadrado);
+            texto.append(" , ");
+            texto.append(squares.get(i).imagemAColocar);
+        }
+
+
+
         try {
+            FileWriter fw = new FileWriter(file, false);
+
+            PrintWriter pw = new PrintWriter(fw);
+
+            pw.println(texto);
+
+            pw.close();
+        } catch (IOException e) {
+            return false;
+        }
+
+
+        /*try {
 
             FileOutputStream ficheiro = new FileOutputStream(file);
             ObjectOutputStream objeto = new ObjectOutputStream(ficheiro);
@@ -635,7 +668,8 @@ public class GameManager {
 
         } catch (IOException e) {
             return false;
-        }
+        }*/
+        return false;
     }
 
     public boolean loadGame(File file) {
@@ -680,11 +714,6 @@ public class GameManager {
         return null;
     }
 
-    /*public boolean moveValido(Jogador player, int nrSquares){
-
-        if(player.energiaAtual )
-    }*/
-
     public void proximoPlayer(int countJogadores) {
 
         countJogadores++;
@@ -719,19 +748,6 @@ public class GameManager {
                 return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
             }
         }
-
-        /*for (int i = squares.size()-1; i > 0; i--) {
-
-                if(squares.get(i).identificadoresNoQuadrado != null){
-
-                    int distancia = posDestino - i+1;
-                    if(distancia > tamanhoTabuleiro/2){
-                        jogadorAJogar.ganhou = true;
-                        jogoAcabou = true;
-                    }
-                }
-        }*/
-
         if (posDestino <= 0) {
             countJogadores++;
             if (countJogadores > jogadores.size() - 1) {
@@ -749,6 +765,10 @@ public class GameManager {
             return new MovementResult(MovementResultCode.NO_ENERGY, null);
         }
 
+        if(nrSquares < 0){
+            jogadorAJogar.nrAlimentosIngeridos += nrSquares*(-1);
+        }else {jogadorAJogar.nrAlimentosIngeridos += nrSquares;}
+
         if (nrSquares == 0) { //descanso
             int nrAleatorio = squares.get(posJogador).cogumelo.nrAleatorio;
             if (jogadorAJogar.energiaAtual + jogadorAJogar.especie.ganhoEnergiaEmDescanso > 200) {
@@ -757,6 +777,7 @@ public class GameManager {
                 jogadorAJogar.energiaAtual += jogadorAJogar.especie.ganhoEnergiaEmDescanso;
             }
             if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
+                jogadorAJogar.nrAlimentosIngeridos++;
                 String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
 
                 if (alimento.equals("e")) {
@@ -919,13 +940,13 @@ public class GameManager {
                             jogadorAJogar.ganhou = true;
                             jogoAcabou = true;
                         }
-                        if(jogadasFeitas > jogadores.size()-1) {
+                        if (jogadasFeitas > jogadores.size() - 1) {
                             if (jogadorAvancado(jogadorAJogar)) {
                                 jogoAcabou = true;
                             }
                         }
                         if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
-
+                            jogadorAJogar.nrAlimentosIngeridos++;
                             String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
 
                             if (alimento.equals("e")) {
@@ -1085,14 +1106,14 @@ public class GameManager {
             distancia = posicaoJogador - posicoesJogadores[1];
             if (distancia > tamanhoTabuleiro / 2) {
                 for (int i = 0; i < jogadores.size(); i++) {
-                    if(jogadores.get(i).posicaoAtual == posicoesJogadores[1]){
+                    if (jogadores.get(i).posicaoAtual == posicoesJogadores[1]) {
                         jogadores.get(i).ganhou = true;
                         jogoAcabou = true;
                     }
                 }
                 return true;
             }
-        } else if (posicoesJogadores[1] == posicaoJogador){
+        } else if (posicoesJogadores[1] == posicaoJogador) {
             distancia = posicoesJogadores[posicoesJogadores.length - 1] - posicaoJogador;
             if (distancia > tamanhoTabuleiro / 2) {
                 jogador.ganhou = true;
@@ -1140,7 +1161,7 @@ public class GameManager {
                 return winnerInfo;
             }
         }
-        return null;
+        return new String[0];
     }
 
 
@@ -1168,7 +1189,7 @@ public class GameManager {
                 nomeDaEspecie = "Tartaruga";
             }
             if (Objects.equals(ordenadosClassificacao.get(i).getEspecieDoJogador(), "L")) {
-                nomeDaEspecie = "Leão";
+                nomeDaEspecie = "Leao";
             }
             if (Objects.equals(ordenadosClassificacao.get(i).getEspecieDoJogador(), "P")) {
                 nomeDaEspecie = "Pássaro";
@@ -1179,7 +1200,8 @@ public class GameManager {
             if (Objects.equals(ordenadosClassificacao.get(i).getEspecieDoJogador(), "E")) {
                 nomeDaEspecie = "Elefante";
             }
-            resultadosDoJogo.add("#" + classificacao + " " + ordenadosClassificacao.get(i).getNome() + ", " + nomeDaEspecie + ", " + ordenadosClassificacao.get(i).getPosicaoAtual());
+            resultadosDoJogo.add("#" + classificacao + " " + ordenadosClassificacao.get(i).getNome() + ", " + nomeDaEspecie + ", " + ordenadosClassificacao.get(i).getPosicaoAtual() + ", "
+                    + ordenadosClassificacao.get(i).nrCasasMovimentou + ", " + ordenadosClassificacao.get(i).nrAlimentosIngeridos);
             classificacao++;
         }
 
