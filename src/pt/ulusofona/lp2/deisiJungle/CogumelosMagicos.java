@@ -22,7 +22,7 @@ public class CogumelosMagicos extends Alimento{
 
     @Override
     String info() {
-        String info = "Cogumelo Magico: +- " + nrAleatorio + "% energia";
+        String info = "Cogumelo Magico : +- " + nrAleatorio + "% energia";
 
         return info;
     }
@@ -30,6 +30,6 @@ public class CogumelosMagicos extends Alimento{
 
     @Override
     public String toString() {
-        return "Cogumelo Magico: +- " + nrAleatorio + "% energia" ;
+        return "Cogumelo Magico : +- " + nrAleatorio + "% energia" ;
     }
 }
