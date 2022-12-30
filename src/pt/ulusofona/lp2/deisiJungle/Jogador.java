@@ -7,7 +7,7 @@ public class Jogador {
     int identificador; //Os IDs dos jogadores podem nÃƒÆ’Ã‚Â£o ser consecutivos, por exemplo J1 = 1, J2 = 3, J3 = 5;
     String nome;       //Apenas poderÃƒÆ’Ã‚Â¡ existir um jogador da espÃƒÆ’Ã‚Â©cie Tarzan
     String especieDoJogador;
-    double energiaAtual;
+    int energiaAtual;
     double energia;
     int posicaoAtual = 1;
     boolean aJogar = false;

@@ -506,7 +506,7 @@ public class GameManager {
                 if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
                     ganhoDeEnergia = 15;
                 } else if (jogadorAJogar.especie.tipo.equals("Omnívoro")) {
-                    ganhoDeEnergia = (int) ((jogadorAJogar.energiaAtual * 20) / 100);
+                    ganhoDeEnergia = ((jogadorAJogar.energiaAtual * 20) / 100);
                 }
             }
             if (alimento.equals("b")) {
@@ -515,7 +515,7 @@ public class GameManager {
             }
             if (alimento.equals("c")) {
                 if (jogadasFeitas > 12) {
-                    ganhoDeEnergia = (int) (jogadorAJogar.energiaAtual / 2);
+                    ganhoDeEnergia = jogadorAJogar.energiaAtual / 2;
                 } else if (jogadorAJogar.especie.tipo.equals("Omnívoros") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
                     ganhoDeEnergia = 50;
                 }
@@ -524,10 +524,10 @@ public class GameManager {
                 int nrAleatorio = squares.get(posDestino).cogumelo.nrAleatorio;
                 if (jogadasFeitas % 2 == 0) {
                     double energia = jogadorAJogar.energiaAtual + ((nrAleatorio * jogadorAJogar.energiaAtual) / 100.0);
-                    jogadorAJogar.energiaAtual = energia;
+                    jogadorAJogar.energiaAtual = (int) Math.round(energia);
                 } else {
                     double energia = jogadorAJogar.energiaAtual - ((nrAleatorio * jogadorAJogar.energiaAtual) / 100.0);
-                    jogadorAJogar.energiaAtual = energia;
+                    jogadorAJogar.energiaAtual = (int) Math.round(energia);
                 }
             }
         }
@@ -871,10 +871,10 @@ public class GameManager {
                 if (alimento.equals("m")) {
                     if (jogadasFeitas % 2 == 0) {
                         double energia = jogadorAJogar.energiaAtual + ((nrAleatorio * jogadorAJogar.energiaAtual) / 100.0);
-                        jogadorAJogar.energiaAtual = energia;
+                        jogadorAJogar.energiaAtual = (int) Math.round(energia);
                     } else {
                         double energia = jogadorAJogar.energiaAtual - ((nrAleatorio * jogadorAJogar.energiaAtual) / 100.0);
-                        jogadorAJogar.energiaAtual = energia;
+                        jogadorAJogar.energiaAtual = (int) Math.round(energia);
                     }
                     countJogadores++;
                     if (countJogadores > jogadores.size() - 1) {
@@ -1041,10 +1041,10 @@ public class GameManager {
                             if (alimento.equals("m")) {
                                 if (jogadasFeitas % 2 == 0) {
                                     double energia = jogadorAJogar.energiaAtual + ((nrAleatorio * jogadorAJogar.energiaAtual) / 100.0);
-                                    jogadorAJogar.energiaAtual = energia;
+                                    jogadorAJogar.energiaAtual = (int) Math.round(energia);
                                 } else {
                                     double energia = jogadorAJogar.energiaAtual - ((nrAleatorio * jogadorAJogar.energiaAtual) / 100.0);
-                                    jogadorAJogar.energiaAtual = energia;
+                                    jogadorAJogar.energiaAtual = (int) Math.round(energia);
                                 }
                                 countJogadores++;
                                 if (countJogadores > jogadores.size() - 1) {
@@ -1068,11 +1068,15 @@ public class GameManager {
                 }
             }
         }
+
         countJogadores++;
         if (countJogadores > jogadores.size() - 1) {
             countJogadores = 0;
         }
-        return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
+        return new
+
+                MovementResult(MovementResultCode.VALID_MOVEMENT, null);
+
     }
 
     public boolean jogadorAvancado(Jogador jogador) {
