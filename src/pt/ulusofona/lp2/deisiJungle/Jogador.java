@@ -18,6 +18,8 @@ public class Jogador {
 
     Especie especie = new Especie();
 
+
+
     public Jogador(int identificador, String nome, String especieDoJogador) {
         this.identificador = identificador;
         this.nome = nome;
@@ -26,6 +28,15 @@ public class Jogador {
         this.energiaAtual = especie.energiaInicial;
         posicaoAtual = 1;
     }
+     public Jogador(int identificador, String nome, int energiaAtual ,String especieDoJogador, int posicaoAtual) {
+        this.identificador = identificador;
+        this.nome = nome;
+        this.especieDoJogador = especieDoJogador;
+        this.especie = setEspecie(especieDoJogador);
+        this.energiaAtual = energiaAtual;
+        this.posicaoAtual = posicaoAtual;
+    }
+
 
 
     public Especie setEspecie(String especieDoJogador) {

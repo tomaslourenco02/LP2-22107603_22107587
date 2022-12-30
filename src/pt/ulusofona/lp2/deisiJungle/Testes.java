@@ -78,13 +78,17 @@ public class Testes {
         String[][] comida = {comida1, comida2, comida3};
 
         System.out.println((gamemaneger.createInitialJungle(10, jogadores, comida)));
+        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(1)));
+
+        File saveFile = new File("textoSave");
+        System.out.println(gamemaneger.saveGame(saveFile));
         System.out.println(gamemaneger.moveCurrentPlayer(4, true));
+        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(0)));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
         System.out.println(gamemaneger.moveCurrentPlayer(1, true));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(6)));
         System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
-        File saveFile = new File("textoSave");
-        System.out.println(gamemaneger.saveGame(saveFile));
+
 
     }
 
