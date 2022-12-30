@@ -686,18 +686,6 @@ public class GameManager {
             }
         }
 
-        /*for (int i = squares.size()-1; i > 0; i--) {
-
-                if(squares.get(i).identificadoresNoQuadrado != null){
-
-                    int distancia = posDestino - i+1;
-                    if(distancia > tamanhoTabuleiro/2){
-                        jogadorAJogar.ganhou = true;
-                        jogoAcabou = true;
-                    }
-                }
-        }*/
-
         if (posDestino <= 0) {
             countJogadores++;
             if (countJogadores > jogadores.size() - 1) {
@@ -713,6 +701,9 @@ public class GameManager {
                 countJogadores = 0;
             }
             return new MovementResult(MovementResultCode.NO_ENERGY, null);
+        }
+        if(jogadorAvancado(jogadorAJogar)){
+            jogoAcabou = true;
         }
 
         if (nrSquares == 0) { //descanso
@@ -885,7 +876,9 @@ public class GameManager {
                             jogadorAJogar.ganhou = true;
                             jogoAcabou = true;
                         }
-
+                        if(jogadorAvancado(jogadorAJogar)){
+                            jogoAcabou = true;
+                        }
                         if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
 
                             String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
@@ -1026,6 +1019,9 @@ public class GameManager {
                         if (countJogadores > jogadores.size() - 1) {
                             countJogadores = 0;
                         }
+                        if(jogadorAvancado(jogadorAJogar)){
+                            jogoAcabou = true;
+                        }
                         return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
                     }
                 }
@@ -1045,15 +1041,20 @@ public class GameManager {
 
         if (posicoesJogadores[0] == posicaoJogador) {
             distancia = posicaoJogador - posicoesJogadores[1];
+            if (distancia > tamanhoTabuleiro / 2) {
+                for (int i = 0; i < jogadores.size(); i++) {
+                    if (jogadores.get(i).posicaoAtual == posicoesJogadores[1]){
+                        jogadores.get(i).ganhou = true;
+                    }
+                }
+                return true;
+            }
         } else {
             distancia = posicoesJogadores[0] - posicaoJogador;
-        }
-
-        if (distancia > tamanhoTabuleiro / 2) {
-            jogador.ganhou = true;
-            jogoAcabou = true;
-            System.out.println("jogador " + jogador.nome + "ganhou");
-            return true;
+            if (distancia > tamanhoTabuleiro / 2) {
+                jogador.ganhou = true;
+                return true;
+            }
         }
         return false;
     }
