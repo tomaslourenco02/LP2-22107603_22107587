@@ -2,10 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -14,6 +11,7 @@ import java.util.Random;
 
 public class GameManager {
     ArrayList<Jogador> jogadores = new ArrayList<>();
+    ArrayList<Alimento> alimentos = new ArrayList<>();
     ArrayList<SquareInfo> squares = new ArrayList<>();
     int countJogadores = 0;
     int jogadoresSemEnergia = 0;
@@ -25,7 +23,7 @@ public class GameManager {
     public GameManager() {
     }
 
-    public GameManager(ArrayList<Jogador> jogadores, ArrayList<SquareInfo> squares, int countJogadores, int jogadoresSemEnergia, int jogadorVencedorID, int tamanhoTabuleiro, int jogadasFeitas, boolean jogoAcabou, int count) {
+    public GameManager(ArrayList<Jogador> jogadores, ArrayList<SquareInfo> squares, int countJogadores, int jogadoresSemEnergia, int jogadorVencedorID, int tamanhoTabuleiro, int jogadasFeitas, boolean jogoAcabou, int count, ArrayList<Alimento> alimentos) {
         this.jogadores = jogadores;
         this.squares = squares;
         this.countJogadores = countJogadores;
@@ -35,6 +33,7 @@ public class GameManager {
         this.jogadasFeitas = jogadasFeitas;
         this.jogoAcabou = jogoAcabou;
         this.count = count;
+        this.alimentos = alimentos;
     }
 
     public String[][] getSpecies() {
@@ -626,7 +625,7 @@ public class GameManager {
             ObjectOutputStream objeto = new ObjectOutputStream(ficheiro);
 
             GameManager jogo = new GameManager(jogadores, squares, countJogadores, jogadoresSemEnergia,
-                    jogadorVencedorID, tamanhoTabuleiro, jogadasFeitas, jogoAcabou, count);
+                    jogadorVencedorID, tamanhoTabuleiro, jogadasFeitas, jogoAcabou, count, alimentos);
 
             objeto.writeObject(jogo);
             objeto.close();
@@ -640,7 +639,23 @@ public class GameManager {
 
     public boolean loadGame(File file) {
 
-        return true;
+        try {
+            FileInputStream fileInput = new FileInputStream(file);
+            ObjectInputStream objectInput = new ObjectInputStream(fileInput);
+            GameManager manager = (GameManager)objectInput.readObject();
+            //Substitui os valores atuais do construtor com os valores do saveGame
+            this.jogadores = manager.jogadores;
+            this.alimentos = manager.alimentos;
+            this.countJogadores = manager.countJogadores;
+            this.jogadorVencedorID = manager.jogadorVencedorID;
+            this.tamanhoTabuleiro = manager.tamanhoTabuleiro;
+            this.jogadasFeitas = manager.jogadasFeitas;
+            objectInput.close();
+            return true;
+
+        } catch (IOException | ClassNotFoundException e) {
+            return false;
+        }
     }
 
     public int gastaEnergia(int consumoEnergia, int nrSquares) {
