@@ -57,23 +57,25 @@ public class Testes {
     @org.junit.Test
     public void testComida() {
         GameManager gamemaneger = new GameManager();
-        String[] jogador1 = {"4", "Joao", "E"};
-        String[] jogador2 = {"6", "Pedro", "L"};
+        String[] jogador1 = {"4", "Joao", "Z"};
+        String[] jogador2 = {"6", "Pedro", "T"};
 
         String[][] jogadores = {jogador1, jogador2};
 
-        String[] comida1 = {"c", String.valueOf(5)};
+        String[] comida1 = {"m", String.valueOf(5)};
         String[] comida2 = {"c", String.valueOf(8)};
         String[] comida3 = {"m", String.valueOf(7)};
 
         String[][] comida = {comida1, comida2, comida3};
 
         System.out.println((gamemaneger.createInitialJungle(10, jogadores, comida)));
+        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(5)));
+        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(7)));
         System.out.println(gamemaneger.moveCurrentPlayer(4, true));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
         System.out.println(gamemaneger.moveCurrentPlayer(1, true));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(6)));
-        System.out.println(gamemaneger.moveCurrentPlayer(3, true));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, true));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
         System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
 
