@@ -3,10 +3,7 @@ package pt.ulusofona.lp2.deisiJungle;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 import static java.awt.SystemColor.text;
 
@@ -124,11 +121,15 @@ public class GameManager {
             return new InitializationError("Erro na inicialização do terreno!");
         }
 
-        for (int i = 0; i < jungleSize; i++) {squares.add(new SquareInfo());}
+        for (int i = 0; i < jungleSize; i++) {
+            squares.add(new SquareInfo());
+        }
 
         for (int i = 0; i < playersInfo.length; i++) {
             jogadores.add(new Jogador(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2]));
-            if (squares != null) { squares.get(0).identificadoresNoQuadrado.add(Integer.valueOf(playersInfo[i][0])); }
+            if (squares != null) {
+                squares.get(0).identificadoresNoQuadrado.add(Integer.valueOf(playersInfo[i][0]));
+            }
         }
 
         if (foodsInfo != null) {
@@ -140,7 +141,9 @@ public class GameManager {
                     if (foodsInfo[i][0].equals("m")) {
                         squares.get(i).cogumelo = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
                     }
-                    if (foodsInfo[i][0].equals("b")) { squares.get(j).bananas = 3; }
+                    if (foodsInfo[i][0].equals("b")) {
+                        squares.get(j).bananas = 3;
+                    }
                 }
             }
         }
@@ -152,7 +155,9 @@ public class GameManager {
                 if (i != j) {
                     if (jogadores.get(i).getIdentificador() < jogadores.get(j).getIdentificador()) {
                         menorID = jogadores.get(i).getIdentificador();
-                    } else { menorID = jogadores.get(j).getIdentificador(); }
+                    } else {
+                        menorID = jogadores.get(j).getIdentificador();
+                    }
                 }
             }
         }
@@ -500,7 +505,9 @@ public class GameManager {
             if (alimento.equals("e")) {
                 if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Omnívoro")) {
                     ganhoDeEnergia = 20;
-                } else if (jogadorAJogar.especie.tipo.equals("Carnívoro")) {ganhoDeEnergia = -20;}
+                } else if (jogadorAJogar.especie.tipo.equals("Carnívoro")) {
+                    ganhoDeEnergia = -20;
+                }
             }
             if (alimento.equals("a")) {
                 if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
@@ -510,8 +517,11 @@ public class GameManager {
                 }
             }
             if (alimento.equals("b")) {
-                if (jogadorAJogar.bananasConsumidas > 1) { ganhoDeEnergia = -40;
-                } else if (squares.get(posDestino).bananas > 0) { ganhoDeEnergia = 40; }
+                if (jogadorAJogar.bananasConsumidas > 1) {
+                    ganhoDeEnergia = -40;
+                } else if (squares.get(posDestino).bananas > 0) {
+                    ganhoDeEnergia = 40;
+                }
             }
             if (alimento.equals("c")) {
                 if (jogadasFeitas > 12) {
@@ -596,17 +606,35 @@ public class GameManager {
         return jogadoresOrdenados;
     }
 
+    public GameManager(ArrayList<Jogador> jogadores, ArrayList<SquareInfo> squares, int countJogadores, int jogadorVencedorID, int tamanhoTabuleiro, int jogadasFeitas, boolean jogoAcabou) {
+        this.jogadores = jogadores;
+        this.squares = squares;
+        this.countJogadores = countJogadores;
+        this.jogadorVencedorID = jogadorVencedorID;
+        this.tamanhoTabuleiro = tamanhoTabuleiro;
+        this.jogadasFeitas = jogadasFeitas;
+        this.jogoAcabou = jogoAcabou;
+    }
+
     public boolean saveGame(File file) {
 
         StringBuilder texto = new StringBuilder();
+        texto.append("Tamanho tabuleiro: \n");
         texto.append(tamanhoTabuleiro).append("\n");
+        texto.append("Jogadas feitas: \n");
         texto.append(jogadasFeitas).append("\n");
+        texto.append("Count jogadores: \n");
         texto.append(countJogadores).append("\n");
+        texto.append("ID jogador vencedor: \n");
         texto.append(jogadorVencedorID).append("\n");
+        texto.append("Jogo Acabou: \n");
         texto.append(jogoAcabou).append("\n");
         for (int i = 0; i < squares.size(); i++) {
-            texto.append(i).append(";");
-            texto.append(squares.get(i).identificadoresNoQuadrado).append(";");
+            texto.append("Quadrado numero: \n");
+            texto.append(i).append("\n");
+            texto.append("IDs jogadores no quadrado: \n");
+            texto.append(squares.get(i).identificadoresNoQuadrado).append("\n");
+            texto.append("IDs alimentos no quadrado: \n");
             texto.append(squares.get(i).identificadoresAlimentosNoQuadrado).append("\n");
 
         }
@@ -627,20 +655,40 @@ public class GameManager {
 
     public boolean loadGame(File file) {
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-
-                tamanhoTabuleiro = Integer.parseInt(reader.readLine());
-
+        try {
+            Scanner myReader = new Scanner(file);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                if (data.equals("Tamanho tabuleiro: \n")) {
+                    tamanhoTabuleiro = Integer.parseInt(myReader.nextLine());
+                }
+                if (data.equals("Jogadas feitas: \n")) {
+                    jogadasFeitas = Integer.parseInt(myReader.nextLine());
+                }
+                if (data.equals("Count jogadores: \n")) {
+                    countJogadores = Integer.parseInt(myReader.nextLine());
+                }
+                if (data.equals("ID jogador vencedor: \n")) {
+                    jogadorVencedorID = Integer.parseInt(myReader.nextLine());
+                }
+                for (int i = 0; i < squares.size(); i++) {
+                    if (data.equals("Quadrado numero: \n")) {
+                        if(myReader.nextLine().equals(String.valueOf(i))){
+                        }
+                    }
+                }
             }
-        } catch (IOException e) {
+            myReader.close();
+        } catch (
+                FileNotFoundException e) {
+            System.out.println("An error occurred.");
             e.printStackTrace();
-            return false;
+            return true;
         }
 
         return true;
     }
+
 
     public int gastaEnergia(int consumoEnergia, int nrSquares) {
 
@@ -730,9 +778,9 @@ public class GameManager {
             return new MovementResult(MovementResultCode.NO_ENERGY, null);
         }
 
-        if(nrSquares < 0){
-            jogadorAJogar.nrCasasMovimentou += nrSquares*(-1);
-        }else {
+        if (nrSquares < 0) {
+            jogadorAJogar.nrCasasMovimentou += nrSquares * (-1);
+        } else {
             jogadorAJogar.nrCasasMovimentou += nrSquares;
         }
 
