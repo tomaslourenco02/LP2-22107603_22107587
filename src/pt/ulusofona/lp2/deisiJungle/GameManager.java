@@ -95,6 +95,8 @@ public class GameManager {
         jogoAcabou = false;
         count = 0;
 
+
+
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
                 if (!verificaIdAlimentos(foodsInfo[i][0])) {
@@ -138,8 +140,10 @@ public class GameManager {
             }
         }
 
+        String[][] foods = getFoodTypes();
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
+                String foodID = foodsInfo[i][0];
                 for (int j = 0; j < squares.size(); j++) {
 
                     if (j == Integer.parseInt(foodsInfo[i][1])) {
@@ -150,6 +154,27 @@ public class GameManager {
                     }
                     if (foodsInfo[i][0].equals("b")) {
                         squares.get(j).bananas = 3;
+                    }
+                    for (int x = 0; x < foods.length; x++) {
+
+                        String[] posAlimento = foods[x];
+                        if(posAlimento[0].equals(foodID)){
+                            if(posAlimento[0].equals("m")){
+                                alimentos.add(new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png"));
+                            }
+                            if(posAlimento[0].equals("a")){
+                                alimentos.add(new Agua("a", "Agua", "water.png"));
+                            }
+                            if(posAlimento[0].equals("c")){
+                                alimentos.add(new Carne("c", "Carne", "meat.png"));
+                            }
+                            if(posAlimento[0].equals("b")){
+                                alimentos.add(new CachoDeBananas("b", "Cacho de bananas", "bananas.png"));
+                            }
+                            if(posAlimento[0].equals("e")){
+                                alimentos.add(new Erva("e", "Erva", "grass.png"));
+                            }
+                        }
                     }
                 }
             }
@@ -543,11 +568,11 @@ public class GameManager {
                 if (jogadasFeitas % 2 == 0) {
                     double energia = jogadorAJogar.energiaAtual + ((nrAleatorio * jogadorAJogar.energiaAtual) / 100.0);
                     jogadorAJogar.energiaAtual = (int) Math.round(energia);
-                    ;
+
                 } else {
                     double energia = jogadorAJogar.energiaAtual - ((nrAleatorio * jogadorAJogar.energiaAtual) / 100.0);
                     jogadorAJogar.energiaAtual = (int) Math.round(energia);
-                    ;
+
                 }
             }
         }
