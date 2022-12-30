@@ -1043,23 +1043,16 @@ public class GameManager {
         int[] posicoesJogadores = ordenarPosicoes();
         int distancia;
 
-        if (posicoesJogadores[posicoesJogadores.length - 1] == posicaoJogador) {
-            distancia = posicoesJogadores[posicoesJogadores.length - 2] - posicaoJogador;
+        if (posicoesJogadores[0] == posicaoJogador) {
+            distancia = posicaoJogador - posicoesJogadores[1];
         } else {
-            distancia = posicoesJogadores[posicoesJogadores.length - 1] - posicaoJogador;
-        }
-
-        for (int i = 0; i < jogadores.size(); i++) {
-            if (distancia < 0) {
-                if (jogadores.get(i).posicaoAtual == (distancia + posicaoJogador)) {
-
-                }
-            }
+            distancia = posicoesJogadores[0] - posicaoJogador;
         }
 
         if (distancia > tamanhoTabuleiro / 2) {
             jogador.ganhou = true;
             jogoAcabou = true;
+            System.out.println("jogador " + jogador.nome + "ganhou");
             return true;
         }
         return false;
