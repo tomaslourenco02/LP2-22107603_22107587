@@ -2,7 +2,10 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -11,7 +14,6 @@ import java.util.Random;
 
 public class GameManager {
     ArrayList<Jogador> jogadores = new ArrayList<>();
-    ArrayList<Alimento> alimentos = new ArrayList<>();
     ArrayList<SquareInfo> squares = new ArrayList<>();
     int countJogadores = 0;
     int jogadoresSemEnergia = 0;
@@ -23,7 +25,7 @@ public class GameManager {
     public GameManager() {
     }
 
-    public GameManager(ArrayList<Jogador> jogadores, ArrayList<SquareInfo> squares, int countJogadores, int jogadoresSemEnergia, int jogadorVencedorID, int tamanhoTabuleiro, int jogadasFeitas, boolean jogoAcabou, int count, ArrayList<Alimento> alimentos) {
+    public GameManager(ArrayList<Jogador> jogadores, ArrayList<SquareInfo> squares, int countJogadores, int jogadoresSemEnergia, int jogadorVencedorID, int tamanhoTabuleiro, int jogadasFeitas, boolean jogoAcabou, int count) {
         this.jogadores = jogadores;
         this.squares = squares;
         this.countJogadores = countJogadores;
@@ -33,7 +35,6 @@ public class GameManager {
         this.jogadasFeitas = jogadasFeitas;
         this.jogoAcabou = jogoAcabou;
         this.count = count;
-        this.alimentos = alimentos;
     }
 
     public String[][] getSpecies() {
@@ -95,7 +96,6 @@ public class GameManager {
         jogoAcabou = false;
         count = 0;
 
-
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
                 if (!verificaIdAlimentos(foodsInfo[i][0])) {
@@ -139,43 +139,18 @@ public class GameManager {
             }
         }
 
-        String[][] foods = getFoodTypes();
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
-                String[] foodInfo = foodsInfo[i];
-                String foodId = foodInfo[0];
-                String foodPos = foodInfo[1];
                 for (int j = 0; j < squares.size(); j++) {
 
                     if (j == Integer.parseInt(foodsInfo[i][1])) {
                         squares.get(j).identificadoresAlimentosNoQuadrado = foodsInfo[i][0];
                     }
                     if (foodsInfo[i][0].equals("m")) {
-                        squares.get(i).cogumelo = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png", foodPos);
+                        squares.get(i).cogumelo = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
                     }
                     if (foodsInfo[i][0].equals("b")) {
                         squares.get(j).bananas = 3;
-                    }
-                    for (int x = 0; x < foods.length; x++) {
-
-                        String[] posAlimento = foods[x];
-                        if (posAlimento[0].equals(foodId)) {
-                            if (posAlimento[0].equals("m")) {
-                                alimentos.add(new CogumelosMagicos(foodId, posAlimento[1], posAlimento[2], foodPos));
-                            }
-                            if (posAlimento[0].equals("a")) {
-                                alimentos.add(new Agua(foodId, posAlimento[1], posAlimento[2], foodPos));
-                            }
-                            if (posAlimento[0].equals("c")) {
-                                alimentos.add(new Carne(foodId, posAlimento[1], posAlimento[2], foodPos));
-                            }
-                            if (posAlimento[0].equals("b")) {
-                                alimentos.add(new CachoDeBananas(foodId, posAlimento[1], posAlimento[2], foodPos));
-                            }
-                            if (posAlimento[0].equals("e")) {
-                                alimentos.add(new Erva(foodId, posAlimento[1], posAlimento[2], foodPos));
-                            }
-                        }
                     }
                 }
             }
@@ -469,19 +444,15 @@ public class GameManager {
         if (squareNr < squares.size() && squareNr > 1) {
 
             if (squares.get(squareNr).identificadoresAlimentosNoQuadrado != null) {
-                for (int i = 0; i < alimentos.size(); i++) {
-                    Alimento alimento = alimentos.get(i);
-                    if (Objects.equals(alimento.identificador, squares.get(squareNr).identificadoresAlimentosNoQuadrado)) {
-                        System.out.println(squares.get(squareNr).cogumelo.nrAleatorio);
-                        squareInfo[0] = alimento.imagem;
-                        squareInfo[1] = alimento.info();
-                        squareInfo[2] = identificadores.toString();
-                        if (squares.get(squareNr).identificadoresAlimentosNoQuadrado.equals("b")) {
-                            squareInfo[1] = "Bananas : " + squares.get(squareNr).bananas + " : + 40 energia";
-                        }
-                        return squareInfo;
-                    }
+                Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
+                System.out.println(squares.get(squareNr).cogumelo.nrAleatorio);
+                squareInfo[0] = alimento.imagem;
+                squareInfo[1] = alimento.info();
+                squareInfo[2] = identificadores.toString();
+                if (squares.get(squareNr).identificadoresAlimentosNoQuadrado.equals("b")) {
+                    squareInfo[1] = "Bananas : " + squares.get(squareNr).bananas + " : + 40 energia";
                 }
+                return squareInfo;
             }
         }
 
@@ -573,11 +544,11 @@ public class GameManager {
                 if (jogadasFeitas % 2 == 0) {
                     double energia = jogadorAJogar.energiaAtual + ((nrAleatorio * jogadorAJogar.energiaAtual) / 100.0);
                     jogadorAJogar.energiaAtual = (int) Math.round(energia);
-
+                    ;
                 } else {
                     double energia = jogadorAJogar.energiaAtual - ((nrAleatorio * jogadorAJogar.energiaAtual) / 100.0);
                     jogadorAJogar.energiaAtual = (int) Math.round(energia);
-
+                    ;
                 }
             }
         }
@@ -655,7 +626,7 @@ public class GameManager {
             ObjectOutputStream objeto = new ObjectOutputStream(ficheiro);
 
             GameManager jogo = new GameManager(jogadores, squares, countJogadores, jogadoresSemEnergia,
-                    jogadorVencedorID, tamanhoTabuleiro, jogadasFeitas, jogoAcabou, count, alimentos);
+                    jogadorVencedorID, tamanhoTabuleiro, jogadasFeitas, jogoAcabou, count);
 
             objeto.writeObject(jogo);
             objeto.close();
@@ -669,23 +640,7 @@ public class GameManager {
 
     public boolean loadGame(File file) {
 
-        try {
-            FileInputStream fileInput = new FileInputStream(file);
-            ObjectInputStream objectInput = new ObjectInputStream(fileInput);
-            GameManager manager = (GameManager) objectInput.readObject();
-            //Substitui os valores atuais do construtor com os valores do saveGame
-            this.jogadores = manager.jogadores;
-            this.alimentos = manager.alimentos;
-            this.countJogadores = manager.countJogadores;
-            this.jogadorVencedorID = manager.jogadorVencedorID;
-            this.tamanhoTabuleiro = manager.tamanhoTabuleiro;
-            this.jogadasFeitas = manager.jogadasFeitas;
-            objectInput.close();
-            return true;
-
-        } catch (IOException | ClassNotFoundException e) {
-            return false;
-        }
+        return true;
     }
 
     public int gastaEnergia(int consumoEnergia, int nrSquares) {
@@ -699,31 +654,31 @@ public class GameManager {
         return energiaFinal;
     }
 
-    /*public Alimento definirAlimento(String idAlimento) {
+    public Alimento definirAlimento(String idAlimento) {
 
         if (idAlimento == "e") {
-            Erva alimento = new Erva("e", "Erva", "grass.png", foodPos);
+            Erva alimento = new Erva("e", "Erva", "grass.png");
             return alimento;
         }
         if (idAlimento == "a") {
-            Agua alimento = new Agua("a", "Agua", "water.png", foodPos);
+            Agua alimento = new Agua("a", "Agua", "water.png");
             return alimento;
         }
         if (idAlimento == "b") {
-            CachoDeBananas alimento = new CachoDeBananas("b", "Cacho de bananas", "bananas.png", foodPos);
+            CachoDeBananas alimento = new CachoDeBananas("b", "Cacho de bananas", "bananas.png");
             return alimento;
         }
         if (idAlimento == "c") {
-            Carne alimento = new Carne("c", "Carne", "meat.png", foodPos);
+            Carne alimento = new Carne("c", "Carne", "meat.png");
             alimento.jogadasEfetuadas = jogadasFeitas;
             return alimento;
         }
         if (idAlimento == "m") {
-            CogumelosMagicos alimento = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png", foodPos);
+            CogumelosMagicos alimento = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
             return alimento;
         }
         return null;
-    }*/
+    }
 
     /*public boolean moveValido(Jogador player, int nrSquares){
 

@@ -12,8 +12,8 @@ public class CachoDeBananas extends Alimento{
 
     int nrBananas;
 
-    public CachoDeBananas(String identificador, String nome, String imagem, String foodPos) {
-        super("b", "Cacho de bananas", "bananas.png", foodPos);
+    public CachoDeBananas(String identificador, String nome, String imagem) {
+        super("b", "Cacho de bananas", "bananas.png");
     }
 
     @Override

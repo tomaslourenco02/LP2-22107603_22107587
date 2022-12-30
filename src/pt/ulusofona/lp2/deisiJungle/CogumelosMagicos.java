@@ -12,8 +12,8 @@ public class CogumelosMagicos extends Alimento{
 
 
 
-    public CogumelosMagicos(String identificador, String nome, String imagem, String foodPos) {
-        super("m", "Cogumelos Magicos", "mushroom.png", foodPos);
+    public CogumelosMagicos(String identificador, String nome, String imagem) {
+        super("m", "Cogumelos Magicos", "mushroom.png");
     }
 
     public static int getRandomNrSquare(int max, int min) {  // retorna um numero random entre 1 e 6 caso 1_min e 6_max
