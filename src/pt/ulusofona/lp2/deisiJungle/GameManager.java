@@ -633,7 +633,7 @@ public class GameManager {
         texto.append(jogoAcabou).append("\n");
 
         for (int i = 0; i < squares.size(); i++) {
-            texto.append("Quadrado: ").append(i+1).append("\n");
+            texto.append("Quadrado: ").append(i + 1).append("\n");
             for (int k = 0; k < squares.get(i).identificadoresNoQuadrado.size(); k++) {
                 for (int j = 0; j < jogadores.size(); j++) {
                     if (squares.get(i).identificadoresNoQuadrado.get(k) == jogadores.get(j).identificador) {
@@ -666,8 +666,6 @@ public class GameManager {
         ArrayList<SquareInfo> squares = new ArrayList<>();
         ArrayList<Jogador> jogadoresLoad = new ArrayList<>();
         ArrayList<Alimento> alimentosLoad = new ArrayList<>();
-        String[][] guardarCasas = new String[tamanhoTabuleiro][3];
-        int index = 0;
 
 
         try {
@@ -687,20 +685,24 @@ public class GameManager {
                     jogadorVencedorID = Integer.parseInt(myReader.nextLine());
                 }
                 for (int i = 0; i < tamanhoTabuleiro; i++) {
-                    if (data.equals("Quadrado: " + i+1 + "\n")) {
+                    squares.add(new SquareInfo());
+                    if (data.equals("Quadrado: " + i + 1 + "\n")) {
                         String[] info = myReader.nextLine().split(" || ");
                         for (int j = 0; j < info.length; j++) {
                             String[] info2 = info[j].split(";");
-                            if(info2[0] != null){
-                                if(info2[0].matches("[0-9]*")){
-                                    jogadoresLoad.add(new Jogador(Integer.parseInt(info2[0]), info2[1], Integer.parseInt(info2[2]), info2[3], j));
-                                }
-                                else if(info2[0].matches("[a-zA-Z]+")) {
-                                       Alimento alimento = definirAlimento(info[0]);
-                                       alimento.posicao = j;
-                                       alimentosLoad.add(alimento);
+                            if (info2[0] != null) {
+                                if (info2[0].matches("[0-9]*")) {
+                                    Jogador jogador = new Jogador(Integer.parseInt(info2[0]), info2[1], Integer.parseInt(info2[2]), info2[3], j);
+                                    jogadoresLoad.add(jogador);
+                                    squares.get(i).identificadoresNoQuadrado.add(jogador.identificador);
+                                } else if (info2[0].matches("[a-zA-Z]+")) {
+                                    Alimento alimento = definirAlimento(info[0]);
+                                    alimento.posicao = j;
+                                    alimentosLoad.add(alimento);
+                                    squares.get(i).identificadoresAlimentosNoQuadrado = alimento.identificador;
                                 }
                             }
+
                         }
                     }
                 }

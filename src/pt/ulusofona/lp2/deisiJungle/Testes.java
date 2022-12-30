@@ -55,13 +55,18 @@ public class Testes {
 
     }
 
-   /* @org.junit.Test
+    @org.junit.Test
     public void testLoad(){
-
         GameManager gameManager = new GameManager();
 
-        System.out.println(gameManager.loadGame(textoSave));
-    }*/
+
+        File saveFile = new File("textoSave");
+        System.out.println(gameManager.saveGame(saveFile));
+
+        gameManager.loadGame(saveFile);
+
+        System.out.println(gameManager.loadGame(saveFile));
+    }
 
     @org.junit.Test
     public void testComida() {
