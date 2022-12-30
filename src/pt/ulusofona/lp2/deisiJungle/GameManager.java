@@ -599,25 +599,17 @@ public class GameManager {
     public boolean saveGame(File file) {
 
         StringBuilder texto = new StringBuilder();
-
+        texto.append(tamanhoTabuleiro).append("\n");
+        texto.append(jogadasFeitas).append("\n");
+        texto.append(countJogadores).append("\n");
+        texto.append(jogadorVencedorID).append("\n");
+        texto.append(jogoAcabou).append("\n");
         for (int i = 0; i < squares.size(); i++) {
+            texto.append(i).append(";");
+            texto.append(squares.get(i).identificadoresNoQuadrado).append(";");
+            texto.append(squares.get(i).identificadoresAlimentosNoQuadrado).append("\n");
 
-            texto.append(squares.get(i).identificadoresNoQuadrado);
-            texto.append(" , ");
-            if(squares.get(i).identificadoresAlimentosNoQuadrado == null){
-                if(i == 0){
-                    texto.append(squares.get(i).imagemAColocar);
-                }
-                if(i == squares.size()){
-                    texto.append(squares.get(i).imagemAColocar);
-                }
-            }
-            texto.append(squares.get(i).identificadoresAlimentosNoQuadrado);
-            texto.append(" , ");
-            texto.append(squares.get(i).imagemAColocar);
         }
-
-
 
         try {
             FileWriter fw = new FileWriter(file, false);
@@ -630,28 +622,22 @@ public class GameManager {
         } catch (IOException e) {
             return false;
         }
-
-
-        /*try {
-
-            FileOutputStream ficheiro = new FileOutputStream(file);
-            ObjectOutputStream objeto = new ObjectOutputStream(ficheiro);
-
-            GameManager jogo = new GameManager(jogadores, squares, countJogadores, jogadoresSemEnergia,
-                    jogadorVencedorID, tamanhoTabuleiro, jogadasFeitas, jogoAcabou, count);
-
-            objeto.writeObject(jogo);
-            objeto.close();
-
-            return true;
-
-        } catch (IOException e) {
-            return false;
-        }*/
-        return false;
+        return true;
     }
 
     public boolean loadGame(File file) {
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+
+                tamanhoTabuleiro = Integer.parseInt(reader.readLine());
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
 
         return true;
     }

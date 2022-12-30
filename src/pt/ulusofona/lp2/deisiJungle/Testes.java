@@ -2,6 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import org.junit.Test;
 
+import java.io.File;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertTrue;
@@ -69,18 +70,13 @@ public class Testes {
         String[][] comida = {comida1, comida2, comida3};
 
         System.out.println((gamemaneger.createInitialJungle(10, jogadores, comida)));
-        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(5)));
-        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(7)));
         System.out.println(gamemaneger.moveCurrentPlayer(4, true));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
         System.out.println(gamemaneger.moveCurrentPlayer(1, true));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(6)));
-        System.out.println(gamemaneger.moveCurrentPlayer(2, true));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
         System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
-
-        System.out.println(gamemaneger.jogadorAvancado(gamemaneger.jogadores.get(gamemaneger.countJogadores)));
-
+        File saveFile = new File("textoSave");
+        System.out.println(gamemaneger.saveGame(saveFile));
 
     }
 
