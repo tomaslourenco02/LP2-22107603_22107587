@@ -1161,7 +1161,7 @@ public class GameManager {
                 return winnerInfo;
             }
         }
-        return new String[0];
+        return null;
     }
 
 
@@ -1204,7 +1204,6 @@ public class GameManager {
                     + ordenadosClassificacao.get(i).nrCasasMovimentou + ", " + ordenadosClassificacao.get(i).nrAlimentosIngeridos);
             classificacao++;
         }
-
 
         return resultadosDoJogo;
     }
