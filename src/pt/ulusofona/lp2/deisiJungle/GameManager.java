@@ -919,7 +919,11 @@ public class GameManager {
                             jogadorAJogar.ganhou = true;
                             jogoAcabou = true;
                         }
-
+                        if(jogadasFeitas > jogadores.size()-1) {
+                            if (jogadorAvancado(jogadorAJogar)) {
+                                jogoAcabou = true;
+                            }
+                        }
                         if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
 
                             String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
@@ -1077,25 +1081,26 @@ public class GameManager {
         int[] posicoesJogadores = ordenarPosicoes();
         int distancia;
 
-        if (posicoesJogadores[posicoesJogadores.length - 1] == posicaoJogador) {
-            distancia = posicoesJogadores[posicoesJogadores.length - 2] - posicaoJogador;
-        } else {
-            distancia = posicoesJogadores[posicoesJogadores.length - 1] - posicaoJogador;
-        }
-
-        for (int i = 0; i < jogadores.size(); i++) {
-            if (distancia < 0) {
-                if (jogadores.get(i).posicaoAtual == (distancia + posicaoJogador)) {
-
+        if (posicoesJogadores[0] == posicaoJogador) {
+            distancia = posicaoJogador - posicoesJogadores[1];
+            if (distancia > tamanhoTabuleiro / 2) {
+                for (int i = 0; i < jogadores.size(); i++) {
+                    if(jogadores.get(i).posicaoAtual == posicoesJogadores[1]){
+                        jogadores.get(i).ganhou = true;
+                        jogoAcabou = true;
+                    }
                 }
+                return true;
+            }
+        } else if (posicoesJogadores[1] == posicaoJogador){
+            distancia = posicoesJogadores[posicoesJogadores.length - 1] - posicaoJogador;
+            if (distancia > tamanhoTabuleiro / 2) {
+                jogador.ganhou = true;
+                jogoAcabou = true;
+                return true;
             }
         }
 
-        if (distancia > tamanhoTabuleiro / 2) {
-            jogador.ganhou = true;
-            jogoAcabou = true;
-            return true;
-        }
         return false;
     }
 

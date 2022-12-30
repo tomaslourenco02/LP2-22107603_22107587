@@ -75,6 +75,7 @@ public class Testes {
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(6)));
         System.out.println(gamemaneger.moveCurrentPlayer(3, true));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
+        System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
 
         System.out.println(gamemaneger.jogadorAvancado(gamemaneger.jogadores.get(gamemaneger.countJogadores)));
 
