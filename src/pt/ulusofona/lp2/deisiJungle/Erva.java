@@ -23,7 +23,7 @@ public class Erva extends Alimento{
 
     @Override
     public String toString() {
-        return "Erva : +- 20 energia";
+        return "Apanhou Erva";
     }
 
 }

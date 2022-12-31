@@ -30,7 +30,7 @@ public class CachoDeBananas extends Alimento{
 
     @Override
     public String toString() {
-        return "Bananas : " + nrBananas + " : 40 energia";
+        return "Apanhou Bananas";
 
     }
 }
