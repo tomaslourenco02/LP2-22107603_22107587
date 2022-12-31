@@ -634,7 +634,7 @@ public class GameManager {
                         texto.append(squares.get(i).identificadoresNoQuadrado.get(k)).append(";");
                         texto.append(jogadores.get(j).nome).append(";");
                         texto.append(jogadores.get(j).energiaAtual).append(";");
-                        texto.append(jogadores.get(j).especie.identificador).append(" - ");
+                        texto.append(jogadores.get(j).especieDoJogador).append(" - ");
                     }
                 }
             }
