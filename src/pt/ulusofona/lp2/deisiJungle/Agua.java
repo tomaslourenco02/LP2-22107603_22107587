@@ -17,6 +17,11 @@ public class Agua extends Alimento{
     }
 
     @Override
+    void energiaFornecida(Jogador jogador, int jogadasFeitas) {
+
+    }
+
+    @Override
     public String toString() {
         return "Agua : + 15U|20% energia";
     }

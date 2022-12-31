@@ -22,6 +22,11 @@ public class Carne extends Alimento{
     }
 
     @Override
+    void energiaFornecida(Jogador jogador, int jogadasFeitas) {
+
+    }
+
+    @Override
     public String toString() {
 
         if(jogadasEfetuadas > 12){
