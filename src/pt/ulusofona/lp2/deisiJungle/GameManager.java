@@ -888,8 +888,7 @@ public class GameManager {
                 return true;
             }
         } else if (alimento.equals("b")) {
-            if (jogadorAJogar.bananasConsumidas > 1) {
-
+            if (jogadorAJogar.bananasConsumidas >= 1) {
                 jogadorAJogar.energiaAtual -= 40;
                 countJogadores++;
                 squares.get(jogadorAJogar.posicaoAtual).bananas--;
@@ -902,7 +901,6 @@ public class GameManager {
                 return true;
 
             } else if (squares.get(jogadorAJogar.posicaoAtual).bananas > 0) {
-
                 jogadorAJogar.energiaAtual += 40;
                 jogadorAJogar.bananasConsumidas++;
                 squares.get(jogadorAJogar.posicaoAtual).bananas--;

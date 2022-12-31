@@ -40,6 +40,6 @@ public class CogumelosMagicos extends Alimento{
 
     @Override
     public String toString() {
-        return "Cogumelo Magico : +- " + nrAleatorio + "% energia" ;
+        return "Apanhou Cogumelo Magico";
     }
 }
