@@ -65,7 +65,7 @@ public class Jogador {
         infoJogador[0] = Integer.toString(identificador);
         infoJogador[1] = nome;
         infoJogador[2] = especieDoJogador;
-        infoJogador[3] = Integer.toString((int) energiaAtual);
+        infoJogador[3] = Integer.toString(energiaAtual);
 
         if(Objects.equals(especieDoJogador, "E")){
             infoJogador[4] = "1..6";

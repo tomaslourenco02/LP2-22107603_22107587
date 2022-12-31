@@ -464,7 +464,6 @@ public class GameManager {
                 return jogadores.get(i).infoJogador();
             }
         }
-
         return null;
     }
 
@@ -631,17 +630,18 @@ public class GameManager {
             texto.append("Quadrado: ").append(i+1).append("\n");
             for (int k = 0; k < squares.get(i).identificadoresNoQuadrado.size(); k++) {
                 for (int j = 0; j < jogadores.size(); j++) {
-                    if (squares.get(i).identificadoresNoQuadrado.get(k) == jogadores.get(j).identificador) {
-                        texto.append(squares.get(i).identificadoresNoQuadrado.get(k)).append(";");
-                        texto.append(jogadores.get(j).nome).append(";");
-                        texto.append(jogadores.get(j).energiaAtual).append(";");
-                        texto.append(jogadores.get(j).especie.identificador).append(" - ");
+                    {
+                        if (squares.get(i).identificadoresNoQuadrado.get(k) == jogadores.get(j).identificador) {
+                            texto.append(squares.get(i).identificadoresNoQuadrado.get(k)).append(";");
+                            texto.append(jogadores.get(j).nome).append(";");
+                            texto.append(jogadores.get(j).energiaAtual).append(";");
+                            texto.append(jogadores.get(j).especieDoJogador).append(" - ");
+                        }
                     }
                 }
             }
-                texto.append(squares.get(i).identificadoresAlimentosNoQuadrado).append("\n");
+            texto.append(squares.get(i).identificadoresAlimentosNoQuadrado).append("\n");
         }
-
 
 
         try {
@@ -684,13 +684,16 @@ public class GameManager {
                         squaresLoad.add(new SquareInfo());
                         String[] info = myReader.nextLine().split(" - ");
                         for (int j = 0; j < info.length; j++) {
-                            String[] info2 = info[j].split(";");
+                            if (!info[j].equals("null")) {
+                                String[] info2 = info[j].split(";");
                                 if (!(info2[0].equals("null"))) {
                                     if (info2[0].matches("[0-9]*")) {
-                                        squaresLoad.add(new SquareInfo());
-                                        Jogador jogador = new Jogador(Integer.parseInt(info2[0]), info2[1], Integer.parseInt(info2[2]), info2[3], i);
-                                        jogadoresLoad.add(jogador);
-                                        squaresLoad.get(i).identificadoresNoQuadrado.add(jogador.identificador);
+                                        if(Integer.parseInt(info2[0]) > 0){
+                                            squaresLoad.add(new SquareInfo());
+                                            Jogador jogador = new Jogador(Integer.parseInt(info2[0]), info2[1], Integer.parseInt(info2[2]), info2[3], i);
+                                            jogadoresLoad.add(jogador);
+                                            squaresLoad.get(i).identificadoresNoQuadrado.add(jogador.identificador);
+                                        }
                                     } else if (info2[0].matches("[a-zA-Z]+")) {
                                         Alimento alimento = definirAlimento(info2[0].trim());
                                         if (alimento != null) {
@@ -701,11 +704,13 @@ public class GameManager {
                                         }
                                     }
                                 }
+                            }
                         }
                     }
                 }
             }
             jogadores = jogadoresLoad;
+            ordenarJogadores();
             squares = squaresLoad;
             myReader.close();
         } catch (
@@ -714,11 +719,10 @@ public class GameManager {
             e.printStackTrace();
             return true;
         }
-
         return true;
     }
 
-    public int jglSize(){
+    public int jglSize() {
         return tamanhoTabuleiro;
     }
 
