@@ -1,31 +1,33 @@
 Tamanho tabuleiro: 
-9
+10
 Jogadas feitas: 
-5
+0
 Nr de jogadores: 
-4
+2
 Count jogadores: 
-1
+0
 ID jogador vencedor: 
 0
 Jogo Acabou: 
-true
+false
 Quadrado: 0
-2;Tomas;90;L - null
+1;Joao;70;Z - 2;Pedro;150;T - null
 Quadrado: 1
 null
 Quadrado: 2
-3;Pedro;91;T - m
+null
 Quadrado: 3
-7;Joana;62;P - null
+null
 Quadrado: 4
 null
 Quadrado: 5
-null
+m
 Quadrado: 6
 null
 Quadrado: 7
-m
+null
 Quadrado: 8
-1;Joao;104;Z - c
+null
+Quadrado: 9
+null
 
