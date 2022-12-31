@@ -758,15 +758,13 @@ public class GameManager {
         } else { jogadorAJogar.nrCasasMovimentou += nrSquares; }
 
         if (nrSquares == 0) { //descanso
-            if (jogadorAJogar.energiaAtual + jogadorAJogar.especie.ganhoEnergiaEmDescanso > 200) {
-                jogadorAJogar.energiaAtual = 200;
+            if (jogadorAJogar.energiaAtual + jogadorAJogar.especie.ganhoEnergiaEmDescanso > 200) { jogadorAJogar.energiaAtual = 200;
             } else { jogadorAJogar.energiaAtual += jogadorAJogar.especie.ganhoEnergiaEmDescanso; }
             if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
                 jogadorAJogar.nrAlimentosIngeridos++;
                 String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
-                Alimento alimentoNoSquare = definirAlimento(alimento);
                 if(energiaFornecidaAlimento(jogadorAJogar, alimento)){
-                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, alimentoNoSquare.toString());
+                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, definirAlimento(alimento).toString());
                 }
             } turnosJogadores();
             return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
@@ -791,9 +789,8 @@ public class GameManager {
                         if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
                             jogadorAJogar.nrAlimentosIngeridos++;
                             String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
-                            Alimento alimentoNoSquare = definirAlimento(alimento);
                             if(energiaFornecidaAlimento(jogadorAJogar, alimento)){
-                                return new MovementResult(MovementResultCode.CAUGHT_FOOD, alimentoNoSquare.toString());
+                                return new MovementResult(MovementResultCode.CAUGHT_FOOD, definirAlimento(alimento).toString());
                             }
                         } turnosJogadores();
                         return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
