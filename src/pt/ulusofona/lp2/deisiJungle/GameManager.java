@@ -91,14 +91,16 @@ public class GameManager {
 
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
-                if (!verificaIdAlimentos(foodsInfo[i][0])) { return new InitializationError("Erro na inicialização do terreno!");
+                if (!verificaIdAlimentos(foodsInfo[i][0])) {
+                    return new InitializationError("Erro na inicialização do terreno!");
                 }
             }
         }
 
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
-                if (foodsInfo[i][1].matches("[a-zA-Z]+")) { return new InitializationError("Erro na inicialização do terreno!");
+                if (foodsInfo[i][1].matches("[a-zA-Z]+")) {
+                    return new InitializationError("Erro na inicialização do terreno!");
                 }
                 if (foodsInfo[i][1].matches("[0-9]*")) {
                     if (Integer.parseInt(foodsInfo[i][1]) >= jungleSize || Integer.parseInt(foodsInfo[i][1]) <= 1) {
@@ -108,9 +110,13 @@ public class GameManager {
             }
         }
 
-        if (!verificaJogadores(playersInfo)) { return new InitializationError("Erro na inicialização do terreno!"); }
+        if (!verificaJogadores(playersInfo)) {
+            return new InitializationError("Erro na inicialização do terreno!");
+        }
 
-        if (jungleSize < playersInfo.length * 2) { return new InitializationError("Erro na inicialização do terreno!"); }
+        if (jungleSize < playersInfo.length * 2) {
+            return new InitializationError("Erro na inicialização do terreno!");
+        }
 
         for (int i = 0; i < jungleSize; i++) {
             squares.add(new SquareInfo());
@@ -304,6 +310,7 @@ public class GameManager {
 
         return alimentos;
     }
+
     public int[] getPlayerIds(int squareNr) {
         int[] idJogadores = new int[jogadores.size()];
         int count = 0;
@@ -422,8 +429,12 @@ public class GameManager {
         int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrPositions);
         int ganhoDeEnergia = 0;
 
-        if (posDestino < 1) { posDestino = 1; }
-        if (posDestino > tamanhoTabuleiro) { posDestino = tamanhoTabuleiro; }
+        if (posDestino < 1) {
+            posDestino = 1;
+        }
+        if (posDestino > tamanhoTabuleiro) {
+            posDestino = tamanhoTabuleiro;
+        }
         if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
             String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
             if (alimento.equals("e")) {
@@ -641,7 +652,7 @@ public class GameManager {
             ordenarJogadores();
             squares = squaresLoad;
             myReader.close();
-        } catch ( FileNotFoundException e ) {
+        } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
             return true;
@@ -746,6 +757,12 @@ public class GameManager {
             jogadorAJogar.nrCasasMovimentou += nrSquares * (-1);
         } else {
             jogadorAJogar.nrCasasMovimentou += nrSquares;
+        }
+
+        if (jogadasFeitas >= jogadores.size() - 1) {
+            if (jogadorAvancado()) {
+                jogoAcabou = true;
+            }
         }
 
         if (nrSquares == 0) { //descanso
@@ -908,8 +925,8 @@ public class GameManager {
                         jogadorAJogar.posicaoAtual = posDestino;
                         jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
 
-                        if (jogadasFeitas > jogadores.size() - 1) {
-                            if (jogadorAvancado(jogadorAJogar)) {
+                        if (jogadasFeitas >= jogadores.size() - 1) {
+                            if (jogadorAvancado()) {
                                 jogoAcabou = true;
                             }
                         }
@@ -1063,33 +1080,24 @@ public class GameManager {
 
     }
 
-    public boolean jogadorAvancado(Jogador jogador) {
-        int posicaoJogador = jogador.posicaoAtual;
+    public boolean jogadorAvancado() {
+        ArrayList<Jogador> jogadoresOrdenados = ordenarJogadores();
         int[] posicoesJogadores = ordenarPosicoes();
         int distancia;
 
-        if (posicoesJogadores[0] == posicaoJogador) {
-            distancia = posicaoJogador - posicoesJogadores[1];
-            if (distancia >= tamanhoTabuleiro / 2) {
-                for (int i = 0; i < jogadores.size(); i++) {
-                    if (jogadores.get(i).posicaoAtual == posicoesJogadores[1]) {
-                        jogadores.get(i).ganhou = true;
-                        jogoAcabou = true;
-                    }
+        for (int i = 0; i < jogadoresOrdenados.size(); i++) {
+            distancia = posicoesJogadores[0] - posicoesJogadores[1];
+            if(distancia >= tamanhoTabuleiro){
+                if (jogadores.get(i).posicaoAtual == posicoesJogadores[1]) {
+                    jogadores.get(i).ganhou = true;
+                    jogoAcabou = true;
+                    return true;
                 }
-                return true;
-            }
-        } else if (posicoesJogadores[1] == posicaoJogador) {
-            distancia = posicoesJogadores[posicoesJogadores.length - 1] - posicaoJogador;
-            if (distancia >= tamanhoTabuleiro / 2) {
-                jogador.ganhou = true;
-                jogoAcabou = true;
-                return true;
             }
         }
-
         return false;
     }
+
 
     public int[] ordenarPosicoes() {
         int[] posicoesOrdenadas = new int[jogadores.size()];
