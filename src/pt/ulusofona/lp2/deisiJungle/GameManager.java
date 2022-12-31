@@ -763,19 +763,12 @@ public class GameManager {
             }
         }
         if (posDestino <= 0) {
-            countJogadores++;
-            if (countJogadores > jogadores.size() - 1) {
-                countJogadores = 0;
-            }
+            turnosJogadores();
             return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
         }
 
         if (jogadorAJogar.energiaAtual <= 0 || jogadorAJogar.energiaAtual - gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares) < 0) {
-
-            countJogadores++;
-            if (countJogadores > jogadores.size() - 1) {
-                countJogadores = 0;
-            }
+            turnosJogadores();
             return new MovementResult(MovementResultCode.NO_ENERGY, null);
         }
 
@@ -797,14 +790,10 @@ public class GameManager {
                 String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
                 return energiaFornecidaAlimento(jogadorAJogar, alimento);
             }
-            countJogadores++;
-            if (countJogadores > jogadores.size() - 1) {
-                countJogadores = 0;
-            }
+            turnosJogadores();
             return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
         }
         if (posDestino >= tamanhoTabuleiro) {
-
             jogadorAJogar.posicaoAtual = tamanhoTabuleiro;
             jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
             jogoAcabou = true;
@@ -969,10 +958,7 @@ public class GameManager {
         }
         if (alimento.equals("m")) {
             squares.get(jogadorAJogar.posicaoAtual).cogumelo.energiaFornecida(jogadorAJogar, jogadasFeitas);
-            countJogadores++;
-            if (countJogadores > jogadores.size() - 1) {
-                countJogadores = 0;
-            }
+            turnosJogadores();
             if (jogadorAJogar.energiaAtual > 200) {
                 jogadorAJogar.energiaAtual = 200;
             }
@@ -996,6 +982,13 @@ public class GameManager {
             }
         }
         return false;
+    }
+
+    public void turnosJogadores(){
+        countJogadores++;
+        if (countJogadores > jogadores.size() - 1) {
+            countJogadores = 0;
+        }
     }
 
     public int[] ordenarPosicoes() {
