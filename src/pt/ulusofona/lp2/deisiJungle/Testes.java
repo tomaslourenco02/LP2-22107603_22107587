@@ -71,10 +71,12 @@ public class Testes {
     @org.junit.Test
     public void testComida() {
         GameManager gamemaneger = new GameManager();
-        String[] jogador1 = {"4", "Joao", "Z"};
-        String[] jogador2 = {"6", "Pedro", "T"};
+        String[] jogador1 = {"1", "Joao", "Z"};
+        String[] jogador2 = {"3", "Pedro", "T"};
+        String[] jogador3 = {"2", "Tomas", "L"};
+        String[] jogador4 = {"7", "Joana", "P"};
 
-        String[][] jogadores = {jogador1, jogador2};
+        String[][] jogadores = {jogador1,jogador2,jogador3,jogador4};
 
         String[] comida1 = {"m", String.valueOf(2)};
         String[] comida2 = {"c", String.valueOf(8)};
@@ -83,13 +85,21 @@ public class Testes {
         String[][] comida = {comida1, comida2, comida3};
 
         System.out.println((gamemaneger.createInitialJungle(10, jogadores, comida)));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(4, true));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(1, true));
-        File saveFile = new File("textoSave");
-        System.out.println(gamemaneger.saveGame(saveFile));
-        System.out.println((gamemaneger.createInitialJungle(17, jogadores, comida)));
-        System.out.println(gamemaneger.loadGame(saveFile));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(gamemaneger.moveCurrentPlayer(6, true));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, true));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+
+
+        System.out.println((gamemaneger.createInitialJungle(10, jogadores, comida)));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
+
         System.out.println(gamemaneger.jglSize());
 
     }

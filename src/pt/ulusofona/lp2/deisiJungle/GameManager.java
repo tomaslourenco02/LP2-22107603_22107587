@@ -464,7 +464,6 @@ public class GameManager {
                 return jogadores.get(i).infoJogador();
             }
         }
-
         return null;
     }
 
@@ -706,6 +705,7 @@ public class GameManager {
                 }
             }
             jogadores = jogadoresLoad;
+            ordenarJogadores();
             squares = squaresLoad;
             myReader.close();
         } catch (
@@ -714,7 +714,6 @@ public class GameManager {
             e.printStackTrace();
             return true;
         }
-
         return true;
     }
 
