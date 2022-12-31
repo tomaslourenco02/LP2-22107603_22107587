@@ -108,6 +108,7 @@ public class Testes {
 
 
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(1)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(8)));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(2)));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(3)));
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(7)));

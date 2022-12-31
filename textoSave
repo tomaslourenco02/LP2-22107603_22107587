@@ -10,22 +10,22 @@ ID jogador vencedor:
 0
 Jogo Acabou: 
 true
-Quadrado: 1
+Quadrado: 0
 2;Tomas;90;L - null
-Quadrado: 2
+Quadrado: 1
 null
+Quadrado: 2
+3;Pedro;91;T - m
 Quadrado: 3
-3;Pedro;86;T - m
-Quadrado: 4
 7;Joana;62;P - null
+Quadrado: 4
+null
 Quadrado: 5
 null
 Quadrado: 6
 null
 Quadrado: 7
-null
-Quadrado: 8
 m
-Quadrado: 9
+Quadrado: 8
 1;Joao;104;Z - c
 
