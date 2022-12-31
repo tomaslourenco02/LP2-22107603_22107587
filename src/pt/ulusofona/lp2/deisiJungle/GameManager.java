@@ -786,7 +786,10 @@ public class GameManager {
             if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
                 jogadorAJogar.nrAlimentosIngeridos++;
                 String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
-                return energiaFornecidaAlimento(jogadorAJogar, alimento);
+                Alimento alimentoNoSquare = definirAlimento(alimento);
+                if(energiaFornecidaAlimento(jogadorAJogar, alimento)){
+                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, alimentoNoSquare.toString());
+                }
             }
             turnosJogadores();
             return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
