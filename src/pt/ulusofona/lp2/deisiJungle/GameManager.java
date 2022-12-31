@@ -91,16 +91,14 @@ public class GameManager {
 
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
-                if (!verificaIdAlimentos(foodsInfo[i][0])) {
-                    return new InitializationError("Erro na inicialização do terreno!");
+                if (!verificaIdAlimentos(foodsInfo[i][0])) { return new InitializationError("Erro na inicialização do terreno!");
                 }
             }
         }
 
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
-                if (foodsInfo[i][1].matches("[a-zA-Z]+")) {
-                    return new InitializationError("Erro na inicialização do terreno!");
+                if (foodsInfo[i][1].matches("[a-zA-Z]+")) { return new InitializationError("Erro na inicialização do terreno!");
                 }
                 if (foodsInfo[i][1].matches("[0-9]*")) {
                     if (Integer.parseInt(foodsInfo[i][1]) >= jungleSize || Integer.parseInt(foodsInfo[i][1]) <= 1) {
@@ -110,13 +108,9 @@ public class GameManager {
             }
         }
 
-        if (!verificaJogadores(playersInfo)) {
-            return new InitializationError("Erro na inicialização do terreno!");
-        }
+        if (!verificaJogadores(playersInfo)) { return new InitializationError("Erro na inicialização do terreno!"); }
 
-        if (jungleSize < playersInfo.length * 2) {
-            return new InitializationError("Erro na inicialização do terreno!");
-        }
+        if (jungleSize < playersInfo.length * 2) { return new InitializationError("Erro na inicialização do terreno!"); }
 
         for (int i = 0; i < jungleSize; i++) {
             squares.add(new SquareInfo());
@@ -310,66 +304,6 @@ public class GameManager {
 
         return alimentos;
     }
-
-    /*public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
-
-        jogadores.clear();
-        squares.clear();
-        countJogadores = 0;
-        jogadoresSemEnergia = 0;
-        jogadorVencedorID = 0;
-        tamanhoTabuleiro = 0;
-        jogoAcabou = false;
-        count = 0;
-
-        if (initialEnergy <= 0) {
-            return false;
-        }
-
-        if (jungleSize < playersInfo.length * 2) {
-            return false;
-        }
-
-        if (!verificaJogadores(playersInfo)) {
-            return false;
-        }
-
-        tamanhoTabuleiro = jungleSize;
-
-        for (int i = 0; i < tamanhoTabuleiro; i++) {
-            squares.add(new SquareInfo());
-        }
-
-
-        for (int i = 0; i < playersInfo.length; i++) {
-            jogadores.add(new Jogador(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2], initialEnergy));
-            if (squares != null) {
-                squares.get(0).identificadoresNoQuadrado.add(Integer.valueOf(playersInfo[i][0])); //NAO POSSO FAZER ISTO
-            }
-        }
-
-        int menorID = 0;
-
-        for (int i = 0; i < jogadores.size(); i++) {
-            for (int j = 0; j < jogadores.size(); j++) {
-                if (i != j) {
-                    if (jogadores.get(i).getIdentificador() < jogadores.get(j).getIdentificador()) {
-                        menorID = jogadores.get(i).getIdentificador();
-                    } else {
-                        menorID = jogadores.get(j).getIdentificador();
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < jogadores.size(); i++) {
-            if (menorID == jogadores.get(i).getIdentificador()) {
-                jogadores.get(i).aJogar = true;
-            }
-        }
-        return true;
-    }*/
-
     public int[] getPlayerIds(int squareNr) {
         int[] idJogadores = new int[jogadores.size()];
         int count = 0;
@@ -488,12 +422,8 @@ public class GameManager {
         int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrPositions);
         int ganhoDeEnergia = 0;
 
-        if (posDestino < 1) {
-            posDestino = 1;
-        }
-        if (posDestino > tamanhoTabuleiro) {
-            posDestino = tamanhoTabuleiro;
-        }
+        if (posDestino < 1) { posDestino = 1; }
+        if (posDestino > tamanhoTabuleiro) { posDestino = tamanhoTabuleiro; }
         if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
             String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
             if (alimento.equals("e")) {
@@ -711,8 +641,7 @@ public class GameManager {
             ordenarJogadores();
             squares = squaresLoad;
             myReader.close();
-        } catch (
-                FileNotFoundException e) {
+        } catch ( FileNotFoundException e ) {
             System.out.println("An error occurred.");
             e.printStackTrace();
             return true;
