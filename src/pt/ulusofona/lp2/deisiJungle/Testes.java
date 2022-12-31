@@ -65,22 +65,16 @@ public class Testes {
 
         String[][] jogadores = {jogador1,jogador2};
 
-        String[] comida1 = {"c", String.valueOf(5)};
+        String[] comida1 = {"m", String.valueOf(5)};
 
         String[][] comida = {comida1};
 
         System.out.println(gameManager.createInitialJungle(10, jogadores, comida));
         System.out.println(Arrays.toString(gameManager.getPlayerIds(1)));
-        System.out.println(gameManager.moveCurrentPlayer(3, true));
-        System.out.println(Arrays.toString(gameManager.getPlayerIds(4)));
+        System.out.println(gameManager.moveCurrentPlayer(4, true));
+        System.out.println(Arrays.toString(gameManager.getPlayerInfo(1)));
+        System.out.println(Arrays.toString(gameManager.getPlayerIds(5)));
 
-        File saveFile = new File("textoSave");
-        System.out.println(gameManager.saveGame(saveFile));
-        System.out.println(gameManager.loadGame(saveFile));
-        System.out.println(Arrays.toString(gameManager.getPlayerIds(1)));
-        System.out.println(Arrays.toString(gameManager.getPlayerIds(4)));
-        System.out.println(gameManager.moveCurrentPlayer(3, true));
-        System.out.println(Arrays.toString(gameManager.getPlayerIds(4)));
 
 
 
