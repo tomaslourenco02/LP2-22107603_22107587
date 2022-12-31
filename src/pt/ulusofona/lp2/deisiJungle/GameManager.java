@@ -567,8 +567,8 @@ public class GameManager {
         texto.append("Jogo Acabou: \n");
         texto.append(jogoAcabou).append("\n");
 
-        for (int i = 1; i < squares.size(); i++) {
-            texto.append("Quadrado: ").append(i).append("\n");
+        for (int i = 0; i < squares.size(); i++) {
+            texto.append("Quadrado: ").append(i+1).append("\n");
             for (int k = 0; k < squares.get(i).identificadoresNoQuadrado.size(); k++) {
                 for (int j = 0; j < jogadores.size(); j++) {
 
