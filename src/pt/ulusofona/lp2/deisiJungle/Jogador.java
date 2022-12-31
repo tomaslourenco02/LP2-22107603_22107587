@@ -31,7 +31,7 @@ public class Jogador {
      public Jogador(int identificador, String nome, int energiaAtual ,String especieDoJogador, int posicaoAtual) {
         this.identificador = identificador;
         this.nome = nome;
-        this.especieDoJogador = especieDoJogador;
+        this.especieDoJogador = especie.nome;
         this.especie = setEspecie(especieDoJogador);
         this.energiaAtual = energiaAtual;
         this.posicaoAtual = posicaoAtual;
@@ -65,7 +65,7 @@ public class Jogador {
         infoJogador[0] = Integer.toString(identificador);
         infoJogador[1] = nome;
         infoJogador[2] = especieDoJogador;
-        infoJogador[3] = Integer.toString(energiaAtual);
+        infoJogador[3] = Integer.toString((int) energiaAtual);
 
         if(Objects.equals(especieDoJogador, "E")){
             infoJogador[4] = "1..6";

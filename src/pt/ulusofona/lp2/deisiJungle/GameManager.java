@@ -118,7 +118,7 @@ public class GameManager {
             return new InitializationError("Erro na inicialização do terreno!");
         }
 
-        for (int i = 0; i <= jungleSize; i++) {
+        for (int i = 0; i < jungleSize; i++) {
             squares.add(new SquareInfo());
         }
 
@@ -626,8 +626,8 @@ public class GameManager {
         texto.append("Jogo Acabou: \n");
         texto.append(jogoAcabou).append("\n");
 
-        for (int i = 1; i < squares.size(); i++) {
-            texto.append("Quadrado: ").append(i).append("\n");
+        for (int i = 0; i < squares.size(); i++) {
+            texto.append("Quadrado: ").append(i+1).append("\n");
             for (int k = 0; k < squares.get(i).identificadoresNoQuadrado.size(); k++) {
                 for (int j = 0; j < jogadores.size(); j++) {
                     {
@@ -635,7 +635,7 @@ public class GameManager {
                             texto.append(squares.get(i).identificadoresNoQuadrado.get(k)).append(";");
                             texto.append(jogadores.get(j).nome).append(";");
                             texto.append(jogadores.get(j).energiaAtual).append(";");
-                            texto.append(jogadores.get(j).especieDoJogador).append(" - ");
+                            texto.append(jogadores.get(j).especie.nome).append(" - ");
                         }
                     }
                 }
@@ -964,12 +964,20 @@ public class GameManager {
             return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
         }
         if (posDestino >= tamanhoTabuleiro) {
+
             jogadorAJogar.posicaoAtual = tamanhoTabuleiro;
             jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
             jogoAcabou = true;
             jogadorAJogar.ganhou = true;
         }
         if (!jogoAcabou) {
+            if (posDestino >= tamanhoTabuleiro) {
+                posDestino = tamanhoTabuleiro;
+                jogadoresOrdenados.get(countJogadores).ganhou = true;
+                jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
+                jogoAcabou = true;
+            }
+
             int nrAleatorio = squares.get(posDestino).cogumelo.nrAleatorio;
 
             for (int i = 0; i < squares.size(); i++) {
@@ -982,7 +990,6 @@ public class GameManager {
                         jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
 
                         if (posDestino >= tamanhoTabuleiro) {
-                            jogadorAJogar.posicaoAtual = tamanhoTabuleiro;
                             jogadorAJogar.ganhou = true;
                             jogoAcabou = true;
                         }
@@ -1132,11 +1139,14 @@ public class GameManager {
                 }
             }
         }
+
         countJogadores++;
         if (countJogadores > jogadores.size() - 1) {
             countJogadores = 0;
         }
-        return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
+        return new
+
+                MovementResult(MovementResultCode.VALID_MOVEMENT, null);
 
     }
 
