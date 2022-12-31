@@ -913,7 +913,7 @@ public class GameManager {
                 if (jogadorAJogar.energiaAtual > 200) {
                     jogadorAJogar.energiaAtual = 200;
                 }
-                return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Banana");
+                return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Bananas");
 
             } else if (squares.get(jogadorAJogar.posicaoAtual).bananas > 0) {
 
@@ -927,7 +927,7 @@ public class GameManager {
                 if (jogadorAJogar.energiaAtual > 200) {
                     jogadorAJogar.energiaAtual = 200;
                 }
-                return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Banana");
+                return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Bananas");
             }
         }
         if (alimento.equals("c")) {
