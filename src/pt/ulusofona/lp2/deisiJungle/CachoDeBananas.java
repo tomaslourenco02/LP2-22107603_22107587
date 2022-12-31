@@ -24,6 +24,11 @@ public class CachoDeBananas extends Alimento{
     }
 
     @Override
+    void energiaFornecida(Jogador jogador, int jogadasFeitas) {
+
+    }
+
+    @Override
     public String toString() {
         return "Bananas : " + nrBananas + " : 40 energia";
 
