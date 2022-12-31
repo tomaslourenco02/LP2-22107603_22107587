@@ -630,11 +630,16 @@ public class GameManager {
             texto.append("Quadrado: ").append(i).append("\n");
             for (int k = 0; k < squares.get(i).identificadoresNoQuadrado.size(); k++) {
                 for (int j = 0; j < jogadores.size(); j++) {
-                    if (squares.get(i).identificadoresNoQuadrado.get(k) == jogadores.get(j).identificador) {
-                        texto.append(squares.get(i).identificadoresNoQuadrado.get(k)).append(";");
-                        texto.append(jogadores.get(j).nome).append(";");
-                        texto.append(jogadores.get(j).energiaAtual).append(";");
-                        texto.append(jogadores.get(j).especieDoJogador).append(" - ");
+                    if (jogadores.get(j).identificador > 0 ||
+                        jogadores.get(j).nome!=null ||
+                        jogadores.get(j).especieDoJogador != null)
+                    {
+                        if (squares.get(i).identificadoresNoQuadrado.get(k) == jogadores.get(j).identificador) {
+                            texto.append(squares.get(i).identificadoresNoQuadrado.get(k)).append(";");
+                            texto.append(jogadores.get(j).nome).append(";");
+                            texto.append(jogadores.get(j).energiaAtual).append(";");
+                            texto.append(jogadores.get(j).especieDoJogador).append(" - ");
+                        }
                     }
                 }
             }
