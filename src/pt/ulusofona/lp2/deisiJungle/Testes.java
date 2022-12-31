@@ -85,30 +85,35 @@ public class Testes {
         String[][] comida = {comida1, comida2, comida3};
 
         System.out.println((gamemaneger.createInitialJungle(10, jogadores, comida)));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
-        System.out.println(gamemaneger.moveCurrentPlayer(4, true));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(1, true));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(6, true));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(2, true));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(gamemaneger.moveCurrentPlayer(8, true)); // Joao 9
+        System.out.println(gamemaneger.moveCurrentPlayer(0, true)); // Tomás 1
+        System.out.println(gamemaneger.moveCurrentPlayer(1, true)); // Pedro 2
+        System.out.println(gamemaneger.moveCurrentPlayer(2, true)); //Joana 3
+        System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
+
         System.out.println(gamemaneger.moveCurrentPlayer(1, true));
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(6)));
 
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(1)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(2)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(3)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(7)));
 
         File saveFile = new File("textoSave");
         System.out.println(gamemaneger.saveGame(saveFile));
         System.out.println((gamemaneger.createInitialJungle(10, jogadores, comida)));
 
         System.out.println(gamemaneger.loadGame(saveFile));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(6)));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(7)));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(7)));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(7)));
+
+
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(1)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(2)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(3)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(7)));
+
+
+
         System.out.println(gamemaneger.jglSize());
 
     }
