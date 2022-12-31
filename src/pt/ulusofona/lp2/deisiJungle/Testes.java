@@ -57,15 +57,25 @@ public class Testes {
 
     @org.junit.Test
     public void testLoad(){
+
         GameManager gameManager = new GameManager();
+        String[] jogador1 = {"1", "Joao", "Z"};
+        String[] jogador2 = {"2", "Pedro", "T"};
 
 
+        String[][] jogadores = {jogador1,jogador2};
+
+        String[] comida1 = {"c", String.valueOf(5)};
+
+        String[][] comida = {comida1};
+
+        System.out.println(gameManager.createInitialJungle(10, jogadores, comida));
+        System.out.println(Arrays.toString(gameManager.getPlayerIds(1)));
         File saveFile = new File("textoSave");
         System.out.println(gameManager.saveGame(saveFile));
-
-        gameManager.loadGame(saveFile);
-
         System.out.println(gameManager.loadGame(saveFile));
+        System.out.println(Arrays.toString(gameManager.getPlayerIds(1)));
+
     }
 
     @org.junit.Test
