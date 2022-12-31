@@ -96,44 +96,21 @@ public class Testes {
 
         String[][] jogadores = {jogador1,jogador2,jogador3,jogador4};
 
-        String[] comida1 = {"m", String.valueOf(2)};
+        String[] comida1 = {"b", String.valueOf(2)};
         String[] comida2 = {"c", String.valueOf(8)};
         String[] comida3 = {"m", String.valueOf(7)};
 
         String[][] comida = {comida1, comida2, comida3};
 
         System.out.println((gamemaneger.createInitialJungle(9, jogadores, comida)));
-        System.out.println(gamemaneger.moveCurrentPlayer(7, true)); // Joao 9
+        System.out.println(gamemaneger.moveCurrentPlayer(7, true)); // Joao 8
         System.out.println(gamemaneger.moveCurrentPlayer(0, true)); // Tomás 1
         System.out.println(gamemaneger.moveCurrentPlayer(1, true)); // Pedro 2
-        System.out.println(gamemaneger.moveCurrentPlayer(2, true)); //Joana 3
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(3))); // Pedro 2
+        System.out.println(gamemaneger.moveCurrentPlayer(2, true)); // Joana 3
         System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
         System.out.println(gamemaneger.getGameResults());
-
-        System.out.println(gamemaneger.moveCurrentPlayer(1, true));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(6)));
-
-
-        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(1)));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(2)));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(3)));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(7)));
-
-        File saveFile = new File("textoSave");
-        System.out.println(gamemaneger.saveGame(saveFile));
-        System.out.println((gamemaneger.createInitialJungle(10, jogadores, comida)));
-
-        System.out.println(gamemaneger.loadGame(saveFile));
-
-
-        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(1)));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(8)));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(2)));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(3)));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(7)));
-
     }
-
 
     @org.junit.Test
     public void testGetPlayersIds() {

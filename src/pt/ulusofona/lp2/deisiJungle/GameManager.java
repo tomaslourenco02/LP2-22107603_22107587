@@ -800,15 +800,6 @@ public class GameManager {
             jogadorAJogar.ganhou = true;
         }
         if (!jogoAcabou) {
-            if (posDestino >= tamanhoTabuleiro) {
-                posDestino = tamanhoTabuleiro;
-                jogadoresOrdenados.get(countJogadores).ganhou = true;
-                jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
-                jogoAcabou = true;
-            }
-
-            int nrAleatorio = squares.get(posDestino).cogumelo.nrAleatorio;
-
             for (int i = 0; i < squares.size(); i++) {
                 for (int j = 0; j < squares.get(i).identificadoresNoQuadrado.size(); j++) {
                     if (squares.get(i).identificadoresNoQuadrado.get(j) == jogadorAJogar.identificador) {
@@ -832,19 +823,13 @@ public class GameManager {
                             String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
                             return energiaFornecidaAlimento(jogadorAJogar, alimento);
                         }
-                        countJogadores++;
-                        if (countJogadores > jogadores.size() - 1) {
-                            countJogadores = 0;
-                        }
+                        turnosJogadores();
                         return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
                     }
                 }
             }
         }
-        countJogadores++;
-        if (countJogadores > jogadores.size() - 1) {
-            countJogadores = 0;
-        }
+        turnosJogadores();
         return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
     }
 
@@ -936,20 +921,14 @@ public class GameManager {
             } else {
                 if (jogadasFeitas > 12) {
                     jogadorAJogar.energiaAtual = jogadorAJogar.energiaAtual / 2;
-                    countJogadores++;
-                    if (countJogadores > jogadores.size() - 1) {
-                        countJogadores = 0;
-                    }
+                    turnosJogadores();
                     if (jogadorAJogar.energiaAtual > 200) {
                         jogadorAJogar.energiaAtual = 200;
                     }
                     return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Carne");
                 }
                 jogadorAJogar.energiaAtual += 50;
-                countJogadores++;
-                if (countJogadores > jogadores.size() - 1) {
-                    countJogadores = 0;
-                }
+                turnosJogadores();
                 if (jogadorAJogar.energiaAtual > 200) {
                     jogadorAJogar.energiaAtual = 200;
                 }
@@ -964,7 +943,7 @@ public class GameManager {
             }
             return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Cogumelo Magico");
         }
-        return null;
+        return new MovementResult(MovementResultCode.CAUGHT_FOOD, "food desconhecida");
     }
 
     public boolean jogadorAvancado() {
