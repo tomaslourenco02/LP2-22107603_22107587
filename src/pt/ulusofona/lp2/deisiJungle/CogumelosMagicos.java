@@ -30,11 +30,11 @@ public class CogumelosMagicos extends Alimento{
     @Override
     void energiaFornecida(Jogador jogador, int jogadasFeitas) {
         if (jogadasFeitas % 2 == 0) {
-            double energia = jogador.energiaAtual + ((nrAleatorio * jogador.energiaAtual) / 100.0);
-            jogador.energiaAtual = (int) Math.round(energia);
+            int energia = jogador.energiaAtual + ((nrAleatorio * jogador.energiaAtual) / 100);
+            jogador.energiaAtual = Math.round(energia);
         } else {
-            double energia = jogador.energiaAtual - ((nrAleatorio * jogador.energiaAtual) / 100.0);
-            jogador.energiaAtual = (int) Math.round(energia);
+            int energia = jogador.energiaAtual - ((nrAleatorio * jogador.energiaAtual) / 100);
+            jogador.energiaAtual = Math.round(energia);
         }
     }
 
