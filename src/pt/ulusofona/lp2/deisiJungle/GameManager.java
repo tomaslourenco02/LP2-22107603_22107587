@@ -635,7 +635,7 @@ public class GameManager {
                         texto.append(squares.get(i).identificadoresNoQuadrado.get(k)).append(";");
                         texto.append(jogadores.get(j).nome).append(";");
                         texto.append(jogadores.get(j).energiaAtual).append(";");
-                        texto.append(jogadores.get(j).especie.nome).append(" - ");
+                        texto.append(jogadores.get(j).especieDoJogador).append(" - ");
                     }
 
                 }
@@ -689,7 +689,13 @@ public class GameManager {
                                     if (info2[0].matches("[0-9]*")) {
                                         if (Integer.parseInt(info2[0]) > 0) {
                                             squaresLoad.add(new SquareInfo());
-                                            Jogador jogador = new Jogador(Integer.parseInt(info2[0]), info2[1], Integer.parseInt(info2[2]), info2[3], i+1);
+                                            Jogador jogador;
+                                            if (i == 0) {
+                                                jogador = new Jogador(Integer.parseInt(info2[0]), info2[1], Integer.parseInt(info2[2]), info2[3], 1);
+                                            } else {
+                                                jogador = new Jogador(Integer.parseInt(info2[0]), info2[1], Integer.parseInt(info2[2]), info2[3], i);
+
+                                            }
                                             jogadoresLoad.add(jogador);
                                             squaresLoad.get(i).identificadoresNoQuadrado.add(jogador.identificador);
                                         }
@@ -1155,7 +1161,7 @@ public class GameManager {
         int distancia;
         for (int i = 0; i < jogadoresOrdenados.size(); i++) {
             distancia = posicoesJogadores[0] - posicoesJogadores[1];
-            if(distancia >= tamanhoTabuleiro/2){
+            if (distancia >= tamanhoTabuleiro / 2) {
                 if (jogadoresOrdenados.get(i).posicaoAtual == posicoesJogadores[1]) {
                     jogadoresOrdenados.get(i).ganhou = true;
                     jogoAcabou = true;
@@ -1216,7 +1222,7 @@ public class GameManager {
         int[] posicoes = ordenarPosicoes();
 
         for (int i = 0; i < jogadoresOrdenados.size(); i++) {
-            if(jogadoresOrdenados.get(i).ganhou){
+            if (jogadoresOrdenados.get(i).ganhou) {
                 if (!ordenadosClassificacao.contains(jogadoresOrdenados.get(i))) {
                     ordenadosClassificacao.add(jogadoresOrdenados.get(i));
                 }

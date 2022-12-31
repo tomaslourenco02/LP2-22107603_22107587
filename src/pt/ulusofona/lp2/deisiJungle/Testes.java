@@ -71,10 +71,18 @@ public class Testes {
 
         System.out.println(gameManager.createInitialJungle(10, jogadores, comida));
         System.out.println(Arrays.toString(gameManager.getPlayerIds(1)));
+        System.out.println(gameManager.moveCurrentPlayer(3, true));
+        System.out.println(Arrays.toString(gameManager.getPlayerIds(4)));
+
         File saveFile = new File("textoSave");
         System.out.println(gameManager.saveGame(saveFile));
         System.out.println(gameManager.loadGame(saveFile));
         System.out.println(Arrays.toString(gameManager.getPlayerIds(1)));
+        System.out.println(Arrays.toString(gameManager.getPlayerIds(4)));
+        System.out.println(gameManager.moveCurrentPlayer(3, true));
+        System.out.println(Arrays.toString(gameManager.getPlayerIds(4)));
+
+
 
     }
 

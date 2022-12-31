@@ -1,17 +1,17 @@
 Tamanho tabuleiro: 
 10
 Jogadas feitas: 
-0
+1
 Nr de jogadores: 
 2
 Count jogadores: 
-0
+1
 ID jogador vencedor: 
 0
 Jogo Acabou: 
 false
 Quadrado: 0
-1;Joao;70;Tarzan - 2;Pedro;150;Tartaruga - null
+2;Pedro;150;T - null
 Quadrado: 1
 null
 Quadrado: 2
@@ -19,7 +19,7 @@ null
 Quadrado: 3
 null
 Quadrado: 4
-null
+1;Joao;64;Z - null
 Quadrado: 5
 c
 Quadrado: 6
