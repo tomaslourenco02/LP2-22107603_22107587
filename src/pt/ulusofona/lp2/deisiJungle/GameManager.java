@@ -567,7 +567,7 @@ public class GameManager {
         texto.append("Jogo Acabou: \n");
         texto.append(jogoAcabou).append("\n");
 
-        for (int i = 1; i < squares.size(); i++) {
+        for (int i = 0; i < squares.size(); i++) {
             texto.append("Quadrado: ").append(i).append("\n");
             for (int k = 0; k < squares.get(i).identificadoresNoQuadrado.size(); k++) {
                 for (int j = 0; j < jogadores.size(); j++) {
@@ -618,7 +618,7 @@ public class GameManager {
                 if (data.equals("ID jogador vencedor: ")) {
                     jogadorVencedorID = Integer.parseInt(myReader.nextLine());
                 }
-                for (int i = 1; i <= tamanhoTabuleiro; i++) {
+                for (int i = 0; i <= tamanhoTabuleiro; i++) {
                     if (data.equals("Quadrado: " + i + "")) {
                         squaresLoad.add(new SquareInfo());
                         String[] info = myReader.nextLine().split(" - ");
