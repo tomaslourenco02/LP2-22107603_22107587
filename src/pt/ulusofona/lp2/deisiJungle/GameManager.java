@@ -1247,7 +1247,7 @@ public class GameManager {
                 nomeDaEspecie = "Leao";
             }
             if (Objects.equals(ordenadosClassificacao.get(i).getEspecieDoJogador(), "P")) {
-                nomeDaEspecie = "Pássaro";
+                nomeDaEspecie = "Passaro";
             }
             if (Objects.equals(ordenadosClassificacao.get(i).getEspecieDoJogador(), "Z")) {
                 nomeDaEspecie = "Tarzan";
