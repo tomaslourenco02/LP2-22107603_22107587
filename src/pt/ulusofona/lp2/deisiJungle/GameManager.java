@@ -759,6 +759,7 @@ public class GameManager {
             jogadorAJogar.nrCasasMovimentou += nrSquares;
         }
 
+        jogadorAJogar.posicaoAtual = posDestino;
         if (jogadasFeitas >= jogadores.size() - 1) {
             if (jogadorAvancado()) {
                 jogoAcabou = true;
@@ -925,11 +926,6 @@ public class GameManager {
                         jogadorAJogar.posicaoAtual = posDestino;
                         jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
 
-                        if (jogadasFeitas >= jogadores.size() - 1) {
-                            if (jogadorAvancado()) {
-                                jogoAcabou = true;
-                            }
-                        }
                         if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
                             jogadorAJogar.nrAlimentosIngeridos++;
                             String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
@@ -1087,9 +1083,9 @@ public class GameManager {
 
         for (int i = 0; i < jogadoresOrdenados.size(); i++) {
             distancia = posicoesJogadores[0] - posicoesJogadores[1];
-            if(distancia >= tamanhoTabuleiro){
-                if (jogadores.get(i).posicaoAtual == posicoesJogadores[1]) {
-                    jogadores.get(i).ganhou = true;
+            if(distancia >= tamanhoTabuleiro/2){
+                if (jogadoresOrdenados.get(i).posicaoAtual == posicoesJogadores[1]) {
+                    jogadoresOrdenados.get(i).ganhou = true;
                     jogoAcabou = true;
                     return true;
                 }
