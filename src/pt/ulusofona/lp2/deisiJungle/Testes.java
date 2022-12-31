@@ -1,12 +1,10 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
 import java.util.Arrays;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class Testes {
@@ -86,47 +84,34 @@ public class Testes {
 
         String[][] comida = {comida1, comida2, comida3};
 
-        Assert.assertNull(gamemaneger.createInitialJungle(10, jogadores, comida));
-        assertEquals((MovementResultCode.CAUGHT_FOOD),(gamemaneger.moveCurrentPlayer(7, true)).code()); // Joao 9
-        assertEquals((MovementResultCode.VALID_MOVEMENT),(gamemaneger.moveCurrentPlayer(0, true)).code()); // Tomás 1
-        assertEquals((MovementResultCode.CAUGHT_FOOD),(gamemaneger.moveCurrentPlayer(1, true)).code()); // Pedro 2
-        assertEquals((MovementResultCode.VALID_MOVEMENT),(gamemaneger.moveCurrentPlayer(2, true)).code()); //Joana 3
-        Assert.assertEquals("[7, Joana, P, 62]",(Arrays.toString(gamemaneger.getWinnerInfo())));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
+        System.out.println((gamemaneger.createInitialJungle(9, jogadores, comida)));
+        System.out.println(gamemaneger.moveCurrentPlayer(7, true)); // Joao 9
+        System.out.println(gamemaneger.moveCurrentPlayer(0, true)); // Tomás 1
+        System.out.println(gamemaneger.moveCurrentPlayer(1, true)); // Pedro 2
+        System.out.println(gamemaneger.moveCurrentPlayer(2, true)); //Joana 3
+        System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
+
+        System.out.println(gamemaneger.moveCurrentPlayer(1, true));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(6)));
+
+
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(1)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(2)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(3)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(7)));
 
         File saveFile = new File("textoSave");
         System.out.println(gamemaneger.saveGame(saveFile));
-        Assert.assertNull((gamemaneger.createInitialJungle(10, jogadores, comida)));
+        System.out.println((gamemaneger.createInitialJungle(10, jogadores, comida)));
 
         System.out.println(gamemaneger.loadGame(saveFile));
 
 
-        Assert.assertArrayEquals(new String[]{"1", "Joao", "Z", "106", "1..6"}, ((gamemaneger.getPlayerInfo(1))));
-
-    }
-
-    @org.junit.Test
-    public void testPosicoes() {
-        GameManager gamemaneger = new GameManager();
-        String[] jogador1 = {"1", "Joao", "Z"};
-        String[] jogador2 = {"2", "Pedro", "T"};
-
-
-        String[][] jogadores = {jogador1,jogador2};
-
-        String[] comida1 = {"m", String.valueOf(5)};
-
-        String[][] comida = {comida1};
-
-        System.out.println(gamemaneger.createInitialJungle(10, jogadores, comida));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
-        File saveFile = new File("textoSave");
-        System.out.println(gamemaneger.saveGame(saveFile));
-        Assert.assertNull((gamemaneger.createInitialJungle(8, jogadores, comida)));
-
-        System.out.println(gamemaneger.loadGame(saveFile));
-        System.out.println(gamemaneger.jglSize());
-        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(1)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(8)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(2)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(3)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(7)));
 
     }
 
