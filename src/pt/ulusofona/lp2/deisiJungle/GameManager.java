@@ -688,10 +688,12 @@ public class GameManager {
                                 String[] info2 = info[j].split(";");
                                 if (!(info2[0].equals("null"))) {
                                     if (info2[0].matches("[0-9]*")) {
-                                        squaresLoad.add(new SquareInfo());
-                                        Jogador jogador = new Jogador(Integer.parseInt(info2[0]), info2[1], Integer.parseInt(info2[2]), info2[3], i);
-                                        jogadoresLoad.add(jogador);
-                                        squaresLoad.get(i).identificadoresNoQuadrado.add(jogador.identificador);
+                                        if(Integer.parseInt(info2[0]) > 0 ) {
+                                            squaresLoad.add(new SquareInfo());
+                                            Jogador jogador = new Jogador(Integer.parseInt(info2[0]), info2[1], Integer.parseInt(info2[2]), info2[3], i);
+                                            jogadoresLoad.add(jogador);
+                                            squaresLoad.get(i).identificadoresNoQuadrado.add(jogador.identificador);
+                                        }
                                     } else if (info2[0].matches("[a-zA-Z]+")) {
                                         Alimento alimento = definirAlimento(info2[0].trim());
                                         if (alimento != null) {
