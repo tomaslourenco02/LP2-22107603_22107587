@@ -87,7 +87,7 @@ public class GameManager {
         jogadorVencedorID = 0;
         tamanhoTabuleiro = jungleSize;
         jogoAcabou = false;
-        count = 0;
+        count = 0; int menorID = 0;
 
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
@@ -110,17 +110,11 @@ public class GameManager {
             }
         }
 
-        if (!verificaJogadores(playersInfo)) {
-            return new InitializationError("Erro na inicialização do terreno!");
-        }
+        if (!verificaJogadores(playersInfo)) { return new InitializationError("Erro na inicialização do terreno!");}
 
-        if (jungleSize < playersInfo.length * 2) {
-            return new InitializationError("Erro na inicialização do terreno!");
-        }
+        if (jungleSize < playersInfo.length * 2) { return new InitializationError("Erro na inicialização do terreno!");}
 
-        for (int i = 0; i < jungleSize; i++) {
-            squares.add(new SquareInfo());
-        }
+        for (int i = 0; i < jungleSize; i++) { squares.add(new SquareInfo()); }
 
         for (int i = 0; i < playersInfo.length; i++) {
             jogadores.add(new Jogador(Integer.parseInt(playersInfo[i][0]), playersInfo[i][1], playersInfo[i][2]));
@@ -144,24 +138,17 @@ public class GameManager {
                 }
             }
         }
-
-        int menorID = 0;
-
         for (int i = 0; i < jogadores.size(); i++) {
             for (int j = 0; j < jogadores.size(); j++) {
                 if (i != j) {
                     if (jogadores.get(i).getIdentificador() < jogadores.get(j).getIdentificador()) {
                         menorID = jogadores.get(i).getIdentificador();
-                    } else {
-                        menorID = jogadores.get(j).getIdentificador();
-                    }
+                    } else { menorID = jogadores.get(j).getIdentificador(); }
                 }
             }
         }
         for (int i = 0; i < jogadores.size(); i++) {
-            if (menorID == jogadores.get(i).getIdentificador()) {
-                jogadores.get(i).aJogar = true;
-            }
+            if (menorID == jogadores.get(i).getIdentificador()) { jogadores.get(i).aJogar = true; }
         }
         return null;
     }
@@ -488,12 +475,9 @@ public class GameManager {
         int energiaGasta = gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrPositions);
         int ganhoDeEnergia = 0;
 
-        if (posDestino < 1) {
-            posDestino = 1;
-        }
-        if (posDestino > tamanhoTabuleiro) {
-            posDestino = tamanhoTabuleiro;
-        }
+        if (posDestino < 1) { posDestino = 1; }
+
+        if (posDestino > tamanhoTabuleiro) { posDestino = tamanhoTabuleiro; }
         if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
             String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
             if (alimento.equals("e")) {
@@ -666,18 +650,10 @@ public class GameManager {
             Scanner myReader = new Scanner(file);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                if (data.equals("Tamanho tabuleiro: ")) {
-                    tamanhoTabuleiro = Integer.parseInt(myReader.nextLine());
-                }
-                if (data.equals("Jogadas feitas: ")) {
-                    jogadasFeitas = Integer.parseInt(myReader.nextLine());
-                }
-                if (data.equals("Count jogadores: ")) {
-                    countJogadores = Integer.parseInt(myReader.nextLine());
-                }
-                if (data.equals("ID jogador vencedor: ")) {
-                    jogadorVencedorID = Integer.parseInt(myReader.nextLine());
-                }
+                if (data.equals("Tamanho tabuleiro: ")) { tamanhoTabuleiro = Integer.parseInt(myReader.nextLine()); }
+                if (data.equals("Jogadas feitas: ")) { jogadasFeitas = Integer.parseInt(myReader.nextLine()); }
+                if (data.equals("Count jogadores: ")) { countJogadores = Integer.parseInt(myReader.nextLine()); }
+                if (data.equals("ID jogador vencedor: ")) { jogadorVencedorID = Integer.parseInt(myReader.nextLine());}
                 for (int i = 0; i <= tamanhoTabuleiro; i++) {
                     if (data.equals("Quadrado: " + i + "")) {
                         squaresLoad.add(new SquareInfo());
@@ -694,7 +670,6 @@ public class GameManager {
                                                 jogador = new Jogador(Integer.parseInt(info2[0]), info2[1], Integer.parseInt(info2[2]), info2[3], 1);
                                             } else {
                                                 jogador = new Jogador(Integer.parseInt(info2[0]), info2[1], Integer.parseInt(info2[2]), info2[3], i);
-
                                             }
                                             jogadoresLoad.add(jogador);
                                             squaresLoad.get(i).identificadoresNoQuadrado.add(jogador.identificador);

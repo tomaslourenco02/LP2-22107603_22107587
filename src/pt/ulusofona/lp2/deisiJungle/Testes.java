@@ -108,6 +108,7 @@ public class Testes {
         System.out.println(gamemaneger.moveCurrentPlayer(1, true)); // Pedro 2
         System.out.println(gamemaneger.moveCurrentPlayer(2, true)); //Joana 3
         System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
+        System.out.println(gamemaneger.getGameResults());
 
         System.out.println(gamemaneger.moveCurrentPlayer(1, true));
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(6)));
