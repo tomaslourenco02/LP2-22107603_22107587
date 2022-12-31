@@ -119,14 +119,14 @@ public class Testes {
         String[][] comida = {comida1};
 
         System.out.println(gamemaneger.createInitialJungle(10, jogadores, comida));
-        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(1)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
         File saveFile = new File("textoSave");
         System.out.println(gamemaneger.saveGame(saveFile));
         Assert.assertNull((gamemaneger.createInitialJungle(8, jogadores, comida)));
 
         System.out.println(gamemaneger.loadGame(saveFile));
         System.out.println(gamemaneger.jglSize());
-        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(1)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
 
     }
 

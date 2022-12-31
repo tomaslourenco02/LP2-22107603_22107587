@@ -629,7 +629,7 @@ public class GameManager {
                                     if (info2[0].matches("[0-9]*")) {
                                         if (Integer.parseInt(info2[0]) > 0) {
                                             squaresLoad.add(new SquareInfo());
-                                            Jogador jogador = new Jogador(Integer.parseInt(info2[0]), info2[1], Integer.parseInt(info2[2]), info2[3], i);
+                                            Jogador jogador = new Jogador(Integer.parseInt(info2[0]), info2[1], Integer.parseInt(info2[2]), info2[3], i+1);
                                             jogadoresLoad.add(jogador);
                                             squaresLoad.get(i).identificadoresNoQuadrado.add(jogador.identificador);
                                         }
