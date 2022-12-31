@@ -630,9 +630,6 @@ public class GameManager {
             texto.append("Quadrado: ").append(i).append("\n");
             for (int k = 0; k < squares.get(i).identificadoresNoQuadrado.size(); k++) {
                 for (int j = 0; j < jogadores.size(); j++) {
-                    if (jogadores.get(j).identificador > 0 ||
-                        jogadores.get(j).nome!=null ||
-                        jogadores.get(j).especieDoJogador != null)
                     {
                         if (squares.get(i).identificadoresNoQuadrado.get(k) == jogadores.get(j).identificador) {
                             texto.append(squares.get(i).identificadoresNoQuadrado.get(k)).append(";");
@@ -643,9 +640,8 @@ public class GameManager {
                     }
                 }
             }
-                texto.append(squares.get(i).identificadoresAlimentosNoQuadrado).append("\n");
+            texto.append(squares.get(i).identificadoresAlimentosNoQuadrado).append("\n");
         }
-
 
 
         try {
@@ -688,7 +684,8 @@ public class GameManager {
                         squaresLoad.add(new SquareInfo());
                         String[] info = myReader.nextLine().split(" - ");
                         for (int j = 0; j < info.length; j++) {
-                            String[] info2 = info[j].split(";");
+                            if (!info[j].equals("null")) {
+                                String[] info2 = info[j].split(";");
                                 if (!(info2[0].equals("null"))) {
                                     if (info2[0].matches("[0-9]*")) {
                                         squaresLoad.add(new SquareInfo());
@@ -705,6 +702,7 @@ public class GameManager {
                                         }
                                     }
                                 }
+                            }
                         }
                     }
                 }
@@ -722,7 +720,7 @@ public class GameManager {
         return true;
     }
 
-    public int jglSize(){
+    public int jglSize() {
         return tamanhoTabuleiro;
     }
 
