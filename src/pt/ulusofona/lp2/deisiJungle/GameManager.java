@@ -434,7 +434,6 @@ public class GameManager {
 
             if (squares.get(squareNr).identificadoresAlimentosNoQuadrado != null) {
                 Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
-                System.out.println(squares.get(squareNr).cogumelo.nrAleatorio);
                 squareInfo[0] = alimento.imagem;
                 squareInfo[1] = alimento.info();
                 squareInfo[2] = identificadores.toString();
@@ -681,19 +680,21 @@ public class GameManager {
                     jogadorVencedorID = Integer.parseInt(myReader.nextLine());
                 }
                 for (int i = 0; i <= tamanhoTabuleiro; i++) {
-                    squaresLoad.add(new SquareInfo());
                     if (data.equals("Quadrado: " + i + "")) {
+                        squaresLoad.add(new SquareInfo());
                         String[] info = myReader.nextLine().split(" - ");
                         for (int j = 0; j < info.length; j++) {
                             String[] info2 = info[j].split(";");
-                                if (info2[0] != null || !(info2[0].equals("null"))) {
+                                if (!(info2[0].equals("null"))) {
                                     if (info2[0].matches("[0-9]*")) {
+                                        squaresLoad.add(new SquareInfo());
                                         Jogador jogador = new Jogador(Integer.parseInt(info2[0]), info2[1], Integer.parseInt(info2[2]), info2[3], i);
                                         jogadoresLoad.add(jogador);
-                                        squaresLoad.get(jogador.posicaoAtual).identificadoresNoQuadrado.add(jogador.identificador);
+                                        squaresLoad.get(i).identificadoresNoQuadrado.add(jogador.identificador);
                                     } else if (info2[0].matches("[a-zA-Z]+")) {
-                                        Alimento alimento = definirAlimento(info2[0]);
-                                        if(alimento != null) {
+                                        Alimento alimento = definirAlimento(info2[0].trim());
+                                        if (alimento != null) {
+                                            squaresLoad.add(new SquareInfo());
                                             alimento.posicao = i;
                                             alimentosLoad.add(alimento);
                                             squaresLoad.get(i).identificadoresAlimentosNoQuadrado = alimento.identificador;
@@ -735,24 +736,24 @@ public class GameManager {
 
     public Alimento definirAlimento(String idAlimento) {
 
-        if (idAlimento == "e") {
+        if (idAlimento.equals("e")) {
             Erva alimento = new Erva("e", "Erva", "grass.png");
             return alimento;
         }
-        if (idAlimento == "a") {
+        if (idAlimento.equals("a")) {
             Agua alimento = new Agua("a", "Agua", "water.png");
             return alimento;
         }
-        if (idAlimento == "b") {
+        if (idAlimento.equals("b")) {
             CachoDeBananas alimento = new CachoDeBananas("b", "Cacho de bananas", "bananas.png");
             return alimento;
         }
-        if (idAlimento == "c") {
+        if (idAlimento.equals("c")) {
             Carne alimento = new Carne("c", "Carne", "meat.png");
             alimento.jogadasEfetuadas = jogadasFeitas;
             return alimento;
         }
-        if (idAlimento == "m") {
+        if (idAlimento.equals("m")) {
             CogumelosMagicos alimento = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
             return alimento;
         }

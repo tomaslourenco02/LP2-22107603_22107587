@@ -76,7 +76,7 @@ public class Testes {
 
         String[][] jogadores = {jogador1, jogador2};
 
-        String[] comida1 = {"m", String.valueOf(5)};
+        String[] comida1 = {"m", String.valueOf(2)};
         String[] comida2 = {"c", String.valueOf(8)};
         String[] comida3 = {"m", String.valueOf(7)};
 
