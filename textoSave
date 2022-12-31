@@ -1,5 +1,5 @@
 Tamanho tabuleiro: 
-9
+10
 Jogadas feitas: 
 5
 Nr de jogadores: 
@@ -11,13 +11,13 @@ ID jogador vencedor:
 Jogo Acabou: 
 true
 Quadrado: 0
-2;Tomas;90;L - null
+2;Tomas;90;Leão - null
 Quadrado: 1
 null
 Quadrado: 2
-3;Pedro;91;T - m
+3;Pedro;76;Tartaruga - m
 Quadrado: 3
-7;Joana;62;P - null
+7;Joana;62;Pássaro - null
 Quadrado: 4
 null
 Quadrado: 5
@@ -27,5 +27,7 @@ null
 Quadrado: 7
 m
 Quadrado: 8
-1;Joao;104;Z - c
+c
+Quadrado: 9
+1;Joao;52;Tarzan - null
 
