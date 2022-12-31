@@ -106,6 +106,7 @@ public class Testes {
 
         System.out.println(gamemaneger.loadGame(saveFile));
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(6)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(1)));
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(7)));
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(7)));
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(7)));
