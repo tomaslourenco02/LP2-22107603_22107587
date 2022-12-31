@@ -1070,7 +1070,7 @@ public class GameManager {
 
         if (posicoesJogadores[0] == posicaoJogador) {
             distancia = posicaoJogador - posicoesJogadores[1];
-            if (distancia > tamanhoTabuleiro / 2) {
+            if (distancia >= tamanhoTabuleiro / 2) {
                 for (int i = 0; i < jogadores.size(); i++) {
                     if (jogadores.get(i).posicaoAtual == posicoesJogadores[1]) {
                         jogadores.get(i).ganhou = true;

@@ -87,11 +87,11 @@ public class Testes {
         System.out.println((gamemaneger.createInitialJungle(10, jogadores, comida)));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
-        System.out.println(gamemaneger.moveCurrentPlayer(4, true));
+        System.out.println(gamemaneger.moveCurrentPlayer(8, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(1, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
-        System.out.println(gamemaneger.moveCurrentPlayer(6, true));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(2, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
