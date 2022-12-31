@@ -1081,7 +1081,7 @@ public class GameManager {
             }
         } else if (posicoesJogadores[1] == posicaoJogador) {
             distancia = posicoesJogadores[posicoesJogadores.length - 1] - posicaoJogador;
-            if (distancia > tamanhoTabuleiro / 2) {
+            if (distancia >= tamanhoTabuleiro / 2) {
                 jogador.ganhou = true;
                 jogoAcabou = true;
                 return true;
