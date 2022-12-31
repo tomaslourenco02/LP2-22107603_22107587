@@ -17,5 +17,8 @@ public abstract class Alimento {
         return posicao;
     }
 
+
     abstract String info();
+
+    abstract void energiaFornecida(Jogador jogador, int jogadasFeitas);
 }
