@@ -86,6 +86,7 @@ public class Testes {
 
         System.out.println((gamemaneger.createInitialJungle(10, jogadores, comida)));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(1)));
         System.out.println(gamemaneger.moveCurrentPlayer(4, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(1, true));
@@ -95,6 +96,8 @@ public class Testes {
         System.out.println(gamemaneger.moveCurrentPlayer(2, true));
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
         System.out.println(gamemaneger.moveCurrentPlayer(1, true));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(6)));
+
         System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
 
         File saveFile = new File("textoSave");
@@ -102,7 +105,10 @@ public class Testes {
         System.out.println((gamemaneger.createInitialJungle(10, jogadores, comida)));
 
         System.out.println(gamemaneger.loadGame(saveFile));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(6)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(7)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(7)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(7)));
         System.out.println(gamemaneger.jglSize());
 
     }
