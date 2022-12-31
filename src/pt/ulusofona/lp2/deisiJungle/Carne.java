@@ -23,7 +23,13 @@ public class Carne extends Alimento{
 
     @Override
     void energiaFornecida(Jogador jogador, int jogadasFeitas) {
-
+        if (jogador.especie.tipo.equals("Herbívoro")) {
+            jogador.nrAlimentosIngeridos--;
+        } else {
+            if (jogadasFeitas > 12) {
+                jogador.energiaAtual = jogador.energiaAtual / 2;
+            }
+        }
     }
 
     @Override

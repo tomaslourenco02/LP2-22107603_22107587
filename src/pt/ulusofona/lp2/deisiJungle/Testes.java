@@ -71,7 +71,7 @@ public class Testes {
 
         System.out.println(gameManager.createInitialJungle(10, jogadores, comida));
         System.out.println(Arrays.toString(gameManager.getPlayerIds(1)));
-        System.out.println(gameManager.moveCurrentPlayer(3, true));
+        System.out.println(gameManager.moveCurrentPlayer(4, true));
         System.out.println(Arrays.toString(gameManager.getPlayerIds(4)));
 
         File saveFile = new File("textoSave");
