@@ -962,20 +962,12 @@ public class GameManager {
             return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
         }
         if (posDestino >= tamanhoTabuleiro) {
-
             jogadorAJogar.posicaoAtual = tamanhoTabuleiro;
             jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
             jogoAcabou = true;
             jogadorAJogar.ganhou = true;
         }
         if (!jogoAcabou) {
-            if (posDestino >= tamanhoTabuleiro) {
-                posDestino = tamanhoTabuleiro;
-                jogadoresOrdenados.get(countJogadores).ganhou = true;
-                jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
-                jogoAcabou = true;
-            }
-
             int nrAleatorio = squares.get(posDestino).cogumelo.nrAleatorio;
 
             for (int i = 0; i < squares.size(); i++) {
@@ -987,15 +979,9 @@ public class GameManager {
                         jogadorAJogar.posicaoAtual = posDestino;
                         jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
 
-                        if (posDestino >= tamanhoTabuleiro) {
-                            jogadorAJogar.ganhou = true;
-                            jogoAcabou = true;
-                        }
-                        if (jogadasFeitas > jogadores.size() - 1) {
                             if (jogadorAvancado(jogadorAJogar)) {
                                 jogoAcabou = true;
                             }
-                        }
                         if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
                             jogadorAJogar.nrAlimentosIngeridos++;
                             String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
@@ -1142,9 +1128,7 @@ public class GameManager {
         if (countJogadores > jogadores.size() - 1) {
             countJogadores = 0;
         }
-        return new
-
-                MovementResult(MovementResultCode.VALID_MOVEMENT, null);
+        return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
 
     }
 

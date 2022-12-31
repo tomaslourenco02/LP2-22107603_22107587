@@ -98,18 +98,26 @@ public class Testes {
         System.out.println(gamemaneger.moveCurrentPlayer(1, true));
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(6)));
 
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(1)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(2)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(3)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(7)));
 
         File saveFile = new File("textoSave");
         System.out.println(gamemaneger.saveGame(saveFile));
         System.out.println((gamemaneger.createInitialJungle(10, jogadores, comida)));
 
         System.out.println(gamemaneger.loadGame(saveFile));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(6)));
+
+
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(1)));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(7)));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(7)));
-        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(7)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(2)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(3)));
+        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(7)));
+
+
+
         System.out.println(gamemaneger.jglSize());
 
     }
