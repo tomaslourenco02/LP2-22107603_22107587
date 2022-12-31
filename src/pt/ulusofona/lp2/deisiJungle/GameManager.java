@@ -786,15 +786,8 @@ public class GameManager {
                         jogadorAJogar.posicaoAtual = posDestino;
                         jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
 
-                        if (posDestino >= tamanhoTabuleiro) {
-                            jogadorAJogar.ganhou = true;
-                            jogoAcabou = true;
-                        }
-                        if (jogadasFeitas > jogadores.size() - 1) {
-                            if (jogadorAvancado()) {
-                                jogoAcabou = true;
-                            }
-                        }
+                        if (posDestino >= tamanhoTabuleiro) { jogadorAJogar.ganhou = true; jogoAcabou = true; }
+                        if (jogadasFeitas > jogadores.size() - 1) {if (jogadorAvancado()) { jogoAcabou = true;} }
                         if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
                             jogadorAJogar.nrAlimentosIngeridos++;
                             String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
@@ -802,14 +795,12 @@ public class GameManager {
                             if(energiaFornecidaAlimento(jogadorAJogar, alimento)){
                                 return new MovementResult(MovementResultCode.CAUGHT_FOOD, alimentoNoSquare.toString());
                             }
-                        }
-                        turnosJogadores();
+                        } turnosJogadores();
                         return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
                     }
                 }
             }
-        }
-        turnosJogadores();
+        }turnosJogadores();
         return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
     }
 
