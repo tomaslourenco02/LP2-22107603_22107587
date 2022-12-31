@@ -463,7 +463,6 @@ public class GameManager {
 
     public String[] getPlayerInfo(int playerId) {
 
-
         for (int i = 0; i < jogadores.size(); i++) {
             if (jogadores.get(i).getIdentificador() == playerId) {
                 return jogadores.get(i).infoJogador();
@@ -633,18 +632,18 @@ public class GameManager {
         texto.append(jogoAcabou).append("\n");
 
         for (int i = 0; i < squares.size(); i++) {
-            texto.append("Quadrado: ").append(i + 1).append("\n");
+            texto.append("Quadrado: ").append(i+1).append("\n");
             for (int k = 0; k < squares.get(i).identificadoresNoQuadrado.size(); k++) {
                 for (int j = 0; j < jogadores.size(); j++) {
                     if (squares.get(i).identificadoresNoQuadrado.get(k) == jogadores.get(j).identificador) {
                         texto.append(squares.get(i).identificadoresNoQuadrado.get(k)).append(";");
                         texto.append(jogadores.get(j).nome).append(";");
                         texto.append(jogadores.get(j).energiaAtual).append(";");
-                        texto.append(jogadores.get(j).especie.identificador).append(" || ");
+                        texto.append(jogadores.get(j).especie.identificador).append(" - ");
                     }
                 }
             }
-            texto.append(squares.get(i).identificadoresAlimentosNoQuadrado).append("\n");
+                texto.append(squares.get(i).identificadoresAlimentosNoQuadrado).append("\n");
         }
 
         try {
@@ -664,6 +663,7 @@ public class GameManager {
     public boolean loadGame(File file) {
 
         ArrayList<SquareInfo> squares = new ArrayList<>();
+        squares.add(new SquareInfo());
         ArrayList<Jogador> jogadoresLoad = new ArrayList<>();
         ArrayList<Alimento> alimentosLoad = new ArrayList<>();
 
@@ -672,37 +672,38 @@ public class GameManager {
             Scanner myReader = new Scanner(file);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                if (data.equals("Tamanho tabuleiro: \n")) {
+                if (data.equals("Tamanho tabuleiro: ")) {
                     tamanhoTabuleiro = Integer.parseInt(myReader.nextLine());
                 }
-                if (data.equals("Jogadas feitas: \n")) {
+                if (data.equals("Jogadas feitas: ")) {
                     jogadasFeitas = Integer.parseInt(myReader.nextLine());
                 }
-                if (data.equals("Count jogadores: \n")) {
+                if (data.equals("Count jogadores: ")) {
                     countJogadores = Integer.parseInt(myReader.nextLine());
                 }
-                if (data.equals("ID jogador vencedor: \n")) {
+                if (data.equals("ID jogador vencedor: ")) {
                     jogadorVencedorID = Integer.parseInt(myReader.nextLine());
                 }
-                for (int i = 0; i < tamanhoTabuleiro; i++) {
+                for (int i = 0; i <= tamanhoTabuleiro; i++) {
                     squares.add(new SquareInfo());
-                    if (data.equals("Quadrado: " + i + 1 + "\n")) {
-                        String[] info = myReader.nextLine().split(" || ");
+                    if (data.equals("Quadrado: " + i + "")) {
+                        String[] info = myReader.nextLine().split(" - ");
                         for (int j = 0; j < info.length; j++) {
                             String[] info2 = info[j].split(";");
-                            if (info2[0] != null) {
-                                if (info2[0].matches("[0-9]*")) {
-                                    Jogador jogador = new Jogador(Integer.parseInt(info2[0]), info2[1], Integer.parseInt(info2[2]), info2[3], j);
-                                    jogadoresLoad.add(jogador);
-                                    squares.get(i).identificadoresNoQuadrado.add(jogador.identificador);
-                                } else if (info2[0].matches("[a-zA-Z]+")) {
-                                    Alimento alimento = definirAlimento(info[0]);
-                                    alimento.posicao = j;
-                                    alimentosLoad.add(alimento);
-                                    squares.get(i).identificadoresAlimentosNoQuadrado = alimento.identificador;
-                                }
+                                if (info2[0] != null || !(info2[0].equals("null"))) {
+                                    if (info2[0].matches("[0-9]*")) {
+                                        Jogador jogador = new Jogador(Integer.parseInt(info2[0]), info2[1], Integer.parseInt(info2[2]), info2[3], i);
+                                        jogadoresLoad.add(jogador);
+                                        squares.get(jogador.posicaoAtual).identificadoresNoQuadrado.add(jogador.identificador);
+                                    } else if (info2[0].matches("[a-zA-Z]+")) {
+                                        Alimento alimento = definirAlimento(info2[0]);
+                                        if(alimento != null) {
+                                            alimento.posicao = i;
+                                            alimentosLoad.add(alimento);
+                                            squares.get(i).identificadoresAlimentosNoQuadrado = alimento.identificador;
+                                        }
+                                    }
                             }
-
                         }
                     }
                 }
@@ -716,6 +717,10 @@ public class GameManager {
         }
 
         return true;
+    }
+
+    public int jglSize(){
+        return tamanhoTabuleiro;
     }
 
 
