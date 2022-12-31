@@ -979,9 +979,11 @@ public class GameManager {
                         jogadorAJogar.posicaoAtual = posDestino;
                         jogadorAJogar.energiaAtual -= gastaEnergia(jogadorAJogar.especie.consumoEnergia, nrSquares);
 
+                        if (jogadasFeitas > jogadores.size() - 1) {
                             if (jogadorAvancado(jogadorAJogar)) {
                                 jogoAcabou = true;
                             }
+                        }
                         if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
                             jogadorAJogar.nrAlimentosIngeridos++;
                             String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
