@@ -12,7 +12,6 @@ public class GameManager {
     ArrayList<Jogador> jogadores = new ArrayList<>();
     ArrayList<SquareInfo> squares = new ArrayList<>();
     int countJogadores = 0;
-    int jogadoresSemEnergia = 0;
     int jogadorVencedorID = 0;
     int tamanhoTabuleiro = 0;
     int jogadasFeitas = 0;
@@ -21,11 +20,10 @@ public class GameManager {
     public GameManager() {
     }
 
-    public GameManager(ArrayList<Jogador> jogadores, ArrayList<SquareInfo> squares, int countJogadores, int jogadoresSemEnergia, int jogadorVencedorID, int tamanhoTabuleiro, int jogadasFeitas, boolean jogoAcabou, int count) {
+    public GameManager(ArrayList<Jogador> jogadores, ArrayList<SquareInfo> squares, int countJogadores, int jogadorVencedorID, int tamanhoTabuleiro, int jogadasFeitas, boolean jogoAcabou, int count) {
         this.jogadores = jogadores;
         this.squares = squares;
         this.countJogadores = countJogadores;
-        this.jogadoresSemEnergia = jogadoresSemEnergia;
         this.jogadorVencedorID = jogadorVencedorID;
         this.tamanhoTabuleiro = tamanhoTabuleiro;
         this.jogadasFeitas = jogadasFeitas;
@@ -86,7 +84,6 @@ public class GameManager {
         jogadores.clear();
         squares.clear();
         countJogadores = 0;
-        jogadoresSemEnergia = 0;
         jogadorVencedorID = 0;
         tamanhoTabuleiro = jungleSize;
         jogoAcabou = false;
@@ -646,6 +643,8 @@ public class GameManager {
                 texto.append(squares.get(i).identificadoresAlimentosNoQuadrado).append("\n");
         }
 
+
+
         try {
             FileWriter fw = new FileWriter(file, false);
 
@@ -662,12 +661,9 @@ public class GameManager {
 
     public boolean loadGame(File file) {
 
-        ArrayList<SquareInfo> squares = new ArrayList<>();
-        squares.add(new SquareInfo());
+        ArrayList<SquareInfo> squaresLoad = new ArrayList<>();
         ArrayList<Jogador> jogadoresLoad = new ArrayList<>();
         ArrayList<Alimento> alimentosLoad = new ArrayList<>();
-
-
         try {
             Scanner myReader = new Scanner(file);
             while (myReader.hasNextLine()) {
@@ -685,7 +681,7 @@ public class GameManager {
                     jogadorVencedorID = Integer.parseInt(myReader.nextLine());
                 }
                 for (int i = 0; i <= tamanhoTabuleiro; i++) {
-                    squares.add(new SquareInfo());
+                    squaresLoad.add(new SquareInfo());
                     if (data.equals("Quadrado: " + i + "")) {
                         String[] info = myReader.nextLine().split(" - ");
                         for (int j = 0; j < info.length; j++) {
@@ -694,20 +690,22 @@ public class GameManager {
                                     if (info2[0].matches("[0-9]*")) {
                                         Jogador jogador = new Jogador(Integer.parseInt(info2[0]), info2[1], Integer.parseInt(info2[2]), info2[3], i);
                                         jogadoresLoad.add(jogador);
-                                        squares.get(jogador.posicaoAtual).identificadoresNoQuadrado.add(jogador.identificador);
+                                        squaresLoad.get(jogador.posicaoAtual).identificadoresNoQuadrado.add(jogador.identificador);
                                     } else if (info2[0].matches("[a-zA-Z]+")) {
                                         Alimento alimento = definirAlimento(info2[0]);
                                         if(alimento != null) {
                                             alimento.posicao = i;
                                             alimentosLoad.add(alimento);
-                                            squares.get(i).identificadoresAlimentosNoQuadrado = alimento.identificador;
+                                            squaresLoad.get(i).identificadoresAlimentosNoQuadrado = alimento.identificador;
                                         }
                                     }
-                            }
+                                }
                         }
                     }
                 }
             }
+            jogadores = jogadoresLoad;
+            squares = squaresLoad;
             myReader.close();
         } catch (
                 FileNotFoundException e) {
