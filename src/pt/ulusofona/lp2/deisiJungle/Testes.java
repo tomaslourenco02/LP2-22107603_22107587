@@ -260,8 +260,10 @@ public class Testes {
 
         String[][] comida = {comida1, comida2, comida3};
 
-        System.out.println(gamemaneger.createInitialJungle(10, jogadores, comida));
-        System.out.println(gamemaneger.moveCurrentPlayer(7, false));
+
+        assertEquals(gamemaneger.createInitialJungle(10, jogadores, comida), null);
+        assertEquals(gamemaneger.moveCurrentPlayer(7, false), new MovementResult(MovementResultCode.INVALID_MOVEMENT, null));
+
 
     }
     @org.junit.Test
@@ -278,10 +280,75 @@ public class Testes {
 
         String[][] comida = {comida1, comida2, comida3};
 
+        gamemaneger.createInitialJungle(10, jogadores, comida);
+        assertEquals(gamemaneger.createInitialJungle(10, jogadores, comida), null);
+        gamemaneger.moveCurrentPlayer(3, true);
+        assertEquals(gamemaneger.moveCurrentPlayer(3, true), new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Carne"));
+
+        gamemaneger.moveCurrentPlayer(2, true);
+        assertEquals(gamemaneger.moveCurrentPlayer(2, true), new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Bananas"));
+
+        gamemaneger.moveCurrentPlayer(-4, true); //INVALID
+        assertEquals(gamemaneger.moveCurrentPlayer(-4, true), new MovementResult(MovementResultCode.VALID_MOVEMENT, null));
+    }
+    @org.junit.Test
+    public void testCriarJungleComPoucasCasas() {
+        GameManager gamemaneger = new GameManager();
+        String[] jogador1 = {"1", "Joao", "L"};
+        String[] jogador2 = {"2", "Miguel", "Z"};
+
+        String[][] jogadores = {jogador1, jogador2};
+
+        String[] comida1 = {"b", String.valueOf(6)};
+        String[] comida2 = {"c", String.valueOf(4)};
+        String[] comida3 = {"a", String.valueOf(3)};
+
+        String[][] comida = {comida1, comida2, comida3};
+
+        System.out.println(gamemaneger.createInitialJungle(4, jogadores, comida));
+
+    }
+    @org.junit.Test
+    public void testGetPlayerEnergyInfo() {
+        GameManager gamemaneger = new GameManager();
+        String[] jogador1 = {"1", "Joao", "L"};
+        String[] jogador2 = {"2", "Miguel", "Z"};
+
+        String[][] jogadores = {jogador1, jogador2};
+
+        String[] comida1 = {"b", String.valueOf(6)};
+        String[] comida2 = {"c", String.valueOf(4)};
+        String[] comida3 = {"a", String.valueOf(3)};
+
+        String[][] comida = {comida1, comida2, comida3};
+
         System.out.println(gamemaneger.createInitialJungle(10, jogadores, comida));
         System.out.println(gamemaneger.moveCurrentPlayer(3, true));
         System.out.println(gamemaneger.moveCurrentPlayer(2, true));
-        System.out.println(gamemaneger.moveCurrentPlayer(-4, true)); //INVALID
+        System.out.println(gamemaneger.moveCurrentPlayer(3, true));
+        System.out.println(gamemaneger.moveCurrentPlayer(1, true));
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerEnergyInfo(2)));
+
+    }
+    @org.junit.Test
+    public void testGetPlayersInfo() {
+        GameManager gamemaneger = new GameManager();
+        String[] jogador1 = {"1", "Joao", "L"};
+        String[] jogador2 = {"2", "Miguel", "Z"};
+
+        String[][] jogadores = {jogador1, jogador2};
+
+        String[] comida1 = {"b", String.valueOf(6)};
+        String[] comida2 = {"c", String.valueOf(4)};
+        String[] comida3 = {"a", String.valueOf(3)};
+
+        String[][] comida = {comida1, comida2, comida3};
+
+        System.out.println(gamemaneger.createInitialJungle(10, jogadores, comida));
+        System.out.println(gamemaneger.moveCurrentPlayer(3, true));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, true));
+
+        System.out.println(Arrays.deepToString(gamemaneger.getPlayersInfo()));
 
     }
 
