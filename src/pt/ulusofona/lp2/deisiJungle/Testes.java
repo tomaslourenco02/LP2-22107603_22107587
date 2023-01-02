@@ -421,7 +421,6 @@ public class Testes {
 
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(4)));
     }
-
 }
 
     /*@org.junit.Test
