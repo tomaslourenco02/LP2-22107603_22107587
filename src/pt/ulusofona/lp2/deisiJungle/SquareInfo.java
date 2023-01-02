@@ -11,6 +11,14 @@ public class SquareInfo {
     String identificadoresAlimentosNoQuadrado;
 
     int bananas;
+    CogumelosMagicos cogumelo = setCogumelo();
+
+    public CogumelosMagicos setCogumelo() {
+        if(cogumelo == null){
+            cogumelo = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
+        }
+        return cogumelo;
+    }
 
     public SquareInfo(String[] identificadoresNoQuadrado, String identificadoresAlimentosNoQuadrado) {
 
@@ -24,8 +32,6 @@ public class SquareInfo {
         }
         this.identificadoresAlimentosNoQuadrado = identificadoresAlimentosNoQuadrado;
     }
-
-    CogumelosMagicos cogumelo = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
 
     public SquareInfo(Boolean meta) {
         this.meta = meta;
@@ -44,7 +50,6 @@ public class SquareInfo {
     }
 
     public String getTexto() {
-
         return texto;
     }
 

@@ -103,13 +103,8 @@ public class Testes {
         String[][] comida = {comida1, comida2, comida3};
 
         System.out.println((gamemaneger.createInitialJungle(9, jogadores, comida)));
-        System.out.println(gamemaneger.moveCurrentPlayer(7, true)); // Joao 8
-        System.out.println(gamemaneger.moveCurrentPlayer(0, true)); // Tomás 1
-        System.out.println(gamemaneger.moveCurrentPlayer(1, true)); // Pedro 2
-        System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(3))); // Pedro 2
-        System.out.println(gamemaneger.moveCurrentPlayer(2, true)); // Joana 3
-        System.out.println(Arrays.toString(gamemaneger.getWinnerInfo()));
-        System.out.println(gamemaneger.getGameResults());
+        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(7)));
+        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(7)));
     }
 
     @org.junit.Test

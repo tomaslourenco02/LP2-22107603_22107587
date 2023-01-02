@@ -409,12 +409,23 @@ public class GameManager {
         if (squareNr < squares.size() && squareNr > 1) {
 
             if (squares.get(squareNr).identificadoresAlimentosNoQuadrado != null) {
-                Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
-                squareInfo[0] = alimento.imagem;
-                squareInfo[1] = alimento.info();
-                squareInfo[2] = identificadores.toString();
-                if (squares.get(squareNr).identificadoresAlimentosNoQuadrado.equals("b")) {
-                    squareInfo[1] = "Bananas : " + squares.get(squareNr).bananas + " : + 40 energia";
+                for (int i = 0; i < squares.size(); i++) {
+                    if(i == squareNr){
+                        if(Objects.equals(squares.get(squareNr).identificadoresAlimentosNoQuadrado, "m")){
+                            Alimento alimento = squares.get(squareNr).cogumelo;
+                            squareInfo[0] = alimento.imagem;
+                            squareInfo[1] = alimento.info();
+                            squareInfo[2] = identificadores.toString();
+                        }else
+                            if (squares.get(squareNr).identificadoresAlimentosNoQuadrado.equals("b")) {
+                            squareInfo[1] = "Bananas : " + squares.get(squareNr).bananas + " : + 40 energia";
+                        } else {
+                            Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
+                            squareInfo[0] = alimento.imagem;
+                            squareInfo[1] = alimento.info();
+                            squareInfo[2] = identificadores.toString();
+                        }
+                    }
                 }
                 return squareInfo;
             }
