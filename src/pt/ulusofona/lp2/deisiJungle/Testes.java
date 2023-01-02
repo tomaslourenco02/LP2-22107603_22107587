@@ -316,18 +316,26 @@ public class Testes {
 
         String[][] jogadores = {jogador1, jogador2};
 
-        String[] comida1 = {"b", String.valueOf(6)};
+        String[] comida1 = {"b", String.valueOf(3)};
         String[] comida2 = {"c", String.valueOf(4)};
-        String[] comida3 = {"a", String.valueOf(3)};
+        String[] comida3 = {"c", String.valueOf(5)};
 
         String[][] comida = {comida1, comida2, comida3};
 
-        System.out.println(gamemaneger.createInitialJungle(10, jogadores, comida));
-        System.out.println(gamemaneger.moveCurrentPlayer(3, true));
-        System.out.println(gamemaneger.moveCurrentPlayer(2, true));
-        System.out.println(gamemaneger.moveCurrentPlayer(3, true));
-        System.out.println(gamemaneger.moveCurrentPlayer(1, true));
-        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerEnergyInfo(2)));
+        gamemaneger.createInitialJungle(50, jogadores, comida);
+        assertEquals(gamemaneger.createInitialJungle(50, jogadores, comida), null);
+        gamemaneger.moveCurrentPlayer(3, true);
+        assertEquals(gamemaneger.moveCurrentPlayer(3, true), new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Carne"));
+        gamemaneger.moveCurrentPlayer(2, true);
+        assertEquals(gamemaneger.moveCurrentPlayer(2, true), new MovementResult(MovementResultCode.VALID_MOVEMENT, null));
+        gamemaneger.moveCurrentPlayer(3, true);
+        assertEquals(gamemaneger.moveCurrentPlayer(3, true), new MovementResult(MovementResultCode.VALID_MOVEMENT, null));
+        gamemaneger.moveCurrentPlayer(2, true);
+        assertEquals(gamemaneger.moveCurrentPlayer(2, true), new MovementResult(MovementResultCode.VALID_MOVEMENT, null));
+
+        Arrays.toString(gamemaneger.getCurrentPlayerEnergyInfo(1));
+        assertEquals(Arrays.toString(gamemaneger.getCurrentPlayerEnergyInfo(2)), "[4, 10]");
+
 
     }
     @org.junit.Test
