@@ -418,7 +418,10 @@ public class GameManager {
                             squareInfo[2] = identificadores.toString();
                         }else
                             if (squares.get(squareNr).identificadoresAlimentosNoQuadrado.equals("b")) {
-                            squareInfo[1] = "Bananas : " + squares.get(squareNr).bananas + " : + 40 energia";
+                                Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
+                                squareInfo[0] = alimento.imagem;
+                                squareInfo[1] = "Bananas : " + squares.get(squareNr).bananas + " : + 40 energia";
+                                squareInfo[2] = identificadores.toString();
                         } else {
                             Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
                             squareInfo[0] = alimento.imagem;
