@@ -409,8 +409,6 @@ public class GameManager {
         if (squareNr < squares.size() && squareNr > 1) {
 
             if (squares.get(squareNr).identificadoresAlimentosNoQuadrado != null) {
-                for (int i = 0; i < squares.size(); i++) {
-                    if(i == squareNr){
                         if(Objects.equals(squares.get(squareNr).identificadoresAlimentosNoQuadrado, "m")){
                             Alimento alimento = squares.get(squareNr).cogumelo;
                             squareInfo[0] = alimento.imagem;
@@ -428,8 +426,7 @@ public class GameManager {
                             squareInfo[1] = alimento.info();
                             squareInfo[2] = identificadores.toString();
                         }
-                    }
-                }
+
                 return squareInfo;
             }
         }
