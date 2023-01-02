@@ -22,11 +22,18 @@ public class Carne extends Alimento{
     }
 
     @Override
-    public String toString() {
-
-        if(jogadasEfetuadas > 12){
-            return "Carne toxica";
+    void energiaFornecida(Jogador jogador, int jogadasFeitas) {
+        if (jogador.especie.tipo.equals("Herbívoro")) {
+            jogador.nrAlimentosIngeridos--;
+        } else {
+            if (jogadasFeitas > 12) {
+                jogador.energiaAtual = jogador.energiaAtual / 2;
+            }
         }
-        return "Carne : + 50 energia : " + jogadasEfetuadas + " jogadas";
+    }
+
+    @Override
+    public String toString() {
+        return "Apanhou Carne";
     }
 }

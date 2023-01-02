@@ -11,8 +11,27 @@ public class SquareInfo {
     String identificadoresAlimentosNoQuadrado;
 
     int bananas;
+    CogumelosMagicos cogumelo = setCogumelo();
 
-    CogumelosMagicos cogumelo;
+    public CogumelosMagicos setCogumelo() {
+        if(cogumelo == null){
+            cogumelo = new CogumelosMagicos("m", "Cogumelos Magicos", "mushroom.png");
+        }
+        return cogumelo;
+    }
+
+    public SquareInfo(String[] identificadoresNoQuadrado, String identificadoresAlimentosNoQuadrado) {
+
+        this.identificadoresNoQuadrado = new ArrayList<>();
+
+        for (int i = 0; i < identificadoresNoQuadrado.length; i++) {
+            identificadoresNoQuadrado[i] = identificadoresNoQuadrado[i].replace("[", "");
+            identificadoresNoQuadrado[i] = identificadoresNoQuadrado[i].replace("]", "");
+            identificadoresNoQuadrado[i] = identificadoresNoQuadrado[i].trim();
+            this.identificadoresNoQuadrado.add(i, Integer.valueOf(identificadoresNoQuadrado[i]));
+        }
+        this.identificadoresAlimentosNoQuadrado = identificadoresAlimentosNoQuadrado;
+    }
 
     public SquareInfo(Boolean meta) {
         this.meta = meta;
@@ -31,7 +50,6 @@ public class SquareInfo {
     }
 
     public String getTexto() {
-
         return texto;
     }
 

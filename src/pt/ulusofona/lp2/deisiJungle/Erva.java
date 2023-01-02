@@ -17,8 +17,13 @@ public class Erva extends Alimento{
     }
 
     @Override
+    void energiaFornecida(Jogador jogador, int jogadasFeitas) {
+
+    }
+
+    @Override
     public String toString() {
-        return "Erva : +- 20 energia";
+        return "Apanhou Erva";
     }
 
 }

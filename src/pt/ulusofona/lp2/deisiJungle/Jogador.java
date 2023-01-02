@@ -7,8 +7,9 @@ public class Jogador {
     int identificador; //Os IDs dos jogadores podem nÃƒÆ’Ã‚Â£o ser consecutivos, por exemplo J1 = 1, J2 = 3, J3 = 5;
     String nome;       //Apenas poderÃƒÆ’Ã‚Â¡ existir um jogador da espÃƒÆ’Ã‚Â©cie Tarzan
     String especieDoJogador;
-    int energiaAtual ;
-    int posicaoAtual = 1;
+    int energiaAtual;
+    double energia;
+    int posicaoAtual=1;
     boolean aJogar = false;
     int bananasConsumidas = 0;
     boolean ganhou = false;
@@ -16,6 +17,8 @@ public class Jogador {
     int nrAlimentosIngeridos = 0;
 
     Especie especie = new Especie();
+
+
 
     public Jogador(int identificador, String nome, String especieDoJogador) {
         this.identificador = identificador;
@@ -25,6 +28,15 @@ public class Jogador {
         this.energiaAtual = especie.energiaInicial;
         posicaoAtual = 1;
     }
+     public Jogador(int identificador, String nome, int energiaAtual ,String especieDoJogador, int posicaoAtual) {
+        this.identificador = identificador;
+        this.nome = nome;
+        this.especieDoJogador = especieDoJogador;
+        this.especie = setEspecie(especieDoJogador);
+        this.energiaAtual = energiaAtual;
+        this.posicaoAtual = posicaoAtual;
+    }
+
 
 
     public Especie setEspecie(String especieDoJogador) {
@@ -85,7 +97,7 @@ public class Jogador {
 
     public int getEnergiaAtual(){
 
-        return energiaAtual;
+        return (int) energiaAtual;
     }
 
     public void setEnergiaAtual(int energiaAtual) {
@@ -95,9 +107,8 @@ public class Jogador {
     public int verificaEnergiaAtual(){
 
         if(energiaAtual > 200){
-
             energiaAtual = 200;
         }
-        return energiaAtual;
+        return (int) energiaAtual;
     }
 }
