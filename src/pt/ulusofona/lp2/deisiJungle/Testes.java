@@ -187,6 +187,104 @@ public class Testes {
                 "[T, Tartaruga, turtle.png, 150, 1, 5, 1..3], " + "[P, Pássaro, bird.png, 70, 4, 50, 5..6]," +
                 " [Z, Tarzan, tarzan.png, 70, 2, 20, 1..6]]");
     }
+
+@org.junit.Test
+    public void testGetFoods() {
+        GameManager gamemaneger = new GameManager();
+        assertEquals(Arrays.deepToString(gamemaneger.getFoodTypes()),"[[e, Erva, grass.png],"+
+                " [a, Agua, water.png], [b, Cacho de bananas, bananas.png], " +
+                "[c, Carne, meat.png], [m, Cogumelos magicos, mushroom.png]]");
+    }
+    @org.junit.Test
+    public void testWinnerAvancado() {
+        GameManager gamemaneger = new GameManager();
+        String[] jogador1 = {"4", "Joao", "E"};
+        String[] jogador2 = {"5", "Miguel", "L"};
+        String[] jogador3 = {"1", "José", "E"};
+        String[] jogador4 = {"90", "Ana", "P"};
+
+        String[][] jogadores = {jogador1, jogador2, jogador3, jogador4};
+
+        String[] comida1 = {"b", String.valueOf(6)};
+        String[] comida2 = {"c", String.valueOf(2)};
+        String[] comida3 = {"a", String.valueOf(3)};
+
+        String[][] comida = {comida1, comida2, comida3};
+
+        gamemaneger.createInitialJungle(10, jogadores, comida);
+        gamemaneger.moveCurrentPlayer(7, true);
+        assertEquals(Arrays.toString(gamemaneger.getWinnerInfo()), "null");
+        assertEquals(Arrays.toString(gamemaneger.getCurrentPlayerInfo()), "[4, Joao, E, 180, 1..6]");
+        gamemaneger.moveCurrentPlayer(1, true);
+        gamemaneger.moveCurrentPlayer(1, true);
+        assertEquals(gamemaneger.moveCurrentPlayer(1, true), new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou Carne"));
+        gamemaneger.moveCurrentPlayer(1, true);
+        gamemaneger.moveCurrentPlayer(1, true);
+        assertEquals(Arrays.toString(gamemaneger.getWinnerInfo()), "[4, Joao, E, 176]");
+
+
+    }
+
+    @org.junit.Test
+    public void test2Tarzans() {
+        GameManager gamemaneger = new GameManager();
+        String[] jogador1 = {"4", "Joao", "Z"};
+        String[] jogador2 = {"5", "Miguel", "Z"};
+        String[] jogador3 = {"1", "José", "E"};
+        String[] jogador4 = {"90", "Ana", "P"};
+
+        String[][] jogadores = {jogador1, jogador2, jogador3, jogador4};
+
+        String[] comida1 = {"b", String.valueOf(6)};
+        String[] comida2 = {"c", String.valueOf(2)};
+        String[] comida3 = {"a", String.valueOf(3)};
+
+        String[][] comida = {comida1, comida2, comida3};
+
+        System.out.println(gamemaneger.createInitialJungle(10, jogadores, comida));
+    }
+
+    @org.junit.Test
+    public void testMoveWithByPassFalse() {
+        GameManager gamemaneger = new GameManager();
+        String[] jogador1 = {"4", "Joao", "L"};
+        String[] jogador2 = {"5", "Miguel", "Z"};
+        String[] jogador3 = {"1", "José", "E"};
+        String[] jogador4 = {"90", "Ana", "P"};
+
+        String[][] jogadores = {jogador1, jogador2, jogador3, jogador4};
+
+        String[] comida1 = {"b", String.valueOf(6)};
+        String[] comida2 = {"c", String.valueOf(4)};
+        String[] comida3 = {"a", String.valueOf(3)};
+
+        String[][] comida = {comida1, comida2, comida3};
+
+        System.out.println(gamemaneger.createInitialJungle(10, jogadores, comida));
+        System.out.println(gamemaneger.moveCurrentPlayer(7, false));
+
+    }
+    @org.junit.Test
+    public void testRecuarAteAPrimeiraCasa() {
+        GameManager gamemaneger = new GameManager();
+        String[] jogador1 = {"1", "Joao", "L"};
+        String[] jogador2 = {"2", "Miguel", "Z"};
+
+        String[][] jogadores = {jogador1, jogador2};
+
+        String[] comida1 = {"b", String.valueOf(6)};
+        String[] comida2 = {"c", String.valueOf(4)};
+        String[] comida3 = {"a", String.valueOf(3)};
+
+        String[][] comida = {comida1, comida2, comida3};
+
+        System.out.println(gamemaneger.createInitialJungle(10, jogadores, comida));
+        System.out.println(gamemaneger.moveCurrentPlayer(3, true));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, true));
+        System.out.println(gamemaneger.moveCurrentPlayer(-4, true)); //INVALID
+
+    }
+
 }
 
     /*@org.junit.Test
