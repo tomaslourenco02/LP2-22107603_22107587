@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.io.File;
 import java.util.Arrays;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class Testes {
@@ -87,7 +88,7 @@ public class Testes {
     }
 
     @org.junit.Test
-    public void testComida() {
+    public void testJogo1() {
         GameManager gamemaneger = new GameManager();
         String[] jogador1 = {"1", "Joao", "Z"};
         String[] jogador2 = {"3", "Pedro", "T"};
@@ -96,16 +97,51 @@ public class Testes {
 
         String[][] jogadores = {jogador1,jogador2,jogador3,jogador4};
 
-        String[] comida1 = {"b", String.valueOf(2)};
+        String[] comida1 = {"b", String.valueOf(5)};
         String[] comida2 = {"c", String.valueOf(8)};
+        String[] comida6 = {"c", String.valueOf(6)};
         String[] comida3 = {"m", String.valueOf(7)};
+        String[] comida4 = {"a", String.valueOf(17)};
+        String[] comida5 = {"e", String.valueOf(23)};
 
-        String[][] comida = {comida1, comida2, comida3};
+        String[][] comida = {comida1, comida2, comida3,comida4,comida5,comida6};
 
-        System.out.println((gamemaneger.createInitialJungle(9, jogadores, comida)));
-        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(2)));
-        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(7)));
-        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(7)));
+        gamemaneger.createInitialJungle(30, jogadores, comida);
+        gamemaneger.moveCurrentPlayer(7,false);
+        gamemaneger.moveCurrentPlayer(4,false);
+        gamemaneger.moveCurrentPlayer(2,false);
+        gamemaneger.moveCurrentPlayer(5,false);
+
+        assertEquals(Arrays.toString(gamemaneger.getSquareInfo(3)), "[blank.png, Vazio, 3]");
+
+        gamemaneger.moveCurrentPlayer(0,false);
+        gamemaneger.moveCurrentPlayer(5,false);
+        gamemaneger.moveCurrentPlayer(3,false);
+        gamemaneger.moveCurrentPlayer(6,false);
+
+        assertEquals(Arrays.toString(gamemaneger.getSquareInfo(5)), "[bananas.png, Bananas : 2 : + 40 energia, ]");
+        assertEquals(Arrays.toString(gamemaneger.getCurrentPlayerInfo()), "[1, Joao, Z, 90, 1..6]");
+
+        gamemaneger.moveCurrentPlayer(1,false);
+        gamemaneger.moveCurrentPlayer(0,false);
+        gamemaneger.moveCurrentPlayer(1,false);
+        gamemaneger.moveCurrentPlayer(6,false);
+
+        gamemaneger.moveCurrentPlayer(1,false);
+        gamemaneger.moveCurrentPlayer(0,false);
+        gamemaneger.moveCurrentPlayer(0,false);
+        gamemaneger.moveCurrentPlayer(6,false);
+
+        assertEquals(Arrays.toString(gamemaneger.getWinnerInfo()), "null");
+
+        gamemaneger.moveCurrentPlayer(0,false);
+        gamemaneger.moveCurrentPlayer(0,false);
+        gamemaneger.moveCurrentPlayer(0,false);
+        gamemaneger.moveCurrentPlayer(6,false);
+
+        assertEquals(gamemaneger.moveCurrentPlayer(6,false), new MovementResult(MovementResultCode.VALID_MOVEMENT, null));
+
+        assertEquals(Arrays.toString(gamemaneger.getWinnerInfo()), "[7, Joana, P, 4]");
     }
 
     @org.junit.Test
