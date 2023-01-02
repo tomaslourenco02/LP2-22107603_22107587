@@ -360,6 +360,68 @@ public class Testes {
 
     }
 
+    @org.junit.Test
+    public void testGetCurrentPlayerInfo() {
+        GameManager gamemaneger = new GameManager();
+        String[] jogador1 = {"1", "Joao", "L"};
+        String[] jogador2 = {"2", "Miguel", "Z"};
+
+        String[][] jogadores = {jogador1, jogador2};
+
+        String[] comida1 = {"b", String.valueOf(6)};
+        String[] comida2 = {"c", String.valueOf(4)};
+        String[] comida3 = {"a", String.valueOf(3)};
+
+        String[][] comida = {comida1, comida2, comida3};
+
+        System.out.println(gamemaneger.createInitialJungle(10, jogadores, comida));
+        System.out.println(gamemaneger.moveCurrentPlayer(3, true));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, true));
+
+        System.out.println(Arrays.toString(gamemaneger.getCurrentPlayerInfo()));
+    }
+
+    @org.junit.Test
+    public void testGetSquareInfo() {
+        GameManager gamemaneger = new GameManager();
+        String[] jogador1 = {"1", "Joao", "L"};
+        String[] jogador2 = {"2", "Miguel", "Z"};
+
+        String[][] jogadores = {jogador1, jogador2};
+
+        String[] comida1 = {"b", String.valueOf(6)};
+        String[] comida2 = {"c", String.valueOf(4)};
+        String[] comida3 = {"a", String.valueOf(3)};
+
+        String[][] comida = {comida1, comida2, comida3};
+
+        System.out.println(gamemaneger.createInitialJungle(10, jogadores, comida));
+        System.out.println(gamemaneger.moveCurrentPlayer(3, true));
+        System.out.println(gamemaneger.moveCurrentPlayer(2, true));
+
+        System.out.println(Arrays.toString(gamemaneger.getSquareInfo(6)));
+    }
+    @org.junit.Test
+    public void testGetPlayerIds() {
+        GameManager gamemaneger = new GameManager();
+        String[] jogador1 = {"1", "Joao", "L"};
+        String[] jogador2 = {"2", "Miguel", "Z"};
+
+        String[][] jogadores = {jogador1, jogador2};
+
+        String[] comida1 = {"b", String.valueOf(6)};
+        String[] comida2 = {"c", String.valueOf(4)};
+        String[] comida3 = {"a", String.valueOf(3)};
+
+        String[][] comida = {comida1, comida2, comida3};
+
+        System.out.println(gamemaneger.createInitialJungle(10, jogadores, comida));
+        System.out.println(gamemaneger.moveCurrentPlayer(3, true));
+        System.out.println(gamemaneger.moveCurrentPlayer(3, true));
+
+        System.out.println(Arrays.toString(gamemaneger.getPlayerIds(4)));
+    }
+
 }
 
     /*@org.junit.Test
