@@ -180,6 +180,13 @@ public class Testes {
 
 
     }
+@org.junit.Test
+    public void testGetSpecies() {
+        GameManager gamemaneger = new GameManager();
+        assertEquals(Arrays.deepToString(gamemaneger.getSpecies()),"[[E, Elefante, elephant.png, 180, 4, 10, 1..6], [L, Leão, lion.png, 80, 2, 10, 4..6], " +
+                "[T, Tartaruga, turtle.png, 150, 1, 5, 1..3], " + "[P, Pássaro, bird.png, 70, 4, 50, 5..6]," +
+                " [Z, Tarzan, tarzan.png, 70, 2, 20, 1..6]]");
+    }
 }
 
     /*@org.junit.Test
