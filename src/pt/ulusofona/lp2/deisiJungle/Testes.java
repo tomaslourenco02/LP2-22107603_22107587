@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.deisiJungle;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
@@ -420,6 +421,20 @@ public class Testes {
         System.out.println(gamemaneger.moveCurrentPlayer(3, true));
 
         System.out.println(Arrays.toString(gamemaneger.getPlayerIds(4)));
+    }
+    @org.junit.Test
+    public void test_comandos() {
+        GameManager gameManager = new GameManager();
+        ArrayList<String> args = new ArrayList<>();
+        args.add("arg1");
+        args.add("arg2");
+        args.add("arg3");
+        String result1 = FunctionsKt.getComando(gameManager, args);
+        String result2 = FunctionsKt.postComando(gameManager, args);
+
+        System.out.println(result1);
+        System.out.println(result2);
+
     }
 }
 
