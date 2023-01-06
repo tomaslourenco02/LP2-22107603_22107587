@@ -1,6 +1,5 @@
 package pt.ulusofona.lp2.deisiJungle
 
-import pt.ulusofona.lp2.deisiJungle.guiSimulator.getIcon
 
 enum class CommandType {
     GET, POST
