@@ -45,39 +45,44 @@ fun postComando(gameManager: GameManager, args: List<String>): String? {
 }
 
 fun getPlayerInfo(manager: GameManager, args: List<String>): String? {
-    val nomePretendido = args[0]
-    val jogadores: List<Jogador> = manager.jogadores.filter { it.nome.equals(nomePretendido) }
-    val jogadorPretendido: Jogador = jogadores[0];
+    if(args.isNotEmpty()) {
+        val nomePretendido = args[0]
+        val jogadores: List<Jogador> = manager.jogadores.filter { it.nome.equals(nomePretendido) }
+        val jogadorPretendido: Jogador = jogadores[0];
 
-    val id = jogadorPretendido.identificador
-    val nome = jogadorPretendido.nome
-    val especie = jogadorPretendido.especie.nome
-    val energia = jogadorPretendido.energiaAtual
-    val posicao = jogadorPretendido.posicaoAtual
+        val id = jogadorPretendido.identificador
+        val nome = jogadorPretendido.nome
+        val especie = jogadorPretendido.especie.nome
+        val energia = jogadorPretendido.energiaAtual
+        val posicao = jogadorPretendido.posicaoAtual
 
-    if (jogadorPretendido != null) {
-        return "$id | $nome | $especie | $energia | $posicao"
+        if (jogadorPretendido != null) {
+            return "$id | $nome | $especie | $energia | $posicao"
+        }
     }
     return "Inexistent player"
 }
 
 fun getPlayersBySpecies(manager: GameManager, args: List<String>): String? {
-    val especiePretendida = args[0];
-    val jogadores: List<Jogador> = manager.jogadores.filter { it.especieDoJogador.equals(especiePretendida) }
-    val nomes: ArrayList<String> = ArrayList()
+    if(args.isNotEmpty()) {
+        val especiePretendida = args[0];
+        val jogadores: List<Jogador> = manager.jogadores.filter { it.especieDoJogador.equals(especiePretendida) }
+        val nomes: ArrayList<String> = ArrayList()
 
-    jogadores.forEach {
-        val nomeJogador = it.nome
-        nomes.add(nomeJogador)
+        jogadores.forEach {
+            val nomeJogador = it.nome
+            nomes.add(nomeJogador)
+        }
+
+        val nomesOrdenados = nomes.sorted()
+        val stringNomes: String = nomesOrdenados.joinToString(separator = ",")
+
+        if (nomes.size == 0) {
+            return stringNomes
+        } else
+            return ""
     }
-
-    val nomesOrdenados = nomes.sorted()
-    val stringNomes: String = nomesOrdenados.joinToString(separator = ",")
-
-    if (nomes.size == 0) {
-        return stringNomes
-    } else
-        return ""
+    return ""
 }
 
 fun getMostTraveledPlayer(manager: GameManager): String? {
