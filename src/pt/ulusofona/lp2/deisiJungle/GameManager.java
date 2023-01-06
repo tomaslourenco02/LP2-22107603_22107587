@@ -104,9 +104,11 @@ public class GameManager {
             }
         }
 
-        if (!verificaJogadores(playersInfo)) { throw  new InvalidInitialJungleException("Erro na inicialização do terreno!");}
+        if (!verificaJogadores(playersInfo)) { throw new InvalidInitialJungleException("Erro na inicialização do terreno!");}
+        if (!verificaJogadores(playersInfo)) { throw new InvalidInitialJungleException("");}
 
-        if (jungleSize < playersInfo.length * 2) { throw  new InvalidInitialJungleException("Erro na inicialização do terreno!");}
+
+        if (jungleSize < playersInfo.length * 2) { throw new InvalidInitialJungleException("Erro na inicialização do terreno!");}
 
         for (int i = 0; i < jungleSize; i++) { squares.add(new SquareInfo()); }
 

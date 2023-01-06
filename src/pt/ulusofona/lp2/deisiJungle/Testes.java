@@ -514,24 +514,19 @@ public class Testes {
     }
 
     @org.junit.Test
-    public void testExceptionInvalido() {
+    public void testExceptionInvalido() throws InvalidInitialJungleException {
         GameManager gamemaneger = new GameManager();
         String[] jogador1 = {"1", "Joao", "L"};
-        String[] jogador2 = {"2", "Miguel", "Z"};
+        String[] jogador2 = {"2", "Pedro", "L"};
 
         String[][] jogadores = {jogador1, jogador2};
 
         String[] comida1 = {"b", String.valueOf(6)};
-        String[] comida2 = {"c", String.valueOf(4)};
-        String[] comida3 = {"a", String.valueOf(3)};
 
-        String[][] comida = {comida1, comida2, comida3};
 
-        try {
-            gamemaneger.createInitialJungle(3, jogadores, comida);
-        } catch (InvalidInitialJungleException e) {
-            throw new RuntimeException(e);
-        }
+        String[][] comida = {comida1};
+
+        gamemaneger.createInitialJungle(10, jogadores, comida);
     }
 }
 
