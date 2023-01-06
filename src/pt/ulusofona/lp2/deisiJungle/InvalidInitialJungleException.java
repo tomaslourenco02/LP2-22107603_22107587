@@ -22,3 +22,4 @@ public class InvalidInitialJungleException extends Exception {
     }
 
 }
+
