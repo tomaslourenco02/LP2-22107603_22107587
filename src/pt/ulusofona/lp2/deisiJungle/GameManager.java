@@ -90,25 +90,23 @@ public class GameManager {
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
                 if (!verificaIdAlimentos(foodsInfo[i][0])) {
-                    throw  new InvalidInitialJungleException("Erro na inicialização do terreno!"); }
+                    throw  new InvalidInitialJungleException("Erro na inicialização do terreno!", false, true); }
             }
         }
 
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
-                if (foodsInfo[i][1].matches("[a-zA-Z]+")) { throw  new InvalidInitialJungleException("Erro na inicialização do terreno!"); }
+                if (foodsInfo[i][1].matches("[a-zA-Z]+")) { throw  new InvalidInitialJungleException("Erro na inicialização do terreno!", false, true); }
                 if (foodsInfo[i][1].matches("[0-9]*")) {
                     if (Integer.parseInt(foodsInfo[i][1]) >= jungleSize || Integer.parseInt(foodsInfo[i][1]) <= 1) {
-                        throw  new InvalidInitialJungleException("Erro na inicialização do terreno!");                    }
+                        throw  new InvalidInitialJungleException("Erro na inicialização do terreno!", false, true);                    }
                 }
             }
         }
 
-        if (!verificaJogadores(playersInfo)) { throw new InvalidInitialJungleException("Erro na inicialização do terreno!");}
-        if (!verificaJogadores(playersInfo)) { throw new InvalidInitialJungleException("");}
+        if (!verificaJogadores(playersInfo)) { throw new InvalidInitialJungleException("Erro na inicialização do terreno!", true, false);}
 
-
-        if (jungleSize < playersInfo.length * 2) { throw new InvalidInitialJungleException("Erro na inicialização do terreno!");}
+        if (jungleSize < playersInfo.length * 2) { throw new InvalidInitialJungleException("Erro na inicialização do terreno!", true, false);}
 
         for (int i = 0; i < jungleSize; i++) { squares.add(new SquareInfo()); }
 

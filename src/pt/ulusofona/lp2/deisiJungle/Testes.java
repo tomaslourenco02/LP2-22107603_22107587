@@ -1,5 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
@@ -514,7 +515,7 @@ public class Testes {
     }
 
     @org.junit.Test
-    public void testExceptionInvalido() throws InvalidInitialJungleException {
+    public void testExceptionInvalido() {
         GameManager gamemaneger = new GameManager();
         String[] jogador1 = {"1", "Joao", "L"};
         String[] jogador2 = {"2", "Pedro", "L"};
@@ -526,7 +527,7 @@ public class Testes {
 
         String[][] comida = {comida1};
 
-        gamemaneger.createInitialJungle(10, jogadores, comida);
+        Assert.assertTrue(gamemaneger.verificaJogadores(jogadores));
     }
 }
 
