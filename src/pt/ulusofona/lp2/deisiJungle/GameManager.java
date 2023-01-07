@@ -142,11 +142,7 @@ public class GameManager {
 
     public void createInitialJungle(int jungleSize, String[][] playersInfo) throws InvalidInitialJungleException{
 
-        try{
-            createInitialJungle(jungleSize,playersInfo,null);
-        } catch (InvalidInitialJungleException e){
-            throw new InvalidInitialJungleException("Erro na inicialização do terreno!", true, true);
-        }
+        createInitialJungle(jungleSize, playersInfo, null);
     }
 
     public boolean verificaPosicaoAlimentos() {
