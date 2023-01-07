@@ -90,15 +90,24 @@ fun getPlayersBySpecies(manager: GameManager, args: List<String>): String? {
     return ""
 }
 
-fun getMostTraveledPlayer(manager: GameManager): String? {
+fun getMostTraveledPlayer(manager: GameManager): String {
     val jogadores: List<Jogador> = manager.jogadores
     val jOrdenadosPelaDistancia: List<Jogador> = jogadores.sortedByDescending { it.nrCasasMovimentou }
-    val string: String
+    var string: String = ""
+    var casasAndadas : Int = 0;
 
     jOrdenadosPelaDistancia.forEach {
+        val nome = it.nome
+        val especie = it.especie.identificador
+        val movimento = it.nrCasasMovimentou
 
+        casasAndadas += movimento
+
+        string += "$nome:$especie:$movimento\n"
     }
-return null;
+    string+="$casasAndadas"
+
+    return string
 }
 
 fun getTopEnergeticOmnivores(manager: GameManager):String?{
