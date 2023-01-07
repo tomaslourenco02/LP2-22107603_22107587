@@ -27,7 +27,7 @@ fun getComando(gameManager: GameManager, args: List<String>): String? {
     }
     when (args[0]) {
         "PLAYER_INFO" -> return getPlayerInfo(gameManager, args.drop(1))
-        "PLAYERS_BY_SPECIE" -> return getPlayersBySpecies(gameManager, args)
+        "PLAYERS_BY_SPECIE" -> return getPlayersBySpecies(gameManager, args.drop(1));
         "MOST_TRAVELED" -> return getMostTraveledPlayer(gameManager)
         "TOP_ENERGETIC_OMNIVORES" -> return getTopEnergeticOmnivores(gameManager)
         else -> return null

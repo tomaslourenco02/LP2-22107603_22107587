@@ -6,11 +6,74 @@ import org.junit.Test;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class Testes {
+
+    @org.junit.Test
+    public void testGetPlayerInfo() throws InvalidInitialJungleException {
+        GameManager manager = new GameManager();
+        // Add some players to the manager's list of players
+
+        String[] jogador1 = {"4", "Joao", "P"};
+        String[] jogador2 = {"6", "Pedro", "Z"};
+        String[][] jogadores = {jogador1, jogador2};
+
+
+        manager.createInitialJungle(30, jogadores, null);
+
+        ArrayList<String> nomes = new ArrayList<>();
+        nomes.add("Joao");
+        ArrayList<String> nomeQueNaoExiste = new ArrayList<>();
+        nomes.add("Leo");
+        ArrayList<String> nomesVazio = new ArrayList<>();
+
+
+        String result1 = FunctionsKt.getPlayerInfo(manager, nomes);
+        assertEquals(result1, "4 | Joao | Passaro | 70 | 1");
+
+        String result3 = FunctionsKt.getPlayerInfo(manager, nomeQueNaoExiste);
+        assertEquals(result3, "Inexistent player");
+
+        String result4 = FunctionsKt.getPlayerInfo(manager, nomesVazio);
+        assertEquals(result4 , "Inexistent player");
+    }
+    @org.junit.Test
+
+    public void testGetPlayersBySpecies() throws InvalidInitialJungleException {
+        GameManager manager = new GameManager();
+
+        String[] jogador1 = {"4", "Joao", "T"};
+        String[] jogador2 = {"6", "Pedro", "T"};
+        String[] jogador3 = {"1", "Miguel", "L"};
+        String[][] jogadores = {jogador1, jogador2, jogador3};
+
+        manager.createInitialJungle(30, jogadores, null);
+
+        ArrayList<String> especie = new ArrayList<>();
+        especie.add("T");
+        ArrayList<String> especie2 = new ArrayList<>();
+        especie2.add("L");
+        ArrayList<String> especieQueNaoExiste = new ArrayList<>();
+        especieQueNaoExiste.add("E");
+        ArrayList<String> especieVazio = new ArrayList<>();
+
+
+        String result1 = FunctionsKt.getPlayersBySpecies(manager, especie);
+        assertEquals(result1, "Joao,Pedro");
+
+        String result2 = FunctionsKt.getPlayersBySpecies(manager, especie2);
+        assertEquals(result2, "Miguel");
+
+        String result3 = FunctionsKt.getPlayersBySpecies(manager, especieQueNaoExiste);
+        assertEquals(result3, "");
+
+        String result4 = FunctionsKt.getPlayersBySpecies(manager, especieVazio);
+        assertEquals(result4, "");
+    }
 
     @org.junit.Test
 
