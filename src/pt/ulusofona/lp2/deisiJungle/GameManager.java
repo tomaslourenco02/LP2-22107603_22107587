@@ -218,7 +218,6 @@ public class GameManager {
         if (playersInfo.length > 4 || playersInfo.length < 2) {
             return false;
         }
-
         for (int i = 0; i < playersInfo.length; i++) {
 
             if (playersInfo[i][1] == null || Objects.equals(playersInfo[i][1], "")) {
