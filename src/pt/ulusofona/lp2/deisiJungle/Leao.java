@@ -3,7 +3,7 @@ package pt.ulusofona.lp2.deisiJungle;
 public class Leao extends Especie{
 
     public Leao(String identificador, String nome, String imagem, int energiaInicial, int consumoEnergia, int ganhoEnergiaEmDescanso, String velocidade, String tipo) {
-        super("L", "Leão", "lion.png", 80, 2, 10, "4..6", "Carnívoro");
+        super("L", "Leao", "lion.png", 80, 2, 10, "4..6", "Carnívoro");
     }
 
     public static int dado(){

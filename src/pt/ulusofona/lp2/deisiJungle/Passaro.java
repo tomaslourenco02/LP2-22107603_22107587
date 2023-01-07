@@ -3,7 +3,7 @@ package pt.ulusofona.lp2.deisiJungle;
 public class Passaro extends Especie{
 
     public Passaro(String identificador, String nome, String imagem, int energiaInicial, int consumoEnergia, int ganhoEnergiaEmDescanso, String velocidade, String tipo) {
-        super("P", "Pássaro", "bird.png", 70, 4, 50, "5..6", "Omnívoro");
+        super("P", "Passaro", "bird.png", 70, 4, 50, "5..6", "Omnívoro");
     }
 
     public static int dado(){
