@@ -49,7 +49,7 @@ fun getPlayerInfo(manager: GameManager, args: List<String>): String? {
         val nomePretendido = args[0]
         val jogadores: List<Jogador> = manager.jogadores.filter { it.nome.equals(nomePretendido) }
         if (jogadores.isEmpty()) {
-            return ""
+            return "Inexistent player"
         }
         val jogadorPretendido: Jogador = jogadores[0];
 
