@@ -48,6 +48,9 @@ fun getPlayerInfo(manager: GameManager, args: List<String>): String? {
     if(args.isNotEmpty()) {
         val nomePretendido = args[0]
         val jogadores: List<Jogador> = manager.jogadores.filter { it.nome.equals(nomePretendido) }
+        if (jogadores.isEmpty()) {
+            return ""
+        }
         val jogadorPretendido: Jogador = jogadores[0];
 
         val id = jogadorPretendido.identificador
@@ -64,10 +67,18 @@ fun getPlayerInfo(manager: GameManager, args: List<String>): String? {
 }
 
 fun getPlayersBySpecies(manager: GameManager, args: List<String>): String? {
+    if (args.size < 1) {
+        return ""
+    }
+
     if(args.isNotEmpty()) {
         val especiePretendida = args[0];
         val jogadores: List<Jogador> = manager.jogadores.filter { it.especieDoJogador.equals(especiePretendida) }
         val nomes: ArrayList<String> = ArrayList()
+
+        if (jogadores.isEmpty()) {
+            return ""
+        }
 
         jogadores.forEach {
             val nomeJogador = it.nome
@@ -107,4 +118,3 @@ fun getConsumedFood(manager: GameManager):String?{
 fun postMove(manager: GameManager, args: List<String>):String?{
     return null;
 }
-

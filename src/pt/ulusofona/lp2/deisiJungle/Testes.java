@@ -14,13 +14,19 @@ public class Testes {
 
     @org.junit.Test
 
-    public void testJungle() {
+    public void testJungle() throws InvalidInitialJungleException {
         GameManager gamemaneger = new GameManager();
         String[] jogador1 = {"4", "Joao", "P"};
         String[] jogador2 = {"6", "Pedro", "Z"};
 
         String[][] jogadores = {jogador1, jogador2};
 
+        String[] comida1 = {"c", String.valueOf(5)};
+
+        String[][] comida = {comida1};
+
+
+        gamemaneger.createInitialJungle(6, jogadores, comida);      //6*4=24   70-24=46
 
         System.out.println(gamemaneger.moveCurrentPlayer(6, false));      //6*4=24   70-24=46
         System.out.println(Arrays.toString(gamemaneger.getPlayerInfo(4)));
