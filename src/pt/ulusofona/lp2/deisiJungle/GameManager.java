@@ -90,23 +90,23 @@ public class GameManager {
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
                 if (!verificaIdAlimentos(foodsInfo[i][0])) {
-                    throw  new InvalidInitialJungleException("Erro na inicialização do terreno!"); }
+                    throw  new InvalidInitialJungleException("Erro na inicialização do terreno!", false, true); }
             }
         }
 
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
-                if (foodsInfo[i][1].matches("[a-zA-Z]+")) { throw  new InvalidInitialJungleException("Erro na inicialização do terreno!"); }
+                if (foodsInfo[i][1].matches("[a-zA-Z]+")) { throw  new InvalidInitialJungleException("Erro na inicialização do terreno!", false, true); }
                 if (foodsInfo[i][1].matches("[0-9]*")) {
                     if (Integer.parseInt(foodsInfo[i][1]) >= jungleSize || Integer.parseInt(foodsInfo[i][1]) <= 1) {
-                        throw  new InvalidInitialJungleException("Erro na inicialização do terreno!");                    }
+                        throw  new InvalidInitialJungleException("Erro na inicialização do terreno!", false, true);                    }
                 }
             }
         }
 
-        if (!verificaJogadores(playersInfo)) { throw  new InvalidInitialJungleException("Erro na inicialização do terreno!");}
+        if (!verificaJogadores(playersInfo)) { throw new InvalidInitialJungleException("Erro na inicialização do terreno!", true, false);}
 
-        if (jungleSize < playersInfo.length * 2) { throw  new InvalidInitialJungleException("Erro na inicialização do terreno!");}
+        if (jungleSize < playersInfo.length * 2) { throw new InvalidInitialJungleException("Erro na inicialização do terreno!", true, false);}
 
         for (int i = 0; i < jungleSize; i++) { squares.add(new SquareInfo()); }
 
@@ -142,11 +142,7 @@ public class GameManager {
 
     public void createInitialJungle(int jungleSize, String[][] playersInfo) throws InvalidInitialJungleException{
 
-        try{
-            createInitialJungle(jungleSize,playersInfo,null);
-        } catch (InvalidInitialJungleException e){
-            System.out.println(e.getMessage());
-        }
+        createInitialJungle(jungleSize, playersInfo, null);
     }
 
     public boolean verificaPosicaoAlimentos() {
@@ -218,7 +214,6 @@ public class GameManager {
         if (playersInfo.length > 4 || playersInfo.length < 2) {
             return false;
         }
-
         for (int i = 0; i < playersInfo.length; i++) {
 
             if (playersInfo[i][1] == null || Objects.equals(playersInfo[i][1], "")) {
@@ -411,23 +406,23 @@ public class GameManager {
         if (squareNr < squares.size() && squareNr > 1) {
 
             if (squares.get(squareNr).identificadoresAlimentosNoQuadrado != null) {
-                        if(Objects.equals(squares.get(squareNr).identificadoresAlimentosNoQuadrado, "m")){
-                            Alimento alimento = squares.get(squareNr).cogumelo;
-                            squareInfo[0] = alimento.imagem;
-                            squareInfo[1] = alimento.info();
-                            squareInfo[2] = identificadores.toString();
-                        }else
-                            if (squares.get(squareNr).identificadoresAlimentosNoQuadrado.equals("b")) {
-                                Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
-                                squareInfo[0] = alimento.imagem;
-                                squareInfo[1] = "Bananas : " + squares.get(squareNr).bananas + " : + 40 energia";
-                                squareInfo[2] = identificadores.toString();
-                        } else {
-                            Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
-                            squareInfo[0] = alimento.imagem;
-                            squareInfo[1] = alimento.info();
-                            squareInfo[2] = identificadores.toString();
-                        }
+                if(Objects.equals(squares.get(squareNr).identificadoresAlimentosNoQuadrado, "m")){
+                    Alimento alimento = squares.get(squareNr).cogumelo;
+                    squareInfo[0] = alimento.imagem;
+                    squareInfo[1] = alimento.info();
+                    squareInfo[2] = identificadores.toString();
+                }else
+                if (squares.get(squareNr).identificadoresAlimentosNoQuadrado.equals("b")) {
+                    Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
+                    squareInfo[0] = alimento.imagem;
+                    squareInfo[1] = "Bananas : " + squares.get(squareNr).bananas + " : + 40 energia";
+                    squareInfo[2] = identificadores.toString();
+                } else {
+                    Alimento alimento = definirAlimento(squares.get(squareNr).identificadoresAlimentosNoQuadrado);
+                    squareInfo[0] = alimento.imagem;
+                    squareInfo[1] = alimento.info();
+                    squareInfo[2] = identificadores.toString();
+                }
 
                 return squareInfo;
             }
