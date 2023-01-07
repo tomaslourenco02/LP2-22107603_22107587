@@ -145,7 +145,7 @@ public class GameManager {
         try{
             createInitialJungle(jungleSize,playersInfo,null);
         } catch (InvalidInitialJungleException e){
-            System.out.println(e.getMessage());
+            throw new InvalidInitialJungleException("Erro na inicialização do terreno!", true, true);
         }
     }
 

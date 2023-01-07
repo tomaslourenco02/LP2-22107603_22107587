@@ -497,9 +497,8 @@ public class Testes {
     public void testExceptionValido() {
         GameManager gamemaneger = new GameManager();
         String[] jogador1 = {"1", "Joao", "L"};
-        String[] jogador2 = {"2", "Miguel", "Z"};
 
-        String[][] jogadores = {jogador1, jogador2};
+        String[][] jogadores = {jogador1};
 
         String[] comida1 = {"b", String.valueOf(6)};
         String[] comida2 = {"c", String.valueOf(4)};
@@ -508,7 +507,7 @@ public class Testes {
         String[][] comida = {comida1, comida2, comida3};
 
         try {
-            gamemaneger.createInitialJungle(10, jogadores, comida);
+            gamemaneger.createInitialJungle(10, jogadores);
         } catch (InvalidInitialJungleException e) {
             throw new RuntimeException(e);
         }
