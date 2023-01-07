@@ -67,10 +67,6 @@ fun getPlayerInfo(manager: GameManager, args: List<String>): String? {
 }
 
 fun getPlayersBySpecies(manager: GameManager, args: List<String>): String? {
-    if (args.size < 1) {
-        return ""
-    }
-
     if(args.isNotEmpty()) {
         val especiePretendida = args[0];
         val jogadores: List<Jogador> = manager.jogadores.filter { it.especieDoJogador.equals(especiePretendida) }
@@ -88,10 +84,7 @@ fun getPlayersBySpecies(manager: GameManager, args: List<String>): String? {
         val nomesOrdenados = nomes.sorted()
         val stringNomes: String = nomesOrdenados.joinToString(separator = ",")
 
-        if (nomes.size == 0) {
-            return stringNomes
-        } else
-            return ""
+        return stringNomes
     }
     return ""
 }
