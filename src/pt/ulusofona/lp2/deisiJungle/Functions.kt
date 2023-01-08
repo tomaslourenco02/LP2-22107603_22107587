@@ -123,14 +123,17 @@ fun getTopEnergeticOmnivores(manager: GameManager, args: List<String>):String?{
     jogadoresOrdenados.forEach{
         val nome = it.nome
         val energia = it.energiaAtual
-        if(jogadoresOrdenados.size-1 == count){
+        if(jogadoresOrdenados.size-1 == count) {
             string += "$nome:$energia"
             count++
-        }else {
+        }
+        if(max_results == count){
+            string += "$nome:$energia"
+            return string
+        } else {
             string += "$nome:$energia\n"
             count++
         }
-        if(max_results == count){return string}
     }
 
     return string;
@@ -144,7 +147,7 @@ fun getConsumedFood(manager: GameManager, args: List<String>):String?{
             val jogador: List<Jogador> = manager.jogadores.filter { it.nome.equals(nomeJogador) }
 
             jogador.forEach {
-                val alimentos = it.alimentosIngeridos;
+                val alimentos = it.alimentosIngeridos.sorted();
                 string = alimentos.joinToString(separator = "\n")
             }
             return string
@@ -172,16 +175,23 @@ fun postMove(manager: GameManager, args: List<String>):String?{
         manager.turnosJogadores()
         return "Sem energia"
     }
+    if(posicaoFutura == manager.tamanhoTabuleiro){
+        jogador.energiaAtual -= nrCasasAMover * jogador.especie.consumoEnergia
+        jogador.posicaoAtual = posicaoFutura
+        manager.turnosJogadores()
+        manager.jogoAcabou = true;
+        return "OK"
+    }
 
-    if(manager.squares.get(posicaoFutura).identificadoresAlimentosNoQuadrado == null){
+    if(manager.squares[posicaoFutura].identificadoresAlimentosNoQuadrado == null){
         jogador.energiaAtual -= nrCasasAMover * jogador.especie.consumoEnergia
         jogador.posicaoAtual = posicaoFutura
         manager.turnosJogadores()
         return "OK"
     }
-    if (manager.squares.get(posicaoFutura).identificadoresAlimentosNoQuadrado != null){
+    if (manager.squares[posicaoFutura].identificadoresAlimentosNoQuadrado != null){
         jogador.energiaAtual -= nrCasasAMover * jogador.especie.consumoEnergia
-        manager.energiaFornecidaAlimento(jogador, manager.squares.get(posicaoFutura).identificadoresAlimentosNoQuadrado)
+        manager.energiaFornecidaAlimento(jogador, manager.squares[posicaoFutura].identificadoresAlimentosNoQuadrado)
         jogador.posicaoAtual = posicaoFutura
         return "Apanhou comida"
     }
