@@ -201,12 +201,21 @@ public class Testes {
         String[] comida1 = {"c", String.valueOf(5)};
         String[] comida2 = {"e", String.valueOf(6)};
         String[] comida3 = {"m", String.valueOf(7)};
+        String[] comida4 = {"c", String.valueOf(8)};
+        String[] comida5 = {"e", String.valueOf(9)};
+        String[] comida6 = {"e", String.valueOf(10)};
 
 
-        String[][] comida = {comida1, comida2, comida3};
+        String[][] comida = {comida1, comida2, comida3, comida4, comida5, comida6};
 
         gameManager.createInitialJungle(30, jogadores, comida);
         System.out.println(gameManager.moveCurrentPlayer(4, true));
+        System.out.println(gameManager.moveCurrentPlayer(0, true));
+        System.out.println(gameManager.moveCurrentPlayer(1, true));
+        System.out.println(gameManager.moveCurrentPlayer(0, true));
+        System.out.println(gameManager.moveCurrentPlayer(1, true));
+        System.out.println(gameManager.moveCurrentPlayer(0, true));
+        System.out.println(gameManager.moveCurrentPlayer(1, true));
         System.out.println(gameManager.moveCurrentPlayer(0, true));
         System.out.println(gameManager.moveCurrentPlayer(1, true));
         System.out.println(gameManager.moveCurrentPlayer(0, true));

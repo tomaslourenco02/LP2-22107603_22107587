@@ -918,7 +918,7 @@ public class GameManager {
                     alimentosIngeridos.add("Carne");
                 }
                 for (int i = 0; i < alimentosIngeridos.size(); i++) {
-                    if(!alimentosIngeridos.get(i).equals("Carne")){
+                    if(!alimentosIngeridos.contains("Carne")){
                         alimentosIngeridos.add("Carne");
                     }
                 }
@@ -929,11 +929,11 @@ public class GameManager {
             }
         } else if (alimento.equals("m")) {
             if(alimentosIngeridos.size() == 0){
-                alimentosIngeridos.add("Cogumelos Magicos");
+                alimentosIngeridos.add("Cogumelo Magico");
             }
             for (int i = 0; i < alimentosIngeridos.size(); i++) {
-                if(!alimentosIngeridos.contains("Cogumelos Magicos")){
-                    alimentosIngeridos.add("Cogumelos Magicos");
+                if(!alimentosIngeridos.contains("Cogumelo Magico")){
+                    alimentosIngeridos.add("Cogumelo Magico");
                 }
             }
             squares.get(jogadorAJogar.posicaoAtual).cogumelo.energiaFornecida(jogadorAJogar, jogadasFeitas);
