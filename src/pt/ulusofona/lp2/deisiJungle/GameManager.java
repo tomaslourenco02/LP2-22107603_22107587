@@ -14,6 +14,8 @@ public class GameManager {
     int tamanhoTabuleiro = 0;
     int jogadasFeitas = 0;
     boolean jogoAcabou = false;
+    ArrayList<String> alimentosIngeridos = new ArrayList<>();
+
 
     public GameManager() {
     }
@@ -812,26 +814,42 @@ public class GameManager {
     public boolean energiaFornecidaAlimento(Jogador jogadorAJogar, String alimento) {
         if (alimento.equals("e")) {
             if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Omnívoro")) {
-                jogadorAJogar.alimentosIngeridos.add("Erva");
+                for (int i = 0; i < alimentosIngeridos.size(); i++) {
+                    if(!alimentosIngeridos.get(i).equals("Erva")){
+                        alimentosIngeridos.add("Erva");
+                    }
+                }
                 jogadorAJogar.energiaAtual += 20;
                 turnosJogadores();
                 if (jogadorAJogar.energiaAtual > 200) { jogadorAJogar.energiaAtual = 200; }
                 return true;
             } else if (jogadorAJogar.especie.tipo.equals("Carnívoro")) {
                 jogadorAJogar.energiaAtual -= 20;
-                jogadorAJogar.alimentosIngeridos.add("Erva");
+                for (int i = 0; i < alimentosIngeridos.size(); i++) {
+                    if(!alimentosIngeridos.get(i).equals("Erva")){
+                        alimentosIngeridos.add("Erva");
+                    }
+                }
                 turnosJogadores();
                 if (jogadorAJogar.energiaAtual > 200) { jogadorAJogar.energiaAtual = 200; }
                 return true; }
         } else if (alimento.equals("a")) {
             if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
-                jogadorAJogar.alimentosIngeridos.add("Agua");
+                for (int i = 0; i < alimentosIngeridos.size(); i++) {
+                    if(!alimentosIngeridos.get(i).equals("Agua")){
+                        alimentosIngeridos.add("Agua");
+                    }
+                }
                 jogadorAJogar.energiaAtual += 15;
                 turnosJogadores();
                 if (jogadorAJogar.energiaAtual > 200) { jogadorAJogar.energiaAtual = 200; }
                 return true;
             } else if (jogadorAJogar.especie.tipo.equals("Omnívoro")) {
-                jogadorAJogar.alimentosIngeridos.add("Agua");
+                for (int i = 0; i < alimentosIngeridos.size(); i++) {
+                    if(!alimentosIngeridos.get(i).equals("Agua")){
+                        alimentosIngeridos.add("Agua");
+                    }
+                }
                 jogadorAJogar.energiaAtual += ((jogadorAJogar.energiaAtual * 20) / 100);
                 turnosJogadores();
                 if (jogadorAJogar.energiaAtual > 200) { jogadorAJogar.energiaAtual = 200; }
@@ -839,14 +857,22 @@ public class GameManager {
             }
         } else if (alimento.equals("b")) {
             if (jogadorAJogar.bananasConsumidas >= 1) { jogadorAJogar.energiaAtual -= 40;
-                jogadorAJogar.alimentosIngeridos.add("Banana");
+                for (int i = 0; i < alimentosIngeridos.size(); i++) {
+                    if(!alimentosIngeridos.get(i).equals("Bananas")){
+                        alimentosIngeridos.add("Bananas");
+                    }
+                }
                 squares.get(jogadorAJogar.posicaoAtual).bananas--;
                 turnosJogadores();
                 if (jogadorAJogar.energiaAtual > 200) { jogadorAJogar.energiaAtual = 200; }
                 return true;
 
             } else if (squares.get(jogadorAJogar.posicaoAtual).bananas > 0) { jogadorAJogar.energiaAtual += 40;
-                jogadorAJogar.alimentosIngeridos.add("Erva");
+                for (int i = 0; i < alimentosIngeridos.size(); i++) {
+                    if(!alimentosIngeridos.get(i).equals("Bananas")){
+                        alimentosIngeridos.add("Bananas");
+                    }
+                }
                 jogadorAJogar.bananasConsumidas++;
                 squares.get(jogadorAJogar.posicaoAtual).bananas--;
                 turnosJogadores();
@@ -857,19 +883,32 @@ public class GameManager {
             if (jogadorAJogar.especie.tipo.equals("Herbívoro")) { jogadorAJogar.nrAlimentosIngeridos--;
             } else {
                 if (jogadasFeitas > 12) {
+                    for (int i = 0; i < alimentosIngeridos.size(); i++) {
+                        if(!alimentosIngeridos.get(i).equals("Carne")){
+                            alimentosIngeridos.add("Carne");
+                        }
+                    }
                     jogadorAJogar.energiaAtual = jogadorAJogar.energiaAtual / 2;
                     turnosJogadores();
                     if (jogadorAJogar.energiaAtual > 200) { jogadorAJogar.energiaAtual = 200; }
                     return true;
                 }
-                jogadorAJogar.alimentosIngeridos.add("Carne");
+                for (int i = 0; i < alimentosIngeridos.size(); i++) {
+                    if(!alimentosIngeridos.get(i).equals("Carne")){
+                        alimentosIngeridos.add("Carne");
+                    }
+                }
                 jogadorAJogar.energiaAtual += 50;
                 turnosJogadores();
                 if (jogadorAJogar.energiaAtual > 200) { jogadorAJogar.energiaAtual = 200; }
                 return true;
             }
         } else if (alimento.equals("m")) {
-            jogadorAJogar.alimentosIngeridos.add("Cogumelos Magicos");
+            for (int i = 0; i < alimentosIngeridos.size(); i++) {
+                if(!alimentosIngeridos.get(i).equals("Cogumelos Magicos")){
+                    alimentosIngeridos.add("Cogumelos Magicos");
+                }
+            }
             squares.get(jogadorAJogar.posicaoAtual).cogumelo.energiaFornecida(jogadorAJogar, jogadasFeitas);
             turnosJogadores();
             if (jogadorAJogar.energiaAtual > 200) { jogadorAJogar.energiaAtual = 200; }

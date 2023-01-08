@@ -211,7 +211,7 @@ public class Testes {
         System.out.println(gameManager.moveCurrentPlayer(1, true));
         System.out.println(gameManager.moveCurrentPlayer(0, true));
         System.out.println(gameManager.moveCurrentPlayer(1, true));
-        System.out.println(gameManager.jogadores.get(0).alimentosIngeridos);
+        System.out.println(gameManager.alimentosIngeridos);
 
 
     }

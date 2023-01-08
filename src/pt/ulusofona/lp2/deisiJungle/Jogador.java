@@ -17,8 +17,6 @@ public class Jogador {
     int nrCasasMovimentou = 0;
     int nrAlimentosIngeridos = 0;
 
-    ArrayList<String> alimentosIngeridos = new ArrayList<>();
-
     Especie especie = new Especie();
 
 

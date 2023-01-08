@@ -31,7 +31,7 @@ fun getComando(gameManager: GameManager, args: List<String>): String? {
         "PLAYERS_BY_SPECIE" -> return getPlayersBySpecies(gameManager, args.drop(1));
         "MOST_TRAVELED" -> return getMostTraveledPlayer(gameManager)
         "TOP_ENERGETIC_OMNIVORES" -> return getTopEnergeticOmnivores(gameManager, args.drop(1))
-        "CONSUMED_FOODS" -> return getConsumedFood(gameManager, args.drop(1))
+        "CONSUMED_FOODS" -> return getConsumedFood(gameManager)
         else -> return null
     }
 }
@@ -123,12 +123,10 @@ fun getTopEnergeticOmnivores(manager: GameManager, args: List<String>):String?{
     jogadoresOrdenados.forEach{
         val nome = it.nome
         val energia = it.energiaAtual
-        if(jogadoresOrdenados.size-1 == count) {
+        if(jogadoresOrdenados.size-1 == count || max_results == count) {
             string += "$nome:$energia"
-            count++
         }
         if(max_results == count){
-            string += "$nome:$energia"
             return string
         } else {
             string += "$nome:$energia\n"
@@ -139,21 +137,14 @@ fun getTopEnergeticOmnivores(manager: GameManager, args: List<String>):String?{
     return string;
 }
 
-fun getConsumedFood(manager: GameManager, args: List<String>):String?{
-    if(args.isNotEmpty()) {
-        val nomeJogador = args[0]
-        if (!nomeJogador.equals(null)) {
+fun getConsumedFood(manager: GameManager):String?{
             var string: String = ""
-            val jogador: List<Jogador> = manager.jogadores.filter { it.nome.equals(nomeJogador) }
 
-            jogador.forEach {
-                val alimentos = it.alimentosIngeridos.sorted();
+            manager.alimentosIngeridos.forEach {
+                val alimentos = manager.alimentosIngeridos.sorted();
                 string = alimentos.joinToString(separator = "\n")
             }
             return string
-        }
-    }
-    return ""
 }
 
 fun postMove(manager: GameManager, args: List<String>):String?{
@@ -171,10 +162,11 @@ fun postMove(manager: GameManager, args: List<String>):String?{
         return "Movimento invalido"
     }
 
-    if( energiaAGastar < 0){
+    if(energiaAGastar < 0){
         manager.turnosJogadores()
         return "Sem energia"
     }
+
     if(posicaoFutura == manager.tamanhoTabuleiro){
         jogador.energiaAtual -= nrCasasAMover * jogador.especie.consumoEnergia
         jogador.posicaoAtual = posicaoFutura
