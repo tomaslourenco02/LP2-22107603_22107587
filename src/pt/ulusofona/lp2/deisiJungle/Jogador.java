@@ -1,5 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Jogador {
@@ -16,6 +17,8 @@ public class Jogador {
     int nrCasasMovimentou = 0;
     int nrAlimentosIngeridos = 0;
 
+    ArrayList<String> alimentosIngeridos = new ArrayList<>();
+
     Especie especie = new Especie();
 
 
@@ -28,7 +31,7 @@ public class Jogador {
         this.energiaAtual = especie.energiaInicial;
         posicaoAtual = 1;
     }
-     public Jogador(int identificador, String nome, int energiaAtual ,String especieDoJogador, int posicaoAtual) {
+    public Jogador(int identificador, String nome, int energiaAtual ,String especieDoJogador, int posicaoAtual) {
         this.identificador = identificador;
         this.nome = nome;
         this.especieDoJogador = especieDoJogador;
