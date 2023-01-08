@@ -14,6 +14,7 @@ fun router(): Function1<CommandType, Function2<GameManager, List<String>, String
     }
 }
 
+
 fun criaComandos(commandType: CommandType): Function2<GameManager, List<String>, String?> {
     return when (commandType) {
         CommandType.GET -> { gameManager, args -> getComando(gameManager, args) }
