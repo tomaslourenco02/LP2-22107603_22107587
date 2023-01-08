@@ -84,7 +84,7 @@ fun getPlayersBySpecies(manager: GameManager, args: List<String>): String? {
             nomes.add(nomeJogador)
         }
 
-        val nomesOrdenados = nomes.sorted()
+        val nomesOrdenados = nomes.sortedByDescending{it}
         val stringNomes: String = nomesOrdenados.joinToString(separator = ",")
 
         return stringNomes
@@ -123,10 +123,13 @@ fun getTopEnergeticOmnivores(manager: GameManager, args: List<String>):String?{
     jogadoresOrdenados.forEach{
         val nome = it.nome
         val energia = it.energiaAtual
-
-        string += "$nome:$energia\n"
-        count++
-
+        if(jogadoresOrdenados.size-1 == count){
+            string += "$nome:$energia"
+            count++
+        }else {
+            string += "$nome:$energia\n"
+            count++
+        }
         if(max_results == count){return string}
     }
 
@@ -134,16 +137,18 @@ fun getTopEnergeticOmnivores(manager: GameManager, args: List<String>):String?{
 }
 
 fun getConsumedFood(manager: GameManager, args: List<String>):String?{
-    val nomeJogador = args[0]
-    if(!nomeJogador.equals(null)){
-        var string : String = ""
-        val jogador: List<Jogador> = manager.jogadores.filter { it.nome.equals(nomeJogador) }
+    if(args.isNotEmpty()) {
+        val nomeJogador = args[0]
+        if (!nomeJogador.equals(null)) {
+            var string: String = ""
+            val jogador: List<Jogador> = manager.jogadores.filter { it.nome.equals(nomeJogador) }
 
-        jogador.forEach{
-            val alimentos = it.alimentosIngeridos;
-            string = alimentos.joinToString(separator = "\n")
+            jogador.forEach {
+                val alimentos = it.alimentosIngeridos;
+                string = alimentos.joinToString(separator = "\n")
+            }
+            return string
         }
-        return string
     }
     return ""
 }
@@ -178,7 +183,7 @@ fun postMove(manager: GameManager, args: List<String>):String?{
         jogador.energiaAtual -= nrCasasAMover * jogador.especie.consumoEnergia
         manager.energiaFornecidaAlimento(jogador, manager.squares.get(posicaoFutura).identificadoresAlimentosNoQuadrado)
         jogador.posicaoAtual = posicaoFutura
-        return "Apanhou Comida"
+        return "Apanhou comida"
     }
     return "";
 }
