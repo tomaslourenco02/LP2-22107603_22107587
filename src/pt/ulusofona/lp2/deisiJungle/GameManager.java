@@ -814,8 +814,11 @@ public class GameManager {
     public boolean energiaFornecidaAlimento(Jogador jogadorAJogar, String alimento) {
         if (alimento.equals("e")) {
             if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Omnívoro")) {
+                if(alimentosIngeridos.size() == 0){
+                    alimentosIngeridos.add("Erva");
+                }
                 for (int i = 0; i < alimentosIngeridos.size(); i++) {
-                    if(!alimentosIngeridos.get(i).equals("Erva")){
+                    if(!alimentosIngeridos.contains("Erva")){
                         alimentosIngeridos.add("Erva");
                     }
                 }
@@ -825,8 +828,11 @@ public class GameManager {
                 return true;
             } else if (jogadorAJogar.especie.tipo.equals("Carnívoro")) {
                 jogadorAJogar.energiaAtual -= 20;
+                if(alimentosIngeridos.size() == 0){
+                    alimentosIngeridos.add("Erva");
+                }
                 for (int i = 0; i < alimentosIngeridos.size(); i++) {
-                    if(!alimentosIngeridos.get(i).equals("Erva")){
+                    if(!alimentosIngeridos.contains("Erva")){
                         alimentosIngeridos.add("Erva");
                     }
                 }
@@ -835,8 +841,11 @@ public class GameManager {
                 return true; }
         } else if (alimento.equals("a")) {
             if (jogadorAJogar.especie.tipo.equals("Herbívoro") || jogadorAJogar.especie.tipo.equals("Carnívoro")) {
+                if(alimentosIngeridos.size() == 0){
+                    alimentosIngeridos.add("Agua");
+                }
                 for (int i = 0; i < alimentosIngeridos.size(); i++) {
-                    if(!alimentosIngeridos.get(i).equals("Agua")){
+                    if(!alimentosIngeridos.contains("Agua")){
                         alimentosIngeridos.add("Agua");
                     }
                 }
@@ -845,8 +854,11 @@ public class GameManager {
                 if (jogadorAJogar.energiaAtual > 200) { jogadorAJogar.energiaAtual = 200; }
                 return true;
             } else if (jogadorAJogar.especie.tipo.equals("Omnívoro")) {
+                if(alimentosIngeridos.size() == 0){
+                    alimentosIngeridos.add("Agua");
+                }
                 for (int i = 0; i < alimentosIngeridos.size(); i++) {
-                    if(!alimentosIngeridos.get(i).equals("Agua")){
+                    if(!alimentosIngeridos.contains("Agua")){
                         alimentosIngeridos.add("Agua");
                     }
                 }
@@ -857,8 +869,11 @@ public class GameManager {
             }
         } else if (alimento.equals("b")) {
             if (jogadorAJogar.bananasConsumidas >= 1) { jogadorAJogar.energiaAtual -= 40;
+                if(alimentosIngeridos.size() == 0){
+                    alimentosIngeridos.add("Bananas");
+                }
                 for (int i = 0; i < alimentosIngeridos.size(); i++) {
-                    if(!alimentosIngeridos.get(i).equals("Bananas")){
+                    if(!alimentosIngeridos.contains("Bananas")){
                         alimentosIngeridos.add("Bananas");
                     }
                 }
@@ -868,8 +883,11 @@ public class GameManager {
                 return true;
 
             } else if (squares.get(jogadorAJogar.posicaoAtual).bananas > 0) { jogadorAJogar.energiaAtual += 40;
+                if(alimentosIngeridos.size() == 0){
+                    alimentosIngeridos.add("Bananas");
+                }
                 for (int i = 0; i < alimentosIngeridos.size(); i++) {
-                    if(!alimentosIngeridos.get(i).equals("Bananas")){
+                    if(!alimentosIngeridos.contains("Bananas")){
                         alimentosIngeridos.add("Bananas");
                     }
                 }
@@ -883,8 +901,11 @@ public class GameManager {
             if (jogadorAJogar.especie.tipo.equals("Herbívoro")) { jogadorAJogar.nrAlimentosIngeridos--;
             } else {
                 if (jogadasFeitas > 12) {
+                    if(alimentosIngeridos.size() == 0){
+                        alimentosIngeridos.add("Carne");
+                    }
                     for (int i = 0; i < alimentosIngeridos.size(); i++) {
-                        if(!alimentosIngeridos.get(i).equals("Carne")){
+                        if(!alimentosIngeridos.contains("Carne")){
                             alimentosIngeridos.add("Carne");
                         }
                     }
@@ -892,6 +913,9 @@ public class GameManager {
                     turnosJogadores();
                     if (jogadorAJogar.energiaAtual > 200) { jogadorAJogar.energiaAtual = 200; }
                     return true;
+                }
+                if(alimentosIngeridos.size() == 0){
+                    alimentosIngeridos.add("Carne");
                 }
                 for (int i = 0; i < alimentosIngeridos.size(); i++) {
                     if(!alimentosIngeridos.get(i).equals("Carne")){
@@ -904,8 +928,11 @@ public class GameManager {
                 return true;
             }
         } else if (alimento.equals("m")) {
+            if(alimentosIngeridos.size() == 0){
+                alimentosIngeridos.add("Cogumelos Magicos");
+            }
             for (int i = 0; i < alimentosIngeridos.size(); i++) {
-                if(!alimentosIngeridos.get(i).equals("Cogumelos Magicos")){
+                if(!alimentosIngeridos.contains("Cogumelos Magicos")){
                     alimentosIngeridos.add("Cogumelos Magicos");
                 }
             }

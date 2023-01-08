@@ -142,7 +142,7 @@ fun getConsumedFood(manager: GameManager):String?{
 
             manager.alimentosIngeridos.forEach {
                 val alimentos = manager.alimentosIngeridos.sorted();
-                string = alimentos.joinToString(separator = "\n")
+                string += alimentos.joinToString(separator = "\n")
             }
             return string
 }
