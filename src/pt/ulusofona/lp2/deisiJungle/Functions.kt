@@ -154,9 +154,14 @@ fun postMove(manager: GameManager, args: List<String>):String?{
     var idJogador = infoJogadorAtual[0].toInt()
     val jogadores: List<Jogador> = manager.jogadores.filter {it.identificador == idJogador}
     val jogador: Jogador = jogadores[0]
+    var energiaAGastar : Int = 0
 
     val posicaoFutura = nrCasasAMover + jogador.posicaoAtual
-    val energiaAGastar = jogador.energiaAtual - (nrCasasAMover * jogador.especie.consumoEnergia);
+
+    if(nrCasasAMover<0){
+        energiaAGastar += jogador.energiaAtual + (nrCasasAMover * jogador.especie.consumoEnergia);
+    }else{
+    energiaAGastar += jogador.energiaAtual - (nrCasasAMover * jogador.especie.consumoEnergia);}
 
     if(posicaoFutura > manager.tamanhoTabuleiro || posicaoFutura < 1){
         manager.turnosJogadores()
