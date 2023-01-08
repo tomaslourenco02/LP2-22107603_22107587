@@ -123,10 +123,9 @@ fun getTopEnergeticOmnivores(manager: GameManager, args: List<String>):String?{
     jogadoresOrdenados.forEach{
         val nome = it.nome
         val energia = it.energiaAtual
-        if(jogadoresOrdenados.size-1 == count || max_results == count) {
-            string += "$nome:$energia"
-        }
+
         if(max_results == count){
+            string += "$nome:$energia"
             return string
         } else {
             string += "$nome:$energia\n"
@@ -162,12 +161,12 @@ fun postMove(manager: GameManager, args: List<String>):String?{
         return "Movimento invalido"
     }
 
-    if(energiaAGastar < 0){
+    if(energiaAGastar <= 0){
         manager.turnosJogadores()
         return "Sem energia"
     }
 
-    if(posicaoFutura == manager.tamanhoTabuleiro){
+    if(posicaoFutura == manager.tamanhoTabuleiro ){
         jogador.energiaAtual -= nrCasasAMover * jogador.especie.consumoEnergia
         jogador.posicaoAtual = posicaoFutura
         manager.turnosJogadores()
