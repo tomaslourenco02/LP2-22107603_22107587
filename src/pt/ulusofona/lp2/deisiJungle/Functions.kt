@@ -186,6 +186,10 @@ fun postMove(manager: GameManager, args: List<String>):String?{
         return "OK"
     }
     if (manager.squares[posicaoFutura].identificadoresAlimentosNoQuadrado != null){
+        if(energiaAGastar < 0){
+            manager.turnosJogadores()
+            return "Sem energia"
+        }
         jogador.energiaAtual -= nrCasasAMover * jogador.especie.consumoEnergia
         manager.energiaFornecidaAlimento(jogador, manager.squares[posicaoFutura].identificadoresAlimentosNoQuadrado)
         jogador.posicaoAtual = posicaoFutura
