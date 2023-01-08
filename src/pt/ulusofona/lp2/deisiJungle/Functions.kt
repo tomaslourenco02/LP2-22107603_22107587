@@ -29,7 +29,7 @@ fun getComando(gameManager: GameManager, args: List<String>): String? {
         "PLAYER_INFO" -> return getPlayerInfo(gameManager, args.drop(1))
         "PLAYERS_BY_SPECIE" -> return getPlayersBySpecies(gameManager, args.drop(1));
         "MOST_TRAVELED" -> return getMostTraveledPlayer(gameManager)
-        "TOP_ENERGETIC_OMNIVORES" -> return getTopEnergeticOmnivores(gameManager)
+        "TOP_ENERGETIC_OMNIVORES" -> return getTopEnergeticOmnivores(gameManager, args.drop(1))
         "CONSUMED_FOODS" -> return getConsumedFood(gameManager, args.drop(1))
         else -> return null
     }
@@ -112,8 +112,24 @@ fun getMostTraveledPlayer(manager: GameManager): String {
     return string
 }
 
-fun getTopEnergeticOmnivores(manager: GameManager):String?{
-    return null;
+fun getTopEnergeticOmnivores(manager: GameManager, args: List<String>):String?{
+    var max_results = args[0].toInt()
+    var count : Int = 0
+    val jogadores: List<Jogador> = manager.jogadores.filter { it.especie.tipo.equals("Omnívoro")}
+    val jogadoresOrdenados : List<Jogador> = jogadores.sortedByDescending { it.energiaAtual }
+    var string: String = ""
+
+    jogadoresOrdenados.forEach{
+        val nome = it.nome
+        val energia = it.energiaAtual
+
+        string += "$nome:$energia\n"
+        count++
+
+        if(max_results == count){return string}
+    }
+
+    return string;
 }
 
 fun getConsumedFood(manager: GameManager, args: List<String>):String?{
