@@ -174,7 +174,6 @@ fun postMove(manager: GameManager, args: List<String>):String?{
         manager.turnosJogadores()
         return "OK"
     }
-
     if (manager.squares.get(posicaoFutura).identificadoresAlimentosNoQuadrado != null){
         jogador.energiaAtual -= nrCasasAMover * jogador.especie.consumoEnergia
         manager.energiaFornecidaAlimento(jogador, manager.squares.get(posicaoFutura).identificadoresAlimentosNoQuadrado)
