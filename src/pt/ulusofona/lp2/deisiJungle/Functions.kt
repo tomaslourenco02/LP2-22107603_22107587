@@ -124,6 +124,7 @@ fun getTopEnergeticOmnivores(manager: GameManager, args: List<String>):String?{
         val nome = it.nome
         val energia = it.energiaAtual
 
+
         if(max_results == count || jogadoresOrdenados.size - 1 == count){
             string += "$nome:$energia"
             return string
