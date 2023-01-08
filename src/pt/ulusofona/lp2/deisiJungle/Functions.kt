@@ -149,5 +149,37 @@ fun getConsumedFood(manager: GameManager, args: List<String>):String?{
 }
 
 fun postMove(manager: GameManager, args: List<String>):String?{
-    return null;
+    var nrCasasAMover = args[0].toInt()
+    var infoJogadorAtual = manager.currentPlayerInfo
+    var idJogador = infoJogadorAtual[0].toInt()
+    val jogadores: List<Jogador> = manager.jogadores.filter {it.identificador == idJogador}
+    val jogador: Jogador = jogadores[0]
+
+    val posicaoFutura = nrCasasAMover + jogador.posicaoAtual
+    val energiaAGastar = jogador.energiaAtual - (nrCasasAMover * jogador.especie.consumoEnergia);
+
+    if(posicaoFutura > manager.tamanhoTabuleiro || posicaoFutura < 1){
+        manager.turnosJogadores()
+        return "Movimento invalido"
+    }
+
+    if( energiaAGastar < 0){
+        manager.turnosJogadores()
+        return "Sem energia"
+    }
+
+    if(manager.squares.get(posicaoFutura).identificadoresAlimentosNoQuadrado == null){
+        jogador.energiaAtual -= nrCasasAMover * jogador.especie.consumoEnergia
+        jogador.posicaoAtual = posicaoFutura
+        manager.turnosJogadores()
+        return "OK"
+    }
+
+    if (manager.squares.get(posicaoFutura).identificadoresAlimentosNoQuadrado != null){
+        jogador.energiaAtual -= nrCasasAMover * jogador.especie.consumoEnergia
+        manager.energiaFornecidaAlimento(jogador, manager.squares.get(posicaoFutura).identificadoresAlimentosNoQuadrado)
+        jogador.posicaoAtual = posicaoFutura
+        return "Apanhou Comida"
+    }
+    return "";
 }
