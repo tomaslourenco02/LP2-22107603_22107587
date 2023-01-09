@@ -155,16 +155,18 @@ fun postMove(manager: GameManager, args: List<String>): String? {
     val jogadores: List<Jogador> = manager.jogadores.filter { it.identificador == idJogador }
     val jogador: Jogador = jogadores[0]
 
-    val posicaoFutura = nrCasasAMover + jogador.posicaoAtual
-    if(posicaoFutura < 1 || posicaoFutura > manager.tamanhoTabuleiro){
+    var posicaoFutura = nrCasasAMover + jogador.posicaoAtual
+    if(posicaoFutura < 1){
         return "Movimento invalido"
     }
-    if(posicaoFutura == manager.tamanhoTabuleiro){
+    if(posicaoFutura >= manager.tamanhoTabuleiro){
+        posicaoFutura = manager.tamanhoTabuleiro
+        nrCasasAMover = posicaoFutura - jogador.posicaoAtual
+        manager.moveCurrentPlayer(nrCasasAMover, true)
         return "OK"
     }
     val alimento = manager.squares.get(posicaoFutura).identificadoresAlimentosNoQuadrado;
     val movimento = manager.moveCurrentPlayer(nrCasasAMover, true)
-
 
     if (movimento == MovementResult(MovementResultCode.INVALID_MOVEMENT, null)) {
         return "Movimento invalido"

@@ -50,10 +50,9 @@ public class Testes {
 
         String[][] jogadores = {jogador1, jogador2};
 
-        String[] comida1 = {"c", String.valueOf(5)};
-        String[][] comida = {comida1};
 
-        manager.createInitialJungle(30, jogadores, comida);
+
+        manager.createInitialJungle(10, jogadores, null);
 
         ArrayList<String> especie = new ArrayList<>();
         especie.add("T");
@@ -62,17 +61,18 @@ public class Testes {
         ArrayList<String> especieQueNaoExiste = new ArrayList<>();
         especieQueNaoExiste.add("E");
         ArrayList<String> especieVazio = new ArrayList<>();
-        ArrayList<String> dez = new ArrayList<>();
-        dez.add("10");
+        ArrayList<String> zero = new ArrayList<>();
+        zero.add("0");
         ArrayList<String> quatro = new ArrayList<>();
         quatro.add("4");
-        ArrayList<String> menosDez = new ArrayList<>();
-        menosDez.add("-10");
+        ArrayList<String> tres = new ArrayList<>();
+        tres.add("3");
 
 
         System.out.println(FunctionsKt.postMove(manager, quatro));
-        System.out.println(FunctionsKt.postMove(manager, dez));
         System.out.println(FunctionsKt.postMove(manager, quatro));
+        System.out.println(FunctionsKt.postMove(manager, tres));
+        System.out.println(FunctionsKt.postMove(manager, zero));
         System.out.println(FunctionsKt.postMove(manager, quatro));
 
     }

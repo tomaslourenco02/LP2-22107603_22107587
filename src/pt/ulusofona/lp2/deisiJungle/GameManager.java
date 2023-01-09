@@ -802,6 +802,9 @@ public class GameManager {
 
                         if (posDestino >= tamanhoTabuleiro) {jogadorAJogar.ganhou = true;
                             jogoAcabou = true;
+                            jogadorAJogar.posicaoAtual = tamanhoTabuleiro;
+                            return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
+
                         }
                         if (jogadasFeitas > jogadores.size() - 1) {if (jogadorAvancado()) {jogoAcabou = true;}}
                         if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
