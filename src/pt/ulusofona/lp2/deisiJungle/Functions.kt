@@ -154,51 +154,21 @@ fun postMove(manager: GameManager, args: List<String>):String?{
     var idJogador = infoJogadorAtual[0].toInt()
     val jogadores: List<Jogador> = manager.jogadores.filter {it.identificador == idJogador}
     val jogador: Jogador = jogadores[0]
-    var energiaAGastar : Int = 0
 
     val posicaoFutura = nrCasasAMover + jogador.posicaoAtual
+    val alimento = manager.squares.get(posicaoFutura).identificadoresAlimentosNoQuadrado;
 
-    if(nrCasasAMover<0){
-        energiaAGastar += jogador.energiaAtual + (nrCasasAMover * jogador.especie.consumoEnergia);
-    }else{
-    energiaAGastar += jogador.energiaAtual - (nrCasasAMover * jogador.especie.consumoEnergia);}
-
-    if(posicaoFutura > manager.tamanhoTabuleiro || posicaoFutura < 1){
-        manager.turnosJogadores()
+    if(manager.moveCurrentPlayer(nrCasasAMover, true) == MovementResult(MovementResultCode.INVALID_MOVEMENT, null)){
         return "Movimento invalido"
     }
-
-    if(posicaoFutura == manager.tamanhoTabuleiro ){
-        if(energiaAGastar < 0){
-            manager.turnosJogadores()
-            return "Sem energia"
-        }
-        jogador.energiaAtual -= nrCasasAMover * jogador.especie.consumoEnergia
-        jogador.posicaoAtual = posicaoFutura
-        manager.turnosJogadores()
-        manager.jogoAcabou = true;
-        return "OK"
+    if(manager.moveCurrentPlayer(nrCasasAMover, true) == MovementResult(MovementResultCode.NO_ENERGY, null)){
+        return "Sem energia"
     }
-
-    if(manager.squares[posicaoFutura].identificadoresAlimentosNoQuadrado == null){
-        if(energiaAGastar < 0){
-            manager.turnosJogadores()
-            return "Sem energia"
-        }
-        jogador.energiaAtual -= nrCasasAMover * jogador.especie.consumoEnergia
-        jogador.posicaoAtual = posicaoFutura
-        manager.turnosJogadores()
-        return "OK"
-    }
-    if (manager.squares[posicaoFutura].identificadoresAlimentosNoQuadrado != null){
-        if(energiaAGastar < 0){
-            manager.turnosJogadores()
-            return "Sem energia"
-        }
-        jogador.energiaAtual -= nrCasasAMover * jogador.especie.consumoEnergia
-        manager.energiaFornecidaAlimento(jogador, manager.squares[posicaoFutura].identificadoresAlimentosNoQuadrado)
-        jogador.posicaoAtual = posicaoFutura
+    if(manager.moveCurrentPlayer(nrCasasAMover, true) == MovementResult(MovementResultCode.CAUGHT_FOOD, manager.definirAlimento(alimento).toString())){
         return "Apanhou comida"
+    }
+    if(manager.moveCurrentPlayer(nrCasasAMover, true) == MovementResult(MovementResultCode.VALID_MOVEMENT, null)){
+        return "OK"
     }
     return "";
 }
