@@ -779,7 +779,7 @@ public class GameManager {
             if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
                 jogadorAJogar.nrAlimentosIngeridos++;
                 String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
-                if (energiaFornecidaAlimento(jogadorAJogar, alimento)) {return new MovementResult(MovementResultCode.CAUGHT_FOOD, definirAlimento(alimento).toString());}
+                if (energiaFornecidaAlimento(jogadorAJogar, alimento)) {turnosJogadores(); return new MovementResult(MovementResultCode.CAUGHT_FOOD, definirAlimento(alimento).toString());}
             }
             turnosJogadores();
             return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
@@ -790,6 +790,7 @@ public class GameManager {
             jogoAcabou = true;
             jogadorAJogar.ganhou = true;
         }
+        if (jogadasFeitas > jogadores.size() - 1) {if (jogadorAvancado()) {jogoAcabou = true;}}
         if (!jogoAcabou) {
             for (int i = 0; i < squares.size(); i++) {
                 for (int j = 0; j < squares.get(i).identificadoresNoQuadrado.size(); j++) {
@@ -803,14 +804,14 @@ public class GameManager {
                         if (posDestino >= tamanhoTabuleiro) {jogadorAJogar.ganhou = true;
                             jogoAcabou = true;
                             jogadorAJogar.posicaoAtual = tamanhoTabuleiro;
+                            turnosJogadores();
                             return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
 
                         }
-                        if (jogadasFeitas > jogadores.size() - 1) {if (jogadorAvancado()) {jogoAcabou = true;}}
                         if (squares.get(posDestino).identificadoresAlimentosNoQuadrado != null) {
                             jogadorAJogar.nrAlimentosIngeridos++;
                             String alimento = squares.get(posDestino).identificadoresAlimentosNoQuadrado;
-                            if (energiaFornecidaAlimento(jogadorAJogar, alimento)) {return new MovementResult(MovementResultCode.CAUGHT_FOOD, definirAlimento(alimento).toString());}
+                            if (energiaFornecidaAlimento(jogadorAJogar, alimento)) { return new MovementResult(MovementResultCode.CAUGHT_FOOD, definirAlimento(alimento).toString());}
                         }
                         turnosJogadores();
                         return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
