@@ -160,6 +160,9 @@ fun postMove(manager: GameManager, args: List<String>): String? {
         manager.turnosJogadores()
         return "Movimento invalido"
     }
+    if(manager.jogoAcabou){
+        manager.jogoAcabou = false;
+    }
     if(posicaoFutura >= manager.tamanhoTabuleiro){
         posicaoFutura = manager.tamanhoTabuleiro
         nrCasasAMover = posicaoFutura - jogador.posicaoAtual

@@ -50,10 +50,7 @@ public class Testes {
         String[] jogador3 = {"3", "Joana", "Z"};
         String[][] jogadores = {jogador1, jogador2, jogador3};
 
-        String[] comida1 = {"c", String.valueOf(9)};
-        String[][] comidas = {comida1};
-
-        manager.createInitialJungle(10, jogadores, comidas);
+        manager.createInitialJungle(10, jogadores, null);
 
         ArrayList<String> oito = new ArrayList<>();
         oito.add("8");
@@ -66,19 +63,17 @@ public class Testes {
 
 
         System.out.println(FunctionsKt.postMove(manager, oito));
-        System.out.println(Arrays.toString(manager.getCurrentPlayerInfo()));
-        System.out.println(FunctionsKt.postMove(manager, oito));
+        System.out.println(FunctionsKt.postMove(manager, dois));
         System.out.println(FunctionsKt.postMove(manager, menosDez));
         System.out.println(Arrays.toString(manager.getCurrentPlayerInfo()));
         System.out.println(Arrays.toString(manager.getSquareInfo(1)));
         System.out.println(FunctionsKt.postMove(manager, zero));
-        System.out.println(FunctionsKt.postMove(manager, zero));
+        System.out.println(FunctionsKt.postMove(manager, oito));
         System.out.println(Arrays.toString(manager.getCurrentPlayerInfo()));
-        System.out.println(FunctionsKt.postMove(manager, dois));
-        System.out.println(FunctionsKt.postMove(manager, dois));
+        System.out.println(Arrays.toString(manager.getWinnerInfo()));
         System.out.println(Arrays.toString(manager.getCurrentPlayerInfo()));
-
-
+        System.out.println(FunctionsKt.postMove(manager, oito));
+        System.out.println(Arrays.toString(manager.getPlayerInfo(3)));
 
     }
 
