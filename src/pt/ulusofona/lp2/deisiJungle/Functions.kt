@@ -159,6 +159,9 @@ fun postMove(manager: GameManager, args: List<String>): String? {
     if(posicaoFutura < 1 || posicaoFutura > manager.tamanhoTabuleiro){
         return "Movimento invalido"
     }
+    if(posicaoFutura == manager.tamanhoTabuleiro){
+        return "OK"
+    }
     val alimento = manager.squares.get(posicaoFutura).identificadoresAlimentosNoQuadrado;
     val movimento = manager.moveCurrentPlayer(nrCasasAMover, true)
 
@@ -166,14 +169,17 @@ fun postMove(manager: GameManager, args: List<String>): String? {
     if (movimento == MovementResult(MovementResultCode.INVALID_MOVEMENT, null)) {
         return "Movimento invalido"
     } else if (movimento == MovementResult(MovementResultCode.NO_ENERGY, null)) {
-        return "Sem energia"
-    }
-    if (alimento != null) {
+            return "Sem energia"
+    }else if (alimento != null) {
         if (movimento == MovementResult(MovementResultCode.CAUGHT_FOOD, manager.definirAlimento(alimento).toString())) {
             return "Apanhou comida"
         }
+        if(movimento == MovementResult(MovementResultCode.VALID_MOVEMENT, null)){
+            return "OK"}
+    }else if(movimento == MovementResult(MovementResultCode.VALID_MOVEMENT, null)){
+        return "OK"
     }
-    return "OK"
+    return ""
 }
 
 

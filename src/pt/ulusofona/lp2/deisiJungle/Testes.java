@@ -45,12 +45,15 @@ public class Testes {
     public void testGetPlayersBySpecies() throws InvalidInitialJungleException {
         GameManager manager = new GameManager();
 
-        String[] jogador1 = {"1", "Joao", "P"};
+        String[] jogador1 = {"1", "Joao", "E"};
         String[] jogador2 = {"2", "Pedro", "P"};
 
         String[][] jogadores = {jogador1, jogador2};
 
-        manager.createInitialJungle(30, jogadores, null);
+        String[] comida1 = {"c", String.valueOf(5)};
+        String[][] comida = {comida1};
+
+        manager.createInitialJungle(30, jogadores, comida);
 
         ArrayList<String> especie = new ArrayList<>();
         especie.add("T");
@@ -61,16 +64,16 @@ public class Testes {
         ArrayList<String> especieVazio = new ArrayList<>();
         ArrayList<String> dez = new ArrayList<>();
         dez.add("10");
-        ArrayList<String> cinco = new ArrayList<>();
-        cinco.add("5");
+        ArrayList<String> quatro = new ArrayList<>();
+        quatro.add("4");
         ArrayList<String> menosDez = new ArrayList<>();
         menosDez.add("-10");
 
 
-        System.out.println(FunctionsKt.postMove(manager, menosDez));
+        System.out.println(FunctionsKt.postMove(manager, quatro));
         System.out.println(FunctionsKt.postMove(manager, dez));
-        System.out.println(FunctionsKt.postMove(manager, cinco));
-        System.out.println(FunctionsKt.postMove(manager, cinco));
+        System.out.println(FunctionsKt.postMove(manager, quatro));
+        System.out.println(FunctionsKt.postMove(manager, quatro));
 
     }
 
