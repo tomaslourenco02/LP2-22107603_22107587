@@ -156,6 +156,9 @@ fun postMove(manager: GameManager, args: List<String>): String? {
     val jogador: Jogador = jogadores[0]
 
     val posicaoFutura = nrCasasAMover + jogador.posicaoAtual
+    if(posicaoFutura < 1 || posicaoFutura > manager.tamanhoTabuleiro){
+        return "Movimento invalido"
+    }
     val alimento = manager.squares.get(posicaoFutura).identificadoresAlimentosNoQuadrado;
     val movimento = manager.moveCurrentPlayer(nrCasasAMover, true)
 

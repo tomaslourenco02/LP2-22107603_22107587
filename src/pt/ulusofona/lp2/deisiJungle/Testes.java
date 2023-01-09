@@ -63,9 +63,11 @@ public class Testes {
         dez.add("10");
         ArrayList<String> cinco = new ArrayList<>();
         cinco.add("5");
+        ArrayList<String> menosDez = new ArrayList<>();
+        menosDez.add("-10");
 
 
-        System.out.println(FunctionsKt.postMove(manager, dez));
+        System.out.println(FunctionsKt.postMove(manager, menosDez));
         System.out.println(FunctionsKt.postMove(manager, dez));
         System.out.println(FunctionsKt.postMove(manager, cinco));
         System.out.println(FunctionsKt.postMove(manager, cinco));
