@@ -47,33 +47,29 @@ public class Testes {
 
         String[] jogador1 = {"1", "Joao", "E"};
         String[] jogador2 = {"2", "Pedro", "P"};
-
-        String[][] jogadores = {jogador1, jogador2};
-
-
+        String[] jogador3 = {"3", "Joana", "Z"};
+        String[][] jogadores = {jogador1, jogador2, jogador3};
 
         manager.createInitialJungle(10, jogadores, null);
 
-        ArrayList<String> especie = new ArrayList<>();
-        especie.add("T");
-        ArrayList<String> especie2 = new ArrayList<>();
-        especie2.add("L");
-        ArrayList<String> especieQueNaoExiste = new ArrayList<>();
-        especieQueNaoExiste.add("E");
-        ArrayList<String> especieVazio = new ArrayList<>();
+        ArrayList<String> oito = new ArrayList<>();
+        oito.add("8");
+        ArrayList<String> dois = new ArrayList<>();
+        dois.add("2");
+        ArrayList<String> menosDez = new ArrayList<>();
+        menosDez.add("-10");
         ArrayList<String> zero = new ArrayList<>();
         zero.add("0");
-        ArrayList<String> quatro = new ArrayList<>();
-        quatro.add("4");
-        ArrayList<String> tres = new ArrayList<>();
-        tres.add("3");
 
 
-        System.out.println(FunctionsKt.postMove(manager, quatro));
-        System.out.println(FunctionsKt.postMove(manager, quatro));
-        System.out.println(FunctionsKt.postMove(manager, tres));
+        System.out.println(FunctionsKt.postMove(manager, oito));
+        System.out.println(FunctionsKt.postMove(manager, dois));
+        System.out.println(FunctionsKt.postMove(manager, menosDez));
+        System.out.println(Arrays.toString(manager.getCurrentPlayerInfo()));
+        System.out.println(Arrays.toString(manager.getSquareInfo(1)));
         System.out.println(FunctionsKt.postMove(manager, zero));
-        System.out.println(FunctionsKt.postMove(manager, quatro));
+        System.out.println(FunctionsKt.postMove(manager, oito));
+        System.out.println(Arrays.toString(manager.getCurrentPlayerInfo()));
 
     }
 

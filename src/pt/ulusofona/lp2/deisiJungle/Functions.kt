@@ -157,6 +157,7 @@ fun postMove(manager: GameManager, args: List<String>): String? {
 
     var posicaoFutura = nrCasasAMover + jogador.posicaoAtual
     if(posicaoFutura < 1){
+        manager.turnosJogadores()
         return "Movimento invalido"
     }
     if(posicaoFutura >= manager.tamanhoTabuleiro){
@@ -168,6 +169,9 @@ fun postMove(manager: GameManager, args: List<String>): String? {
     val alimento = manager.squares.get(posicaoFutura).identificadoresAlimentosNoQuadrado;
     val movimento = manager.moveCurrentPlayer(nrCasasAMover, true)
 
+    if(movimento == MovementResult(MovementResultCode.VALID_MOVEMENT, null)){
+        return "OK"
+    }
     if (movimento == MovementResult(MovementResultCode.INVALID_MOVEMENT, null)) {
         return "Movimento invalido"
     } else if (movimento == MovementResult(MovementResultCode.NO_ENERGY, null)) {
@@ -178,8 +182,6 @@ fun postMove(manager: GameManager, args: List<String>): String? {
         }
         if(movimento == MovementResult(MovementResultCode.VALID_MOVEMENT, null)){
             return "OK"}
-    }else if(movimento == MovementResult(MovementResultCode.VALID_MOVEMENT, null)){
-        return "OK"
     }
     return ""
 }
