@@ -169,16 +169,11 @@ fun postMove(manager: GameManager, args: List<String>): String? {
         return "Sem energia"
     }
     if (alimento != null) {
-        if (movimento == MovementResult(
-                MovementResultCode.CAUGHT_FOOD,
-                manager.definirAlimento(alimento).toString()
-            )
-        ) {
+        if (movimento == MovementResult(MovementResultCode.CAUGHT_FOOD, manager.definirAlimento(alimento).toString())) {
             return "Apanhou comida"
         }
-    } else {
-        return "OK"
     }
-    return "";
+    return "OK"
 }
+
 
