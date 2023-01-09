@@ -45,9 +45,9 @@ public class Testes {
     public void testGetPlayersBySpecies() throws InvalidInitialJungleException {
         GameManager manager = new GameManager();
 
-        String[] jogador1 = {"4", "Joao", "T"};
-        String[] jogador2 = {"6", "Pedro", "T"};
-        String[] jogador3 = {"1", "Miguel", "L"};
+        String[] jogador1 = {"4", "Joao", "P"};
+        String[] jogador2 = {"6", "Pedro", "P"};
+        String[] jogador3 = {"1", "Miguel", "P"};
         String[][] jogadores = {jogador1, jogador2, jogador3};
 
         manager.createInitialJungle(30, jogadores, null);
@@ -59,6 +59,23 @@ public class Testes {
         ArrayList<String> especieQueNaoExiste = new ArrayList<>();
         especieQueNaoExiste.add("E");
         ArrayList<String> especieVazio = new ArrayList<>();
+        ArrayList<String> dez = new ArrayList<>();
+        dez.add("10");
+        ArrayList<String> cinco = new ArrayList<>();
+        cinco.add("5");
+        ArrayList<String> menosDez = new ArrayList<>();
+        menosDez.add("-10");
+
+        System.out.println(FunctionsKt.postMove(manager, dez));         //30
+        System.out.println(FunctionsKt.postMove(manager, dez));//30
+        System.out.println(FunctionsKt.postMove(manager, dez));//30
+        System.out.println(FunctionsKt.postMove(manager, cinco));//10
+        System.out.println(FunctionsKt.postMove(manager, cinco));//10
+        System.out.println(FunctionsKt.postMove(manager, cinco));//10
+        System.out.println(FunctionsKt.postMove(manager, menosDez));
+        System.out.println(FunctionsKt.postMove(manager, menosDez));
+
+
 
 
         String result1 = FunctionsKt.getPlayersBySpecies(manager, especie);
@@ -194,34 +211,17 @@ public class Testes {
         GameManager gameManager = new GameManager();
         String[] jogador1 = {"1", "Joao", "Z"};
         String[] jogador2 = {"2", "Pedro", "T"};
-
-
         String[][] jogadores = {jogador1, jogador2};
 
         String[] comida1 = {"c", String.valueOf(5)};
-        String[] comida2 = {"e", String.valueOf(6)};
-        String[] comida3 = {"m", String.valueOf(7)};
-        String[] comida4 = {"c", String.valueOf(8)};
-        String[] comida5 = {"e", String.valueOf(9)};
-        String[] comida6 = {"e", String.valueOf(10)};
+        String[][] comida = {comida1};
 
-
-        String[][] comida = {comida1, comida2, comida3, comida4, comida5, comida6};
-
-        gameManager.createInitialJungle(30, jogadores, comida);
-        System.out.println(gameManager.moveCurrentPlayer(4, true));
+        gameManager.createInitialJungle(15, jogadores, comida);
+        System.out.println(gameManager.moveCurrentPlayer(5, true));
+        System.out.println(Arrays.toString(gameManager.getPlayerInfo(1)));
         System.out.println(gameManager.moveCurrentPlayer(0, true));
-        System.out.println(gameManager.moveCurrentPlayer(1, true));
-        System.out.println(gameManager.moveCurrentPlayer(0, true));
-        System.out.println(gameManager.moveCurrentPlayer(1, true));
-        System.out.println(gameManager.moveCurrentPlayer(0, true));
-        System.out.println(gameManager.moveCurrentPlayer(1, true));
-        System.out.println(gameManager.moveCurrentPlayer(0, true));
-        System.out.println(gameManager.moveCurrentPlayer(1, true));
-        System.out.println(gameManager.moveCurrentPlayer(0, true));
-        System.out.println(gameManager.moveCurrentPlayer(1, true));
-        System.out.println(gameManager.alimentosIngeridos);
-
+        System.out.println(gameManager.moveCurrentPlayer(-3, true));
+        System.out.println(Arrays.toString(gameManager.getPlayerInfo(1)));
 
     }
 }

@@ -159,9 +159,10 @@ fun postMove(manager: GameManager, args: List<String>):String?{
     val posicaoFutura = nrCasasAMover + jogador.posicaoAtual
 
     if(nrCasasAMover<0){
-        energiaAGastar += jogador.energiaAtual + (nrCasasAMover * jogador.especie.consumoEnergia);
+        energiaAGastar += jogador.energiaAtual + (nrCasasAMover * jogador.especie.consumoEnergia)
     }else{
-    energiaAGastar += jogador.energiaAtual - (nrCasasAMover * jogador.especie.consumoEnergia);}
+        energiaAGastar += jogador.energiaAtual - (nrCasasAMover * jogador.especie.consumoEnergia)
+    }
 
     if(posicaoFutura > manager.tamanhoTabuleiro || posicaoFutura < 1){
         manager.turnosJogadores()
