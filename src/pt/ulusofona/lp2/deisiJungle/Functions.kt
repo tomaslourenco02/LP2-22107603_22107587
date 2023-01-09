@@ -42,12 +42,12 @@ fun postComando(gameManager: GameManager, args: List<String>): String? {
     }
     when (args[0]) {
         "MOVE" -> return postMove(gameManager, args.drop(1))
-            else -> return null
+        else -> return null
     }
 }
 
 fun getPlayerInfo(manager: GameManager, args: List<String>): String? {
-    if(args.isNotEmpty()) {
+    if (args.isNotEmpty()) {
         val nomePretendido = args[0]
         val jogadores: List<Jogador> = manager.jogadores.filter { it.nome.equals(nomePretendido) }
         if (jogadores.isEmpty()) {
@@ -69,10 +69,10 @@ fun getPlayerInfo(manager: GameManager, args: List<String>): String? {
 }
 
 fun getPlayersBySpecies(manager: GameManager, args: List<String>): String? {
-    if(args.isNotEmpty()) {
+    if (args.isNotEmpty()) {
         val especiePretendida = args[0];
-        val jogadores: List<Jogador> = manager.jogadores.filter { it.especieDoJogador.equals(especiePretendida)}
-        val jogadoresOrdenados : List<Jogador> = jogadores.sortedByDescending{it.nome};
+        val jogadores: List<Jogador> = manager.jogadores.filter { it.especieDoJogador.equals(especiePretendida) }
+        val jogadoresOrdenados: List<Jogador> = jogadores.sortedByDescending { it.nome };
         val nomes: ArrayList<String> = ArrayList()
 
         if (jogadores.isEmpty()) {
@@ -84,7 +84,7 @@ fun getPlayersBySpecies(manager: GameManager, args: List<String>): String? {
             nomes.add(nomeJogador)
         }
 
-        val nomesOrdenados = nomes.sortedByDescending{it}
+        val nomesOrdenados = nomes.sortedByDescending { it }
         val stringNomes: String = nomesOrdenados.joinToString(separator = ",")
 
         return stringNomes
@@ -97,7 +97,7 @@ fun getMostTraveledPlayer(manager: GameManager): String {
     val jogadores: List<Jogador> = manager.jogadores
     val jOrdenadosPelaDistancia: List<Jogador> = jogadores.sortedByDescending { it.nrCasasMovimentou }
     var string: String = ""
-    var casasAndadas : Int = 0;
+    var casasAndadas: Int = 0;
 
     jOrdenadosPelaDistancia.forEach {
         val nome = it.nome
@@ -108,26 +108,26 @@ fun getMostTraveledPlayer(manager: GameManager): String {
 
         string += "$nome:$especie:$movimento\n"
     }
-    string+="Total:$casasAndadas"
+    string += "Total:$casasAndadas"
 
     return string
 }
 
-fun getTopEnergeticOmnivores(manager: GameManager, args: List<String>):String?{
+fun getTopEnergeticOmnivores(manager: GameManager, args: List<String>): String? {
     var max_results = args[0].toInt()
-    var count : Int = 0
-    val jogadores: List<Jogador> = manager.jogadores.filter { it.especie.tipo.equals("Omnívoro")}
-    val jogadoresOrdenados : List<Jogador> = jogadores.sortedByDescending { it.energiaAtual }
+    var count: Int = 0
+    val jogadores: List<Jogador> = manager.jogadores.filter { it.especie.tipo.equals("Omnívoro") }
+    val jogadoresOrdenados: List<Jogador> = jogadores.sortedByDescending { it.energiaAtual }
     var string: String = ""
 
-    jogadoresOrdenados.forEach{
+    jogadoresOrdenados.forEach {
         val nome = it.nome
         val energia = it.energiaAtual
 
-        if (max_results == count){
+        if (max_results == count) {
             return string.trim()
         }
-        if(jogadoresOrdenados.size - 1 == count){
+        if (jogadoresOrdenados.size - 1 == count) {
             string += "$nome:$energia"
             return string
         } else {
@@ -139,36 +139,43 @@ fun getTopEnergeticOmnivores(manager: GameManager, args: List<String>):String?{
     return string;
 }
 
-fun getConsumedFood(manager: GameManager):String?{
-            var string: String = ""
-            manager.alimentosIngeridos.forEach {
-                val alimentos = manager.alimentosIngeridos.sorted();
-                string = alimentos.joinToString(separator = "\n")
-            }
-            return string
+fun getConsumedFood(manager: GameManager): String? {
+    var string: String = ""
+    manager.alimentosIngeridos.forEach {
+        val alimentos = manager.alimentosIngeridos.sorted();
+        string = alimentos.joinToString(separator = "\n")
+    }
+    return string
 }
 
-fun postMove(manager: GameManager, args: List<String>):String?{
+fun postMove(manager: GameManager, args: List<String>): String? {
     var nrCasasAMover = args[0].toInt()
     var infoJogadorAtual = manager.currentPlayerInfo
     var idJogador = infoJogadorAtual[0].toInt()
-    val jogadores: List<Jogador> = manager.jogadores.filter {it.identificador == idJogador}
+    val jogadores: List<Jogador> = manager.jogadores.filter { it.identificador == idJogador }
     val jogador: Jogador = jogadores[0]
 
     val posicaoFutura = nrCasasAMover + jogador.posicaoAtual
     val alimento = manager.squares.get(posicaoFutura).identificadoresAlimentosNoQuadrado;
+    val movimento = manager.moveCurrentPlayer(nrCasasAMover, true)
 
-    if(manager.moveCurrentPlayer(nrCasasAMover, true) == MovementResult(MovementResultCode.INVALID_MOVEMENT, null)){
+
+    if (movimento == MovementResult(MovementResultCode.INVALID_MOVEMENT, null)) {
         return "Movimento invalido"
-    }
-    if(manager.moveCurrentPlayer(nrCasasAMover, true) == MovementResult(MovementResultCode.NO_ENERGY, null)){
+    } else if (movimento == MovementResult(MovementResultCode.NO_ENERGY, null)) {
         return "Sem energia"
     }
-    if(manager.moveCurrentPlayer(nrCasasAMover, true) == MovementResult(MovementResultCode.CAUGHT_FOOD, manager.definirAlimento(alimento).toString())){
-        return "Apanhou comida"
-    }
-    if(manager.moveCurrentPlayer(nrCasasAMover, true) == MovementResult(MovementResultCode.VALID_MOVEMENT, null)){
+    if (alimento != null) {
+        if (movimento == MovementResult(
+                MovementResultCode.CAUGHT_FOOD,
+                manager.definirAlimento(alimento).toString()
+            )
+        ) {
+            return "Apanhou comida"
+        }
+    } else {
         return "OK"
     }
     return "";
 }
+

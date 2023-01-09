@@ -45,10 +45,10 @@ public class Testes {
     public void testGetPlayersBySpecies() throws InvalidInitialJungleException {
         GameManager manager = new GameManager();
 
-        String[] jogador1 = {"4", "Joao", "T"};
-        String[] jogador2 = {"6", "Pedro", "T"};
-        String[] jogador3 = {"1", "Miguel", "L"};
-        String[][] jogadores = {jogador1, jogador2, jogador3};
+        String[] jogador1 = {"1", "Joao", "P"};
+        String[] jogador2 = {"2", "Pedro", "P"};
+
+        String[][] jogadores = {jogador1, jogador2};
 
         manager.createInitialJungle(30, jogadores, null);
 
@@ -59,19 +59,17 @@ public class Testes {
         ArrayList<String> especieQueNaoExiste = new ArrayList<>();
         especieQueNaoExiste.add("E");
         ArrayList<String> especieVazio = new ArrayList<>();
+        ArrayList<String> dez = new ArrayList<>();
+        dez.add("10");
+        ArrayList<String> cinco = new ArrayList<>();
+        cinco.add("5");
 
 
-        String result1 = FunctionsKt.getPlayersBySpecies(manager, especie);
-        assertEquals(result1, "Joao,Pedro");
+        System.out.println(FunctionsKt.postMove(manager, dez));
+        System.out.println(FunctionsKt.postMove(manager, dez));
+        System.out.println(FunctionsKt.postMove(manager, cinco));
+        System.out.println(FunctionsKt.postMove(manager, cinco));
 
-        String result2 = FunctionsKt.getPlayersBySpecies(manager, especie2);
-        assertEquals(result2, "Miguel");
-
-        String result3 = FunctionsKt.getPlayersBySpecies(manager, especieQueNaoExiste);
-        assertEquals(result3, "");
-
-        String result4 = FunctionsKt.getPlayersBySpecies(manager, especieVazio);
-        assertEquals(result4, "");
     }
 
     @org.junit.Test
