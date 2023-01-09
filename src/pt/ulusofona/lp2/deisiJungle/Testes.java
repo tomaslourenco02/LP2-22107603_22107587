@@ -50,7 +50,10 @@ public class Testes {
         String[] jogador3 = {"3", "Joana", "Z"};
         String[][] jogadores = {jogador1, jogador2, jogador3};
 
-        manager.createInitialJungle(10, jogadores, null);
+        String[] comida1 = {"c", String.valueOf(7)};
+        String[][] comida = {comida1};
+
+        manager.createInitialJungle(10, jogadores, comida);
 
         ArrayList<String> oito = new ArrayList<>();
         oito.add("8");
@@ -60,7 +63,8 @@ public class Testes {
         menosDez.add("-10");
         ArrayList<String> zero = new ArrayList<>();
         zero.add("0");
-
+        ArrayList<String> seis = new ArrayList<>();
+        seis.add("6");
 
         System.out.println(FunctionsKt.postMove(manager, oito));
         System.out.println(FunctionsKt.postMove(manager, dois));
@@ -72,7 +76,7 @@ public class Testes {
         System.out.println(Arrays.toString(manager.getCurrentPlayerInfo()));
         System.out.println(Arrays.toString(manager.getWinnerInfo()));
         System.out.println(Arrays.toString(manager.getCurrentPlayerInfo()));
-        System.out.println(FunctionsKt.postMove(manager, oito));
+        System.out.println(FunctionsKt.postMove(manager, seis));
         System.out.println(Arrays.toString(manager.getPlayerInfo(3)));
 
     }
