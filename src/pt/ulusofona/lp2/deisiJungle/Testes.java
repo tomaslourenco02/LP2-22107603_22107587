@@ -74,6 +74,11 @@ public class Testes {
         System.out.println(FunctionsKt.postMove(manager, zero));
         System.out.println(FunctionsKt.postMove(manager, zero));
         System.out.println(Arrays.toString(manager.getCurrentPlayerInfo()));
+        System.out.println(FunctionsKt.postMove(manager, dois));
+        System.out.println(FunctionsKt.postMove(manager, dois));
+        System.out.println(Arrays.toString(manager.getCurrentPlayerInfo()));
+
+
 
     }
 
